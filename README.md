@@ -301,3 +301,29 @@ The demonstration executes a reproducible 720-step episode using seed 101 and re
 NEXUS aims to become an intelligent operating layer for agriculture:
 
 **not merely predicting what may happen, but helping farms decide what to do next, execute the decision, observe the result, and systematically learn from experience.**
+
+---
+
+## Engineering case study | Recruiter overview
+
+### NEXUS: Autonomous Agricultural Intelligence
+
+**Project status:** Simulation-validated technical MVP; real-farm validation pending
+
+**Why I built / am building it:** Farm operators need a connected process for observing conditions, selecting actions, executing them and learning from results.
+
+**Who it is for:** Farmers, farm managers, agricultural extension teams and agri-tech partners.
+
+**Development and engineering process:** Problem framing → autonomous decision-loop design → spatial action intents → simulated execution → outcome verification → experience storage and retrieval → reproducible regression testing.
+
+**Demonstrated progress and evidence:** A documented 720-step simulation recorded 719 decisions and 719 experiences, with 82 successful harvests; the repository reports a 324-test regression baseline. These are simulation results, not field performance.
+
+**What I plan to achieve:** Real-farm pilots, expert review, integration with farm observations and gradual evidence-informed operational automation.
+
+**What this work demonstrates to a hiring team:** The ability to connect a real user problem to a technical plan, implement and evaluate a solution, document limitations honestly, and prioritize the next engineering milestones.
+
+**[Source repository](https://github.com/Yaqini-Duniya-Technology/nexus-intelligent-farm)** · No public MVP URL confirmed for this repository.
+
+
+**Developer:** Inda Obanyi · AI/ML Engineer & Software Developer · Founder, Yaqini & Duniya Technology  
+**[Portfolio](https://indaobanyi.vercel.app)** · **[LinkedIn](https://www.linkedin.com/in/inda-obanyi-8886553a6/)** · **[GitHub](https://github.com/Inda-Obanyi)**
