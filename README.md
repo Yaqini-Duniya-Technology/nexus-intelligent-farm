@@ -1,5 +1,8 @@
 # NEXUS — MVP PRODUCT BRIEF
 
+[![NEXUS Python tests](https://github.com/Yaqini-Duniya-Technology/nexus-intelligent-farm/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/Yaqini-Duniya-Technology/nexus-intelligent-farm/actions/workflows/ci.yml)
+
+
 ## Architecture and engineering evidence
 
 - **[System architecture and validation boundaries](docs/ARCHITECTURE.md)** — decision flow, execution verification, experience memory and reproducibility.
