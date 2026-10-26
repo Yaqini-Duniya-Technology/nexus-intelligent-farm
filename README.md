@@ -1,5 +1,12 @@
 # NEXUS — MVP PRODUCT BRIEF
 
+## Architecture and engineering evidence
+
+- **[System architecture and validation boundaries](docs/ARCHITECTURE.md)** — decision flow, execution verification, experience memory and reproducibility.
+- **[Reproducible MVP demonstration](#mvp-demonstration)** — documented 720-step simulation using seed 101.
+- **[Reported MVP results](#validated-mvp-results)** — simulation metrics, not field outcomes.
+
+
 ## Product
 
 **NEXUS — Intelligent Farm Decision & Autonomous Management System**
