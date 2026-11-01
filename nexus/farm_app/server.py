@@ -455,11 +455,23 @@ def main():
     parser.add_argument("--port", type=int, default=8080)
     parser.add_argument(
         "--database",
-        default="nexus-farm.sqlite3",
+        default=None,
     )
+    from nexus.farm_app import deployment_controls
+    deployment_controls.configure(parser)
     args = parser.parse_args()
+    data_directory = deployment_controls.prepare(args, parser)
+    if data_directory:
+        import os
+        os.chdir(data_directory)
+        print(f"Persistent data directory: {data_directory}", flush=True)
+    if args.apply_migrations and Path(args.database).is_file():
+        result = deployment_controls.migrate(args.database, Path(args.database).parent / 'backups')
+        print(f"Migration result: {result}", flush=True)
 
     store = FarmStore(args.database)
+    if args.apply_migrations:
+        deployment_controls.migrate(args.database, Path(args.database).parent / 'backups')
 
     initialize_audit(store)
     initialize_scheduling(store)

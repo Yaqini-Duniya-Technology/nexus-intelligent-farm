@@ -361,3 +361,5 @@ NEXUS aims to become an intelligent operating layer for agriculture:
 **Developer:** Inda Obanyi · AI/ML Engineer & Software Developer · Founder, Yaqini & Duniya Technology  
 **[Portfolio](https://indaobanyi.vercel.app)** · **[LinkedIn](https://www.linkedin.com/in/inda-obanyi-8886553a6/)** · **[GitHub](https://github.com/Inda-Obanyi)**
 
+
+Storage and account foundations: [deployment controls guide](docs/DEPLOYMENT_CONTROLS.md). The separate narrow account pilot enforces its own farm scope; grants do not yet protect the full Operations workspace; shared hosting remains deferred.

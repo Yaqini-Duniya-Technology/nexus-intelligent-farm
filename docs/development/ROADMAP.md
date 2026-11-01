@@ -15,13 +15,13 @@ First batch: 18 implemented IDs. Tested means recorded acceptance evidence; In P
 | NEXUS-UPG-005 | Validated resource pagination | High | 1 — Audit and reliability | Tested | None | docs/development/VERIFICATION.md; docs/development/VERIFICATION.md, docs/RELIABILITY_GUIDE.md | 1cd8563515fa0a1b0888866a8178eaf78e93938b |
 | NEXUS-UPG-006 | Saved resource domain checks | Critical | 1 — Audit and reliability | Tested | None | docs/development/VERIFICATION.md; docs/development/VERIFICATION.md, docs/RELIABILITY_GUIDE.md | 1cd8563515fa0a1b0888866a8178eaf78e93938b |
 | NEXUS-UPG-007 | Composable route registry | High | 2 — Access and platform foundations | Planned | None | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
-| NEXUS-UPG-008 | Schema migration registry | High | 2 — Access and platform foundations | Planned | None | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
+| NEXUS-UPG-008 | Schema migration registry | High | 2 — Access and platform foundations | In Progress | None | Foundation/pilot tests; docs/DEPLOYMENT_CONTROLS.md; full acceptance pending | Continuation review branch |
 | NEXUS-UPG-009 | Transaction service boundaries | High | 2 — Access and platform foundations | Planned | None | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
 | NEXUS-UPG-010 | Typed API error catalogue | High | 2 — Access and platform foundations | Planned | None | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
 | NEXUS-UPG-011 | Resource payload migration policy | High | 2 — Access and platform foundations | Planned | None | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
 | NEXUS-UPG-012 | Bounded SQLite contention recovery | High | 2 — Access and platform foundations | Planned | None | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
 | NEXUS-UPG-013 | Query-plan and index review | High | 2 — Access and platform foundations | Planned | None | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
-| NEXUS-UPG-014 | Explicit data-directory configuration | High | 2 — Access and platform foundations | Planned | None | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
+| NEXUS-UPG-014 | Explicit data-directory configuration | High | 2 — Access and platform foundations | In Progress | None | Foundation/pilot tests; docs/DEPLOYMENT_CONTROLS.md; full acceptance pending | Continuation review branch |
 | NEXUS-UPG-015 | Separate dependency profiles | High | 2 — Access and platform foundations | Planned | None | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
 | NEXUS-UPG-016 | Verified knowledge source register | Medium | 3 — Evidence and operational integration | Planned | None | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
 | NEXUS-UPG-017 | Claim-level source references | Medium | 3 — Evidence and operational integration | Planned | NEXUS-UPG-016 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
@@ -96,11 +96,11 @@ First batch: 18 implemented IDs. Tested means recorded acceptance evidence; In P
 | NEXUS-UPG-086 | Same-origin writes across combined routes | Critical | 1 — Audit and reliability | Tested | None | docs/development/VERIFICATION.md; docs/development/VERIFICATION.md, docs/RELIABILITY_GUIDE.md | 1cd8563515fa0a1b0888866a8178eaf78e93938b |
 | NEXUS-UPG-087 | Reject ambiguous body encodings | Critical | 1 — Audit and reliability | Tested | None | docs/development/VERIFICATION.md; docs/development/VERIFICATION.md, docs/RELIABILITY_GUIDE.md | 1cd8563515fa0a1b0888866a8178eaf78e93938b |
 | NEXUS-UPG-088 | Safe request diagnostics | High | 1 — Audit and reliability | Tested | None | docs/development/VERIFICATION.md; docs/development/VERIFICATION.md, docs/RELIABILITY_GUIDE.md | 1cd8563515fa0a1b0888866a8178eaf78e93938b |
-| NEXUS-UPG-089 | Local account password storage | Critical | 2 — Access and platform foundations | Planned | NEXUS-UPG-014 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
+| NEXUS-UPG-089 | Local account password storage | Critical | 2 — Access and platform foundations | In Progress | NEXUS-UPG-014 | Foundation/pilot tests; docs/DEPLOYMENT_CONTROLS.md; full acceptance pending | Continuation review branch |
 | NEXUS-UPG-090 | First-owner bootstrap | Critical | 2 — Access and platform foundations | Planned | NEXUS-UPG-089 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
-| NEXUS-UPG-091 | Secure account sessions | Critical | 2 — Access and platform foundations | Planned | NEXUS-UPG-089 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
+| NEXUS-UPG-091 | Secure account sessions | Critical | 2 — Access and platform foundations | In Progress | NEXUS-UPG-089 | Foundation/pilot tests; docs/DEPLOYMENT_CONTROLS.md; full acceptance pending | Continuation review branch |
 | NEXUS-UPG-092 | Session-bound CSRF protection | Critical | 2 — Access and platform foundations | Planned | NEXUS-UPG-089 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
-| NEXUS-UPG-093 | Role permission matrix | Critical | 2 — Access and platform foundations | Planned | NEXUS-UPG-089 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
+| NEXUS-UPG-093 | Role permission matrix | Critical | 2 — Access and platform foundations | In Progress | NEXUS-UPG-089 | Foundation/pilot tests; docs/DEPLOYMENT_CONTROLS.md; full acceptance pending | Continuation review branch |
 | NEXUS-UPG-094 | Farm membership scoping | Critical | 2 — Access and platform foundations | Planned | NEXUS-UPG-091, NEXUS-UPG-093 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
 | NEXUS-UPG-095 | Object-level authorization | Critical | 2 — Access and platform foundations | Planned | NEXUS-UPG-091, NEXUS-UPG-093 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
 | NEXUS-UPG-096 | Session revocation and logout | High | 2 — Access and platform foundations | Planned | NEXUS-UPG-089 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
@@ -110,7 +110,7 @@ First batch: 18 implemented IDs. Tested means recorded acceptance evidence; In P
 | NEXUS-UPG-100 | Public-deployment security gate | Critical | 2 — Access and platform foundations | Planned | NEXUS-UPG-089 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
 | NEXUS-UPG-101 | Cross-platform workspace CI | High | 1 — Audit and reliability | Tested | None | GitHub Actions 41297994634: all four platform jobs passed; docs/development/VERIFICATION.md, docs/RELIABILITY_GUIDE.md | 1cd8563515fa0a1b0888866a8178eaf78e93938b |
 | NEXUS-UPG-102 | Data-minimising readiness endpoint | High | 2 — Access and platform foundations | Planned | None | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
-| NEXUS-UPG-103 | Pre-migration backup gate | Critical | 2 — Access and platform foundations | Planned | NEXUS-UPG-008, NEXUS-UPG-104 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
+| NEXUS-UPG-103 | Pre-migration backup gate | Critical | 2 — Access and platform foundations | In Progress | NEXUS-UPG-008, NEXUS-UPG-104 | Foundation/pilot tests; docs/DEPLOYMENT_CONTROLS.md; full acceptance pending | Continuation review branch |
 | NEXUS-UPG-104 | Operator recovery rehearsal reports | Critical | 2 — Access and platform foundations | Planned | NEXUS-UPG-008 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
 | NEXUS-UPG-105 | Container data-volume recipe | Future | 2 — Access and platform foundations | Planned | NEXUS-UPG-100, NEXUS-UPG-104 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
 | NEXUS-UPG-106 | GitHub Actions runtime maintenance | High | 2 — Access and platform foundations | Planned | None | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
@@ -119,12 +119,12 @@ First batch: 18 implemented IDs. Tested means recorded acceptance evidence; In P
 | NEXUS-UPG-109 | Dependency inventory and SBOM | High | 2 — Access and platform foundations | Planned | None | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
 | NEXUS-UPG-110 | Release manifest CI verification | High | 2 — Access and platform foundations | Planned | None | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
 | NEXUS-UPG-111 | Required release quality gates | High | 2 — Access and platform foundations | Planned | None | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
-| NEXUS-UPG-112 | Migration recovery rehearsal | High | 2 — Access and platform foundations | Planned | NEXUS-UPG-008, NEXUS-UPG-103 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
+| NEXUS-UPG-112 | Migration recovery rehearsal | High | 2 — Access and platform foundations | In Progress | NEXUS-UPG-008, NEXUS-UPG-103 | Foundation/pilot tests; docs/DEPLOYMENT_CONTROLS.md; full acceptance pending | Continuation review branch |
 | NEXUS-UPG-113 | Infrastructure cost worksheet | High | 2 — Access and platform foundations | Planned | None | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
 | NEXUS-UPG-114 | TLS and private access deployment recipe | Future | 2 — Access and platform foundations | Planned | NEXUS-UPG-100, NEXUS-UPG-104 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
 | NEXUS-UPG-115 | Production readiness assessment | High | 2 — Access and platform foundations | Planned | NEXUS-UPG-100, NEXUS-UPG-104 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
 | NEXUS-UPG-116 | Reliability troubleshooting guide | High | 1 — Audit and reliability | Tested | NEXUS-UPG-001, NEXUS-UPG-071, NEXUS-UPG-075 | docs/development/VERIFICATION.md; docs/development/VERIFICATION.md, docs/RELIABILITY_GUIDE.md | 1cd8563515fa0a1b0888866a8178eaf78e93938b |
-| NEXUS-UPG-117 | Account administration guide | Medium | 4 — Usability, guidance and adoption | Planned | NEXUS-UPG-091, NEXUS-UPG-093 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
+| NEXUS-UPG-117 | Account administration guide | Medium | 4 — Usability, guidance and adoption | In Progress | NEXUS-UPG-091, NEXUS-UPG-093 | Foundation/pilot tests; docs/DEPLOYMENT_CONTROLS.md; full acceptance pending | Continuation review branch |
 | NEXUS-UPG-118 | API contracts reference | Medium | 4 — Usability, guidance and adoption | Planned | NEXUS-UPG-116 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
 | NEXUS-UPG-119 | Cross-module save-effects matrix | Medium | 4 — Usability, guidance and adoption | Planned | NEXUS-UPG-116 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |
 | NEXUS-UPG-120 | Season relevance FAQ | Medium | 4 — Usability, guidance and adoption | Planned | NEXUS-UPG-116 | Acceptance pending; docs/development/ROADMAP.md | Not implemented |

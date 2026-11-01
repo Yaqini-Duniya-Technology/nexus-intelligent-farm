@@ -49,3 +49,13 @@ Actual user data, full device/mobile coverage, authenticated roles, production h
 Portability run 41297994634 completed successfully on all four jobs: Windows/Linux, Python 3.13/3.14. Each job ran the workspace suite, modified-script syntax checks, Node helper tests and the isolated route smoke test. This verifies the committed implementation on those platforms; it does not substitute for browser UI acceptance.
 
 The current 150-item tracker has 16 Tested, 2 In Progress (real-browser acceptance), 129 Planned and 3 Blocked (data/evaluation prerequisites). Eighteen IDs have implementation in this batch; only sixteen have completed their recorded acceptance gates. No status is changed to Completed merely to satisfy a numerical target.
+
+## Storage and account-pilot continuation — 1 November 2026
+
+469 combined local workspace tests passed, including 15 storage/account/service/HTTP tests. The original 65-route isolated smoke also passed. Node syntax checks cover the new account pilot script; real-browser acceptance is pending. No actual user database was supplied.
+
+New migration tests demonstrate checked pre-schema backup, rerun no-op, backup-failure refusal, transactional rollback and unknown/changed-history refusal. A real subprocess launcher verifies explicit data-directory initialization and migration. Account tests cover salted password verification, scoped roles, disabled accounts and last-owner protection. Authenticated HTTP tests exercise cookies, permitted reads, cross-farm denial, legacy-route denial, CSRF/Origin rejection, note saves and logout. Sessions are stored as token hashes and have idle/absolute limits; login failures are temporarily limited.
+
+The new `/` on account_pilot port 8081 is a **narrow authenticated pilot**, not the complete Operations workspace. Its only authenticated data surface is `/api/session`, `/api/note` and `/api/logout`; `/api/login` handles credentials. Farm notes are separate pilot records. All other legacy API/export/attachment paths are unavailable in that server. Operations on port 8080 remains local single-user. No shared-hosting readiness is claimed. Password reset, full route integration, hosted TLS/cookies, account lifecycle/audit and browser acceptance remain required.
+
+Tracker phase-2 items are In Progress rather than marked complete: the additive registry does not yet encompass every legacy initializer, and pilot roles/sessions do not fulfill the full role matrix or all workspace permissions. See DEPLOYMENT_CONTROLS.md for supported commands and boundaries.

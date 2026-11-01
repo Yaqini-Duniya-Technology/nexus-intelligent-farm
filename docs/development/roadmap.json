@@ -218,7 +218,7 @@
       "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
-      "status": "Planned",
+      "status": "In Progress",
       "dependencies": [],
       "requirements": [],
       "acceptance_criteria": [
@@ -228,8 +228,11 @@
         "Fixture assertion: Version schema changes and preview their effects before applying them.",
         "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
-      "verification": [],
+      "verification": [
+        "Foundation batch: versioned additive access schema, explicit launcher data directory and local account/grant primitives. Legacy schema conversion, full role matrix, authenticated routes and deployment acceptance remain incomplete."
+      ],
       "documentation": [
+        "docs/DEPLOYMENT_CONTROLS.md",
         "docs/development/ROADMAP.md"
       ],
       "git_reference": null
@@ -368,7 +371,7 @@
       "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
-      "status": "Planned",
+      "status": "In Progress",
       "dependencies": [],
       "requirements": [],
       "acceptance_criteria": [
@@ -378,8 +381,11 @@
         "Fixture assertion: Show and validate the selected data directory before initializing a new database.",
         "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
-      "verification": [],
+      "verification": [
+        "Foundation batch: versioned additive access schema, explicit launcher data directory and local account/grant primitives. Legacy schema conversion, full role matrix, authenticated routes and deployment acceptance remain incomplete."
+      ],
       "documentation": [
+        "docs/DEPLOYMENT_CONTROLS.md",
         "docs/development/ROADMAP.md"
       ],
       "git_reference": null
@@ -2416,7 +2422,7 @@
       "benefit": "Control identities and data access before shared deployment.",
       "priority": "Critical",
       "phase": "2 — Access and platform foundations",
-      "status": "Planned",
+      "status": "In Progress",
       "dependencies": [
         "NEXUS-UPG-014"
       ],
@@ -2428,8 +2434,11 @@
         "Fixture assertion: Use a reviewed password-hashing design with no plaintext password persistence.",
         "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
-      "verification": [],
+      "verification": [
+        "Foundation batch: versioned additive access schema, explicit launcher data directory and local account/grant primitives. Legacy schema conversion, full role matrix, authenticated routes and deployment acceptance remain incomplete."
+      ],
       "documentation": [
+        "docs/DEPLOYMENT_CONTROLS.md",
         "docs/development/ROADMAP.md"
       ],
       "git_reference": null
@@ -2470,7 +2479,7 @@
       "benefit": "Control identities and data access before shared deployment.",
       "priority": "Critical",
       "phase": "2 — Access and platform foundations",
-      "status": "Planned",
+      "status": "In Progress",
       "dependencies": [
         "NEXUS-UPG-089"
       ],
@@ -2482,9 +2491,12 @@
         "Fixture assertion: Implement expiring server-side sessions and appropriate cookie controls.",
         "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
-      "verification": [],
+      "verification": [
+        "Expiring hashed-token sessions, logout, CSRF, idle/absolute timeout and HTTP permission tests implemented for a separate narrow loopback pilot. Full-workspace integration, hosted cookies and browser acceptance remain incomplete."
+      ],
       "documentation": [
-        "docs/development/ROADMAP.md"
+        "docs/development/ROADMAP.md",
+        "docs/DEPLOYMENT_CONTROLS.md"
       ],
       "git_reference": null
     },
@@ -2524,7 +2536,7 @@
       "benefit": "Control identities and data access before shared deployment.",
       "priority": "Critical",
       "phase": "2 — Access and platform foundations",
-      "status": "Planned",
+      "status": "In Progress",
       "dependencies": [
         "NEXUS-UPG-089"
       ],
@@ -2536,8 +2548,11 @@
         "Fixture assertion: Define farmer, worker, adviser, cooperative, business and administrator permissions before rollout.",
         "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
-      "verification": [],
+      "verification": [
+        "Foundation batch: versioned additive access schema, explicit launcher data directory and local account/grant primitives. Legacy schema conversion, full role matrix, authenticated routes and deployment acceptance remain incomplete."
+      ],
       "documentation": [
+        "docs/DEPLOYMENT_CONTROLS.md",
         "docs/development/ROADMAP.md"
       ],
       "git_reference": null
@@ -2797,7 +2812,7 @@
       "benefit": "Make release, recovery and hosting prerequisites reproducible.",
       "priority": "Critical",
       "phase": "2 — Access and platform foundations",
-      "status": "Planned",
+      "status": "In Progress",
       "dependencies": [
         "NEXUS-UPG-008",
         "NEXUS-UPG-104"
@@ -2810,8 +2825,11 @@
         "Fixture assertion: Verify a recoverable backup before applying versioned schema changes.",
         "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
-      "verification": [],
+      "verification": [
+        "Foundation batch: versioned additive access schema, explicit launcher data directory and local account/grant primitives. Legacy schema conversion, full role matrix, authenticated routes and deployment acceptance remain incomplete."
+      ],
       "documentation": [
+        "docs/DEPLOYMENT_CONTROLS.md",
         "docs/development/ROADMAP.md"
       ],
       "git_reference": null
@@ -3032,7 +3050,7 @@
       "benefit": "Make release, recovery and hosting prerequisites reproducible.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
-      "status": "Planned",
+      "status": "In Progress",
       "dependencies": [
         "NEXUS-UPG-008",
         "NEXUS-UPG-103"
@@ -3045,8 +3063,11 @@
         "Fixture assertion: Test failure and restoration for each supported schema migration.",
         "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
-      "verification": [],
+      "verification": [
+        "Foundation batch: versioned additive access schema, explicit launcher data directory and local account/grant primitives. Legacy schema conversion, full role matrix, authenticated routes and deployment acceptance remain incomplete."
+      ],
       "documentation": [
+        "docs/DEPLOYMENT_CONTROLS.md",
         "docs/development/ROADMAP.md"
       ],
       "git_reference": null
@@ -3177,7 +3198,7 @@
       "benefit": "Explain supported workflows and their limits at the point of use.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
-      "status": "Planned",
+      "status": "In Progress",
       "dependencies": [
         "NEXUS-UPG-091",
         "NEXUS-UPG-093"
@@ -3190,8 +3211,11 @@
         "Fixture assertion: Document actual account/session/role features only after implementation and testing.",
         "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
-      "verification": [],
+      "verification": [
+        "Foundation batch: versioned additive access schema, explicit launcher data directory and local account/grant primitives. Legacy schema conversion, full role matrix, authenticated routes and deployment acceptance remain incomplete."
+      ],
       "documentation": [
+        "docs/DEPLOYMENT_CONTROLS.md",
         "docs/development/ROADMAP.md"
       ],
       "git_reference": null

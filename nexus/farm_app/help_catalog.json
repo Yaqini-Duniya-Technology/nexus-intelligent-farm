@@ -5602,6 +5602,29 @@
         }
       ],
       "example_notice": "All examples are fictional and never inserted automatically. Strict request errors reject unsupported input; they do not validate agricultural facts."
+    },
+    {
+      "id": "storage-and-access",
+      "title": "Storage, migrations and local account foundations",
+      "category": "Administration",
+      "routes": [
+        {
+          "path": "/workbench"
+        }
+      ],
+      "forms": [],
+      "purpose": "Choose persistent storage, preview additive migrations and understand the separate local account pilot. Full-workspace permission integration remains incomplete.",
+      "steps": [
+        "Stop NEXUS and locate your existing database and attachments. Keep the original copy.",
+        "Use --data-directory only for a directory containing your copied database; intentional new workspaces require --initialize-data-directory.",
+        "Preview with python -m nexus.farm_app.deployment_controls, then add --apply only after reading the plan. A checked backup is mandatory.",
+        "Account CLI creation and farm grants are foundational only. Keep the server local until route enforcement, sessions and cross-farm HTTP tests exist.",
+        "For permission testing, launch account_pilot on port 8081 and use its embedded Help. It exposes only scoped reads and separate notes; it is not the full Operations workspace."
+      ],
+      "save_effect": "An applied migration adds access tables and a checksum ledger; it preserves existing farm records. A grant affects the permission primitive, not existing web pages.",
+      "after_save": "Check the reported backup and applied versions. Read docs/DEPLOYMENT_CONTROLS.md for commands, path meanings and recovery.",
+      "fields": [],
+      "example_notice": "Fictional example path C:\\NEXUS-data is illustrative. Do not initialize a new empty database to replace missing records. No passwords belong in farm forms."
     }
   ],
   "glossary": {

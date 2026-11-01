@@ -33,6 +33,7 @@ jobs:
         run: |
           node --check nexus/farm_app/resource_workspace.js
           node --check nexus/farm_app/form_safety.js
+          node --check nexus/farm_app/account_pilot.js
           node --check nexus/farm_app/page_guides.js
       - name: Check form safety helpers
         run: node nexus/farm_app/test_form_safety.cjs
