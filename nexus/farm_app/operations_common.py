@@ -7,7 +7,7 @@ from datetime import date, datetime, timedelta, timezone
 from html import escape
 from pathlib import Path
 
-RELEASE = 'NEXUS produce and market 2026.11.01'
+RELEASE = 'NEXUS reliability audit 2026.11.01'
 LAGOS = timezone(timedelta(hours=1))
 
 

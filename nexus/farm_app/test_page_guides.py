@@ -8,8 +8,8 @@ from nexus.farm_app.store import FarmStore
 
 class GuideTests(unittest.TestCase):
     def test_catalog_complete_and_all_routes_resolve(self):
-        topics=help.catalog()['topics'];self.assertEqual(len(topics),89)
-        self.assertEqual(len({t['id'] for t in topics}),89)
+        topics=help.catalog()['topics'];self.assertEqual(len(topics),91)
+        self.assertEqual(len({t['id'] for t in topics}),91)
         for topic in topics:
             self.assertTrue(topic['steps']);self.assertTrue(topic['save_effect']);self.assertIn('fictional',topic['example_notice'].lower())
             for route in topic['routes']:self.assertIn(topic,help.context(route['path'],route.get('view','')))
@@ -56,7 +56,7 @@ class GuideHTTPTests(unittest.TestCase):
         with urlopen(self.base+path) as r:
             raw=r.read();self.assertEqual(int(r.headers['Content-Length']),len(raw));return raw,r.headers
     def test_catalog_and_topic_api(self):
-        raw,_=self.get('/api/help/catalog');self.assertEqual(len(json.loads(raw)['topics']),89)
+        raw,_=self.get('/api/help/catalog');self.assertEqual(len(json.loads(raw)['topics']),91)
         raw,_=self.get('/api/help/topic?id=measurements');self.assertEqual(json.loads(raw)['id'],'measurements')
     def test_context_and_search_api(self):
         raw,_=self.get('/api/help/context?path=/evidence-studio&view=imports');self.assertEqual(json.loads(raw)['topics'][0]['id'],'csv-import')

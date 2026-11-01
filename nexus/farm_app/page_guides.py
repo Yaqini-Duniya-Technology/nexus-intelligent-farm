@@ -66,11 +66,13 @@ def centre(query):
     html+='<p>'+str(len(topics))+' guided workflows shown.</p>'
     if not topics:html+='<p>No guide matched. Try a shorter term, remove a category or use Show all guides.</p>'
     if not tid:
-        html+='<nav class="nxh-topic-index" aria-label="Guide topics">'
-        for topic in topics:html+='<a href="/help-centre?topic='+t(topic['id'])+'">'+t(topic['title'])+'</a>'
-        html+='</nav>'
-    for topic in topics:
-        html+=topic_html(topic)+'<p class="nxh-centre-actions"><a href="/api/help/download?topic='+t(topic['id'])+'">Download standalone HTML guide</a> · <a href="/help-centre?topic='+t(topic['id'])+'">Link to this guide</a></p>'
+        html+='<section class="nxh-topic-index" aria-label="Guide topics">'
+        for topic in topics:
+            html+='<article><h2><a href="/help-centre?topic='+t(topic['id'])+'">'+t(topic['title'])+'</a></h2><p>'+t(topic['purpose'])+'</p><p>'+t(topic['category'])+' · <a href="/help-centre?topic='+t(topic['id'])+'">Read fields, examples and steps</a></p></article>'
+        html+='</section>'
+    else:
+        for topic in topics:
+            html+=topic_html(topic)+'<p class="nxh-centre-actions"><a href="/api/help/download?topic='+t(topic['id'])+'">Download standalone HTML guide</a> · <a href="/help-centre?topic='+t(topic['id'])+'">Link to this guide</a></p>'
     html+='<section><h2>Terms used in NEXUS</h2><dl>'
     for term,meaning in catalog()['glossary'].items():html+='<dt>'+t(term)+'</dt><dd>'+t(meaning)+'</dd>'
     html+='</dl></section><section><h2>Privacy and limits</h2><p>'+t(catalog()['privacy'])+'</p><p>'+t(catalog()['limits'])+'</p></section><noscript><p>The guides and search form above work without JavaScript. The in-page help panel needs JavaScript; no form values are changed if it is unavailable.</p></noscript></main></body></html>'

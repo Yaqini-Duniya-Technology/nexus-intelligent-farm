@@ -1,13 +1,16 @@
 """One local launcher for the combined NEXUS workspace and operations workbench."""
 import json
+import io
+import sys
+import uuid
 import sqlite3
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
-from nexus.farm_app import operations_records as records, operations_exports as exports, work_orders, evidence_studio, page_guides, farm_resources, project_branding, produce_market
+from nexus.farm_app import operations_records as records, operations_exports as exports, work_orders, evidence_studio, page_guides, farm_resources, project_branding, produce_market, request_inputs
 from nexus.farm_app.operations_common import RELEASE, readonly, table_names
 
 ROOT=Path(__file__).parent
-ASSETS={'resource_workspace.js':'text/javascript; charset=utf-8','resource_workspace.css':'text/css; charset=utf-8','operations_workbench.css':'text/css; charset=utf-8','operations_workbench.js':'text/javascript; charset=utf-8', 'evidence_studio.js':'text/javascript; charset=utf-8', 'page_guides.js':'text/javascript; charset=utf-8', 'page_guides.css':'text/css; charset=utf-8'}
+ASSETS={'form_safety.js':'text/javascript; charset=utf-8','resource_workspace.js':'text/javascript; charset=utf-8','resource_workspace.css':'text/css; charset=utf-8','operations_workbench.css':'text/css; charset=utf-8','operations_workbench.js':'text/javascript; charset=utf-8', 'evidence_studio.js':'text/javascript; charset=utf-8', 'page_guides.js':'text/javascript; charset=utf-8', 'page_guides.css':'text/css; charset=utf-8'}
 
 
 def bootstrap_optional(store):
@@ -59,6 +62,15 @@ def make_handler(base,store):
                 return parsed.hostname in ('127.0.0.1','localhost','::1') and parsed.port==self.server.server_port and parsed.username is None and parsed.password is None and not parsed.path and not parsed.query and not parsed.fragment
             except ValueError:return False
 
+        def trace_id(self):
+            if not getattr(self,'_nexus_trace',None):self._nexus_trace=uuid.uuid4().hex
+            return self._nexus_trace
+
+        def log_message(self,format,*args):
+            # Log route/status only, never query strings, request bodies or headers.
+            code=args[1] if len(args)>1 and str(args[1]).isdigit() else '-'
+            sys.stderr.write('NEXUS '+getattr(self,'command','?')+' '+urlparse(getattr(self,'path','/')).path[:200].__repr__()+' '+str(code)+' trace='+self.trace_id()+'\n')
+
         def respond(self,status,body,content_type='application/json; charset=utf-8'):
             raw=body if isinstance(body,bytes) else json.dumps(body,ensure_ascii=False,allow_nan=False).encode()
             if status==200 and content_type.startswith('text/html'):
@@ -66,6 +78,7 @@ def make_handler(base,store):
             self.send_response(status)
             self.send_header('Content-Type',content_type)
             self.send_header('Content-Length',str(len(raw)))
+            self.send_header('X-Nexus-Request-ID',self.trace_id())
             self.send_header('Cache-Control','no-store')
             self.send_header('X-Content-Type-Options','nosniff')
             self.send_header('X-Frame-Options','DENY')
@@ -75,7 +88,7 @@ def make_handler(base,store):
         def download(self,raw,content_type,filename):
             self.send_response(200);self.send_header('Content-Type',content_type)
             self.send_header('Content-Disposition','attachment; filename="'+filename+'"')
-            self.send_header('Content-Length',str(len(raw)));self.send_header('Cache-Control','no-store')
+            self.send_header('Content-Length',str(len(raw)));self.send_header('X-Nexus-Request-ID',self.trace_id());self.send_header('Cache-Control','no-store')
             self.send_header('X-Content-Type-Options','nosniff');self.send_header('X-Frame-Options','DENY')
             self.send_header('Referrer-Policy','no-referrer');self.end_headers();self.wfile.write(raw)
 
@@ -105,7 +118,7 @@ def make_handler(base,store):
                     return self.respond(200,result)
                 if path in ('/workbench','/help'):
                     if path=='/help':
-                        self.send_response(302);self.send_header('Location','/help-centre');self.send_header('Content-Length','0');self.end_headers();return
+                        self.send_response(302);self.send_header('X-Nexus-Request-ID',self.trace_id());self.send_header('Location','/help-centre');self.send_header('Content-Length','0');self.end_headers();return
                     return self.respond(200,(ROOT/'operations_workbench.html').read_bytes(),'text/html; charset=utf-8')
                 if path.startswith('/ops-assets/'):
                     name=path.rsplit('/',1)[-1]
@@ -137,6 +150,19 @@ def make_handler(base,store):
             except (sqlite3.Error,OSError):return self.respond(500,{'error':'Could not read local records. Check the database and server terminal.'})
 
         def do_POST(self):
+            if not self.host_valid():return self.respond(403,{'error':'Use the local NEXUS host and port'})
+            if self.headers.get('Origin')!='http://'+self.headers.get('Host',''):
+                return self.respond(403,{'error':'Same-origin browser request required'})
+            try:raw=request_inputs.read_request(self)
+            except request_inputs.RequestError as error:
+                self.close_connection=True
+                return self.respond(error.status,{'error':str(error)})
+            original=self.rfile
+            self.rfile=io.BytesIO(raw)
+            try:return self.dispatch_post()
+            finally:self.rfile=original
+
+        def dispatch_post(self):
             if not self.host_valid():return self.respond(403,{'error':'Use the local NEXUS host and port'})
             path=urlparse(self.path).path
             if path.startswith('/api/resources/'):

@@ -1,0 +1,4117 @@
+{
+  "tracker_version": "nexus-roadmap-v1",
+  "scope": "150 future upgrades from baseline e5eccd442eeada29769f304f4d025946c1fafe20; earlier delivered capabilities are not counted again.",
+  "count_note": "Requested A–I quotas total 140. J adds 10 explicit cross-cutting validation/release items to reach 150.",
+  "baseline_commit": "e5eccd442eeada29769f304f4d025946c1fafe20",
+  "workstream_counts": {
+    "A": 15,
+    "B": 20,
+    "C": 20,
+    "D": 15,
+    "E": 15,
+    "F": 15,
+    "G": 15,
+    "H": 15,
+    "I": 10,
+    "J": 10
+  },
+  "upgrades": [
+    {
+      "id": "NEXUS-UPG-001",
+      "feature": "Strict JSON object parsing",
+      "workstream": "A",
+      "workstream_name": "Core platform and architecture",
+      "purpose": "Reject duplicate fields, nonfinite numbers and excessively nested bodies before a write.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
+      "priority": "Critical",
+      "phase": "1 — Audit and reliability",
+      "status": "Tested",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Reject duplicate fields, nonfinite numbers and excessively nested bodies before a write."
+      ],
+      "tests": [
+        "nexus/farm_app/test_reliability_batch.py — request/parser/HTTP cases"
+      ],
+      "verification": [
+        "docs/development/VERIFICATION.md"
+      ],
+      "documentation": [
+        "docs/development/VERIFICATION.md",
+        "docs/RELIABILITY_GUIDE.md"
+      ],
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
+    },
+    {
+      "id": "NEXUS-UPG-002",
+      "feature": "Bounded request framing",
+      "workstream": "A",
+      "workstream_name": "Core platform and architecture",
+      "purpose": "Require one positive Content-Length and reject truncated or oversized bodies before route dispatch.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
+      "priority": "Critical",
+      "phase": "1 — Audit and reliability",
+      "status": "Tested",
+      "dependencies": [
+        "NEXUS-UPG-001"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Require one positive Content-Length and reject truncated or oversized bodies before route dispatch."
+      ],
+      "tests": [
+        "nexus/farm_app/test_reliability_batch.py — request/parser/HTTP cases"
+      ],
+      "verification": [
+        "docs/development/VERIFICATION.md"
+      ],
+      "documentation": [
+        "docs/development/VERIFICATION.md",
+        "docs/RELIABILITY_GUIDE.md"
+      ],
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
+    },
+    {
+      "id": "NEXUS-UPG-003",
+      "feature": "UTF-8 JSON media contracts",
+      "workstream": "A",
+      "workstream_name": "Core platform and architecture",
+      "purpose": "Accept supported JSON media/charset combinations and preserve the explicit WAV route.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
+      "priority": "Critical",
+      "phase": "1 — Audit and reliability",
+      "status": "Tested",
+      "dependencies": [
+        "NEXUS-UPG-001"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Accept supported JSON media/charset combinations and preserve the explicit WAV route."
+      ],
+      "tests": [
+        "nexus/farm_app/test_reliability_batch.py — request/parser/HTTP cases"
+      ],
+      "verification": [
+        "docs/development/VERIFICATION.md"
+      ],
+      "documentation": [
+        "docs/development/VERIFICATION.md",
+        "docs/RELIABILITY_GUIDE.md"
+      ],
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
+    },
+    {
+      "id": "NEXUS-UPG-004",
+      "feature": "Request-body timeouts",
+      "workstream": "A",
+      "workstream_name": "Core platform and architecture",
+      "purpose": "Bound slow body reads and return a recoverable timeout response without performing a mutation.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
+      "priority": "Critical",
+      "phase": "1 — Audit and reliability",
+      "status": "Tested",
+      "dependencies": [
+        "NEXUS-UPG-001"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Bound slow body reads and return a recoverable timeout response without performing a mutation."
+      ],
+      "tests": [
+        "nexus/farm_app/test_reliability_batch.py — request/parser/HTTP cases"
+      ],
+      "verification": [
+        "docs/development/VERIFICATION.md"
+      ],
+      "documentation": [
+        "docs/development/VERIFICATION.md",
+        "docs/RELIABILITY_GUIDE.md"
+      ],
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
+    },
+    {
+      "id": "NEXUS-UPG-005",
+      "feature": "Validated resource pagination",
+      "workstream": "A",
+      "workstream_name": "Core platform and architecture",
+      "purpose": "Validate query switches, cap record pages and preserve complete bounded exports.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
+      "priority": "High",
+      "phase": "1 — Audit and reliability",
+      "status": "Tested",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Validate query switches, cap record pages and preserve complete bounded exports."
+      ],
+      "tests": [
+        "nexus/farm_app/test_reliability_batch.py — paging/export/stored-domain cases"
+      ],
+      "verification": [
+        "docs/development/VERIFICATION.md"
+      ],
+      "documentation": [
+        "docs/development/VERIFICATION.md",
+        "docs/RELIABILITY_GUIDE.md"
+      ],
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
+    },
+    {
+      "id": "NEXUS-UPG-006",
+      "feature": "Saved resource domain checks",
+      "workstream": "A",
+      "workstream_name": "Core platform and architecture",
+      "purpose": "Validate persisted field types, enums, units and timestamps in addition to hashes.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
+      "priority": "Critical",
+      "phase": "1 — Audit and reliability",
+      "status": "Tested",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Validate persisted field types, enums, units and timestamps in addition to hashes."
+      ],
+      "tests": [
+        "nexus/farm_app/test_reliability_batch.py — paging/export/stored-domain cases"
+      ],
+      "verification": [
+        "docs/development/VERIFICATION.md"
+      ],
+      "documentation": [
+        "docs/development/VERIFICATION.md",
+        "docs/RELIABILITY_GUIDE.md"
+      ],
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
+    },
+    {
+      "id": "NEXUS-UPG-007",
+      "feature": "Composable route registry",
+      "workstream": "A",
+      "workstream_name": "Core platform and architecture",
+      "purpose": "Replace layered main-function monkeypatching with tested route composition while preserving legacy URLs.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Replace layered main-function monkeypatching with tested route composition while preserving legacy URLs."
+      ],
+      "tests": [
+        "Fixture assertion: Replace layered main-function monkeypatching with tested route composition while preserving legacy URLs.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-008",
+      "feature": "Schema migration registry",
+      "workstream": "A",
+      "workstream_name": "Core platform and architecture",
+      "purpose": "Version schema changes and preview their effects before applying them.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "In Progress",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Version schema changes and preview their effects before applying them."
+      ],
+      "tests": [
+        "Fixture assertion: Version schema changes and preview their effects before applying them.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [
+        "Foundation batch: versioned additive access schema, explicit launcher data directory and local account/grant primitives. Legacy schema conversion, full role matrix, authenticated routes and deployment acceptance remain incomplete."
+      ],
+      "documentation": [
+        "docs/DEPLOYMENT_CONTROLS.md",
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-009",
+      "feature": "Transaction service boundaries",
+      "workstream": "A",
+      "workstream_name": "Core platform and architecture",
+      "purpose": "Document and enforce one transaction per cross-record mutation.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Document and enforce one transaction per cross-record mutation."
+      ],
+      "tests": [
+        "Fixture assertion: Document and enforce one transaction per cross-record mutation.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-010",
+      "feature": "Typed API error catalogue",
+      "workstream": "A",
+      "workstream_name": "Core platform and architecture",
+      "purpose": "Return stable error codes alongside safe messages for all routes.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Return stable error codes alongside safe messages for all routes."
+      ],
+      "tests": [
+        "Fixture assertion: Return stable error codes alongside safe messages for all routes.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-011",
+      "feature": "Resource payload migration policy",
+      "workstream": "A",
+      "workstream_name": "Core platform and architecture",
+      "purpose": "Maintain version-specific readers and compatibility fixtures for saved payloads.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Maintain version-specific readers and compatibility fixtures for saved payloads."
+      ],
+      "tests": [
+        "Fixture assertion: Maintain version-specific readers and compatibility fixtures for saved payloads.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-012",
+      "feature": "Bounded SQLite contention recovery",
+      "workstream": "A",
+      "workstream_name": "Core platform and architecture",
+      "purpose": "Distinguish busy database errors from validation failures and test safe bounded retries.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Distinguish busy database errors from validation failures and test safe bounded retries."
+      ],
+      "tests": [
+        "Fixture assertion: Distinguish busy database errors from validation failures and test safe bounded retries.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-013",
+      "feature": "Query-plan and index review",
+      "workstream": "A",
+      "workstream_name": "Core platform and architecture",
+      "purpose": "Measure large-fixture read paths before adding indexes or caching.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Measure large-fixture read paths before adding indexes or caching."
+      ],
+      "tests": [
+        "Fixture assertion: Measure large-fixture read paths before adding indexes or caching.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-014",
+      "feature": "Explicit data-directory configuration",
+      "workstream": "A",
+      "workstream_name": "Core platform and architecture",
+      "purpose": "Show and validate the selected data directory before initializing a new database.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "In Progress",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Show and validate the selected data directory before initializing a new database."
+      ],
+      "tests": [
+        "Fixture assertion: Show and validate the selected data directory before initializing a new database.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [
+        "Foundation batch: versioned additive access schema, explicit launcher data directory and local account/grant primitives. Legacy schema conversion, full role matrix, authenticated routes and deployment acceptance remain incomplete."
+      ],
+      "documentation": [
+        "docs/DEPLOYMENT_CONTROLS.md",
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-015",
+      "feature": "Separate dependency profiles",
+      "workstream": "A",
+      "workstream_name": "Core platform and architecture",
+      "purpose": "Package the standard-library workspace separately from simulation and optional speech dependencies.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Package the standard-library workspace separately from simulation and optional speech dependencies."
+      ],
+      "tests": [
+        "Fixture assertion: Package the standard-library workspace separately from simulation and optional speech dependencies.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-016",
+      "feature": "Verified knowledge source register",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "Register reviewed agricultural source metadata, scope and review dates before retrieval.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [
+        "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
+      ],
+      "acceptance_criteria": [
+        "Register reviewed agricultural source metadata, scope and review dates before retrieval."
+      ],
+      "tests": [
+        "Fixture assertion: Register reviewed agricultural source metadata, scope and review dates before retrieval.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-017",
+      "feature": "Claim-level source references",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "Associate each future decision-support claim with its actual supporting passage.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-016"
+      ],
+      "requirements": [
+        "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
+      ],
+      "acceptance_criteria": [
+        "Associate each future decision-support claim with its actual supporting passage."
+      ],
+      "tests": [
+        "Fixture assertion: Associate each future decision-support claim with its actual supporting passage.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-018",
+      "feature": "Knowledge provenance and usage gate",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "Check source origin, review responsibility and permitted use before indexing.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-016"
+      ],
+      "requirements": [
+        "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
+      ],
+      "acceptance_criteria": [
+        "Check source origin, review responsibility and permitted use before indexing."
+      ],
+      "tests": [
+        "Fixture assertion: Check source origin, review responsibility and permitted use before indexing.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-019",
+      "feature": "Versioned knowledge captures",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "Freeze knowledge versions used in a reviewed recommendation.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-016"
+      ],
+      "requirements": [
+        "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
+      ],
+      "acceptance_criteria": [
+        "Freeze knowledge versions used in a reviewed recommendation."
+      ],
+      "tests": [
+        "Fixture assertion: Freeze knowledge versions used in a reviewed recommendation.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-020",
+      "feature": "Rule version manifest",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "List deterministic rules, inputs, applicability and limitations without changing policy silently.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-016"
+      ],
+      "requirements": [
+        "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
+      ],
+      "acceptance_criteria": [
+        "List deterministic rules, inputs, applicability and limitations without changing policy silently."
+      ],
+      "tests": [
+        "Fixture assertion: List deterministic rules, inputs, applicability and limitations without changing policy silently.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-021",
+      "feature": "Applicability-gated knowledge cards",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "Gate newly registered knowledge/rules by declared context requirements; preserve existing missing-information prompts.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-016"
+      ],
+      "requirements": [
+        "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
+      ],
+      "acceptance_criteria": [
+        "Gate newly registered knowledge/rules by declared context requirements; preserve existing missing-information prompts."
+      ],
+      "tests": [
+        "Fixture assertion: Gate newly registered knowledge/rules by declared context requirements; preserve existing missing-information prompts.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-022",
+      "feature": "Water context review",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "Check crop stage, soil and measurement method before presenting water-management review prompts.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-016"
+      ],
+      "requirements": [
+        "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
+      ],
+      "acceptance_criteria": [
+        "Check crop stage, soil and measurement method before presenting water-management review prompts."
+      ],
+      "tests": [
+        "Fixture assertion: Check crop stage, soil and measurement method before presenting water-management review prompts.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-023",
+      "feature": "Cross-record symptom assertion review",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "Keep conflicting farmer, adviser and model assertions separate with source/version references instead of merging them into a diagnosis.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-016"
+      ],
+      "requirements": [
+        "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
+      ],
+      "acceptance_criteria": [
+        "Keep conflicting farmer, adviser and model assertions separate with source/version references instead of merging them into a diagnosis."
+      ],
+      "tests": [
+        "Fixture assertion: Keep conflicting farmer, adviser and model assertions separate with source/version references instead of merging them into a diagnosis.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-024",
+      "feature": "Reviewed pest-scouting protocol library",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "Reuse human-reviewed scouting protocols with versioned applicability and sample instructions; do not infer organism causation.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-016"
+      ],
+      "requirements": [
+        "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
+      ],
+      "acceptance_criteria": [
+        "Reuse human-reviewed scouting protocols with versioned applicability and sample instructions; do not infer organism causation."
+      ],
+      "tests": [
+        "Fixture assertion: Reuse human-reviewed scouting protocols with versioned applicability and sample instructions; do not infer organism causation.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-025",
+      "feature": "Soil sampling depth and spatial alignment",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "Require a declared sampling depth and coverage basis before relating soil readings to a proposed knowledge card.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-016"
+      ],
+      "requirements": [
+        "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
+      ],
+      "acceptance_criteria": [
+        "Require a declared sampling depth and coverage basis before relating soil readings to a proposed knowledge card."
+      ],
+      "tests": [
+        "Fixture assertion: Require a declared sampling depth and coverage basis before relating soil readings to a proposed knowledge card.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-026",
+      "feature": "Weather relevance checks",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "Check location precision and forecast/observation dates before linking weather to a case.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-016"
+      ],
+      "requirements": [
+        "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
+      ],
+      "acceptance_criteria": [
+        "Check location precision and forecast/observation dates before linking weather to a case."
+      ],
+      "tests": [
+        "Fixture assertion: Check location precision and forecast/observation dates before linking weather to a case.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-027",
+      "feature": "Rainfall window and units checks",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "Keep accumulated rainfall windows separate from point readings and incompatible units.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-016"
+      ],
+      "requirements": [
+        "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
+      ],
+      "acceptance_criteria": [
+        "Keep accumulated rainfall windows separate from point readings and incompatible units."
+      ],
+      "tests": [
+        "Fixture assertion: Keep accumulated rainfall windows separate from point readings and incompatible units.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-028",
+      "feature": "Explicit abstention outputs",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "Represent insufficient evidence and unsupported cases without invented explanations.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-016"
+      ],
+      "requirements": [
+        "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
+      ],
+      "acceptance_criteria": [
+        "Represent insufficient evidence and unsupported cases without invented explanations."
+      ],
+      "tests": [
+        "Fixture assertion: Represent insufficient evidence and unsupported cases without invented explanations.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-029",
+      "feature": "Source-only retrieval baseline",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "Build a reproducible literal retrieval baseline before evaluating generated assistance.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-016"
+      ],
+      "requirements": [
+        "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
+      ],
+      "acceptance_criteria": [
+        "Build a reproducible literal retrieval baseline before evaluating generated assistance."
+      ],
+      "tests": [
+        "Fixture assertion: Build a reproducible literal retrieval baseline before evaluating generated assistance.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-030",
+      "feature": "Knowledge-card evidence explanations",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "Display the actual reviewed supporting passage and applicability limits for a retrieved card, separately from existing static review prompts.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-016"
+      ],
+      "requirements": [
+        "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
+      ],
+      "acceptance_criteria": [
+        "Display the actual reviewed supporting passage and applicability limits for a retrieved card, separately from existing static review prompts."
+      ],
+      "tests": [
+        "Fixture assertion: Display the actual reviewed supporting passage and applicability limits for a retrieved card, separately from existing static review prompts.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-031",
+      "feature": "Agricultural rule evaluation fixtures",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "Evaluate supported and unsupported cases using reviewed fixtures and documented acceptance thresholds.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-016"
+      ],
+      "requirements": [
+        "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
+      ],
+      "acceptance_criteria": [
+        "Evaluate supported and unsupported cases using reviewed fixtures and documented acceptance thresholds."
+      ],
+      "tests": [
+        "Fixture assertion: Evaluate supported and unsupported cases using reviewed fixtures and documented acceptance thresholds.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-032",
+      "feature": "Dataset card registry",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "Require data origin, intended use and validation limitations for proposed ML datasets.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-016"
+      ],
+      "requirements": [
+        "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
+      ],
+      "acceptance_criteria": [
+        "Require data origin, intended use and validation limitations for proposed ML datasets."
+      ],
+      "tests": [
+        "Fixture assertion: Require data origin, intended use and validation limitations for proposed ML datasets.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-033",
+      "feature": "Leakage and field-split checks",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "Test train/test separation by farm, date and relevant geographic unit before model evaluation.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Blocked",
+      "dependencies": [
+        "NEXUS-UPG-032"
+      ],
+      "requirements": [
+        "Suitable consented data, a dataset card and field/date-separated evaluation evidence"
+      ],
+      "acceptance_criteria": [
+        "Test train/test separation by farm, date and relevant geographic unit before model evaluation."
+      ],
+      "tests": [
+        "Fixture assertion: Test train/test separation by farm, date and relevant geographic unit before model evaluation.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-034",
+      "feature": "Disabled-by-default model adapter",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "Permit model registration only with a model card, evaluation evidence and explicit activation.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Future",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Blocked",
+      "dependencies": [
+        "NEXUS-UPG-032"
+      ],
+      "requirements": [
+        "Suitable consented data, a dataset card and field/date-separated evaluation evidence"
+      ],
+      "acceptance_criteria": [
+        "Permit model registration only with a model card, evaluation evidence and explicit activation."
+      ],
+      "tests": [
+        "Fixture assertion: Permit model registration only with a model card, evaluation evidence and explicit activation.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-035",
+      "feature": "Offline model monitoring harness",
+      "workstream": "B",
+      "workstream_name": "AI and agricultural intelligence",
+      "purpose": "Compare saved predictions against later labels without claiming live drift detection or model accuracy.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
+      "priority": "Future",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Blocked",
+      "dependencies": [
+        "NEXUS-UPG-032"
+      ],
+      "requirements": [
+        "Suitable consented data, a dataset card and field/date-separated evaluation evidence"
+      ],
+      "acceptance_criteria": [
+        "Compare saved predictions against later labels without claiming live drift detection or model accuracy."
+      ],
+      "tests": [
+        "Fixture assertion: Compare saved predictions against later labels without claiming live drift detection or model accuracy.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-036",
+      "feature": "Season-scoped cultivation plans",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Link a cultivation plan to an established field season with assumptions recorded.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Link a cultivation plan to an established field season with assumptions recorded."
+      ],
+      "tests": [
+        "Fixture assertion: Link a cultivation plan to an established field season with assumptions recorded.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-037",
+      "feature": "Actual planting event records",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Separate actual planting reports from planned calendar dates.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Separate actual planting reports from planned calendar dates."
+      ],
+      "tests": [
+        "Fixture assertion: Separate actual planting reports from planned calendar dates.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-038",
+      "feature": "Input application reports",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Record actual product, amount, area and user-selected activity without inferring application doses.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Record actual product, amount, area and user-selected activity without inferring application doses."
+      ],
+      "tests": [
+        "Fixture assertion: Record actual product, amount, area and user-selected activity without inferring application doses.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-039",
+      "feature": "Irrigation activity evidence",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Record actual water volume, area and method with unknowns preserved.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Record actual water volume, area and method with unknowns preserved."
+      ],
+      "tests": [
+        "Fixture assertion: Record actual water volume, area and method with unknowns preserved.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-040",
+      "feature": "Worker capacity planning",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Compare human-entered availability and assignments without authenticating people implicitly.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Compare human-entered availability and assignments without authenticating people implicitly."
+      ],
+      "tests": [
+        "Fixture assertion: Compare human-entered availability and assignments without authenticating people implicitly.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-041",
+      "feature": "Equipment usage-hour logs",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Record actual usage and service triggers separately from condition certification.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Record actual usage and service triggers separately from condition certification."
+      ],
+      "tests": [
+        "Fixture assertion: Record actual usage and service triggers separately from condition certification.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-042",
+      "feature": "Field-area measurement reconciliation",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Version field-area measurements and explain disagreements with crop-season area while preserving existing coordinate evidence.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Version field-area measurements and explain disagreements with crop-season area while preserving existing coordinate evidence."
+      ],
+      "tests": [
+        "Fixture assertion: Version field-area measurements and explain disagreements with crop-season area while preserving existing coordinate evidence.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-043",
+      "feature": "Inspection route planning",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Plan coverage and record actual sampled areas without claiming a representative field survey.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Plan coverage and record actual sampled areas without claiming a representative field survey."
+      ],
+      "tests": [
+        "Fixture assertion: Plan coverage and record actual sampled areas without claiming a representative field survey.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-044",
+      "feature": "Adviser consultation tracking",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Separate requested, scheduled and actually completed consultation records.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Separate requested, scheduled and actually completed consultation records."
+      ],
+      "tests": [
+        "Fixture assertion: Separate requested, scheduled and actually completed consultation records.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-045",
+      "feature": "Evidence attachment registry",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Associate explicitly selected documents with case records and source labels.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Associate explicitly selected documents with case records and source labels."
+      ],
+      "tests": [
+        "Fixture assertion: Associate explicitly selected documents with case records and source labels.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-046",
+      "feature": "Attachment integrity checks",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Verify document bytes and capture scope without authenticating their contents.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Verify document bytes and capture scope without authenticating their contents."
+      ],
+      "tests": [
+        "Fixture assertion: Verify document bytes and capture scope without authenticating their contents.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-047",
+      "feature": "Recurring follow-up templates",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Create human-confirmed schedules while keeping background alerts disabled by default.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Create human-confirmed schedules while keeping background alerts disabled by default."
+      ],
+      "tests": [
+        "Fixture assertion: Create human-confirmed schedules while keeping background alerts disabled by default.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-048",
+      "feature": "Authenticated work assignments",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Assign work to verified permitted accounts after role and farm-membership controls exist.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-094"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Assign work to verified permitted accounts after role and farm-membership controls exist."
+      ],
+      "tests": [
+        "Fixture assertion: Assign work to verified permitted accounts after role and farm-membership controls exist.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-049",
+      "feature": "Explicit task/work-order/decision links",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Approve typed links between existing task, work-order and decision records without inferring identity from a common field or merging their statuses.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Approve typed links between existing task, work-order and decision records without inferring identity from a common field or merging their statuses."
+      ],
+      "tests": [
+        "Fixture assertion: Approve typed links between existing task, work-order and decision records without inferring identity from a common field or merging their statuses.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-050",
+      "feature": "Field context age visibility",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Show how old captured soil/stage/resource context is without inferring it is invalid.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Show how old captured soil/stage/resource context is without inferring it is invalid."
+      ],
+      "tests": [
+        "Fixture assertion: Show how old captured soil/stage/resource context is without inferring it is invalid.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-051",
+      "feature": "Append-only harvest weighing corrections",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Retain earlier harvest quantities and the reason for correction.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Retain earlier harvest quantities and the reason for correction."
+      ],
+      "tests": [
+        "Fixture assertion: Retain earlier harvest quantities and the reason for correction.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-052",
+      "feature": "Reusable sampling-protocol templates",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Version reusable sampling definitions and freeze the chosen protocol version in each new inspection, preserving existing free-text inspection history.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Version reusable sampling definitions and freeze the chosen protocol version in each new inspection, preserving existing free-text inspection history."
+      ],
+      "tests": [
+        "Fixture assertion: Version reusable sampling definitions and freeze the chosen protocol version in each new inspection, preserving existing free-text inspection history.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-053",
+      "feature": "Multi-location inventory count sessions",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Group explicitly disjoint count locations in a dated session and prevent duplicate coverage before summarizing quantities.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Group explicitly disjoint count locations in a dated session and prevent duplicate coverage before summarizing quantities."
+      ],
+      "tests": [
+        "Fixture assertion: Group explicitly disjoint count locations in a dated session and prevent duplicate coverage before summarizing quantities.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-054",
+      "feature": "Cross-module chronology review",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Review inconsistent dates across selected task, decision, stock and market events without reordering or deleting their historical reports.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Review inconsistent dates across selected task, decision, stock and market events without reordering or deleting their historical reports."
+      ],
+      "tests": [
+        "Fixture assertion: Review inconsistent dates across selected task, decision, stock and market events without reordering or deleting their historical reports.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-055",
+      "feature": "Farm handover report",
+      "workstream": "C",
+      "workstream_name": "Farm management and operations",
+      "purpose": "Capture selected operational records and unresolved issues for a human handover.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
+      "priority": "High",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Capture selected operational records and unresolved issues for a human handover."
+      ],
+      "tests": [
+        "Fixture assertion: Capture selected operational records and unresolved issues for a human handover.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-056",
+      "feature": "Market-to-core quantity preview",
+      "workstream": "D",
+      "workstream_name": "Produce, markets and commerce",
+      "purpose": "Preview explicit quantity reconciliation without posting duplicate core stock movements.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-009"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Preview explicit quantity reconciliation without posting duplicate core stock movements."
+      ],
+      "tests": [
+        "Fixture assertion: Preview explicit quantity reconciliation without posting duplicate core stock movements.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-057",
+      "feature": "Market-to-Finance reconciliation preview",
+      "workstream": "D",
+      "workstream_name": "Produce, markets and commerce",
+      "purpose": "Compare explicitly selected money records without automatically creating transactions.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-009"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Compare explicitly selected money records without automatically creating transactions."
+      ],
+      "tests": [
+        "Fixture assertion: Compare explicitly selected money records without automatically creating transactions.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-058",
+      "feature": "Complete order evidence captures",
+      "workstream": "D",
+      "workstream_name": "Produce, markets and commerce",
+      "purpose": "Freeze an order, its lines and selected delivery/payment/return records with defined scope.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-009"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Freeze an order, its lines and selected delivery/payment/return records with defined scope."
+      ],
+      "tests": [
+        "Fixture assertion: Freeze an order, its lines and selected delivery/payment/return records with defined scope.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-059",
+      "feature": "Versioned offer-sheet captures",
+      "workstream": "D",
+      "workstream_name": "Produce, markets and commerce",
+      "purpose": "Retain the exact dated offer sheet selected for manual sharing.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-009"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Retain the exact dated offer sheet selected for manual sharing."
+      ],
+      "tests": [
+        "Fixture assertion: Retain the exact dated offer sheet selected for manual sharing.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-060",
+      "feature": "Order terms amendment workflow",
+      "workstream": "D",
+      "workstream_name": "Produce, markets and commerce",
+      "purpose": "Preserve original agreed terms and record supported amendments separately.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-009"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Preserve original agreed terms and record supported amendments separately."
+      ],
+      "tests": [
+        "Fixture assertion: Preserve original agreed terms and record supported amendments separately.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-061",
+      "feature": "Packaging quantity records",
+      "workstream": "D",
+      "workstream_name": "Produce, markets and commerce",
+      "purpose": "Record package count and measured weight without assuming a universal bag weight.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-009"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Record package count and measured weight without assuming a universal bag weight."
+      ],
+      "tests": [
+        "Fixture assertion: Record package count and measured weight without assuming a universal bag weight.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-062",
+      "feature": "Evidence-supported unit conversions",
+      "workstream": "D",
+      "workstream_name": "Produce, markets and commerce",
+      "purpose": "Require a documented conversion basis before converting packaging to kilograms.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-009"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Require a documented conversion basis before converting packaging to kilograms."
+      ],
+      "tests": [
+        "Fixture assertion: Require a documented conversion basis before converting packaging to kilograms.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-063",
+      "feature": "Produce storage condition history",
+      "workstream": "D",
+      "workstream_name": "Produce, markets and commerce",
+      "purpose": "Record actual storage checks and limitations without certifying food safety.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-009"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Record actual storage checks and limitations without certifying food safety."
+      ],
+      "tests": [
+        "Fixture assertion: Record actual storage checks and limitations without certifying food safety.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-064",
+      "feature": "Buyer acknowledgement evidence",
+      "workstream": "D",
+      "workstream_name": "Produce, markets and commerce",
+      "purpose": "Record the source of acceptance or dispute rather than inferring it from dispatch.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-009"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Record the source of acceptance or dispute rather than inferring it from dispatch."
+      ],
+      "tests": [
+        "Fixture assertion: Record the source of acceptance or dispute rather than inferring it from dispatch.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-065",
+      "feature": "Buyer fulfilment summaries",
+      "workstream": "D",
+      "workstream_name": "Produce, markets and commerce",
+      "purpose": "Summarize scoped reported deliveries and returns without ranking buyer trustworthiness.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-009"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Summarize scoped reported deliveries and returns without ranking buyer trustworthiness."
+      ],
+      "tests": [
+        "Fixture assertion: Summarize scoped reported deliveries and returns without ranking buyer trustworthiness.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-066",
+      "feature": "Market price reference notes",
+      "workstream": "D",
+      "workstream_name": "Produce, markets and commerce",
+      "purpose": "Record location, date, unit and user-reported price source without presenting live prices.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-009"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Record location, date, unit and user-reported price source without presenting live prices."
+      ],
+      "tests": [
+        "Fixture assertion: Record location, date, unit and user-reported price source without presenting live prices.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-067",
+      "feature": "Produce cost allocation scope",
+      "workstream": "D",
+      "workstream_name": "Produce, markets and commerce",
+      "purpose": "Define selected costs and allocation assumptions before calculating descriptive margins.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-009"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Define selected costs and allocation assumptions before calculating descriptive margins."
+      ],
+      "tests": [
+        "Fixture assertion: Define selected costs and allocation assumptions before calculating descriptive margins.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-068",
+      "feature": "Export redaction preview",
+      "workstream": "D",
+      "workstream_name": "Produce, markets and commerce",
+      "purpose": "Preview the exact fields to share and omit contact details deliberately.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-009"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Preview the exact fields to share and omit contact details deliberately."
+      ],
+      "tests": [
+        "Fixture assertion: Preview the exact fields to share and omit contact details deliberately.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-069",
+      "feature": "Cooperative lot provenance",
+      "workstream": "D",
+      "workstream_name": "Produce, markets and commerce",
+      "purpose": "Represent contributions and source histories only after membership permissions exist.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-094"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Represent contributions and source histories only after membership permissions exist."
+      ],
+      "tests": [
+        "Fixture assertion: Represent contributions and source histories only after membership permissions exist.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-070",
+      "feature": "Market end-to-end acceptance fixture",
+      "workstream": "D",
+      "workstream_name": "Produce, markets and commerce",
+      "purpose": "Validate a test lot through order, delivery, return and explicit reconciliation previews.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
+      "priority": "Medium",
+      "phase": "3 — Evidence and operational integration",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-009"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Validate a test lot through order, delivery, return and explicit reconciliation previews."
+      ],
+      "tests": [
+        "Fixture assertion: Validate a test lot through order, delivery, return and explicit reconciliation previews.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-071",
+      "feature": "Compact Help Centre index",
+      "workstream": "E",
+      "workstream_name": "Experience and accessibility",
+      "purpose": "List summaries first and load one full guide at a time while retaining no-JavaScript search.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
+      "priority": "High",
+      "phase": "1 — Audit and reliability",
+      "status": "Tested",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "List summaries first and load one full guide at a time while retaining no-JavaScript search."
+      ],
+      "tests": [
+        "nexus/farm_app/test_reliability_batch.py — Help size and detail routing"
+      ],
+      "verification": [
+        "docs/development/VERIFICATION.md"
+      ],
+      "documentation": [
+        "docs/development/VERIFICATION.md",
+        "docs/RELIABILITY_GUIDE.md"
+      ],
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
+    },
+    {
+      "id": "NEXUS-UPG-072",
+      "feature": "Preserve valid form references",
+      "workstream": "E",
+      "workstream_name": "Experience and accessibility",
+      "purpose": "Retain valid selected references when refreshing options and warn when one is no longer available.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
+      "priority": "High",
+      "phase": "1 — Audit and reliability",
+      "status": "Tested",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Retain valid selected references when refreshing options and warn when one is no longer available."
+      ],
+      "tests": [
+        "node nexus/farm_app/test_form_safety.cjs",
+        "Browser workflow checks listed in VERIFICATION.md"
+      ],
+      "verification": [
+        "docs/development/VERIFICATION.md"
+      ],
+      "documentation": [
+        "docs/development/VERIFICATION.md",
+        "docs/RELIABILITY_GUIDE.md"
+      ],
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
+    },
+    {
+      "id": "NEXUS-UPG-073",
+      "feature": "Unsaved form change protection",
+      "workstream": "E",
+      "workstream_name": "Experience and accessibility",
+      "purpose": "Warn before navigation/context changes and prevent edits being lost during an in-flight save.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
+      "priority": "High",
+      "phase": "1 — Audit and reliability",
+      "status": "In Progress",
+      "dependencies": [
+        "NEXUS-UPG-072"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Warn before navigation/context changes and prevent edits being lost during an in-flight save."
+      ],
+      "tests": [
+        "node nexus/farm_app/test_form_safety.cjs",
+        "Browser workflow checks listed in VERIFICATION.md"
+      ],
+      "verification": [
+        "docs/development/VERIFICATION.md"
+      ],
+      "documentation": [
+        "docs/development/VERIFICATION.md",
+        "docs/RELIABILITY_GUIDE.md"
+      ],
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
+    },
+    {
+      "id": "NEXUS-UPG-074",
+      "feature": "Ignore stale refresh responses",
+      "workstream": "E",
+      "workstream_name": "Experience and accessibility",
+      "purpose": "Prevent an older asynchronous response from overwriting a newer selected view.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
+      "priority": "High",
+      "phase": "1 — Audit and reliability",
+      "status": "In Progress",
+      "dependencies": [
+        "NEXUS-UPG-072"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Prevent an older asynchronous response from overwriting a newer selected view."
+      ],
+      "tests": [
+        "node nexus/farm_app/test_form_safety.cjs",
+        "Browser workflow checks listed in VERIFICATION.md"
+      ],
+      "verification": [
+        "docs/development/VERIFICATION.md"
+      ],
+      "documentation": [
+        "docs/development/VERIFICATION.md",
+        "docs/RELIABILITY_GUIDE.md"
+      ],
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
+    },
+    {
+      "id": "NEXUS-UPG-075",
+      "feature": "Resource and market page controls",
+      "workstream": "E",
+      "workstream_name": "Experience and accessibility",
+      "purpose": "Show bounded record pages, totals and previous/next controls without changing overview scope.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
+      "priority": "High",
+      "phase": "1 — Audit and reliability",
+      "status": "Tested",
+      "dependencies": [
+        "NEXUS-UPG-005"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Show bounded record pages, totals and previous/next controls without changing overview scope."
+      ],
+      "tests": [
+        "nexus/farm_app/test_reliability_batch.py — paging/export/stored-domain cases"
+      ],
+      "verification": [
+        "docs/development/VERIFICATION.md"
+      ],
+      "documentation": [
+        "docs/development/VERIFICATION.md",
+        "docs/RELIABILITY_GUIDE.md"
+      ],
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
+    },
+    {
+      "id": "NEXUS-UPG-076",
+      "feature": "Role-aware workspace start",
+      "workstream": "E",
+      "workstream_name": "Experience and accessibility",
+      "purpose": "Show permitted starting workflows after account roles exist; navigation must not substitute for API authorization.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-093"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Show permitted starting workflows after account roles exist; navigation must not substitute for API authorization."
+      ],
+      "tests": [
+        "Fixture assertion: Show permitted starting workflows after account roles exist; navigation must not substitute for API authorization.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-077",
+      "feature": "Accessible labels audit",
+      "workstream": "E",
+      "workstream_name": "Experience and accessibility",
+      "purpose": "Ensure every data-entry control has a meaningful programmatic label.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Ensure every data-entry control has a meaningful programmatic label."
+      ],
+      "tests": [
+        "Fixture assertion: Ensure every data-entry control has a meaningful programmatic label.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-078",
+      "feature": "Mobile workflow acceptance",
+      "workstream": "E",
+      "workstream_name": "Experience and accessibility",
+      "purpose": "Verify key creation/correction flows at narrow widths with real browser tests.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Verify key creation/correction flows at narrow widths with real browser tests."
+      ],
+      "tests": [
+        "Fixture assertion: Verify key creation/correction flows at narrow widths with real browser tests.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-079",
+      "feature": "Consistent navigation landmarks",
+      "workstream": "E",
+      "workstream_name": "Experience and accessibility",
+      "purpose": "Standardize page titles, landmarks and active navigation across existing routes.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Standardize page titles, landmarks and active navigation across existing routes."
+      ],
+      "tests": [
+        "Fixture assertion: Standardize page titles, landmarks and active navigation across existing routes.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-080",
+      "feature": "Print readability checks",
+      "workstream": "E",
+      "workstream_name": "Experience and accessibility",
+      "purpose": "Verify printable tables, headings and scope notes with representative nonprivate fixtures.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Verify printable tables, headings and scope notes with representative nonprivate fixtures."
+      ],
+      "tests": [
+        "Fixture assertion: Verify printable tables, headings and scope notes with representative nonprivate fixtures.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-081",
+      "feature": "Keyboard acceptance suite",
+      "workstream": "E",
+      "workstream_name": "Experience and accessibility",
+      "purpose": "Automate and manually verify keyboard/modal focus and return behaviour across supported workflows, rather than recounting the existing native-dialog feature.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Automate and manually verify keyboard/modal focus and return behaviour across supported workflows, rather than recounting the existing native-dialog feature."
+      ],
+      "tests": [
+        "Fixture assertion: Automate and manually verify keyboard/modal focus and return behaviour across supported workflows, rather than recounting the existing native-dialog feature.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-082",
+      "feature": "Deferred Help payload loading",
+      "workstream": "E",
+      "workstream_name": "Experience and accessibility",
+      "purpose": "Load only needed guide content before optionally searching the complete catalogue.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Load only needed guide content before optionally searching the complete catalogue."
+      ],
+      "tests": [
+        "Fixture assertion: Load only needed guide content before optionally searching the complete catalogue.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-083",
+      "feature": "Active filter chips and reset",
+      "workstream": "E",
+      "workstream_name": "Experience and accessibility",
+      "purpose": "Show the currently selected field, source, status and text filters as actionable chips with an explicit reset, preserving overview-scope explanations.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Show the currently selected field, source, status and text filters as actionable chips with an explicit reset, preserving overview-scope explanations."
+      ],
+      "tests": [
+        "Fixture assertion: Show the currently selected field, source, status and text filters as actionable chips with an explicit reset, preserving overview-scope explanations.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-084",
+      "feature": "First-record onboarding",
+      "workstream": "E",
+      "workstream_name": "Experience and accessibility",
+      "purpose": "Guide a user through a labelled test example without saving sample facts automatically.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Guide a user through a labelled test example without saving sample facts automatically."
+      ],
+      "tests": [
+        "Fixture assertion: Guide a user through a labelled test example without saving sample facts automatically.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-085",
+      "feature": "Date and number display consistency",
+      "workstream": "E",
+      "workstream_name": "Experience and accessibility",
+      "purpose": "Use explicit Lagos dates, units and locale formatting throughout the UI.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Use explicit Lagos dates, units and locale formatting throughout the UI."
+      ],
+      "tests": [
+        "Fixture assertion: Use explicit Lagos dates, units and locale formatting throughout the UI.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-086",
+      "feature": "Same-origin writes across combined routes",
+      "workstream": "F",
+      "workstream_name": "Accounts and security",
+      "purpose": "Apply the local origin boundary to legacy, resource, studio and audio write routes alike.",
+      "benefit": "Control identities and data access before shared deployment.",
+      "priority": "Critical",
+      "phase": "1 — Audit and reliability",
+      "status": "Tested",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Apply the local origin boundary to legacy, resource, studio and audio write routes alike."
+      ],
+      "tests": [
+        "nexus/farm_app/test_reliability_batch.py — request/parser/HTTP cases"
+      ],
+      "verification": [
+        "docs/development/VERIFICATION.md"
+      ],
+      "documentation": [
+        "docs/development/VERIFICATION.md",
+        "docs/RELIABILITY_GUIDE.md"
+      ],
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
+    },
+    {
+      "id": "NEXUS-UPG-087",
+      "feature": "Reject ambiguous body encodings",
+      "workstream": "F",
+      "workstream_name": "Accounts and security",
+      "purpose": "Reject Transfer-Encoding, duplicate framing and unsupported compressed request bodies.",
+      "benefit": "Control identities and data access before shared deployment.",
+      "priority": "Critical",
+      "phase": "1 — Audit and reliability",
+      "status": "Tested",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Reject Transfer-Encoding, duplicate framing and unsupported compressed request bodies."
+      ],
+      "tests": [
+        "nexus/farm_app/test_reliability_batch.py — request/parser/HTTP cases"
+      ],
+      "verification": [
+        "docs/development/VERIFICATION.md"
+      ],
+      "documentation": [
+        "docs/development/VERIFICATION.md",
+        "docs/RELIABILITY_GUIDE.md"
+      ],
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
+    },
+    {
+      "id": "NEXUS-UPG-088",
+      "feature": "Safe request diagnostics",
+      "workstream": "F",
+      "workstream_name": "Accounts and security",
+      "purpose": "Return server-generated trace IDs and omit query strings, headers and bodies from combined-server request logs.",
+      "benefit": "Control identities and data access before shared deployment.",
+      "priority": "High",
+      "phase": "1 — Audit and reliability",
+      "status": "Tested",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Return server-generated trace IDs and omit query strings, headers and bodies from combined-server request logs."
+      ],
+      "tests": [
+        "nexus/farm_app/test_reliability_batch.py — request/parser/HTTP cases"
+      ],
+      "verification": [
+        "docs/development/VERIFICATION.md"
+      ],
+      "documentation": [
+        "docs/development/VERIFICATION.md",
+        "docs/RELIABILITY_GUIDE.md"
+      ],
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
+    },
+    {
+      "id": "NEXUS-UPG-089",
+      "feature": "Local account password storage",
+      "workstream": "F",
+      "workstream_name": "Accounts and security",
+      "purpose": "Use a reviewed password-hashing design with no plaintext password persistence.",
+      "benefit": "Control identities and data access before shared deployment.",
+      "priority": "Critical",
+      "phase": "2 — Access and platform foundations",
+      "status": "In Progress",
+      "dependencies": [
+        "NEXUS-UPG-014"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Use a reviewed password-hashing design with no plaintext password persistence."
+      ],
+      "tests": [
+        "Fixture assertion: Use a reviewed password-hashing design with no plaintext password persistence.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [
+        "Foundation batch: versioned additive access schema, explicit launcher data directory and local account/grant primitives. Legacy schema conversion, full role matrix, authenticated routes and deployment acceptance remain incomplete."
+      ],
+      "documentation": [
+        "docs/DEPLOYMENT_CONTROLS.md",
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-090",
+      "feature": "First-owner bootstrap",
+      "workstream": "F",
+      "workstream_name": "Accounts and security",
+      "purpose": "Require an explicit local first-owner setup without open administrator registration.",
+      "benefit": "Control identities and data access before shared deployment.",
+      "priority": "Critical",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-089"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Require an explicit local first-owner setup without open administrator registration."
+      ],
+      "tests": [
+        "Fixture assertion: Require an explicit local first-owner setup without open administrator registration.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-091",
+      "feature": "Secure account sessions",
+      "workstream": "F",
+      "workstream_name": "Accounts and security",
+      "purpose": "Implement expiring server-side sessions and appropriate cookie controls.",
+      "benefit": "Control identities and data access before shared deployment.",
+      "priority": "Critical",
+      "phase": "2 — Access and platform foundations",
+      "status": "In Progress",
+      "dependencies": [
+        "NEXUS-UPG-089"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Implement expiring server-side sessions and appropriate cookie controls."
+      ],
+      "tests": [
+        "Fixture assertion: Implement expiring server-side sessions and appropriate cookie controls.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [
+        "Expiring hashed-token sessions, logout, CSRF, idle/absolute timeout and HTTP permission tests implemented for a separate narrow loopback pilot. Full-workspace integration, hosted cookies and browser acceptance remain incomplete."
+      ],
+      "documentation": [
+        "docs/development/ROADMAP.md",
+        "docs/DEPLOYMENT_CONTROLS.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-092",
+      "feature": "Session-bound CSRF protection",
+      "workstream": "F",
+      "workstream_name": "Accounts and security",
+      "purpose": "Protect authenticated writes with validated CSRF tokens in addition to origin checks.",
+      "benefit": "Control identities and data access before shared deployment.",
+      "priority": "Critical",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-089"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Protect authenticated writes with validated CSRF tokens in addition to origin checks."
+      ],
+      "tests": [
+        "Fixture assertion: Protect authenticated writes with validated CSRF tokens in addition to origin checks.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-093",
+      "feature": "Role permission matrix",
+      "workstream": "F",
+      "workstream_name": "Accounts and security",
+      "purpose": "Define farmer, worker, adviser, cooperative, business and administrator permissions before rollout.",
+      "benefit": "Control identities and data access before shared deployment.",
+      "priority": "Critical",
+      "phase": "2 — Access and platform foundations",
+      "status": "In Progress",
+      "dependencies": [
+        "NEXUS-UPG-089"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Define farmer, worker, adviser, cooperative, business and administrator permissions before rollout."
+      ],
+      "tests": [
+        "Fixture assertion: Define farmer, worker, adviser, cooperative, business and administrator permissions before rollout.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [
+        "Foundation batch: versioned additive access schema, explicit launcher data directory and local account/grant primitives. Legacy schema conversion, full role matrix, authenticated routes and deployment acceptance remain incomplete."
+      ],
+      "documentation": [
+        "docs/DEPLOYMENT_CONTROLS.md",
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-094",
+      "feature": "Farm membership scoping",
+      "workstream": "F",
+      "workstream_name": "Accounts and security",
+      "purpose": "Associate permitted accounts with specific farms and enforce membership.",
+      "benefit": "Control identities and data access before shared deployment.",
+      "priority": "Critical",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-091",
+        "NEXUS-UPG-093"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Associate permitted accounts with specific farms and enforce membership."
+      ],
+      "tests": [
+        "Fixture assertion: Associate permitted accounts with specific farms and enforce membership.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-095",
+      "feature": "Object-level authorization",
+      "workstream": "F",
+      "workstream_name": "Accounts and security",
+      "purpose": "Reject cross-farm object access through every relevant API and export.",
+      "benefit": "Control identities and data access before shared deployment.",
+      "priority": "Critical",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-091",
+        "NEXUS-UPG-093"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Reject cross-farm object access through every relevant API and export."
+      ],
+      "tests": [
+        "Fixture assertion: Reject cross-farm object access through every relevant API and export.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-096",
+      "feature": "Session revocation and logout",
+      "workstream": "F",
+      "workstream_name": "Accounts and security",
+      "purpose": "Expire revoked sessions and test logout across active clients.",
+      "benefit": "Control identities and data access before shared deployment.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-089"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Expire revoked sessions and test logout across active clients."
+      ],
+      "tests": [
+        "Fixture assertion: Expire revoked sessions and test logout across active clients.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-097",
+      "feature": "Authentication abuse limits",
+      "workstream": "F",
+      "workstream_name": "Accounts and security",
+      "purpose": "Bound login/reset attempts and return safe errors without account enumeration.",
+      "benefit": "Control identities and data access before shared deployment.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-089"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Bound login/reset attempts and return safe errors without account enumeration."
+      ],
+      "tests": [
+        "Fixture assertion: Bound login/reset attempts and return safe errors without account enumeration.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-098",
+      "feature": "Authenticated actor audit trail",
+      "workstream": "F",
+      "workstream_name": "Accounts and security",
+      "purpose": "Record verified actor IDs separately from user-reported names while preserving legacy labels.",
+      "benefit": "Control identities and data access before shared deployment.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-091",
+        "NEXUS-UPG-093"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Record verified actor IDs separately from user-reported names while preserving legacy labels."
+      ],
+      "tests": [
+        "Fixture assertion: Record verified actor IDs separately from user-reported names while preserving legacy labels.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-099",
+      "feature": "Scoped export permissions",
+      "workstream": "F",
+      "workstream_name": "Accounts and security",
+      "purpose": "Restrict exports to permitted fields and evidence scope with tested redaction.",
+      "benefit": "Control identities and data access before shared deployment.",
+      "priority": "Critical",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-091",
+        "NEXUS-UPG-093"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Restrict exports to permitted fields and evidence scope with tested redaction."
+      ],
+      "tests": [
+        "Fixture assertion: Restrict exports to permitted fields and evidence scope with tested redaction.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-100",
+      "feature": "Public-deployment security gate",
+      "workstream": "F",
+      "workstream_name": "Accounts and security",
+      "purpose": "Prevent unsupported shared-network operation until authentication and deployment controls pass.",
+      "benefit": "Control identities and data access before shared deployment.",
+      "priority": "Critical",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-089"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Prevent unsupported shared-network operation until authentication and deployment controls pass."
+      ],
+      "tests": [
+        "Fixture assertion: Prevent unsupported shared-network operation until authentication and deployment controls pass.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-101",
+      "feature": "Cross-platform workspace CI",
+      "workstream": "G",
+      "workstream_name": "Infrastructure and DevOps",
+      "purpose": "Run the standard-library suite on Windows and Linux with Python 3.13 and 3.14, plus browser-script helper checks.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
+      "priority": "High",
+      "phase": "1 — Audit and reliability",
+      "status": "Tested",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Run the standard-library suite on Windows and Linux with Python 3.13 and 3.14, plus browser-script helper checks."
+      ],
+      "tests": [
+        ".github/workflows/farm-workspace.yml — four OS/Python jobs"
+      ],
+      "verification": [
+        "GitHub Actions 41297994634: Windows/Linux × Python 3.13/3.14 all passed for implementation commit 1cd8563515fa0a1b0888866a8178eaf78e93938b",
+        "docs/development/VERIFICATION.md"
+      ],
+      "documentation": [
+        "docs/development/VERIFICATION.md",
+        "docs/RELIABILITY_GUIDE.md"
+      ],
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
+    },
+    {
+      "id": "NEXUS-UPG-102",
+      "feature": "Data-minimising readiness endpoint",
+      "workstream": "G",
+      "workstream_name": "Infrastructure and DevOps",
+      "purpose": "Add a lightweight readiness contract without farm notes or full integrity scans; retain the existing detailed local doctor endpoint separately.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Add a lightweight readiness contract without farm notes or full integrity scans; retain the existing detailed local doctor endpoint separately."
+      ],
+      "tests": [
+        "Fixture assertion: Add a lightweight readiness contract without farm notes or full integrity scans; retain the existing detailed local doctor endpoint separately.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-103",
+      "feature": "Pre-migration backup gate",
+      "workstream": "G",
+      "workstream_name": "Infrastructure and DevOps",
+      "purpose": "Verify a recoverable backup before applying versioned schema changes.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
+      "priority": "Critical",
+      "phase": "2 — Access and platform foundations",
+      "status": "In Progress",
+      "dependencies": [
+        "NEXUS-UPG-008",
+        "NEXUS-UPG-104"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Verify a recoverable backup before applying versioned schema changes."
+      ],
+      "tests": [
+        "Fixture assertion: Verify a recoverable backup before applying versioned schema changes.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [
+        "Foundation batch: versioned additive access schema, explicit launcher data directory and local account/grant primitives. Legacy schema conversion, full role matrix, authenticated routes and deployment acceptance remain incomplete."
+      ],
+      "documentation": [
+        "docs/DEPLOYMENT_CONTROLS.md",
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-104",
+      "feature": "Operator recovery rehearsal reports",
+      "workstream": "G",
+      "workstream_name": "Infrastructure and DevOps",
+      "purpose": "Generate a dated recoverability report after a verified restore-to-new-file exercise, explicitly declaring database and external-file scope.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
+      "priority": "Critical",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Generate a dated recoverability report after a verified restore-to-new-file exercise, explicitly declaring database and external-file scope."
+      ],
+      "tests": [
+        "Fixture assertion: Generate a dated recoverability report after a verified restore-to-new-file exercise, explicitly declaring database and external-file scope.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-105",
+      "feature": "Container data-volume recipe",
+      "workstream": "G",
+      "workstream_name": "Infrastructure and DevOps",
+      "purpose": "Document an affordable single-instance setup with persistent data and no accidental public binding.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
+      "priority": "Future",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-100",
+        "NEXUS-UPG-104"
+      ],
+      "requirements": [
+        "Approved target hosting environment and completed account/backup security gates"
+      ],
+      "acceptance_criteria": [
+        "Document an affordable single-instance setup with persistent data and no accidental public binding."
+      ],
+      "tests": [
+        "Fixture assertion: Document an affordable single-instance setup with persistent data and no accidental public binding.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-106",
+      "feature": "GitHub Actions runtime maintenance",
+      "workstream": "G",
+      "workstream_name": "Infrastructure and DevOps",
+      "purpose": "Update action runtime versions after checking current support and repository constraints.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Update action runtime versions after checking current support and repository constraints."
+      ],
+      "tests": [
+        "Fixture assertion: Update action runtime versions after checking current support and repository constraints.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-107",
+      "feature": "Privacy-aware operational metrics",
+      "workstream": "G",
+      "workstream_name": "Infrastructure and DevOps",
+      "purpose": "Measure latency/error counts without including crop notes, contacts or tokens.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Measure latency/error counts without including crop notes, contacts or tokens."
+      ],
+      "tests": [
+        "Fixture assertion: Measure latency/error counts without including crop notes, contacts or tokens.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-108",
+      "feature": "Startup diagnostics",
+      "workstream": "G",
+      "workstream_name": "Infrastructure and DevOps",
+      "purpose": "Show resolved data path, port conflicts and dependency profile with actionable errors.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Show resolved data path, port conflicts and dependency profile with actionable errors."
+      ],
+      "tests": [
+        "Fixture assertion: Show resolved data path, port conflicts and dependency profile with actionable errors.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-109",
+      "feature": "Dependency inventory and SBOM",
+      "workstream": "G",
+      "workstream_name": "Infrastructure and DevOps",
+      "purpose": "Record runtime and optional dependency versions and review applicable vulnerability reports.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Record runtime and optional dependency versions and review applicable vulnerability reports."
+      ],
+      "tests": [
+        "Fixture assertion: Record runtime and optional dependency versions and review applicable vulnerability reports.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-110",
+      "feature": "Release manifest CI verification",
+      "workstream": "G",
+      "workstream_name": "Infrastructure and DevOps",
+      "purpose": "Check source hashes and artifact contents before distributing release packages.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Check source hashes and artifact contents before distributing release packages."
+      ],
+      "tests": [
+        "Fixture assertion: Check source hashes and artifact contents before distributing release packages.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-111",
+      "feature": "Required release quality gates",
+      "workstream": "G",
+      "workstream_name": "Infrastructure and DevOps",
+      "purpose": "Document and enforce the test matrix and compatibility checks before promotion.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Document and enforce the test matrix and compatibility checks before promotion."
+      ],
+      "tests": [
+        "Fixture assertion: Document and enforce the test matrix and compatibility checks before promotion.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-112",
+      "feature": "Migration recovery rehearsal",
+      "workstream": "G",
+      "workstream_name": "Infrastructure and DevOps",
+      "purpose": "Test failure and restoration for each supported schema migration.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "In Progress",
+      "dependencies": [
+        "NEXUS-UPG-008",
+        "NEXUS-UPG-103"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Test failure and restoration for each supported schema migration."
+      ],
+      "tests": [
+        "Fixture assertion: Test failure and restoration for each supported schema migration.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [
+        "Foundation batch: versioned additive access schema, explicit launcher data directory and local account/grant primitives. Legacy schema conversion, full role matrix, authenticated routes and deployment acceptance remain incomplete."
+      ],
+      "documentation": [
+        "docs/DEPLOYMENT_CONTROLS.md",
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-113",
+      "feature": "Infrastructure cost worksheet",
+      "workstream": "G",
+      "workstream_name": "Infrastructure and DevOps",
+      "purpose": "Document actual selected hosting costs and limits without inventing prices or usage.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Document actual selected hosting costs and limits without inventing prices or usage."
+      ],
+      "tests": [
+        "Fixture assertion: Document actual selected hosting costs and limits without inventing prices or usage.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-114",
+      "feature": "TLS and private access deployment recipe",
+      "workstream": "G",
+      "workstream_name": "Infrastructure and DevOps",
+      "purpose": "Use a reviewed reverse-proxy/private-access setup after account protections pass.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
+      "priority": "Future",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-100",
+        "NEXUS-UPG-104"
+      ],
+      "requirements": [
+        "Approved target hosting environment and completed account/backup security gates"
+      ],
+      "acceptance_criteria": [
+        "Use a reviewed reverse-proxy/private-access setup after account protections pass."
+      ],
+      "tests": [
+        "Fixture assertion: Use a reviewed reverse-proxy/private-access setup after account protections pass.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-115",
+      "feature": "Production readiness assessment",
+      "workstream": "G",
+      "workstream_name": "Infrastructure and DevOps",
+      "purpose": "Verify backup, access, monitoring and recovery prerequisites without equating a green test run to production readiness.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
+      "priority": "High",
+      "phase": "2 — Access and platform foundations",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-100",
+        "NEXUS-UPG-104"
+      ],
+      "requirements": [
+        "Approved target hosting environment and completed account/backup security gates"
+      ],
+      "acceptance_criteria": [
+        "Verify backup, access, monitoring and recovery prerequisites without equating a green test run to production readiness."
+      ],
+      "tests": [
+        "Fixture assertion: Verify backup, access, monitoring and recovery prerequisites without equating a green test run to production readiness.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-116",
+      "feature": "Reliability troubleshooting guide",
+      "workstream": "H",
+      "workstream_name": "Help and documentation",
+      "purpose": "Explain strict request errors, unsaved changes, paging and compact Help at the relevant forms.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
+      "priority": "High",
+      "phase": "1 — Audit and reliability",
+      "status": "Tested",
+      "dependencies": [
+        "NEXUS-UPG-001",
+        "NEXUS-UPG-071",
+        "NEXUS-UPG-075"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Explain strict request errors, unsaved changes, paging and compact Help at the relevant forms."
+      ],
+      "tests": [
+        "Help catalogue route/schema checks",
+        "nexus/farm_app/test_reliability_batch.py — troubleshooting guide"
+      ],
+      "verification": [
+        "docs/development/VERIFICATION.md"
+      ],
+      "documentation": [
+        "docs/development/VERIFICATION.md",
+        "docs/RELIABILITY_GUIDE.md"
+      ],
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
+    },
+    {
+      "id": "NEXUS-UPG-117",
+      "feature": "Account administration guide",
+      "workstream": "H",
+      "workstream_name": "Help and documentation",
+      "purpose": "Document actual account/session/role features only after implementation and testing.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "In Progress",
+      "dependencies": [
+        "NEXUS-UPG-091",
+        "NEXUS-UPG-093"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Document actual account/session/role features only after implementation and testing."
+      ],
+      "tests": [
+        "Fixture assertion: Document actual account/session/role features only after implementation and testing.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [
+        "Foundation batch: versioned additive access schema, explicit launcher data directory and local account/grant primitives. Legacy schema conversion, full role matrix, authenticated routes and deployment acceptance remain incomplete."
+      ],
+      "documentation": [
+        "docs/DEPLOYMENT_CONTROLS.md",
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-118",
+      "feature": "API contracts reference",
+      "workstream": "H",
+      "workstream_name": "Help and documentation",
+      "purpose": "Document existing request schemas, response shapes and limits with tested examples.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-116"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Document existing request schemas, response shapes and limits with tested examples."
+      ],
+      "tests": [
+        "Fixture assertion: Document existing request schemas, response shapes and limits with tested examples.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-119",
+      "feature": "Cross-module save-effects matrix",
+      "workstream": "H",
+      "workstream_name": "Help and documentation",
+      "purpose": "Document and test which endpoints alter tasks, plans, market quantities or cash; preserve existing individual workflow guides.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-116"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Document and test which endpoints alter tasks, plans, market quantities or cash; preserve existing individual workflow guides."
+      ],
+      "tests": [
+        "Fixture assertion: Document and test which endpoints alter tasks, plans, market quantities or cash; preserve existing individual workflow guides.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-120",
+      "feature": "Season relevance FAQ",
+      "workstream": "H",
+      "workstream_name": "Help and documentation",
+      "purpose": "Explain unknown season links and historical stage context using reviewed examples.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-116"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Explain unknown season links and historical stage context using reviewed examples."
+      ],
+      "tests": [
+        "Fixture assertion: Explain unknown season links and historical stage context using reviewed examples.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-121",
+      "feature": "Market money examples",
+      "workstream": "H",
+      "workstream_name": "Help and documentation",
+      "purpose": "Explain deposits, refunds, returns and scoped balances without implying audited debts.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-116"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Explain deposits, refunds, returns and scoped balances without implying audited debts."
+      ],
+      "tests": [
+        "Fixture assertion: Explain deposits, refunds, returns and scoped balances without implying audited debts.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-122",
+      "feature": "Nonprivate visual walkthroughs",
+      "workstream": "H",
+      "workstream_name": "Help and documentation",
+      "purpose": "Create screenshots using synthetic fixtures only and label their scope.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-116"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Create screenshots using synthetic fixtures only and label their scope."
+      ],
+      "tests": [
+        "Fixture assertion: Create screenshots using synthetic fixtures only and label their scope.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-123",
+      "feature": "Plain-language content review",
+      "workstream": "H",
+      "workstream_name": "Help and documentation",
+      "purpose": "Review terms and error explanations with user feedback and record approved changes.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-116"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Review terms and error explanations with user feedback and record approved changes."
+      ],
+      "tests": [
+        "Fixture assertion: Review terms and error explanations with user feedback and record approved changes.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-124",
+      "feature": "Human-reviewed Hausa glossary",
+      "workstream": "H",
+      "workstream_name": "Help and documentation",
+      "purpose": "Add reviewed terminology with language/source attribution; no unverified translation claims.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-116"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Add reviewed terminology with language/source attribution; no unverified translation claims."
+      ],
+      "tests": [
+        "Fixture assertion: Add reviewed terminology with language/source attribution; no unverified translation claims.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-125",
+      "feature": "Selector-to-form Help binding validation",
+      "workstream": "H",
+      "workstream_name": "Help and documentation",
+      "purpose": "Validate that guide selectors resolve to actual intended controls and form routes, extending existing catalogue/schema tests.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-116"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Validate that guide selectors resolve to actual intended controls and form routes, extending existing catalogue/schema tests."
+      ],
+      "tests": [
+        "Fixture assertion: Validate that guide selectors resolve to actual intended controls and form routes, extending existing catalogue/schema tests.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-126",
+      "feature": "Documented example-to-fixture links",
+      "workstream": "H",
+      "workstream_name": "Help and documentation",
+      "purpose": "Associate documented fictional walkthroughs with isolated fixture identifiers and test that the walkthrough creates no actual pilot records.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-116"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Associate documented fictional walkthroughs with isolated fixture identifiers and test that the walkthrough creates no actual pilot records."
+      ],
+      "tests": [
+        "Fixture assertion: Associate documented fictional walkthroughs with isolated fixture identifiers and test that the walkthrough creates no actual pilot records.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-127",
+      "feature": "Guide revision history",
+      "workstream": "H",
+      "workstream_name": "Help and documentation",
+      "purpose": "Record content versions and preserve links to changed workflow guidance.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-116"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Record content versions and preserve links to changed workflow guidance."
+      ],
+      "tests": [
+        "Fixture assertion: Record content versions and preserve links to changed workflow guidance.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-128",
+      "feature": "Offline help package",
+      "workstream": "H",
+      "workstream_name": "Help and documentation",
+      "purpose": "Export the supported guide set with searchable offline navigation and no farm data.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-116"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Export the supported guide set with searchable offline navigation and no farm data."
+      ],
+      "tests": [
+        "Fixture assertion: Export the supported guide set with searchable offline navigation and no farm data.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-129",
+      "feature": "Backup and recovery walkthrough",
+      "workstream": "H",
+      "workstream_name": "Help and documentation",
+      "purpose": "Document verified restore-to-new-file steps and limits of external-file coverage.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-116"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Document verified restore-to-new-file steps and limits of external-file coverage."
+      ],
+      "tests": [
+        "Fixture assertion: Document verified restore-to-new-file steps and limits of external-file coverage.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-130",
+      "feature": "Developer setup profiles",
+      "workstream": "H",
+      "workstream_name": "Help and documentation",
+      "purpose": "Document standard-library, simulation and optional model workflows with independent commands.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-015",
+        "NEXUS-UPG-116"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Document standard-library, simulation and optional model workflows with independent commands."
+      ],
+      "tests": [
+        "Fixture assertion: Document standard-library, simulation and optional model workflows with independent commands.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-131",
+      "feature": "Pilot intake records",
+      "workstream": "I",
+      "workstream_name": "Business and adoption",
+      "purpose": "Collect minimal consented pilot needs and constraints without inventing enrolled farms.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-142"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Collect minimal consented pilot needs and constraints without inventing enrolled farms."
+      ],
+      "tests": [
+        "Fixture assertion: Collect minimal consented pilot needs and constraints without inventing enrolled farms.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-132",
+      "feature": "Early-user feedback triage",
+      "workstream": "I",
+      "workstream_name": "Business and adoption",
+      "purpose": "Record reported issues, priority and verified resolution without treating feedback as validated impact.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-142"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Record reported issues, priority and verified resolution without treating feedback as validated impact."
+      ],
+      "tests": [
+        "Fixture assertion: Record reported issues, priority and verified resolution without treating feedback as validated impact.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-133",
+      "feature": "Observed usability study checklist",
+      "workstream": "I",
+      "workstream_name": "Business and adoption",
+      "purpose": "Define tasks and consented measurements for real pilot usability sessions.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-142"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Define tasks and consented measurements for real pilot usability sessions."
+      ],
+      "tests": [
+        "Fixture assertion: Define tasks and consented measurements for real pilot usability sessions.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-134",
+      "feature": "Deterministic demonstration workspace",
+      "workstream": "I",
+      "workstream_name": "Business and adoption",
+      "purpose": "Create an explicitly synthetic isolated demo with a safe reset command.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-142"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Create an explicitly synthetic isolated demo with a safe reset command."
+      ],
+      "tests": [
+        "Fixture assertion: Create an explicitly synthetic isolated demo with a safe reset command.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-135",
+      "feature": "Publishable capability catalogue",
+      "workstream": "I",
+      "workstream_name": "Business and adoption",
+      "purpose": "Generate reviewable marketing facts from verified release evidence and explicit limitations; do not publish automatically or infer adoption from database counts.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-142"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Generate reviewable marketing facts from verified release evidence and explicit limitations; do not publish automatically or infer adoption from database counts."
+      ],
+      "tests": [
+        "Fixture assertion: Generate reviewable marketing facts from verified release evidence and explicit limitations; do not publish automatically or infer adoption from database counts.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-136",
+      "feature": "YD Tech brand usage guide",
+      "workstream": "I",
+      "workstream_name": "Business and adoption",
+      "purpose": "Keep attribution, readable colours and company links consistent across delivered surfaces.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-142"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Keep attribution, readable colours and company links consistent across delivered surfaces."
+      ],
+      "tests": [
+        "Fixture assertion: Keep attribution, readable colours and company links consistent across delivered surfaces.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-137",
+      "feature": "Cooperative discovery records",
+      "workstream": "I",
+      "workstream_name": "Business and adoption",
+      "purpose": "Capture consented interview needs without claiming partnerships or memberships.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-142"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Capture consented interview needs without claiming partnerships or memberships."
+      ],
+      "tests": [
+        "Fixture assertion: Capture consented interview needs without claiming partnerships or memberships.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-138",
+      "feature": "Pricing validation experiments",
+      "workstream": "I",
+      "workstream_name": "Business and adoption",
+      "purpose": "Record proposed plans, assumptions and observed feedback without inventing revenue.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
+      "priority": "Future",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-142"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Record proposed plans, assumptions and observed feedback without inventing revenue."
+      ],
+      "tests": [
+        "Fixture assertion: Record proposed plans, assumptions and observed feedback without inventing revenue.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-139",
+      "feature": "Partnership request templates",
+      "workstream": "I",
+      "workstream_name": "Business and adoption",
+      "purpose": "Prepare reviewable materials tied to actual needs; do not send outreach automatically.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-142"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Prepare reviewable materials tied to actual needs; do not send outreach automatically."
+      ],
+      "tests": [
+        "Fixture assertion: Prepare reviewable materials tied to actual needs; do not send outreach automatically.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-140",
+      "feature": "Investor evidence pack",
+      "workstream": "I",
+      "workstream_name": "Business and adoption",
+      "purpose": "Assemble verified engineering and pilot evidence with explicit limitations and no invented traction.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
+      "priority": "Medium",
+      "phase": "4 — Usability, guidance and adoption",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-142"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Assemble verified engineering and pilot evidence with explicit limitations and no invented traction."
+      ],
+      "tests": [
+        "Fixture assertion: Assemble verified engineering and pilot evidence with explicit limitations and no invented traction.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-141",
+      "feature": "Permanent 150-upgrade tracker",
+      "workstream": "J",
+      "workstream_name": "Cross-cutting delivery and validation",
+      "purpose": "Validate unique IDs, workstream counts, dependencies, acceptance criteria, test evidence and statuses with a read-only CLI.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
+      "priority": "High",
+      "phase": "1 — Audit and reliability",
+      "status": "Tested",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Validate unique IDs, workstream counts, dependencies, acceptance criteria, test evidence and statuses with a read-only CLI."
+      ],
+      "tests": [
+        "nexus/farm_app/test_development_tracker.py"
+      ],
+      "verification": [
+        "docs/development/VERIFICATION.md"
+      ],
+      "documentation": [
+        "docs/development/VERIFICATION.md",
+        "docs/RELIABILITY_GUIDE.md"
+      ],
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
+    },
+    {
+      "id": "NEXUS-UPG-142",
+      "feature": "Reproducible technical audit baseline",
+      "workstream": "J",
+      "workstream_name": "Cross-cutting delivery and validation",
+      "purpose": "Record inspected source revision, actual CI outcome, known limits and prioritized findings before implementation.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
+      "priority": "High",
+      "phase": "1 — Audit and reliability",
+      "status": "Tested",
+      "dependencies": [],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Record inspected source revision, actual CI outcome, known limits and prioritized findings before implementation."
+      ],
+      "tests": [
+        "GitHub Actions baseline run 41294892808: 749 passed, 123 subtests passed"
+      ],
+      "verification": [
+        "docs/development/AUDIT-2026-11-01.md"
+      ],
+      "documentation": [
+        "docs/development/VERIFICATION.md",
+        "docs/RELIABILITY_GUIDE.md"
+      ],
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
+    },
+    {
+      "id": "NEXUS-UPG-143",
+      "feature": "Acceptance-evidence links",
+      "workstream": "J",
+      "workstream_name": "Cross-cutting delivery and validation",
+      "purpose": "Connect completed criteria to tests, artifacts and immutable source references.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
+      "priority": "High",
+      "phase": "Continuous release governance",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-141"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Connect completed criteria to tests, artifacts and immutable source references."
+      ],
+      "tests": [
+        "Fixture assertion: Connect completed criteria to tests, artifacts and immutable source references.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-144",
+      "feature": "Phase release checklist",
+      "workstream": "J",
+      "workstream_name": "Cross-cutting delivery and validation",
+      "purpose": "Require scoped test, documentation, security and rollback evidence per phase.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
+      "priority": "High",
+      "phase": "Continuous release governance",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-141"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Require scoped test, documentation, security and rollback evidence per phase."
+      ],
+      "tests": [
+        "Fixture assertion: Require scoped test, documentation, security and rollback evidence per phase.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-145",
+      "feature": "Historical compatibility fixtures",
+      "workstream": "J",
+      "workstream_name": "Cross-cutting delivery and validation",
+      "purpose": "Preserve nonprivate older database/payload fixtures across supported readers.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
+      "priority": "High",
+      "phase": "Continuous release governance",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-011"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Preserve nonprivate older database/payload fixtures across supported readers."
+      ],
+      "tests": [
+        "Fixture assertion: Preserve nonprivate older database/payload fixtures across supported readers.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-146",
+      "feature": "Risk-to-negative-test coverage map",
+      "workstream": "J",
+      "workstream_name": "Cross-cutting delivery and validation",
+      "purpose": "Map documented security/data-integrity risks to rejection tests and release evidence without recounting existing negative tests as newly implemented features.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
+      "priority": "High",
+      "phase": "Continuous release governance",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-141"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Map documented security/data-integrity risks to rejection tests and release evidence without recounting existing negative tests as newly implemented features."
+      ],
+      "tests": [
+        "Fixture assertion: Map documented security/data-integrity risks to rejection tests and release evidence without recounting existing negative tests as newly implemented features.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-147",
+      "feature": "Privacy scope review",
+      "workstream": "J",
+      "workstream_name": "Cross-cutting delivery and validation",
+      "purpose": "Check actual exported and captured fields before each release.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
+      "priority": "High",
+      "phase": "Continuous release governance",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-068"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Check actual exported and captured fields before each release."
+      ],
+      "tests": [
+        "Fixture assertion: Check actual exported and captured fields before each release.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-148",
+      "feature": "Versioned release provenance index",
+      "workstream": "J",
+      "workstream_name": "Cross-cutting delivery and validation",
+      "purpose": "Index release commits, artifact hashes, scope and validation evidence across versions, extending existing per-release notes.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
+      "priority": "High",
+      "phase": "Continuous release governance",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-141"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Index release commits, artifact hashes, scope and validation evidence across versions, extending existing per-release notes."
+      ],
+      "tests": [
+        "Fixture assertion: Index release commits, artifact hashes, scope and validation evidence across versions, extending existing per-release notes.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-149",
+      "feature": "Pilot outcome evidence gate",
+      "workstream": "J",
+      "workstream_name": "Cross-cutting delivery and validation",
+      "purpose": "Require observed data and consent before making adoption or agricultural impact claims.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
+      "priority": "High",
+      "phase": "Continuous release governance",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-141"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Require observed data and consent before making adoption or agricultural impact claims."
+      ],
+      "tests": [
+        "Fixture assertion: Require observed data and consent before making adoption or agricultural impact claims.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    },
+    {
+      "id": "NEXUS-UPG-150",
+      "feature": "Future opportunity register",
+      "workstream": "J",
+      "workstream_name": "Cross-cutting delivery and validation",
+      "purpose": "Separate sensor, satellite, offline mobile and cooperative/financial research opportunities from the committed 150 items.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
+      "priority": "High",
+      "phase": "Continuous release governance",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-UPG-141"
+      ],
+      "requirements": [],
+      "acceptance_criteria": [
+        "Separate sensor, satellite, offline mobile and cooperative/financial research opportunities from the committed 150 items."
+      ],
+      "tests": [
+        "Fixture assertion: Separate sensor, satellite, offline mobile and cooperative/financial research opportunities from the committed 150 items.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
+      ],
+      "verification": [],
+      "documentation": [
+        "docs/development/ROADMAP.md"
+      ],
+      "git_reference": null
+    }
+  ],
+  "pull_request": "https://github.com/Yaqini-Duniya-Technology/nexus-intelligent-farm/pull/1"
+}

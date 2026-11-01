@@ -5559,6 +5559,72 @@
         }
       ],
       "example_notice": "All examples are fictional; this page does not generate farm facts or contact buyers."
+    },
+    {
+      "id": "reliable-saving",
+      "title": "Saving, refreshing and request errors",
+      "category": "Troubleshooting",
+      "routes": [
+        {
+          "path": "/resources"
+        },
+        {
+          "path": "/market"
+        },
+        {
+          "path": "/workbench"
+        },
+        {
+          "path": "/evidence-studio"
+        }
+      ],
+      "forms": [],
+      "purpose": "Understand safe saves, retained references, unsaved changes, list pages and request failures.",
+      "steps": [
+        "Choose field and Actual/Test source before typing. Changing context can clear unsaved values only after your confirmation.",
+        "Save once and inspect the saved record. The form locks while saving. A timeout does not prove that no record was saved.",
+        "Use Previous/Next for lists. Export uses the complete filtered selection up to the existing limit, not just the visible page."
+      ],
+      "save_effect": "Help and paging are read-only. No unsaved form is auto-saved; leaving a page may trigger a browser warning. Request trace IDs are diagnostic values, not login credentials.",
+      "after_save": "Use a reasoned correction for an existing record. For 400/408/413/415 errors, check the supported body format and limit. Use the server-generated X-Nexus-Request-ID for a safe support reference; do not share private record text.",
+      "fields": [
+        {
+          "selector": "#resource-page",
+          "label": "Record pages",
+          "meaning": "Pages show at most 100 entries by default. Overview totals still use the full field/source scope.",
+          "example": "Fictional format: Showing 101–105 of 105 matching records."
+        },
+        {
+          "selector": "#resource-reason",
+          "label": "Unsaved correction text",
+          "meaning": "Changes remain in memory until you save. Closing Help does not save them. Do not discard a reason without reviewing what will be lost.",
+          "example": "Fictional format: corrected the item selection after checking the source receipt."
+        }
+      ],
+      "example_notice": "All examples are fictional and never inserted automatically. Strict request errors reject unsupported input; they do not validate agricultural facts."
+    },
+    {
+      "id": "storage-and-access",
+      "title": "Storage, migrations and local account foundations",
+      "category": "Administration",
+      "routes": [
+        {
+          "path": "/workbench"
+        }
+      ],
+      "forms": [],
+      "purpose": "Choose persistent storage, preview additive migrations and understand the separate local account pilot. Full-workspace permission integration remains incomplete.",
+      "steps": [
+        "Stop NEXUS and locate your existing database and attachments. Keep the original copy.",
+        "Use --data-directory only for a directory containing your copied database; intentional new workspaces require --initialize-data-directory.",
+        "Preview with python -m nexus.farm_app.deployment_controls, then add --apply only after reading the plan. A checked backup is mandatory.",
+        "Account CLI creation and farm grants are foundational only. Keep the server local until route enforcement, sessions and cross-farm HTTP tests exist.",
+        "For permission testing, launch account_pilot on port 8081 and use its embedded Help. It exposes only scoped reads and separate notes; it is not the full Operations workspace."
+      ],
+      "save_effect": "An applied migration adds access tables and a checksum ledger; it preserves existing farm records. A grant affects the permission primitive, not existing web pages.",
+      "after_save": "Check the reported backup and applied versions. Read docs/DEPLOYMENT_CONTROLS.md for commands, path meanings and recovery.",
+      "fields": [],
+      "example_notice": "Fictional example path C:\\NEXUS-data is illustrative. Do not initialize a new empty database to replace missing records. No passwords belong in farm forms."
     }
   ],
   "glossary": {

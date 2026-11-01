@@ -8,7 +8,7 @@ from nexus.farm_app.operations_common import instant,day,LAGOS,text,digest
 D=Decimal
 
 def money(value):return format(value.quantize(D('.01'),rounding=ROUND_HALF_UP),'f')
-def normalize(kind,v):
+def normalize(kind,v,check_time=True):
     if kind not in SPECS:return v
     if 'quantity_kg' in v:
         qty=D(v['quantity_kg'])
@@ -18,7 +18,7 @@ def normalize(kind,v):
     if kind=='customer_payment' and D(v['amount_ngn'])<=0:raise ValueError('Payment amount must be positive')
     if kind=='sales_order':
         today=datetime.now(timezone.utc).astimezone(LAGOS).date().isoformat()
-        if v['order_date']>today:raise ValueError('Actual agreement date cannot be in the future')
+        if check_time and v['order_date']>today:raise ValueError('Actual agreement date cannot be in the future')
         if v['due_date']<v['order_date']:raise ValueError('Delivery due date cannot predate the agreement')
     return v
 
