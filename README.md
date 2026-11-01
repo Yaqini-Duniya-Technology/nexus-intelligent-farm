@@ -10,10 +10,12 @@ python -m nexus.farm_app.operations --port 8080 --database nexus-farm.sqlite3
 
 Open [Operations](http://127.0.0.1:8080/workbench), [Produce & Market](http://127.0.0.1:8080/market), or [Help Centre](http://127.0.0.1:8080/help-centre). The local workspace uses Python's standard library; the simulation has separate dependencies.
 
+- [150-upgrade roadmap and current audit](docs/development/ROADMAP.md)
+- [Safe saving and troubleshooting](docs/RELIABILITY_GUIDE.md)
 - [Local workspace setup, data boundaries and testing](docs/FARM_WORKSPACE.md)
 - [Produce & Market release: 50 capabilities](docs/releases/produce-market-2026-11-01.md)
-- 89 workflow guides with field explanations and fictional examples.
-- 425 farm-workspace tests passed in the release environment; simulation results below are a separate historical baseline.
+- 90 workflow guides with field explanations and fictional examples.
+- 454 farm-workspace tests passed in the first reliability batch; simulation results below are a separate historical baseline.
 - No databases, audio, exports or model weights are included. Speech/chatbot expansion remains deferred.
 
 Built by [Yaqini & Duniya Technology](https://yd.ydtech.workers.dev).

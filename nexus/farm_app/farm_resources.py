@@ -27,7 +27,7 @@ def decimal(value,label,places=3,signed=False):
     except (InvalidOperation,ValueError):raise ValueError(f'{label}: enter a finite {"signed" if signed else "nonnegative"} number with at most {places} decimals') from None
 
 
-def normalize(kind,data):
+def normalize(kind,data,validate_time=True):
     if kind not in SPECS:raise ValueError('Choose a resource workflow')
     values={}
     for field in SPECS[kind]['fields']:
@@ -42,7 +42,7 @@ def normalize(kind,data):
         elif typ=='date':values[key]=day(value).isoformat()
         elif typ=='datetime':
             parsed=instant(value)
-            if parsed>datetime.now(timezone.utc):raise ValueError(label+' cannot be in the future')
+            if validate_time and parsed>datetime.now(timezone.utc):raise ValueError(label+' cannot be in the future')
             values[key]=parsed.isoformat()
         elif typ in ('quantity','signed_quantity','money'):
             values[key]=decimal(value,label,2 if typ=='money' else 3,typ=='signed_quantity')
@@ -56,7 +56,7 @@ def normalize(kind,data):
         if values['status']=='completed' and not values['performed_at']:raise ValueError('Record the actual completion time')
         if values['status']!='completed' and values['performed_at']:raise ValueError('Use actual completion time only with completed status')
     if kind=='contact' and values['permission']!='granted' and values['contact'].casefold()!='unknown':raise ValueError('Record permission before storing contact details, or enter Unknown')
-    return market.normalize(kind,logistics.normalize(kind,values))
+    return market.normalize(kind,logistics.normalize(kind,values),check_time=validate_time)
 
 
 def load(db):
@@ -75,6 +75,12 @@ def load(db):
             old=latest.get(root)
             if old is None or old['id']!=prev or p.get('previous_sha256')!=old['content_sha256'] or old['kind']!=row['kind'] or old['field_id']!=row['field_id'] or old['payload']['source']!=p['source']:raise ValueError('Resource history chain mismatch')
         if not isinstance(p.get('values'),dict):raise ValueError('Invalid resource fields')
+        try:
+            if normalize(row['kind'],p['values'],validate_time=False)!=p['values']:raise ValueError('Resource field normalization mismatch')
+            positive(row['field_id'],'field ID')
+            word(p.get('reporter'),'reporter',200);word(p.get('reason'),'reason')
+            instant(row['recorded_at'])
+        except (ValueError,KeyError,TypeError,ArithmeticError) as error:raise ValueError('Invalid saved resource fields at entry #'+str(row['id'])) from error
         row['payload']=p;row['record_id']=root;logistics.check_captures(row);market.check_captures(row);entries.append(row);latest[root]=row;by_id[row['id']]=row
     return entries,latest
 
@@ -141,11 +147,19 @@ def save(store,data):
         return {'id':cursor.lastrowid,'record_id':root or cursor.lastrowid,'reused':False}
 
 
-def state(store,query=None):
+def state(store,query=None,*,all_entries=False):
     query=query or {};kind=query.get('kind','');q=query.get('q','').strip().casefold()
     if kind and kind not in SPECS:raise ValueError('Unknown resource workflow')
     if len(q)>200:raise ValueError('Search is limited to 200 characters')
     fid=query.get('field_id');fid=positive(int(fid),'field ID') if fid not in (None,'') else None
+    for flag in ('history','include_tests'):
+        if query.get(flag,'false') not in ('true','false'):raise ValueError(flag+' must be true or false')
+    if query.get('area','') not in ('','market'):raise ValueError('Unknown resource area')
+    def page_number(key,default,minimum,maximum):
+        value=query.get(key,str(default))
+        if not isinstance(value,str) or not value.isascii() or not value.isdigit() or not minimum<=int(value)<=maximum:raise ValueError('Invalid '+key+' pagination value')
+        return int(value)
+    offset=page_number('offset',0,0,1000000);limit=page_number('limit',100,1,200)
     history=query.get('history')=='true';tests=query.get('include_tests')=='true';status=query.get('status','')
     with readonly(store.path) as db:
         entries,current=load(db);totals=validate_links(current)
@@ -173,7 +187,10 @@ def state(store,query=None):
     due.sort(key=lambda e:(e['due_date'],e['record_id']))
     logistics_report={k:[r for r in values if (not fid or r['field_id']==fid) and (tests or r['source']=='actual')] for k,values in logistics_report.items()}
     market_report={k:[r for r in values if (not fid or r['field_id']==fid) and (tests or r['source']=='actual')] for k,values in market_report.items()}
-    return {'market':market_report,'logistics':logistics_report,'external_options':external_options,'entries':rows,'references':reference_scope,'fields':fields,'totals':totals,'due':due,'counts':{k:sum(e['kind']==k for e in scope) for k in SPECS if area!='market' or k in market.SPECS},'limits':['Recorded balances reflect saved entries, not verified physical stock.','Reservation status does not create an issue.','Budgets and labour amounts are not finance expenses or payments.','No background reminder, message, diagnosis or equipment action is created.']}
+    total=len(rows)
+    if not all_entries:rows=rows[offset:offset+limit]
+    page={'total':total,'offset':offset,'limit':limit,'returned':len(rows),'has_previous':offset>0,'has_next':offset+limit<total}
+    return {'page':page,'market':market_report,'logistics':logistics_report,'external_options':external_options,'entries':rows,'references':reference_scope,'fields':fields,'totals':totals,'due':due,'counts':{k:sum(e['kind']==k for e in scope) for k in SPECS if area!='market' or k in market.SPECS},'limits':['Recorded balances reflect saved entries, not verified physical stock.','Reservation status does not create an issue.','Budgets and labour amounts are not finance expenses or payments.','No background reminder, message, diagnosis or equipment action is created.']}
 
 
 def metadata():return {'specs':SPECS,'market_kinds':list(market.SPECS),'examples':EXAMPLES,'version':'resources-v1'}
@@ -181,7 +198,7 @@ def metadata():return {'specs':SPECS,'market_kinds':list(market.SPECS),'examples
 
 def export(store,query):
     from nexus.farm_app.operations_exports import csv_bytes,printable
-    result=state(store,query);format=query.get('format','json');rows=[]
+    result=state(store,query,all_entries=True);format=query.get('format','json');rows=[]
     if len(result['entries'])>10000:raise ValueError('Narrow filters to at most 10000 exported entries')
     for e in result['entries']:rows.append({'record_id':e['record_id'],'entry_id':e['id'],'kind':e['kind'],'field_id':e['field_id'],'recorded_at':e['recorded_at'],'source':e['payload']['source'],'reporter':e['payload']['reporter'],'reason':e['payload']['reason'],'content_sha256':e['content_sha256'],**e['payload']['values']})
     if format=='csv':return csv_bytes(rows),'text/csv; charset=utf-8','nexus-resources.csv'

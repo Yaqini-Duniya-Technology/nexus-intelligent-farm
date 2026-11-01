@@ -1,0 +1,40 @@
+name: Farm workspace portability
+on:
+  push:
+    paths:
+      - 'nexus/farm_app/**'
+      - 'docs/development/**'
+      - '.github/workflows/farm-workspace.yml'
+  pull_request:
+    paths:
+      - 'nexus/farm_app/**'
+      - 'docs/development/**'
+      - '.github/workflows/farm-workspace.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  farm-workspace:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.13', '3.14']
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Run standard-library workspace tests
+        run: python -m unittest discover -s nexus/farm_app -t .
+      - name: Check modified browser scripts
+        run: |
+          node --check nexus/farm_app/resource_workspace.js
+          node --check nexus/farm_app/form_safety.js
+          node --check nexus/farm_app/page_guides.js
+      - name: Check form safety helpers
+        run: node nexus/farm_app/test_form_safety.cjs
+      - name: Smoke test combined routes on an isolated database
+        run: python -m nexus.farm_app.smoke_workspace
