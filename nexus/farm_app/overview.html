@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEXUS Farm Dashboard</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f1f5ee;color:#183c2c;font:16px system-ui}
+header{background:#163f30;color:white;padding:28px}
+main{max-width:1100px;margin:auto;padding:24px}
+nav{display:flex;flex-wrap:wrap;gap:16px}
+a{color:inherit}
+section{background:white;padding:24px;border-radius:16px;margin-bottom:20px}
+label{display:block;margin:12px 0 6px}
+input,select,button{font:inherit;padding:12px;border:1px solid #bdcbbb;border-radius:8px;width:100%}
+button{background:#1d5c40;color:white;cursor:pointer;margin-top:12px}
+button:disabled{opacity:.5}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.grid section{overflow-wrap:anywhere}
+#message{padding:12px;background:#fff1c6}
+.muted{color:#5d7060}
+dl{margin:0}
+dt{color:#5d7060;margin-top:14px}
+dd{margin:4px 0;font-weight:600}
+.table-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%}
+article{padding:18px 0;border-top:1px solid #ddd;overflow-wrap:anywhere}
+th,td{text-align:left;padding:12px;border-bottom:1px solid #ddd;vertical-align:top;overflow-wrap:anywhere}
+@media(max-width:800px){
+  .grid{grid-template-columns:1fr}
+  main{padding:15px}
+}
+@media print{
+  header nav,#controls,#message,.edit{display:none}
+  body{background:white}
+  .grid{display:block}
+  section{border:1px solid #ddd;break-inside:avoid}
+  main{padding:0}
+}
+</style>
+</head>
+<body>
+<header>
+  <small>LOCAL PILOT · FARM DASHBOARD</small>
+  <h1>NEXUS farm dashboard</h1>
+  <nav><a href="/workbench">Operations workbench</a>
+    <a href="/">Workspace</a>
+    <a href="/seasons">Crop seasons</a>
+    <a href="/harvests">Harvests</a>
+    <a href="/finance">Expenses & sales</a>
+    <a href="/stock">Produce stock</a>
+    <a href="/history">Field memory</a>
+    <a href="/photos">Photo evidence</a>
+    <a href="/advisers">Adviser reviews</a>
+  <a href="/field-inspections">Field inspections</a> <a href="/season-overview">Field season overview</a></nav>
+</header>
+
+<main>
+  <p class="muted">
+    A summary of your saved season, reported harvest, recorded payments
+    and produce stock. It does not predict yield or establish a complete profit.
+  </p>
+
+  <p id="message" role="status" aria-live="polite">Loading overview…</p>
+
+  <section id="controls">
+    <label for="farm-filter">Farm</label>
+    <select id="farm-filter">
+      <option value="">All farms</option>
+    </select>
+
+    <label for="season-search">Find a season, field or crop</label>
+    <input
+      id="season-search"
+      type="search"
+      maxlength="200"
+      placeholder="For example: maize or North field"
+    >
+
+    <label for="season">Select crop season</label>
+    <select id="season"></select>
+
+    <button id="refresh" type="button">Refresh overview</button>
+    <button id="print" type="button" disabled>Print / save as PDF</button>
+  </section>
+
+  <div id="dashboard"></div>
+  <div id="report"></div>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+let state;
+
+const money = kobo => new Intl.NumberFormat(
+  'en-NG',
+  {style:'currency', currency:'NGN'}
+).format(kobo / 100);
+
+const number = value => Number(value).toLocaleString(
+  undefined,
+  {maximumFractionDigits:3}
+);
+
+function node(tag, text) {
+  const element = document.createElement(tag);
+  element.textContent = text;
+  return element;
+}
+
+function pair(list, label, value) {
+  list.append(node('dt', label), node('dd', value));
+}
+
+function section(title, href) {
+  const element = node('section', '');
+  const link = node('a', 'Open records');
+  link.href = href;
+  link.className = 'edit';
+  element.append(node('h2', title), link);
+  return element;
+}
+
+async function get(path) {
+  const response = await fetch(path);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw Error(data.error || 'Could not load records');
+  }
+
+  return data;
+}
+
+function tableSection(title, labels, rows) {
+  const element = node('section', '');
+  element.append(node('h2', title));
+
+  if (!rows.length) {
+    element.append(node('p', 'No records for this selection.'));
+    return element;
+  }
+
+  const wrap = node('div', '');
+  wrap.className = 'table-wrap';
+
+  const table = node('table', '');
+  const head = node('thead', '');
+  const header = node('tr', '');
+  const body = node('tbody', '');
+
+  for (const label of labels) {
+    const th = node('th', label);
+    th.scope = 'col';
+    header.append(th);
+  }
+
+  head.append(header);
+  table.append(head);
+
+  for (const values of rows) {
+    const tr = node('tr', '');
+
+    for (const value of values) {
+      tr.append(node('td', value));
+    }
+
+    body.append(tr);
+  }
+
+  table.append(body);
+  wrap.append(table);
+  element.append(wrap);
+  return element;
+}
+
+function comparisonRows(seasons) {
+  return seasons.map(season => {
+    const harvest = state.harvests.find(
+      record => record.season_id === season.id
+    );
+
+    const stock = state.stock.harvests.find(
+      record => record.season_id === season.id
+    );
+
+    const confirmed = Boolean(
+      stock?.form_current && stock?.product_form
+    );
+
+    const payments = state.transactions.filter(
+      record => record.season_id === season.id
+    );
+
+    const expenses = payments
+      .filter(record => record.kind === 'expense')
+      .reduce((sum, record) => sum + record.amount_kobo, 0);
+
+    const sales = payments
+      .filter(record => record.kind === 'sale')
+      .reduce((sum, record) => sum + record.amount_kobo, 0);
+
+    return [
+      season.name,
+      `${season.farm_name} / ${season.field_name}`,
+      season.crop,
+      harvest ? number(harvest.area_ha) + ' ha' : 'Not recorded',
+      confirmed ? stock.product_form : 'Not confirmed / needs review',
+      harvest ? number(harvest.quantity_kg) + ' kg' : 'Not recorded',
+      harvest ? number(harvest.yield_kg_ha) + ' kg/ha' : 'Not recorded',
+      harvest ? harvest.harvested_at : 'Not recorded',
+      payments.length ? money(expenses) : 'No payments recorded',
+      payments.length ? money(sales) : 'No payments recorded',
+      payments.length ? money(sales - expenses) : 'No payments recorded'
+    ];
+  });
+}
+
+function selectedFarm() {
+  return Number($('farm-filter').value) || null;
+}
+
+function filteredSeasons() {
+  const farmId = selectedFarm();
+  const query = $('season-search').value.trim().toLowerCase();
+
+  return state.seasons.filter(season => {
+    const field = state.workspace.fields.find(
+      record => record.id === season.field_id
+    );
+
+    const text = [
+      season.name,
+      season.field_name,
+      season.crop,
+      season.variety,
+      season.farm_name
+    ].join(' ').toLowerCase();
+
+    return (
+      (!farmId || field?.farm_id === farmId) &&
+      (!query || text.includes(query))
+    );
+  });
+}
+
+function taskInFarm(task) {
+  const farmId = selectedFarm();
+  if (!farmId) return true;
+
+  const observation = state.workspace.observations.find(
+    record => record.id === task?.observation_id
+  );
+
+  const field = state.workspace.fields.find(
+    record => record.id === observation?.field_id
+  );
+
+  return field?.farm_id === farmId;
+}
+
+function applyFilters() {
+  if (!state) return;
+
+  const previous = $('season').value;
+  const select = $('season');
+  const seasons = filteredSeasons();
+
+  select.replaceChildren(
+    new Option('Matching seasons dashboard', '')
+  );
+
+  for (const season of seasons) {
+    select.add(new Option(
+      `${season.name} / ${season.field_name} · ${season.crop}`,
+      season.id
+    ));
+  }
+
+  if (seasons.some(season => String(season.id) === previous)) {
+    select.value = previous;
+  }
+
+  renderDashboard();
+  render();
+}
+
+function taskLabel(taskId) {
+  const task = state.workspace.tasks.find(
+    record => record.id === taskId
+  );
+
+  const observation = state.workspace.observations.find(
+    record => record.id === task?.observation_id
+  );
+
+  const field = state.workspace.fields.find(
+    record => record.id === observation?.field_id
+  );
+
+  return `${field?.name || 'Unknown field'} · task #${taskId}`;
+}
+
+function renderDashboard() {
+  const dashboard = $('dashboard');
+  dashboard.replaceChildren();
+
+  const workspace = state.workspace;
+
+  const open = workspace.tasks.filter(task =>
+    (task.status === 'pending' || task.status === 'approved') &&
+    taskInFarm(task)
+  );
+
+  const schedules = workspace.followup_schedules.filter(schedule =>
+    schedule.status === 'scheduled' &&
+    taskInFarm(workspace.tasks.find(
+      task => task.id === schedule.task_id
+    ))
+  );
+
+  const overdue = schedules.filter(
+    schedule => schedule.timing === 'overdue'
+  );
+
+  const farmId = selectedFarm();
+  const matching = filteredSeasons();
+
+  const fields = workspace.fields.filter(
+    field => !farmId || field.farm_id === farmId
+  );
+
+  const summary = node('section', '');
+  const list = node('dl', '');
+
+  summary.append(node('h2', 'Farm at a glance'));
+
+  pair(
+    list,
+    'Farms / fields',
+    `${farmId ? 1 : workspace.farms.length} / ${fields.length}`
+  );
+  pair(list, 'Matching crop seasons', String(matching.length));
+  pair(list, 'Open review tasks', String(open.length));
+  pair(list, 'Active follow-ups', String(schedules.length));
+  pair(list, 'Overdue follow-ups', String(overdue.length));
+  pair(
+    list,
+    'Records refreshed',
+    new Date(state.loadedAt).toLocaleString()
+  );
+
+  summary.append(
+    list,
+    node(
+      'p',
+      'Season search filters season cards and comparisons only. ' +
+      'Task and follow-up counts apply to the selected farm.'
+    )
+  );
+
+  dashboard.append(summary);
+
+  const seasons = node('section', '');
+  seasons.append(node('h2', 'Matching crop seasons'));
+
+  if (!matching.length) {
+    seasons.append(node(
+      'p',
+      'No matching crop seasons. Clear the search or choose another farm.'
+    ));
+  }
+
+  for (const season of matching) {
+    const article = node('article', '');
+
+    article.append(
+      node('h3', season.name),
+      node(
+        'p',
+        `${season.farm_name} / ${season.field_name} · ${season.crop}`
+      )
+    );
+
+    const harvest = state.stock.harvests.find(
+      record => record.season_id === season.id
+    );
+
+    article.append(node(
+      'p',
+      harvest?.balance_known
+        ? `Recorded remaining: ${number(harvest.remaining_kg)} kg · ` +
+          harvest.product_form
+        : 'Recorded remaining: unknown — record a harvest or ' +
+          'review stock confirmation.'
+    ));
+
+    const payments = state.transactions.filter(
+      record => record.season_id === season.id
+    );
+
+    if (payments.length) {
+      const balance = payments.reduce(
+        (sum, payment) => sum + (
+          payment.kind === 'sale'
+            ? payment.amount_kobo
+            : payment.kind === 'expense'
+              ? -payment.amount_kobo
+              : 0
+        ),
+        0
+      );
+
+      article.append(node(
+        'p',
+        'Recorded cash balance: ' + money(balance)
+      ));
+    } else {
+      article.append(node(
+        'p',
+        'Recorded cash balance: unknown — no payments recorded.'
+      ));
+    }
+
+    if (harvest?.unlinked_payments) {
+      article.append(node(
+        'p',
+        `${harvest.unlinked_payments} sale payment(s) need ` +
+        'a linked stock quantity.'
+      ));
+    }
+
+    const button = node('button', 'View season report');
+    button.type = 'button';
+
+    button.onclick = () => {
+      $('season').value = season.id;
+      render();
+      $('report').scrollIntoView({behavior:'smooth'});
+    };
+
+    article.append(button);
+    seasons.append(article);
+  }
+
+  dashboard.append(seasons);
+
+  const comparison = tableSection(
+    'Compare matching crop seasons',
+    [
+      'Season',
+      'Farm / field',
+      'Crop',
+      'Harvest area',
+      'Confirmed product form',
+      'Reported harvest',
+      'Calculated yield',
+      'Harvest completed',
+      'Expenses paid',
+      'Sales received',
+      'Recorded cash balance'
+    ],
+    comparisonRows(matching)
+  );
+
+  comparison.append(
+    node(
+      'p',
+      'Yield uses the area recorded with each harvest. Compare yields ' +
+      'only for the same crop and confirmed product form, with ' +
+      'compatible measurement methods and growing conditions. ' +
+      'This table does not rank performance or predict future yield.'
+    ),
+    node(
+      'p',
+      'Cash balances describe recorded payments, not complete profit. ' +
+      'Missing harvests and payments are shown as not recorded ' +
+      'rather than assumed to be zero.'
+    )
+  );
+
+  if (matching.length < 2) {
+    comparison.append(node(
+      'p',
+      'At least two saved seasons are needed for a comparison. ' +
+      'Add another season when you have actual records to enter.'
+    ));
+  }
+
+  dashboard.append(comparison);
+
+  const tasks = node('section', '');
+  tasks.append(node('h2', 'Open review tasks'));
+
+  if (!open.length) {
+    tasks.append(node('p', 'No open review tasks.'));
+  }
+
+  for (const task of open) {
+    const article = node('article', '');
+    const link = node('a', 'Open task workspace');
+    link.href = '/#tasks';
+
+    article.append(
+      node('h3', taskLabel(task.id)),
+      node(
+        'p',
+        `${task.status} · ${task.priority || 'routine'} review`
+      ),
+      node('p', task.recommendation),
+      link
+    );
+
+    tasks.append(article);
+  }
+
+  dashboard.append(tasks);
+
+  const reminders = node('section', '');
+  reminders.append(node('h2', 'Active follow-ups'));
+
+  if (!schedules.length) {
+    reminders.append(node('p', 'No active follow-ups.'));
+  }
+
+  for (const schedule of schedules) {
+    const article = node('article', '');
+    const link = node('a', 'Open scheduled follow-ups');
+    link.href = '/#scheduled';
+
+    article.append(
+      node('h3', taskLabel(schedule.task_id)),
+      node('p', schedule.note),
+      node(
+        'p',
+        `${schedule.timing === 'overdue' ? 'Overdue' : 'Upcoming'} · ` +
+        `Due ${new Date(schedule.due_at).toLocaleString()}`
+      ),
+      link
+    );
+
+    reminders.append(article);
+  }
+
+  reminders.append(node(
+    'p',
+    'Reminder status is checked when you refresh. ' +
+    'No background alerts or SMS are sent.'
+  ));
+
+  dashboard.append(reminders);
+}
+
+function render() {
+  $('dashboard').hidden = Boolean($('season').value);
+
+  const selected = Number($('season').value);
+  const season = state.seasons.find(record => record.id === selected);
+  const report = $('report');
+
+  report.replaceChildren();
+  $('print').disabled = false;
+
+  if (!season) {
+    report.append(node(
+      'p',
+      'Select a crop season above for its detailed printable report.'
+    ));
+    return;
+  }
+
+  report.append(
+    node('h2', season.name),
+    node('p', `${season.farm_name} / ${season.field_name}`),
+    node(
+      'p',
+      `Overview loaded: ${new Date(state.loadedAt).toLocaleString()}`
+    )
+  );
+
+  const grid = node('div', '');
+  grid.className = 'grid';
+
+  const plan = section('Planting & plan', '/seasons');
+  const details = node('dl', '');
+
+  pair(details, 'Crop', season.crop);
+  pair(details, 'Variety', season.variety);
+  pair(details, 'Season area', number(season.area_ha) + ' hectares');
+  pair(
+    details,
+    'Planting date (planned or actual)',
+    season.planting_date
+  );
+  pair(details, 'Expected harvest date', season.expected_harvest_date);
+
+  plan.append(
+    details,
+    node('p', 'Expected harvest is a farmer-entered estimate.')
+  );
+
+  const harvest = state.harvests.find(
+    record => record.season_id === selected
+  );
+  const production = section('Reported harvest', '/harvests');
+
+  if (harvest) {
+    const list = node('dl', '');
+
+    pair(list, 'Harvest completed', harvest.harvested_at);
+    pair(list, 'Reported total', number(harvest.quantity_kg) + ' kg');
+    pair(
+      list,
+      'Area recorded with harvest',
+      number(harvest.area_ha) + ' hectares'
+    );
+    pair(
+      list,
+      'Calculated yield',
+      number(harvest.yield_kg_ha) + ' kg/ha'
+    );
+
+    production.append(
+      list,
+      node(
+        'p',
+        'Product form / measurement notes: ' +
+        (harvest.note || 'Not recorded.')
+      ),
+      node(
+        'p',
+        'Yield uses reported kilograms and the area recorded with ' +
+        'the harvest. Product forms such as cobs and shelled grain ' +
+        'are not directly comparable.'
+      )
+    );
+
+    if (harvest.area_ha !== season.area_ha) {
+      production.append(node(
+        'p',
+        'The current season area differs from the area recorded ' +
+        'with this harvest. Check both records.'
+      ));
+    }
+
+    if (harvest.harvested_at < season.planting_date) {
+      production.append(node(
+        'p',
+        'The harvest predates the current planting date. ' +
+        'Check the edited season and harvest records.'
+      ));
+    }
+  } else {
+    production.append(node(
+      'p',
+      'No final harvest recorded. Production and yield are unknown.'
+    ));
+  }
+
+  const rows = state.transactions.filter(
+    record => record.season_id === selected
+  );
+
+  const cash = section('Recorded cash', '/finance');
+
+  if (rows.length) {
+    let expenses = 0;
+    let sales = 0;
+
+    for (const record of rows) {
+      if (record.kind === 'expense') {
+        expenses += record.amount_kobo;
+      } else if (record.kind === 'sale') {
+        sales += record.amount_kobo;
+      }
+    }
+
+    const list = node('dl', '');
+
+    pair(list, 'Recorded payments', String(rows.length));
+    pair(list, 'Expenses paid', money(expenses));
+    pair(list, 'Sales received', money(sales));
+    pair(list, 'Recorded cash balance', money(sales - expenses));
+
+    cash.append(list);
+  } else {
+    cash.append(node(
+      'p',
+      'No payments recorded. Expenses, sales and cash balance ' +
+      'are not established.'
+    ));
+  }
+
+  cash.append(node(
+    'p',
+    'Cash balance excludes unrecorded costs, unpaid amounts and ' +
+    'unsold produce. It is not a complete profit calculation.'
+  ));
+
+  grid.append(plan, production, cash);
+  report.append(grid);
+
+  report.append(tableSection(
+    'Payment details',
+    ['Date', 'Type', 'Description', 'Amount (NGN)'],
+    rows.map(record => [
+      record.occurred_at,
+      record.kind === 'expense'
+        ? 'Expense paid'
+        : 'Sale payment received',
+      record.description,
+      money(record.amount_kobo)
+    ])
+  ));
+
+  const stockHarvest = state.stock.harvests.find(
+    record => record.season_id === selected
+  );
+
+  const stock = section('Recorded produce stock', '/stock');
+
+  if (stockHarvest) {
+    const list = node('dl', '');
+
+    pair(
+      list,
+      'Product form',
+      stockHarvest.product_form || 'Not confirmed'
+    );
+    pair(
+      list,
+      'Reported harvest',
+      number(stockHarvest.quantity_kg) + ' kg'
+    );
+
+    if (stockHarvest.balance_known) {
+      pair(
+        list,
+        'Confirmed linked sales',
+        number(stockHarvest.linked_sales_kg) + ' kg'
+      );
+      pair(
+        list,
+        'Active withdrawals',
+        number(stockHarvest.withdrawals_kg) + ' kg'
+      );
+      pair(
+        list,
+        'Recorded remaining balance',
+        number(stockHarvest.remaining_kg) + ' kg'
+      );
+    } else {
+      pair(
+        list,
+        'Recorded remaining balance',
+        'Unavailable — review harvest confirmation and stock records'
+      );
+    }
+
+    stock.append(list);
+
+    if (stockHarvest.product_form && !stockHarvest.form_current) {
+      stock.append(node(
+        'p',
+        'The harvest changed after product-form confirmation. ' +
+        'Review and confirm it again in Produce stock.'
+      ));
+    }
+
+    if (stockHarvest.unlinked_payments) {
+      stock.append(node(
+        'p',
+        `${stockHarvest.unlinked_payments} sale payment(s) have no ` +
+        'eligible linked quantity. The remaining balance may overstate stock.'
+      ));
+    }
+  } else {
+    stock.append(node(
+      'p',
+      'No final harvest recorded. Remaining stock is unknown.'
+    ));
+  }
+
+  stock.append(node(
+    'p',
+    'Remaining balance subtracts eligible linked sales and active ' +
+    'withdrawals from the reported harvest. Unrecorded movements ' +
+    'are excluded. This is not a verified physical stock count.'
+  ));
+
+  report.append(stock);
+
+  const links = state.stock.links.filter(
+    link => link.harvest_id === stockHarvest?.id
+  );
+
+  report.append(tableSection(
+    'Linked sale quantities',
+    ['Payment', 'Quantity', 'Delivery date', 'Status'],
+    links.map(link => [
+      '#' + link.transaction_id,
+      number(link.quantity_kg) + ' kg',
+      link.delivered_at,
+      link.eligible ? 'Included' : 'Excluded — review stock records'
+    ])
+  ));
+
+  const movements = state.stock.movements.filter(
+    movement => movement.harvest_id === stockHarvest?.id
+  );
+
+  const movementLabels = {
+    loss: 'Loss / spoilage',
+    household_use: 'Household use',
+    other: 'Other withdrawal'
+  };
+
+  report.append(tableSection(
+    'Withdrawal history',
+    ['Date', 'Type', 'Quantity / form', 'Details', 'Status'],
+    movements.map(movement => [
+      movement.occurred_at,
+      movementLabels[movement.kind] || movement.kind,
+      number(movement.quantity_kg) + ' kg · ' + movement.product_form,
+      movement.note,
+      movement.status === 'cancelled'
+        ? 'Cancelled — excluded'
+        : movement.eligible
+          ? 'Active — included'
+          : 'Active — excluded; review confirmation'
+    ])
+  ));
+
+  report.append(node(
+    'p',
+    'Records were fetched from separate local endpoints during ' +
+    'this refresh. Refresh again after editing records before printing.'
+  ));
+}
+
+async function load() {
+  const previous = $('season').value;
+
+  state = undefined;
+  $('dashboard').replaceChildren();
+  $('report').replaceChildren();
+  $('refresh').disabled = true;
+  $('print').disabled = true;
+  $('season').disabled = true;
+  $('message').textContent = 'Loading saved records…';
+
+  try {
+    const [planning, production, cash, stock, workspace] =
+      await Promise.all([
+        get('/api/seasons'),
+        get('/api/harvests'),
+        get('/api/finance'),
+        get('/api/stock'),
+        get('/api/state')
+      ]);
+
+    state = {
+      seasons: planning.seasons,
+      harvests: production.harvests,
+      transactions: cash.transactions,
+      stock,
+      workspace,
+      loadedAt: new Date().toISOString()
+    };
+
+    const farmSelect = $('farm-filter');
+    const previousFarm = farmSelect.value;
+
+    farmSelect.replaceChildren(new Option('All farms', ''));
+
+    for (const farm of workspace.farms) {
+      farmSelect.add(new Option(farm.name, farm.id));
+    }
+
+    if (workspace.farms.some(
+      farm => String(farm.id) === previousFarm
+    )) {
+      farmSelect.value = previousFarm;
+    }
+
+    applyFilters();
+
+    if (filteredSeasons().some(
+      season => String(season.id) === previous
+    )) {
+      $('season').value = previous;
+      render();
+    }
+
+    $('message').textContent = 'Farm dashboard ready.';
+  } catch (error) {
+    $('message').textContent =
+      'Could not load overview: ' + error.message;
+  } finally {
+    $('refresh').disabled = false;
+    $('season').disabled = false;
+  }
+}
+
+$('farm-filter').onchange = applyFilters;
+$('season-search').oninput = applyFilters;
+$('season').onchange = () => {
+  if (state) render();
+};
+$('refresh').onclick = load;
+$('print').onclick = () => window.print();
+
+load();
+</script>
+</body>
+</html>

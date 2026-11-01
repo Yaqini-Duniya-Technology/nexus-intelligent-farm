@@ -1,5 +1,26 @@
 # NEXUS — MVP PRODUCT BRIEF
 
+## Local farm workspace — November 2026
+
+The repository now also includes a **single-user local pilot workspace** for field records, human reviews, resource planning and Produce & Market records. This track is separate from the simulation's autonomous action loop: it does not diagnose crops, control equipment, transfer money or contact buyers.
+
+```bash
+python -m nexus.farm_app.operations --port 8080 --database nexus-farm.sqlite3
+```
+
+Open [Operations](http://127.0.0.1:8080/workbench), [Produce & Market](http://127.0.0.1:8080/market), or [Help Centre](http://127.0.0.1:8080/help-centre). The local workspace uses Python's standard library; the simulation has separate dependencies.
+
+- [Local workspace setup, data boundaries and testing](docs/FARM_WORKSPACE.md)
+- [Produce & Market release: 50 capabilities](docs/releases/produce-market-2026-11-01.md)
+- 89 workflow guides with field explanations and fictional examples.
+- 425 farm-workspace tests passed in the release environment; simulation results below are a separate historical baseline.
+- No databases, audio, exports or model weights are included. Speech/chatbot expansion remains deferred.
+
+Built by [Yaqini & Duniya Technology](https://yd.ydtech.workers.dev).
+
+---
+
+
 [![NEXUS Python tests](https://github.com/Yaqini-Duniya-Technology/nexus-intelligent-farm/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/Yaqini-Duniya-Technology/nexus-intelligent-farm/actions/workflows/ci.yml)
 
 
@@ -337,3 +358,4 @@ NEXUS aims to become an intelligent operating layer for agriculture:
 
 **Developer:** Inda Obanyi · AI/ML Engineer & Software Developer · Founder, Yaqini & Duniya Technology  
 **[Portfolio](https://indaobanyi.vercel.app)** · **[LinkedIn](https://www.linkedin.com/in/inda-obanyi-8886553a6/)** · **[GitHub](https://github.com/Inda-Obanyi)**
+

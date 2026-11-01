@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEXUS Produce Stock</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f1f5ee;color:#183c2c;font:16px system-ui}
+header{background:#163f30;color:white;padding:28px}
+main{max-width:900px;margin:auto;padding:24px}
+nav{display:flex;flex-wrap:wrap;gap:16px}
+a{color:inherit}
+section{background:white;padding:24px;border-radius:16px;margin-bottom:20px}
+label{display:block;margin:16px 0 6px}
+input,select,button{width:100%;padding:12px;font:inherit;border:1px solid #bdcbbb;border-radius:8px}
+button{background:#1d5c40;color:white;margin-top:16px;cursor:pointer}
+button:disabled{opacity:.5}
+input[type=checkbox]{width:auto}
+article{border-top:1px solid #ddd;padding:16px 0;overflow-wrap:anywhere}
+#message{padding:12px;background:#fff1c6}
+</style>
+</head>
+<body>
+<header>
+  <small>LOCAL PILOT · PRODUCE STOCK</small>
+  <h1>NEXUS produce stock</h1>
+  <nav>
+    <a href="/overview">Season overview</a>
+    <a href="/harvests">Harvests</a>
+    <a href="/finance">Expenses & sales</a>
+    <a href="/">Workspace</a>
+  </nav>
+</header>
+
+<main>
+<p>Confirm the harvest product form, then link delivered sale quantities to existing payment records. This does not add another cash payment.</p>
+<p>Recorded remaining balance = reported harvest minus confirmed linked sales and active withdrawals. Unrecorded movements are excluded. It is not a verified physical stock count.</p>
+<p>Use one payment record per delivered sale for this pilot. Do not count the same delivery again against a second instalment. Unpaid deliveries and product conversions are not supported here.</p>
+
+<p id="message" role="status" aria-live="polite">Loading…</p>
+
+<section>
+  <label for="season">Crop season</label>
+  <select id="season"></select>
+  <button id="refresh" type="button">Refresh records</button>
+  <div id="balance"></div>
+</section>
+
+<section>
+  <h2>1. Confirm harvest product form</h2>
+  <form id="form-confirm">
+    <p id="harvest-notes"></p>
+    <label for="product">Product form of the entire recorded harvest</label>
+    <input id="product" name="product_form" maxlength="200"
+           placeholder="For example: maize cobs" required>
+    <button id="confirm">Confirm product form</button>
+  </form>
+</section>
+
+<section>
+  <h2>2. Confirm delivered sale quantity</h2>
+  <form id="form-sale">
+    <label for="payment">Existing sale payment</label>
+    <select id="payment" required></select>
+    <p id="payment-info"></p>
+
+    <label for="quantity">Total kilograms delivered for this sale</label>
+    <input id="quantity" type="number" min="0.001" step="0.001" required>
+
+    <label for="delivery">Actual delivery date</label>
+    <input id="delivery" type="date" required>
+
+    <label>
+      <input id="same-form" type="checkbox" required>
+      I confirm this sale is from this season and has the same product form as the confirmed harvest.
+    </label>
+
+    <p>Saving again replaces the quantity linked to this payment.</p>
+    <button id="link">Save confirmed sale quantity</button>
+  </form>
+</section>
+
+<section>
+  <h2>3. Record a stock withdrawal</h2>
+  <form id="form-movement">
+    <p id="movement-form-info"></p>
+
+    <label for="movement-kind">Withdrawal type</label>
+    <select id="movement-kind">
+      <option value="loss">Loss / spoilage</option>
+      <option value="household_use">Household use</option>
+      <option value="other">Other withdrawal</option>
+    </select>
+
+    <label for="movement-quantity">Kilograms withdrawn</label>
+    <input id="movement-quantity" type="number"
+           min="0.001" step="0.001" required>
+
+    <label for="movement-date">Actual withdrawal date</label>
+    <input id="movement-date" type="date" required>
+
+    <label for="movement-note">What happened?</label>
+    <input id="movement-note" maxlength="1000" required>
+
+    <label>
+      <input id="movement-same" type="checkbox" required>
+      This quantity has the same product form as the confirmed harvest.
+    </label>
+
+    <p>Record each event once. To correct an entry, cancel it and save a replacement. Cancelling does not mean produce was physically returned.</p>
+
+    <button id="movement-save">Save withdrawal</button>
+  </form>
+</section>
+
+<section>
+  <h2>Withdrawal history</h2>
+  <div id="movements"></div>
+</section>
+
+<section>
+  <h2>Linked sale quantities</h2>
+  <div id="links"></div>
+</section>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+let state, busy = false;
+
+const money = kobo => new Intl.NumberFormat(
+  'en-NG',
+  {style: 'currency', currency: 'NGN'}
+).format(kobo / 100);
+
+function node(tag, text) {
+  const n = document.createElement(tag);
+  n.textContent = text;
+  return n;
+}
+
+function selectedHarvest() {
+  return state.harvests.find(
+    h => h.season_id === Number($('season').value)
+  );
+}
+
+async function request(data) {
+  const response = await fetch(
+    '/api/stock',
+    data ? {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    } : {}
+  );
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw Error(result.error || 'Request failed');
+  }
+
+  return result;
+}
+
+function paymentSelection() {
+  const payment = state.payments.find(
+    p => String(p.id) === $('payment').value
+  );
+
+  const link = state.links.find(
+    l => l.transaction_id === payment?.id
+  );
+
+  $('quantity').value = link?.quantity_kg ?? '';
+  $('delivery').value = link?.delivered_at || '';
+  $('same-form').checked = false;
+
+  $('payment-info').textContent = payment
+    ? `${payment.description} · Received ${money(payment.amount_kobo)} on ${payment.occurred_at}`
+    : '';
+}
+
+function renderSeason() {
+  const seasonId = Number($('season').value);
+  const harvest = selectedHarvest();
+
+  $('balance').replaceChildren();
+  $('links').replaceChildren();
+  $('movements').replaceChildren();
+
+  $('confirm').disabled = !harvest || busy;
+  $('link').disabled = !harvest?.form_current || busy;
+  $('movement-save').disabled = !harvest?.balance_known || busy;
+
+  $('movement-form-info').textContent = harvest?.form_current
+    ? 'Product form: ' + harvest.product_form
+    : 'Confirm the harvest product form first.';
+
+  $('product').value = harvest?.product_form || '';
+
+  $('harvest-notes').textContent = harvest
+    ? `Harvest: ${harvest.quantity_kg} kg. Existing notes: ${harvest.note || 'None'}`
+    : 'Record a final harvest for this season first.';
+
+  if (harvest) {
+    $('balance').append(
+      node('p', `Reported harvest: ${harvest.quantity_kg} kg`),
+      node('p', `Product form: ${harvest.product_form || 'Not confirmed'}`)
+    );
+
+    if (harvest.balance_known) {
+      $('balance').append(
+        node('p', `Confirmed linked sales: ${harvest.linked_sales_kg} kg`),
+        node('p', `Active withdrawals: ${harvest.withdrawals_kg} kg`),
+        node('p', `Recorded remaining balance: ${harvest.remaining_kg} kg`)
+      );
+    } else {
+      $('balance').append(node(
+        'p',
+        'Remaining balance unavailable. Confirm the current harvest form and check linked quantities.'
+      ));
+    }
+
+    if (harvest.product_form && !harvest.form_current) {
+      $('balance').append(node(
+        'p',
+        'The harvest was edited after product-form confirmation. Review and confirm it again.'
+      ));
+    }
+
+    if (harvest.unlinked_payments) {
+      $('balance').append(node(
+        'p',
+        `${harvest.unlinked_payments} sale payment(s) have no eligible linked quantity. The remaining balance may overstate stock.`
+      ));
+    }
+  }
+
+  const payments = state.payments.filter(
+    p => p.season_id === seasonId
+  );
+
+  const select = $('payment');
+
+  select.replaceChildren(new Option(
+    payments.length
+      ? 'Select a sale payment…'
+      : 'Record a received sale payment first',
+    ''
+  ));
+
+  for (const payment of payments) {
+    select.add(new Option(
+      `#${payment.id} · ${payment.description} · ${money(payment.amount_kobo)}`,
+      payment.id
+    ));
+  }
+
+  paymentSelection();
+
+  const movements = state.movements.filter(
+    m => m.harvest_id === harvest?.id
+  );
+
+  if (!movements.length) {
+    $('movements').append(node('p', 'No withdrawals recorded.'));
+  }
+
+  for (const movement of movements) {
+    const article = node('article', '');
+
+    const status = movement.status === 'cancelled'
+      ? 'Cancelled: excluded from balance.'
+      : movement.eligible
+        ? 'Active: included in balance.'
+        : 'Active but excluded: review harvest confirmation.';
+
+    article.append(
+      node('h3', movement.kind.replaceAll('_', ' ')),
+      node(
+        'p',
+        `${movement.quantity_kg} kg · ${movement.product_form} · ${movement.occurred_at}`
+      ),
+      node('p', movement.note),
+      node('p', status)
+    );
+
+    if (movement.status === 'active') {
+      const button = node('button', 'Cancel incorrect withdrawal');
+      button.type = 'button';
+      button.disabled = busy;
+      button.onclick = () => mutate({
+        action: 'cancel_movement',
+        movement_id: movement.id
+      });
+      article.append(button);
+    }
+
+    $('movements').append(article);
+  }
+
+  const links = state.links.filter(
+    l => l.harvest_id === harvest?.id
+  );
+
+  if (!links.length) {
+    $('links').append(node(
+      'p',
+      'No sale quantities linked to this harvest.'
+    ));
+  }
+
+  for (const link of links) {
+    const payment = state.payments.find(
+      p => p.id === link.transaction_id
+    );
+
+    const article = node('article', '');
+
+    article.append(
+      node('h3', `Payment #${link.transaction_id}`),
+      node('p', payment?.description || 'Payment is no longer a sale'),
+      node(
+        'p',
+        `${link.quantity_kg} kg · Delivered ${link.delivered_at}`
+      ),
+      node(
+        'p',
+        link.eligible
+          ? 'Included in recorded stock balance.'
+          : 'Excluded: review the harvest confirmation and payment relationship.'
+      )
+    );
+
+    const button = node('button', 'Unlink quantity');
+    button.type = 'button';
+    button.disabled = busy;
+    button.onclick = () => mutate({
+      action: 'unlink_sale',
+      transaction_id: link.transaction_id
+    });
+
+    article.append(button);
+    $('links').append(article);
+  }
+}
+
+function render() {
+  const previous = $('season').value;
+  const select = $('season');
+
+  select.replaceChildren(new Option(
+    state.seasons.length ? 'Select a season…' : 'Create a season first',
+    ''
+  ));
+
+  for (const season of state.seasons) {
+    select.add(new Option(
+      `${season.name} / ${season.field_name} · ${season.crop}`,
+      season.id
+    ));
+  }
+
+  if (state.seasons.some(s => String(s.id) === previous)) {
+    select.value = previous;
+  } else if (state.seasons.length === 1) {
+    select.value = state.seasons[0].id;
+  }
+
+  renderSeason();
+}
+
+function lock(value) {
+  busy = value;
+
+  for (const id of [
+    'confirm', 'link', 'refresh',
+    'season', 'payment', 'movement-save'
+  ]) {
+    $(id).disabled = value;
+  }
+}
+
+async function mutate(data) {
+  if (busy) return;
+  lock(true);
+
+  try {
+    state = await request(data);
+    $('form-movement').reset();
+    lock(false);
+    render();
+    $('message').textContent =
+      'Stock record saved. Cash records are unchanged.';
+  } catch (error) {
+    lock(false);
+    $('confirm').disabled = !selectedHarvest();
+    $('link').disabled = !selectedHarvest()?.form_current;
+    $('movement-save').disabled = !selectedHarvest()?.balance_known;
+    $('message').textContent = error.message;
+  }
+}
+
+$('form-confirm').onsubmit = event => {
+  event.preventDefault();
+  const harvest = selectedHarvest();
+
+  if (harvest) {
+    mutate({
+      action: 'confirm_harvest',
+      harvest_id: harvest.id,
+      product_form: $('product').value
+    });
+  }
+};
+
+$('form-sale').onsubmit = event => {
+  event.preventDefault();
+
+  mutate({
+    action: 'link_sale',
+    transaction_id: Number($('payment').value),
+    quantity_kg: $('quantity').value,
+    delivered_at: $('delivery').value,
+    same_product_form: $('same-form').checked
+  });
+};
+
+$('form-movement').onsubmit = event => {
+  event.preventDefault();
+  const harvest = selectedHarvest();
+
+  if (harvest) {
+    mutate({
+      action: 'save_movement',
+      harvest_id: harvest.id,
+      kind: $('movement-kind').value,
+      quantity_kg: $('movement-quantity').value,
+      occurred_at: $('movement-date').value,
+      note: $('movement-note').value,
+      same_product_form: $('movement-same').checked
+    });
+  }
+};
+
+$('season').onchange = () => {
+  $('form-movement').reset();
+  renderSeason();
+};
+
+$('payment').onchange = paymentSelection;
+
+async function load() {
+  if (busy) return;
+  lock(true);
+
+  try {
+    state = await request();
+    lock(false);
+    render();
+    $('message').textContent = 'Produce stock ready.';
+  } catch (error) {
+    lock(false);
+    $('confirm').disabled = true;
+    $('link').disabled = true;
+    $('movement-save').disabled = true;
+    $('message').textContent = error.message;
+  }
+}
+
+$('refresh').onclick = load;
+load();
+</script>
+</body>
+</html>

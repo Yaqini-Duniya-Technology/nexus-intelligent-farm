@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEXUS Adviser Reviews</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#f1f5ee;
+  color:#183c2c;
+  font:16px system-ui;
+}
+header{
+  padding:28px;
+  background:#163f30;
+  color:white;
+}
+main{max-width:900px;margin:auto;padding:24px}
+nav{display:flex;flex-wrap:wrap;gap:18px}
+a{color:inherit}
+section{
+  background:white;
+  padding:24px;
+  border-radius:16px;
+  margin-bottom:20px;
+}
+label{display:block;margin:16px 0 6px}
+input,select,textarea,button{
+  width:100%;
+  padding:12px;
+  font:inherit;
+  border:1px solid #bdcbbb;
+  border-radius:8px;
+}
+textarea{min-height:100px}
+button{
+  background:#1d5c40;
+  color:white;
+  margin-top:16px;
+  cursor:pointer;
+}
+button:disabled{opacity:.5}
+article{
+  border-top:1px solid #ddd;
+  padding:18px 0;
+  overflow-wrap:anywhere;
+}
+article p{white-space:pre-wrap}
+#message{background:#fff1c6;padding:12px}
+</style>
+</head>
+<body>
+<header>
+  <small>LOCAL PILOT · ADVISER REVIEWS</small>
+  <h1>NEXUS adviser reviews</h1>
+  <nav>
+    <a href="/overview">Farm dashboard</a>
+    <a href="/">Workspace</a>
+    <a href="/photos">Photo evidence</a>
+  </nav>
+</header>
+
+<main>
+  <p>
+    Record an actual adviser consultation. Names, roles and findings
+    are entered by the workspace user; NEXUS does not authenticate
+    advisers or independently verify their conclusions.
+  </p>
+  <p>
+    Reviews do not change task recommendations, complete tasks or
+    rewrite stored review snapshots. Save a new review to document
+    a correction to an earlier entry.
+  </p>
+
+  <p id="message" role="status" aria-live="polite">Loading…</p>
+
+  <section>
+    <label for="observation">Observation</label>
+    <select id="observation"></select>
+    <p id="note"></p>
+
+    <a id="photos" href="/photos">
+      View attached photos and source labels
+    </a>
+
+    <form id="review">
+      <label for="adviser-name">Adviser name</label>
+      <input
+        id="adviser-name"
+        name="adviser_name"
+        maxlength="200"
+        required
+      >
+
+      <label for="adviser-role">Role / organisation as reported</label>
+      <input
+        id="adviser-role"
+        name="adviser_role"
+        maxlength="200"
+        required
+      >
+
+      <label for="reviewed-at">
+        Consultation time (local time; blank means now)
+      </label>
+      <input
+        id="reviewed-at"
+        name="reviewed_at"
+        type="datetime-local"
+      >
+
+      <label for="findings">
+        What did the adviser observe or find?
+      </label>
+      <textarea
+        id="findings"
+        name="findings"
+        maxlength="3000"
+        required
+      ></textarea>
+
+      <label for="assessment">
+        Cause assessment as reported by the adviser
+      </label>
+      <select id="assessment" name="assessment">
+        <option value="unconfirmed">Cause remains unconfirmed</option>
+        <option value="suspected">Suspected cause</option>
+        <option value="adviser_reported_confirmation">
+          Adviser reports a confirmed cause
+        </option>
+      </select>
+
+      <label for="basis">
+        Evidence / examination method and limitations
+      </label>
+      <textarea
+        id="basis"
+        name="basis"
+        maxlength="3000"
+        required
+      ></textarea>
+
+      <label for="next-step">Actual agreed next step</label>
+      <textarea
+        id="next-step"
+        name="next_step"
+        maxlength="3000"
+        required
+      ></textarea>
+
+      <button id="save">Save adviser review</button>
+    </form>
+
+    <button id="refresh" type="button">Refresh saved reviews</button>
+  </section>
+
+  <section>
+    <h2>Reviews for selected observation</h2>
+    <div id="reviews"></div>
+  </section>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+let state;
+let busy = false;
+
+const labels = {
+  unconfirmed: 'Cause remains unconfirmed',
+  suspected: 'Suspected cause',
+  adviser_reported_confirmation:
+    'Adviser-reported confirmation — not independently verified by NEXUS'
+};
+
+function node(tag, text) {
+  const element = document.createElement(tag);
+  element.textContent = text;
+  return element;
+}
+
+function lock(value) {
+  busy = value;
+  $('observation').disabled = value;
+  $('refresh').disabled = value;
+
+  for (const element of $('review').elements) {
+    element.disabled = value;
+  }
+}
+
+async function request(data) {
+  const response = await fetch(
+    '/api/adviser-reviews',
+    data
+      ? {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data)
+        }
+      : {}
+  );
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw Error(result.error || 'Request failed');
+  }
+
+  return result;
+}
+
+function renderReviews() {
+  const id = Number($('observation').value);
+  const observation = state.observations.find(
+    record => record.id === id
+  );
+
+  $('note').textContent = observation?.note || '';
+  $('photos').href =
+    '/photos' + (id ? '?observation_id=' + id : '');
+
+  $('reviews').replaceChildren();
+
+  const reviews = state.reviews.filter(
+    review => review.observation_id === id
+  );
+
+  if (!reviews.length) {
+    $('reviews').append(
+      node('p', 'No adviser reviews recorded for this observation.')
+    );
+  }
+
+  for (const review of reviews) {
+    const article = node('article', '');
+
+    article.append(
+      node('h3', `Review #${review.id} · ${review.adviser_name}`),
+      node('p', 'Reported role: ' + review.adviser_role),
+      node(
+        'p',
+        'Consultation: ' +
+        new Date(review.reviewed_at).toLocaleString()
+      ),
+      node('p', labels[review.assessment] || review.assessment),
+      node('p', 'Findings: ' + review.findings),
+      node('p', 'Evidence / limitations: ' + review.basis),
+      node('p', 'Agreed next step: ' + review.next_step),
+      node(
+        'small',
+        'Recorded ' +
+        new Date(review.recorded_at).toLocaleString()
+      )
+    );
+
+    $('reviews').append(article);
+  }
+
+  $('save').disabled = busy || !observation;
+}
+
+function render() {
+  const previous =
+    $('observation').value ||
+    new URL(location.href).searchParams.get('observation_id') ||
+    '';
+
+  $('observation').replaceChildren(
+    new Option('Select an observation…', '')
+  );
+
+  for (const observation of state.observations) {
+    $('observation').add(
+      new Option(
+        `#${observation.id} · ${observation.farm_name} / ` +
+        `${observation.field_name} · ${observation.category}`,
+        observation.id
+      )
+    );
+  }
+
+  if (
+    state.observations.some(
+      observation => String(observation.id) === previous
+    )
+  ) {
+    $('observation').value = previous;
+  }
+
+  renderReviews();
+}
+
+$('observation').onchange = () => {
+  const url = new URL(location.href);
+
+  if ($('observation').value) {
+    url.searchParams.set(
+      'observation_id',
+      $('observation').value
+    );
+  } else {
+    url.searchParams.delete('observation_id');
+  }
+
+  history.replaceState(null, '', url);
+  renderReviews();
+};
+
+$('review').onsubmit = async event => {
+  event.preventDefault();
+  if (busy) return;
+
+  const data = Object.fromEntries(
+    new FormData($('review'))
+  );
+
+  data.observation_id = Number($('observation').value);
+
+  if (!data.observation_id) {
+    $('message').textContent = 'Select an observation first.';
+    return;
+  }
+
+  if (data.reviewed_at) {
+    const date = new Date(data.reviewed_at);
+
+    if (!Number.isFinite(date.getTime())) {
+      $('message').textContent = 'Enter a valid consultation time.';
+      return;
+    }
+
+    data.reviewed_at = date.toISOString();
+  }
+
+  lock(true);
+
+  try {
+    state = await request(data);
+    $('review').reset();
+    $('message').textContent = 'Adviser review saved.';
+  } catch (error) {
+    $('message').textContent = error.message;
+  } finally {
+    lock(false);
+    if (state) render();
+  }
+};
+
+async function load() {
+  if (busy) return;
+
+  lock(true);
+
+  try {
+    state = await request();
+    $('message').textContent = 'Adviser reviews ready.';
+  } catch (error) {
+    $('message').textContent = error.message;
+  } finally {
+    lock(false);
+
+    if (state) {
+      render();
+    } else {
+      $('save').disabled = true;
+    }
+  }
+}
+
+$('refresh').onclick = load;
+load();
+</script>
+</body>
+</html>

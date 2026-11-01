@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NEXUS Voice review</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #f1f5ee;
+      color: #183c2c;
+      font: 17px system-ui;
+    }
+
+    header {
+      background: #163f30;
+      color: white;
+      padding: 24px;
+    }
+
+    main {
+      max-width: 850px;
+      margin: auto;
+      padding: 24px;
+    }
+
+    section {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      margin: 20px 0;
+    }
+
+    label {
+      display: block;
+      margin: 18px 0 8px;
+    }
+
+    input, select, textarea, button {
+      font: inherit;
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #bdcbbb;
+      border-radius: 8px;
+    }
+
+    textarea { min-height: 180px; }
+
+    button {
+      background: #1d5c40;
+      color: white;
+      margin-top: 16px;
+      cursor: pointer;
+    }
+
+    button:disabled { opacity: .5; }
+    a { color: inherit; }
+
+    #status {
+      padding: 14px;
+      background: #fff1c6;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    audio { width: 100%; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <small>LOCAL PILOT · HAUSA VOICE REVIEW</small>
+    <h1>NEXUS Voice</h1>
+    <a href="/overview">Farm dashboard</a> ·
+    <a href="/">Workspace</a>
+  </header>
+
+  <main>
+    <p>
+      Upload Hausa speech, listen and correct the transcript.
+      This first test page does not save farm observations
+      or generate agricultural advice.
+    </p>
+
+    <p id="status" role="status" aria-live="polite">
+      Ready. Use a 16 kHz mono WAV recording up to
+      30 seconds and 2 MB.
+    </p>
+
+    <section>
+      <form id="upload">
+        <label for="source">Recording source</label>
+        <select id="source" required>
+          <option value="">Select…</option>
+          <option value="synthetic_test">
+            Synthetic / generated test speech
+          </option>
+          <option value="human_test">Human test recording</option>
+          <option value="farmer">Actual farmer recording</option>
+        </select>
+
+        <label for="audio-file">Hausa WAV recording</label>
+        <input
+          id="audio-file"
+          type="file"
+          accept=".wav,audio/wav"
+          required
+        >
+
+        <audio id="player" controls></audio>
+
+        <button id="transcribe">Transcribe Hausa speech</button>
+      </form>
+
+      <p>
+        The first request loads the model. Later requests reuse
+        it while this server is running.
+      </p>
+    </section>
+
+    <section id="review" hidden>
+      <h2>Review the transcript</h2>
+      <p id="metrics"></p>
+
+      <h3>Original ASR text</h3>
+      <pre id="original"></pre>
+
+      <label for="corrected">Corrected Hausa transcript</label>
+      <textarea id="corrected" maxlength="3000"></textarea>
+
+      <p>
+        Compare with the recording. This model does not supply
+        a calibrated confidence score here.
+      </p>
+
+      <button id="download" type="button">
+        Download test transcript JSON
+      </button>
+
+      <p>
+        Downloaded transcripts are review drafts. Refreshing this
+        page clears the draft. No farm record is saved.
+      </p>
+    </section>
+
+    <p>
+      Awarri Technologies and the Federal Government of Nigeria,
+      developers of N-ATLaS (Hausa-ASR).
+    </p>
+  </main>
+
+  <script>
+    const $ = id => document.getElementById(id);
+
+    let result = null;
+    let audioUrl = null;
+    let sourceAtTranscription = null;
+    let filename = null;
+
+    function clearResult() {
+      result = null;
+      $("review").hidden = true;
+    }
+
+    $("source").onchange = clearResult;
+
+    $("audio-file").onchange = () => {
+      clearResult();
+
+      if (audioUrl) URL.revokeObjectURL(audioUrl);
+
+      const file = $("audio-file").files[0];
+      audioUrl = file ? URL.createObjectURL(file) : null;
+
+      if (audioUrl) {
+        $("player").src = audioUrl;
+      } else {
+        $("player").removeAttribute("src");
+      }
+    };
+
+    $("upload").onsubmit = async event => {
+      event.preventDefault();
+      clearResult();
+
+      const file = $("audio-file").files[0];
+
+      if (!file || file.size > 2000000) {
+        $("status").textContent =
+          "Select a WAV file no larger than 2 MB.";
+        return;
+      }
+
+      const source = $("source").value;
+
+      $("transcribe").disabled = true;
+      $("audio-file").disabled = true;
+      $("source").disabled = true;
+
+      $("status").textContent =
+        "Loading / transcribing… Allow the CPU to finish. " +
+        "Progress and errors appear in the server terminal.";
+
+      try {
+        const response = await fetch("/api/voice-transcribe", {
+          method: "POST",
+          headers: { "Content-Type": "audio/wav" },
+          body: file
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw Error(data.error || "Transcription failed");
+        }
+
+        result = data;
+        sourceAtTranscription = source;
+        filename = file.name;
+
+        $("original").textContent = data.original_transcript;
+        $("corrected").value = data.original_transcript;
+
+        $("metrics").textContent =
+          `Duration: ${data.duration_seconds}s · ` +
+          `Loading: ${data.load_seconds}s · ` +
+          `Inference: ${data.inference_seconds}s`;
+
+        $("review").hidden = false;
+
+        $("status").textContent =
+          "Transcript ready for correction. " +
+          "No farm observation was saved.";
+
+      } catch (error) {
+        $("status").textContent = error.message;
+
+      } finally {
+        $("transcribe").disabled = false;
+        $("audio-file").disabled = false;
+        $("source").disabled = false;
+      }
+    };
+
+    $("download").onclick = () => {
+      if (!result) return;
+
+      const data = {
+        draft_version: "voice-test-transcript-v1",
+        source: sourceAtTranscription,
+        filename,
+        ...result,
+        corrected_transcript: $("corrected").value,
+        review_status: "draft_not_confirmed",
+        exported_at: new Date().toISOString(),
+        farm_observation_saved: false
+      };
+
+      const url = URL.createObjectURL(
+        new Blob(
+          [JSON.stringify(data, null, 2)],
+          { type: "application/json" }
+        )
+      );
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "nexus-voice-test-transcript.json";
+      link.click();
+
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    };
+  </script>
+</body>
+</html>

@@ -21,3 +21,22 @@ PY
 # Keep dependency manifests versioned
 !requirements.txt
 !requirements-dev.txt
+
+# Local farm pilot data and environments
+.venv*/
+.env
+.env.*
+!.env.example
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+backups/
+exports/
+backup-*-code-*/
+*.wav
+*.mp3
+*.m4a
+*.safetensors
+

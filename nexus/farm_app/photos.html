@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEXUS Photo Evidence</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #f1f5ee;
+  color: #183c2c;
+  font: 16px system-ui;
+}
+header {
+  background: #163f30;
+  color: white;
+  padding: 28px;
+}
+main {
+  max-width: 900px;
+  margin: auto;
+  padding: 24px;
+}
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+a { color: inherit; }
+section {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+label {
+  display: block;
+  margin: 16px 0 6px;
+}
+select, input, textarea, button {
+  width: 100%;
+  padding: 12px;
+  font: inherit;
+  border: 1px solid #bdcbbb;
+  border-radius: 8px;
+}
+button {
+  background: #1d5c40;
+  color: white;
+  margin-top: 16px;
+  cursor: pointer;
+}
+button:disabled { opacity: .5; }
+textarea { min-height: 100px; }
+img {
+  max-width: 100%;
+  max-height: 480px;
+  object-fit: contain;
+}
+article {
+  border-top: 1px solid #ddd;
+  padding: 18px 0;
+  overflow-wrap: anywhere;
+}
+#message {
+  padding: 12px;
+  background: #fff1c6;
+}
+</style>
+</head>
+<body>
+<header>
+  <small>LOCAL PILOT · PHOTO EVIDENCE</small>
+  <h1>NEXUS photo evidence</h1>
+  <nav>
+    <a href="/overview">Farm dashboard</a>
+    <a href="/">Workspace</a>
+    <a href="/history">Field memory</a>
+  </nav>
+</header>
+
+<main>
+  <p>
+    Attach a photo to an existing observation for human review.
+    No image diagnosis model is connected.
+    Source labels are user declarations, not independent verification.
+    Photos do not change recommendations or stored review snapshots.
+  </p>
+  <p>
+    This page saves a resized JPEG copy inside the local database.
+    Keep the original image separately if you need its full detail.
+  </p>
+
+  <p id="message" role="status" aria-live="polite">Loading…</p>
+
+  <section>
+    <form id="upload">
+      <label for="observation">Observation</label>
+      <select id="observation" required></select>
+      <p id="observation-note"></p>
+
+      <label for="file">Field or crop photo</label>
+      <input
+        id="file"
+        type="file"
+        accept="image/jpeg,image/png,image/webp"
+        required
+      >
+      <p>
+        Choose JPEG, PNG or WebP, up to 20 MB.
+        The saved copy is at most 1600 pixels along its longest
+        side and 2 MB.
+      </p>
+
+      <img id="preview" alt="Selected photo preview" hidden>
+
+      <label for="source">Photo source</label>
+      <select id="source">
+        <option value="unknown">Unknown / not recorded</option>
+        <option value="farmer_photo">Farmer photo</option>
+        <option value="adviser_photo">Adviser photo</option>
+        <option value="test_image">Test / AI-generated image</option>
+      </select>
+
+      <label for="caption">What does this photo show?</label>
+      <textarea id="caption" maxlength="1000" required></textarea>
+
+      <button id="save">Save photo evidence</button>
+    </form>
+
+    <button id="refresh" type="button">Refresh saved photos</button>
+  </section>
+
+  <section>
+    <h2>Photos for selected observation</h2>
+    <div id="photos"></div>
+  </section>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+
+let state;
+let busy = false;
+
+const sourceLabels = {
+  unknown: 'Unknown / not recorded',
+  farmer_photo: 'Farmer photo',
+  adviser_photo: 'Adviser photo',
+  test_image: 'Test / AI-generated image'
+};
+
+function node(tag, text) {
+  const element = document.createElement(tag);
+  element.textContent = text;
+  return element;
+}
+
+async function request(data) {
+  const response = await fetch(
+    '/api/photos',
+    data
+      ? {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data)
+        }
+      : {}
+  );
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw Error(result.error || 'Request failed');
+  }
+
+  return result;
+}
+
+function lock(value) {
+  busy = value;
+
+  for (const id of [
+    'save', 'refresh', 'observation', 'file', 'caption', 'source'
+  ]) {
+    $(id).disabled = value;
+  }
+}
+
+function renderPhotos() {
+  const id = Number($('observation').value);
+  const observation = state.observations.find(
+    record => record.id === id
+  );
+
+  $('observation-note').textContent = observation?.note || '';
+  $('photos').replaceChildren();
+
+  const photos = state.photos.filter(
+    photo => photo.observation_id === id
+  );
+
+  if (!photos.length) {
+    $('photos').append(
+      node('p', 'No photos attached to this observation.')
+    );
+  }
+
+  for (const photo of photos) {
+    const article = node('article', '');
+    const image = document.createElement('img');
+
+    image.src = '/api/photo?photo_id=' + photo.id;
+    image.alt = photo.caption;
+    image.loading = 'lazy';
+
+    article.append(
+      image,
+      node('p', photo.caption),
+      node(
+        'p',
+        'Source: ' +
+          (sourceLabels[photo.source_kind] || sourceLabels.unknown)
+      ),
+      node(
+        'p',
+        'Uploaded ' + new Date(photo.uploaded_at).toLocaleString()
+      )
+    );
+
+    if (photo.source_kind === 'test_image') {
+      article.append(
+        node('p', 'Test image — not real farm evidence.')
+      );
+    }
+
+    const label = node('label', 'Update source label');
+    const select = document.createElement('select');
+    const button = node('button', 'Save source label');
+
+    select.id = 'photo-source-' + photo.id;
+    label.htmlFor = select.id;
+
+    for (const [value, text] of Object.entries(sourceLabels)) {
+      select.add(new Option(text, value));
+    }
+
+    select.value = photo.source_kind || 'unknown';
+    button.type = 'button';
+    button.disabled = busy;
+    button.onclick = () => updateSource(photo.id, select.value);
+
+    article.append(label, select, button);
+    $('photos').append(article);
+  }
+
+  $('save').disabled = busy || !state.observations.length;
+}
+
+function render() {
+  const previous =
+    $('observation').value ||
+    new URL(location.href).searchParams.get('observation_id') ||
+    '';
+
+  const select = $('observation');
+
+  select.replaceChildren(
+    new Option(
+      state.observations.length
+        ? 'Select an observation…'
+        : 'Record an observation first',
+      ''
+    )
+  );
+
+  for (const observation of state.observations) {
+    select.add(
+      new Option(
+        `#${observation.id} · ${observation.farm_name} / ` +
+        `${observation.field_name} · ${observation.category}`,
+        observation.id
+      )
+    );
+  }
+
+  if (
+    state.observations.some(
+      observation => String(observation.id) === previous
+    )
+  ) {
+    select.value = previous;
+  }
+
+  renderPhotos();
+}
+
+async function prepare(file) {
+  if (
+    !file ||
+    !['image/jpeg', 'image/png', 'image/webp'].includes(file.type)
+  ) {
+    throw Error('Choose a JPEG, PNG or WebP photo.');
+  }
+
+  if (file.size > 20 * 1024 * 1024) {
+    throw Error('Choose an original photo no larger than 20 MB.');
+  }
+
+  const url = URL.createObjectURL(file);
+  const image = new Image();
+
+  try {
+    await new Promise((resolve, reject) => {
+      image.onload = resolve;
+      image.onerror = () => reject(Error('Could not read this photo.'));
+      image.src = url;
+    });
+
+    const scale = Math.min(
+      1,
+      1600 / Math.max(image.naturalWidth, image.naturalHeight)
+    );
+
+    const canvas = document.createElement('canvas');
+
+    canvas.width = Math.max(
+      1,
+      Math.round(image.naturalWidth * scale)
+    );
+    canvas.height = Math.max(
+      1,
+      Math.round(image.naturalHeight * scale)
+    );
+
+    const context = canvas.getContext('2d');
+
+    context.fillStyle = '#ffffff';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+    const result = canvas.toDataURL('image/jpeg', 0.85);
+    const encoded = result.split(',')[1];
+
+    if (
+      !encoded ||
+      atob(encoded).length > 2 * 1024 * 1024
+    ) {
+      throw Error('Saved copy exceeds 2 MB. Choose a smaller photo.');
+    }
+
+    return result;
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+
+$('file').onchange = async () => {
+  if (busy) return;
+
+  lock(true);
+  $('preview').hidden = true;
+
+  try {
+    const result = await prepare($('file').files[0]);
+
+    $('preview').src = result;
+    $('preview').hidden = false;
+    $('message').textContent =
+      'Preview ready. Review the observation and caption before saving.';
+  } catch (error) {
+    $('file').value = '';
+    $('message').textContent = error.message;
+  } finally {
+    lock(false);
+    if (state) renderPhotos();
+  }
+};
+
+function rememberObservation() {
+  const url = new URL(location.href);
+
+  if ($('observation').value) {
+    url.searchParams.set(
+      'observation_id',
+      $('observation').value
+    );
+  } else {
+    url.searchParams.delete('observation_id');
+  }
+
+  history.replaceState(null, '', url);
+}
+
+$('observation').onchange = () => {
+  rememberObservation();
+  renderPhotos();
+};
+
+async function updateSource(id, source) {
+  if (busy) return;
+
+  lock(true);
+
+  try {
+    state = await request({
+      action: 'set_source',
+      photo_id: id,
+      source_kind: source
+    });
+
+    lock(false);
+    render();
+
+    $('message').textContent =
+      'Photo source label saved. This is a user declaration, ' +
+      'not independent verification.';
+  } catch (error) {
+    lock(false);
+    if (state) renderPhotos();
+    $('message').textContent = error.message;
+  }
+}
+
+$('upload').onsubmit = async event => {
+  event.preventDefault();
+  if (busy) return;
+
+  const id = Number($('observation').value);
+  const caption = $('caption').value;
+  const file = $('file').files[0];
+  const source = $('source').value;
+
+  lock(true);
+
+  try {
+    const prepared = await prepare(file);
+
+    state = await request({
+      action: 'upload',
+      source_kind: source,
+      observation_id: id,
+      caption,
+      image_base64: prepared.split(',')[1]
+    });
+
+    $('file').value = '';
+    $('caption').value = '';
+    $('preview').hidden = true;
+
+    lock(false);
+    render();
+
+    $('message').textContent =
+      'Photo saved or already attached. Review the saved caption below.';
+  } catch (error) {
+    lock(false);
+    if (state) renderPhotos();
+    $('message').textContent = error.message;
+  }
+};
+
+async function load() {
+  if (busy) return;
+
+  lock(true);
+
+  try {
+    state = await request();
+
+    lock(false);
+    render();
+
+    $('message').textContent = 'Photo evidence ready.';
+  } catch (error) {
+    lock(false);
+    $('save').disabled = true;
+    $('message').textContent = error.message;
+  }
+}
+
+$('refresh').onclick = load;
+load();
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+"""Supply traceability and case/cost linking workflows."""
+from nexus.farm_app.resource_formtypes import f,choice,spec
+SPECS={
+ 'batch':spec('Supply batches','Identify a lot within a saved supply item. An expiry date is user-reported; blank means unknown.','Creates lot metadata only; allocate saved supply movements separately to establish a lot balance.',[
+ f('supply_id','Supply item','reference',ref='supply'),f('name','Batch / lot label'),f('expiry_date','Reported expiry date (blank if unknown)','date',False),choice('status','Lot status',['active','hold','closed']),f('storage','Storage location or Unknown'),f('notes','Label evidence, condition and limitations','textarea')]),
+ 'allocation':spec('Batch movement allocation','Associate all or part of an existing supply movement with one lot. Use the supply unit.','Allocates recorded movement quantities to lots without changing the overall stock movement or creating another movement.',[
+ f('batch_id','Batch / lot','reference',ref='batch'),f('movement_id','Saved supply movement','reference',ref='movement'),f('quantity','Allocated movement quantity; signed only for negative adjustments','signed_quantity'),f('notes','Allocation basis and limitations','textarea')]),
+ 'quote':spec('Supplier quotes','Record a user-obtained quote from a saved contact. Nothing is sent to the supplier.','Saves a quote only; no purchase, payment or inventory receipt is created.',[
+ f('contact_id','Supplier contact','reference',ref='contact'),f('supply_id','Quoted supply','reference',ref='supply'),f('quantity','Quoted quantity in supply unit','quantity'),f('unit_ngn','Quoted NGN per supply unit','money'),f('valid_until','Reported valid-until date (blank if unknown)','date',False),f('notes','Quote reference, terms and limitations','textarea')]),
+ 'purchase':spec('Purchase plans','Plan a supply purchase and record human-reported ordering status.','Saves a plan; no order, message, expense, receipt or payment is generated.',[
+ f('supply_id','Supply item','reference',ref='supply'),f('name','Purchase purpose / reference'),f('quantity','Planned quantity in supply unit','quantity'),f('estimated_ngn','Estimated total NGN (blank if unknown)','money',False),choice('status','Plan status',['planned','ordered','closed','cancelled']),f('due_date','Expected date (Lagos)','date'),f('notes','Supplier details as permitted, basis and constraints','textarea')]),
+ 'delivery':spec('Delivery reports','Record an actual delivery against a purchase plan. Quantities remain separate from stock receipts.','Saves reported delivery details. Record an inventory receipt separately; this report does not add stock.',[
+ f('purchase_id','Purchase plan','reference',ref='purchase'),f('quantity','Quantity delivered in supply unit','quantity'),f('occurred_at','Actual delivery time','datetime'),choice('result','Reported result',['accepted','partly_accepted','rejected','uncertain']),f('notes','Condition, receipt reference and limitations','textarea')]),
+ 'lot_check':spec('Lot condition checks','Record what was actually checked on a lot. This is not a laboratory certificate.','Saves reported findings only. It does not automatically change lot status, stock or safety certification.',[
+ f('batch_id','Batch / lot','reference',ref='batch'),f('occurred_at','Actual check time','datetime'),choice('result','Human-reported result',['no_visible_issue','concern','uncertain']),f('findings','What was checked, observations and limitations','textarea')]),
+ 'dispatch':spec('Dispatch plans and reports','Plan a dispatch and later record actual occurrence separately from stock issues.','Saves a plan/report. No goods, message or stock issue is executed.',[
+ f('supply_id','Supply item','reference',ref='supply'),f('contact_id','Recipient contact','reference',ref='contact'),f('quantity','Quantity in supply unit','quantity'),f('due_date','Planned dispatch date (Lagos)','date'),choice('status','Status',['planned','completed','cancelled']),f('performed_at','Actual dispatch time; required when completed','datetime',False),f('notes','Purpose, transport and actual evidence or constraints','textarea')]),
+ 'stock_check':spec('Physical stock checks','Record a counted quantity in the saved supply unit, including counted zero.','Saves an independent count and freezes the recorded balance for comparison at entry time. It never posts a stock adjustment.',[
+ f('supply_id','Supply item','reference',ref='supply'),f('quantity','Physically counted quantity in supply unit','quantity'),f('occurred_at','Actual count time','datetime'),f('method','Counting method / coverage'),f('notes','Evidence and limitations','textarea')]),
+ 'handover':spec('Equipment handovers','Record an actual custody handover as reported by the user.','Saves a handover record; it does not silently overwrite the equipment custodian or condition.',[
+ f('equipment_id','Equipment','reference',ref='equipment'),f('receiver','Receiving person / role as reported'),f('occurred_at','Actual handover time','datetime'),choice('condition','Reported condition',['unknown','serviceable','needs_check','out_of_service']),f('notes','Agreement, accessories and limitations','textarea')]),
+ 'budget_scope':spec('Budget season scope','Associate a budget with an existing season only when you established that connection.','Freezes a copy of the selected season with an active or withdrawn association. It does not alter the season or original budget.',[
+ f('budget_id','Budget plan','reference',ref='budget'),f('season_id','Established crop season','reference',ref='season'),choice('status','Association status',['active','withdrawn']),f('basis','Evidence for season relevance and limits','textarea')]),
+ 'expense_match':spec('Expense reconciliation','Associate one whole existing expense with a budget line after checking field and season relevance.','Freezes the selected actual expense for comparison. No transaction is created, edited or paid. Partial/split matching is not supported.',[
+ f('budget_line_id','Budget cost line','reference',ref='budget_line'),f('expense_id','Existing actual expense','reference',ref='expense'),choice('status','Match status',['active','withdrawn']),f('basis','Reason for this match and limitations','textarea')]),
+ 'case_link':spec('Resource case evidence','Select an existing resource record that is relevant to an observation. Its current version is frozen with this link.','Saves an explicit association and a frozen resource copy. New review bundles capture these links; earlier bundles stay unchanged.',[
+ f('resource_id','Relevant resource record','reference',ref='resource'),f('observation_id','Observation','reference',ref='observation'),choice('status','Link status',['active','withdrawn']),f('basis','Relevance and limitations; no causal inference','textarea')])}
+EXAMPLES={
+ 'batch':{'name':'DEMO lot A','storage':'DEMO locked store','notes':'DEMO only. Expiry date requires label evidence.'},
+ 'allocation':{'quantity':'4','notes':'DEMO: four pieces from the selected receipt belong to this lot.'},
+ 'quote':{'quantity':'10','unit_ngn':'500','notes':'DEMO quote only, not a confirmed order.'},
+ 'purchase':{'name':'DEMO packing supplies','quantity':'10','estimated_ngn':'5000','notes':'DEMO plan; not an order sent to a supplier.'},
+ 'delivery':{'quantity':'8','notes':'DEMO: actual delivery report; inventory receipt still separate.'},
+ 'lot_check':{'findings':'DEMO: packaging checked; no independent product-quality verification.'},
+ 'dispatch':{'quantity':'3','notes':'DEMO planned transport, not an inventory issue.'},
+ 'stock_check':{'quantity':'7','method':'DEMO: counted all pieces in one named bin','notes':'DEMO count, not an adjustment.'},
+ 'handover':{'receiver':'DEMO custodian','notes':'DEMO reported handover only.'},
+ 'budget_scope':{'basis':'DEMO: checked the plan and season references; association is user-entered.'},
+ 'expense_match':{'basis':'DEMO: verified the receipt refers to this whole budget line; no payment recorded here.'},
+ 'case_link':{'basis':'DEMO: this inspection-related resource is relevant context; it does not establish the cause.'}}

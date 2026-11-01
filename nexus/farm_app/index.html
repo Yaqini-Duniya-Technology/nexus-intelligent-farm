@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NEXUS Farm Workspace</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f1f5ee;
+            color: #183c2c;
+            font: 16px system-ui, sans-serif;
+        }
+
+        header {
+            background: #163f30;
+            color: white;
+            padding: 30px;
+        }
+
+        header h1 {
+            margin-bottom: 8px;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 24px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            align-items: start;
+        }
+
+        section,
+        form {
+            background: white;
+            padding: 22px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+
+        section,
+        article {
+            scroll-margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 14px 0 6px;
+        }
+
+        input,
+        select,
+        textarea,
+        button {
+            width: 100%;
+            min-width: 0;
+            font: inherit;
+            padding: 12px;
+            border: 1px solid #bdcbbb;
+            border-radius: 8px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            background: #1d5c40;
+            color: white;
+            margin-top: 14px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #174a34;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        input:focus-visible,
+        select:focus-visible,
+        textarea:focus-visible,
+        button:focus-visible,
+        a:focus-visible,
+        summary:focus-visible {
+            outline: 3px solid #c8a12e;
+            outline-offset: 3px;
+        }
+
+        article {
+            padding: 20px 0;
+            border-top: 1px solid #ddd;
+            overflow-wrap: anywhere;
+        }
+
+        article form {
+            padding: 18px;
+            background: #f5f8f2;
+            margin-top: 16px;
+        }
+
+        .muted {
+            color: #5d7060;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e5eee0;
+            color: #244c35;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+
+        .evidence {
+            background: #f0f5eb;
+            border-left: 4px solid #6c8c4d;
+            padding: 14px;
+            margin-top: 12px;
+        }
+
+        .evidence.excluded {
+            background: #fff2e7;
+            border-left-color: #b96727;
+        }
+
+        .evidence-summary {
+            background: #f5f8f2;
+            border: 1px solid #d6e1ce;
+            border-radius: 12px;
+            padding: 18px;
+            margin: 18px 0;
+        }
+
+        .evidence-summary h4 {
+            margin: 0 0 12px;
+            font-size: 17px;
+        }
+
+        .summary-counts {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .summary-count {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .summary-count strong {
+            display: block;
+            font-size: 24px;
+        }
+
+        .result-counts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .result-counts span {
+            background: #e7eee1;
+            padding: 6px 10px;
+            border-radius: 8px;
+        }
+
+        .warning {
+            color: #824516;
+        }
+
+        #message {
+            padding: 12px;
+            color: #513e0f;
+            background: #fff1c6;
+            border-radius: 8px;
+            overflow-wrap: anywhere;
+        }
+
+        #message.error {
+            color: #812828;
+            background: #ffe5e5;
+        }
+
+        #metrics {
+            padding: 18px 0;
+            font-weight: bold;
+        }
+
+        details {
+            margin-top: 18px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            padding: 10px 0;
+        }
+
+        @media (max-width: 800px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            main {
+                padding: 15px;
+            }
+
+            header {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <small>LOCAL PILOT · FOLLOW-UP SCHEDULING</small>
+        <h1>NEXUS</h1>
+        <p>Farm intelligence starts with a reliable record.</p>
+
+        <nav aria-label="Main navigation">
+            <a href="#workspace">Workspace</a>
+            <a href="#tasks">Tasks</a>
+            <a href="#scheduled">Follow-ups</a>
+            <a href="/history">Field memory</a>
+            <a href="#history">History</a>
+        </nav>
+    </header>
+
+    <main>
+        <p class="muted">
+            Single-user local workspace. Review prompts require
+            human judgement. No diagnosis model or equipment
+            actions are connected.
+        </p>
+
+        <div id="message" role="status" aria-live="polite">
+            Loading records…
+        </div>
+
+        <div id="metrics"></div>
+
+        <div class="grid" id="workspace">
+            <form id="farm">
+                <h2>1. Register farm</h2>
+
+                <label for="name">Farm name</label>
+                <input id="name" name="name" required maxlength="3000">
+
+                <label for="location">Location</label>
+                <input
+                    id="location"
+                    name="location"
+                    required
+                    maxlength="3000"
+                >
+
+                <button type="submit" disabled>Save farm</button>
+                <div id="farm-list"></div>
+            </form>
+
+            <form id="field">
+                <h2>2. Add field</h2>
+
+                <label for="farm-id">Farm</label>
+                <select id="farm-id" name="farm_id" required></select>
+
+                <label for="field-name">Field name</label>
+                <input
+                    id="field-name"
+                    name="name"
+                    required
+                    maxlength="3000"
+                >
+
+                <label for="crop">Crop</label>
+                <input id="crop" name="crop" required maxlength="3000">
+
+                <button type="submit" disabled>Save field</button>
+                <div id="field-list"></div>
+            </form>
+
+            <form id="observation">
+                <h2>3. Record observation</h2>
+
+                <label for="field-id">Field</label>
+                <select id="field-id" name="field_id" required></select>
+
+                <label for="category">Category</label>
+                <select id="category" name="category">
+                    <option value="general">General</option>
+                    <option value="crop_health">Crop health</option>
+                    <option value="water">Water</option>
+                    <option value="pest">Pest observation</option>
+                    <option value="operations">Operations</option>
+                </select>
+
+                <label for="observed-at">
+                    Observed at (your local time)
+                </label>
+                <input
+                    id="observed-at"
+                    type="datetime-local"
+                    name="observed_at"
+                >
+
+                <p class="muted">
+                    Leave blank to use the submission time.
+                </p>
+
+                <label for="source">Source</label>
+                <select id="source" name="source">
+                    <option value="farmer">Farmer</option>
+                    <option value="adviser">Adviser</option>
+                    <option value="sensor">Sensor</option>
+                </select>
+
+                <label for="condition">Field condition</label>
+                <select id="condition" name="condition">
+                    <option value="unknown">Unknown</option>
+                    <option value="stable">Stable</option>
+                    <option value="worsening">Worsening</option>
+                </select>
+
+                <label for="moisture">
+                    Soil moisture (volumetric %, optional)
+                </label>
+                <input
+                    id="moisture"
+                    name="soil_moisture_pct"
+                    type="number"
+                    min="0"
+                    max="100"
+                    step="any"
+                >
+
+                <label for="moisture-method">Measurement method</label>
+                <select id="moisture-method" name="moisture_method">
+                    <option value="">Not measured</option>
+                    <option value="volumetric_sensor">
+                        Volumetric sensor
+                    </option>
+                </select>
+
+                <label for="note">What did you observe?</label>
+                <textarea
+                    id="note"
+                    name="note"
+                    required
+                    maxlength="3000"
+                ></textarea>
+
+                <button type="submit" disabled>
+                    Save & create review task
+                </button>
+            </form>
+        </div>
+
+        <section id="tasks">
+            <h2>Recommendations & tasks</h2>
+            <p class="muted">
+                Observation → review → approval → action record
+            </p>
+            <div id="task-list"></div>
+        </section>
+
+        <section id="scheduled">
+            <h2>Scheduled follow-ups</h2>
+            <p class="muted">
+                Choose follow-up times yourself or with your adviser.
+                Reminders appear here while the workspace is open;
+                no SMS or background alerts are sent.
+            </p>
+
+            <button type="button" id="refresh-schedules">
+                Refresh reminder status
+            </button>
+
+            <div id="schedule-list"></div>
+        </section>
+
+        <section id="history">
+            <h2>Actions & outcome history</h2>
+            <p class="muted">
+                Evidence counts describe recorded reports.
+                They do not establish treatment effectiveness.
+            </p>
+            <div id="history-list"></div>
+        </section>
+    </main>
+
+    <script>
+        "use strict";
+
+        const $ = (id) => document.getElementById(id);
+        let state;
+        let voiceContext = [];
+        let voiceContextError = "";
+
+        function node(tag, text = "", className = "") {
+            const element = document.createElement(tag);
+            element.textContent = text;
+
+            if (className) {
+                element.className = className;
+            }
+
+            return element;
+        }
+
+        function message(text, isError = false) {
+            $("message").textContent = text;
+            $("message").classList.toggle("error", isError);
+        }
+
+        function displayTime(value) {
+            if (!value) return "Time not recorded";
+
+            const date = new Date(value);
+
+            return Number.isNaN(date.getTime())
+                ? "Time unavailable"
+                : date.toLocaleString();
+        }
+
+        function localTime(value) {
+            if (!value) return null;
+
+            const date = new Date(value);
+
+            if (Number.isNaN(date.getTime())) {
+                throw new Error("Enter a valid date and time.");
+            }
+
+            return date.toISOString();
+        }
+
+        async function request(path, data) {
+            const options = data
+                ? {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                }
+                : {};
+
+            const response = await fetch(path, options);
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || "Request failed.");
+            }
+
+            return result;
+        }
+
+        function populateOptions(id, records, label) {
+            const select = $(id);
+            const previous = select.value;
+
+            select.replaceChildren(
+                new Option(
+                    records.length
+                        ? "Select…"
+                        : "Create a record first",
+                    "",
+                ),
+            );
+
+            for (const record of records) {
+                select.add(new Option(label(record), record.id));
+            }
+
+            if (
+                records.some(
+                    (record) => String(record.id) === previous,
+                )
+            ) {
+                select.value = previous;
+            }
+        }
+
+        function labelled(labelText, input, id) {
+            input.id = id;
+
+            const label = node("label", labelText);
+            label.htmlFor = id;
+
+            return [label, input];
+        }
+
+        function missingInformation(value) {
+            if (Array.isArray(value)) return value;
+
+            try {
+                const parsed = JSON.parse(value || "[]");
+                return Array.isArray(parsed) ? parsed : [];
+            } catch {
+                return [];
+            }
+        }
+
+        async function submitEvidence(path, data, button) {
+            button.disabled = true;
+
+            try {
+                state = await request(path, data);
+                render();
+                message("Evidence saved.");
+            } catch (error) {
+                message(error.message, true);
+                button.disabled = false;
+            }
+        }
+
+        async function approveTask(id, button) {
+            button.disabled = true;
+
+            try {
+                state = await request("/api/tasks", {
+                    id,
+                    action: "approve",
+                });
+
+                render();
+
+                message(
+                    "Task approved. Record the action after it is performed.",
+                );
+            } catch (error) {
+                message(error.message, true);
+                button.disabled = false;
+            }
+        }
+
+        function actionForm(task) {
+            const form = node("form");
+            const type = node("select");
+
+            for (const [value, text] of [
+                ["inspection", "Inspection"],
+                ["manual_work", "Manual work"],
+                ["adviser_consultation", "Adviser consultation"],
+                ["other", "Other"],
+            ]) {
+                type.add(new Option(text, value));
+            }
+
+            const when = node("input");
+            when.type = "datetime-local";
+
+            const description = node("textarea");
+            description.required = true;
+            description.maxLength = 3000;
+
+            const button = node(
+                "button",
+                "Save action & mark task complete",
+            );
+            button.type = "submit";
+
+            form.append(
+                ...labelled(
+                    "Action type",
+                    type,
+                    `action-type-${task.id}`,
+                ),
+                ...labelled(
+                    "Performed at (local time; blank means now)",
+                    when,
+                    `performed-${task.id}`,
+                ),
+                ...labelled(
+                    "What was actually done? Record actions and findings.",
+                    description,
+                    `action-description-${task.id}`,
+                ),
+                node(
+                    "p",
+                    "Completion records work performed. Add follow-up evidence later to report the result.",
+                    "muted",
+                ),
+                button,
+            );
+
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+
+                try {
+                    submitEvidence(
+                        "/api/task-actions",
+                        {
+                            id: task.id,
+                            action_type: type.value,
+                            description: description.value,
+                            performed_at: localTime(when.value),
+                        },
+                        button,
+                    );
+                } catch (error) {
+                    message(error.message, true);
+                }
+            });
+
+            return form;
+        }
+
+        function followupForm(task) {
+            const details = node("details");
+            const summary = node("summary", "Add follow-up evidence");
+            const form = node("form");
+            const result = node("select");
+
+            for (const [value, text] of [
+                ["uncertain", "Uncertain"],
+                ["improved", "Improved"],
+                ["unchanged", "Unchanged"],
+                ["worsened", "Worsened"],
+            ]) {
+                result.add(new Option(text, value));
+            }
+
+            const when = node("input");
+            when.type = "datetime-local";
+
+            const evidence = node("textarea");
+            evidence.required = true;
+            evidence.maxLength = 3000;
+
+            const button = node("button", "Save follow-up");
+            button.type = "submit";
+
+            form.append(
+                ...labelled(
+                    "Farmer-reported result",
+                    result,
+                    `result-${task.id}`,
+                ),
+                ...labelled(
+                    "Observed at (local time; blank means now)",
+                    when,
+                    `followup-time-${task.id}`,
+                ),
+                ...labelled(
+                    "What changed? Describe observable evidence.",
+                    evidence,
+                    `evidence-${task.id}`,
+                ),
+                node(
+                    "p",
+                    "These are reported outcomes. NEXUS has not independently verified effectiveness.",
+                    "muted",
+                ),
+                button,
+            );
+
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+
+                try {
+                    submitEvidence(
+                        "/api/followups",
+                        {
+                            id: task.id,
+                            result: result.value,
+                            evidence: evidence.value,
+                            observed_at: localTime(when.value),
+                        },
+                        button,
+                    );
+                } catch (error) {
+                    message(error.message, true);
+                }
+            });
+
+            details.append(summary, form);
+            return details;
+        }
+
+        function evidenceSummary(task) {
+            const panel = node("div", "", "evidence-summary");
+            panel.append(node("h4", "Evidence summary"));
+
+            const summary = (
+                state.evidence_summaries || []
+            ).find((record) => record.task_id === task.id);
+
+            if (!summary) {
+                panel.append(
+                    node("p", "Evidence summary unavailable.", "warning"),
+                );
+                return panel;
+            }
+
+            const counts = node("div", "", "summary-counts");
+
+            for (const [label, value] of [
+                ["Eligible reports", summary.eligible_followups],
+                ["Excluded reports", summary.excluded_followups],
+            ]) {
+                const card = node("div", "", "summary-count");
+
+                card.append(
+                    node("strong", String(value)),
+                    node("span", label),
+                );
+
+                counts.append(card);
+            }
+
+            panel.append(counts);
+
+            const results = summary.reported_results || {};
+            const resultCounts = node("div", "", "result-counts");
+
+            for (const [key, label] of [
+                ["improved", "Improved"],
+                ["unchanged", "Unchanged"],
+                ["worsened", "Worsened"],
+                ["uncertain", "Uncertain"],
+            ]) {
+                resultCounts.append(
+                    node("span", `${label}: ${results[key] || 0}`),
+                );
+            }
+
+            panel.append(
+                node(
+                    "p",
+                    "Reported results from eligible follow-ups only:",
+                    "muted",
+                ),
+                resultCounts,
+                node(
+                    "p",
+                    summary.action_time_available
+                        ? "A structured action time is recorded."
+                        : "Action time is unavailable for this legacy completion.",
+                    "muted",
+                ),
+                node(
+                    "p",
+                    "Eligibility means the report passes the current record checks. It does not verify the result or prove that an action caused it.",
+                    "muted",
+                ),
+                node(
+                    "p",
+                    "Counts represent follow-up reports, not independent trials or success rates.",
+                    "muted",
+                ),
+            );
+
+            return panel;
+        }
+
+        function followupBlock(followup) {
+            const assessment = followup.evidence_assessment;
+            const excluded = assessment?.eligible === false;
+
+            const block = node(
+                "div",
+                "",
+                excluded ? "evidence excluded" : "evidence",
+            );
+
+            block.append(
+                node("strong", `Reported ${followup.result}`),
+                node(
+                    "p",
+                    followup.original_evidence
+                        ?? followup.evidence
+                        ?? "",
+                ),
+                node(
+                    "small",
+                    displayTime(followup.observed_at),
+                    "muted",
+                ),
+            );
+
+            if (excluded) {
+                block.append(
+                    node(
+                        "p",
+                        "Excluded from evidence summary: " +
+                            (assessment.reasons || []).join("; "),
+                        "warning",
+                    ),
+                );
+            } else if (assessment?.eligible === true) {
+                block.append(
+                    node(
+                        "p",
+                        "Eligible farmer-reported evidence.",
+                        "muted",
+                    ),
+                );
+            } else {
+                block.append(
+                    node(
+                        "p",
+                        "Evidence assessment unavailable.",
+                        "muted",
+                    ),
+                );
+            }
+
+            return block;
+        }
+
+        async function scheduleRequest(path, data, button, success) {
+            button.disabled = true;
+
+            try {
+                state = await request(path, data);
+                render();
+                message(success);
+            } catch (error) {
+                message(error.message, true);
+                button.disabled = false;
+            }
+        }
+
+        function scheduleForm(task) {
+            const details = node("details");
+            const form = node("form");
+
+            const when = node("input");
+            when.type = "datetime-local";
+            when.required = true;
+
+            const note = node("textarea");
+            note.required = true;
+            note.maxLength = 3000;
+
+            const button = node("button", "Schedule follow-up");
+            button.type = "submit";
+
+            form.append(
+                ...labelled(
+                    "Follow-up due (your local time)",
+                    when,
+                    `schedule-due-${task.id}`,
+                ),
+                ...labelled(
+                    "What should be checked?",
+                    note,
+                    `schedule-note-${task.id}`,
+                ),
+                button,
+            );
+
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+
+                try {
+                    scheduleRequest(
+                        "/api/followup-schedules",
+                        {
+                            task_id: task.id,
+                            due_at: localTime(when.value),
+                            note: note.value,
+                        },
+                        button,
+                        "Follow-up scheduled.",
+                    );
+                } catch (error) {
+                    message(error.message, true);
+                }
+            });
+
+            details.append(
+                node("summary", "Schedule another inspection"),
+                form,
+            );
+
+            return details;
+        }
+
+        function renderSchedules() {
+            const target = $("schedule-list");
+            target.replaceChildren();
+
+            const rows = state.followup_schedules || [];
+            const active = rows.filter(
+                (record) => record.status === "scheduled",
+            );
+
+            const now = new Date();
+            const overdue = active.filter(
+                (record) => new Date(record.due_at) <= now,
+            ).length;
+
+            target.append(
+                node(
+                    "p",
+                    `${active.length} active follow-ups · ${overdue} overdue`,
+                ),
+            );
+
+            if (!rows.length) {
+                target.append(
+                    node(
+                        "p",
+                        "Schedule a follow-up from a completed task in outcome history.",
+                        "muted",
+                    ),
+                );
+            }
+
+            const ordered = [
+                ...active,
+                ...rows.filter(
+                    (record) => record.status !== "scheduled",
+                ),
+            ];
+
+            for (const schedule of ordered) {
+                const task = state.tasks.find(
+                    (record) => record.id === schedule.task_id,
+                );
+
+                const observation = state.observations.find(
+                    (record) => record.id === task?.observation_id,
+                );
+
+                const field = state.fields.find(
+                    (record) => record.id === observation?.field_id,
+                );
+
+                const timing = schedule.status === "scheduled"
+                    ? (
+                        new Date(schedule.due_at) <= now
+                            ? "OVERDUE"
+                            : "UPCOMING"
+                    )
+                    : schedule.status.toUpperCase();
+
+                const article = node("article");
+
+                article.append(
+                    node("small", timing, "badge"),
+                    node(
+                        "h3",
+                        `${field?.name || "Field"} · task #${schedule.task_id}`,
+                    ),
+                    node("p", schedule.note),
+                    node("p", `Due ${displayTime(schedule.due_at)}`),
+                );
+
+                if (schedule.status === "scheduled") {
+                    const link = node(
+                        "a",
+                        "Record follow-up evidence in outcome history",
+                    );
+                    link.href = `#task-${schedule.task_id}`;
+                    article.append(link);
+
+                    const reports = (state.followups || []).filter(
+                        (report) =>
+                            report.task_id === schedule.task_id &&
+                            report.evidence_assessment?.eligible === true &&
+                            new Date(report.observed_at) >=
+                                new Date(schedule.created_at) &&
+                            new Date(report.recorded_at) >=
+                                new Date(schedule.created_at),
+                    );
+
+                    const form = node("form");
+                    const select = node("select");
+                    select.required = true;
+
+                    select.add(
+                        new Option(
+                            "Select a saved follow-up report…",
+                            "",
+                        ),
+                    );
+
+                    for (const report of reports) {
+                        select.add(
+                            new Option(
+                                `#${report.id} · ${report.result} · ` +
+                                    displayTime(report.observed_at),
+                                report.id,
+                            ),
+                        );
+                    }
+
+                    const complete = node(
+                        "button",
+                        "Complete scheduled review with selected evidence",
+                    );
+                    complete.type = "submit";
+                    complete.disabled = !reports.length;
+
+                    form.append(
+                        ...labelled(
+                            "Saved evidence",
+                            select,
+                            `schedule-evidence-${schedule.id}`,
+                        ),
+                        complete,
+                    );
+
+                    form.addEventListener("submit", (event) => {
+                        event.preventDefault();
+
+                        scheduleRequest(
+                            "/api/followup-schedules/close",
+                            {
+                                id: schedule.id,
+                                action: "complete",
+                                followup_id: Number(select.value),
+                            },
+                            complete,
+                            "Scheduled review completed. Reported results remain unverified.",
+                        );
+                    });
+
+                    article.append(form);
+
+                    if (!reports.length) {
+                        article.append(
+                            node(
+                                "p",
+                                "Save eligible evidence observed after scheduling, then select it here.",
+                                "muted",
+                            ),
+                        );
+                    }
+
+                    const cancel = node(
+                        "button",
+                        "Cancel this reminder",
+                    );
+                    cancel.type = "button";
+
+                    cancel.addEventListener("click", () => {
+                        scheduleRequest(
+                            "/api/followup-schedules/close",
+                            {
+                                id: schedule.id,
+                                action: "cancel",
+                            },
+                            cancel,
+                            "Reminder cancelled.",
+                        );
+                    });
+
+                    article.append(cancel);
+                } else {
+                    article.append(
+                        node(
+                            "p",
+                            `Closed ${displayTime(schedule.closed_at)}`,
+                        ),
+                    );
+
+                    if (schedule.followup_id) {
+                        article.append(
+                            node(
+                                "p",
+                                `Linked follow-up report #${schedule.followup_id}`,
+                            ),
+                        );
+                    }
+                }
+
+                target.append(article);
+            }
+        }
+
+        $("refresh-schedules").addEventListener("click", async () => {
+            const button = $("refresh-schedules");
+            button.disabled = true;
+
+            try {
+                const fresh = await request("/api/state");
+                state.followup_schedules = fresh.followup_schedules;
+                renderSchedules();
+                message("Reminder status refreshed.");
+            } catch (error) {
+                message(error.message, true);
+            } finally {
+                button.disabled = false;
+            }
+        });
+
+        setInterval(() => {
+            if (state) renderSchedules();
+        }, 60000);
+
+        function voiceContextPanel(task) {
+            const saved = voiceContext.find((row) =>
+                row.task_id === task.id && row.observation_id === task.observation_id);
+            if (!saved && !voiceContextError) return null;
+            const panel = node("div", "", "evidence-summary");
+            panel.append(node("h4", "Human-reviewed voice context"));
+            if (saved?.error || voiceContextError) {
+                panel.append(node("p", saved?.error || voiceContextError, "warning"));
+                return panel;
+            }
+            const extraction = saved.extraction;
+            panel.append(node("p", `Saved review #${saved.review_id} captured at confirmation.`, "muted"));
+            panel.append(node("p", `Reviewed crop: ${extraction.crop || "Not recorded"}`));
+            panel.append(node("p", `Reviewed category: ${extraction.proposed_category || "Not recorded"}`));
+            for (const [key, title, empty] of [
+                ["reported_symptoms", "Reported observations", "No observations listed."],
+                ["possible_causes_mentioned_by_farmer", "Possible causes mentioned by the farmer — unconfirmed", "No cause mentioned in the recording."],
+                ["clarification_questions", "Questions for human review", "No questions listed."],
+            ]) {
+                panel.append(node("strong", title));
+                const values = Array.isArray(extraction[key]) ? extraction[key] : [];
+                if (!values.length) panel.append(node("p", empty, "muted"));
+                else {
+                    const list = node("ul");
+                    for (const value of values) list.append(node("li", String(value)));
+                    panel.append(list);
+                }
+            }
+            panel.append(node("p", `Reviewer as reported: ${saved.reviewer_as_reported || "Not recorded"}`));
+            panel.append(node("p", saved.notes || "No review notes recorded."));
+            panel.append(node("p", "Human-reviewed content may include corrections and speaker clarifications. It is not a diagnosis or an independently verified translation. Later review edits do not rewrite this capture.", "muted"));
+            return panel;
+        }
+
+        function render() {
+            const {
+                farms,
+                fields,
+                observations,
+                tasks,
+                task_actions = [],
+                followups = [],
+            } = state;
+
+            const openTasks = tasks.filter(
+                (task) => task.status !== "completed",
+            );
+
+            $("metrics").textContent =
+                `${farms.length} farms · ` +
+                `${fields.length} fields · ` +
+                `${observations.length} observations · ` +
+                `${openTasks.length} open tasks`;
+
+            populateOptions(
+                "farm-id",
+                farms,
+                (farm) => farm.name,
+            );
+
+            populateOptions("field-id", fields, (field) => {
+                const farm = farms.find(
+                    (record) => record.id === field.farm_id,
+                );
+
+                return (
+                    `${farm?.name || "Farm"} / ` +
+                    `${field.name} · ${field.crop}`
+                );
+            });
+
+            $("farm").querySelector("button").disabled = false;
+            $("field").querySelector("button").disabled =
+                !farms.length;
+            $("observation").querySelector("button").disabled =
+                !fields.length;
+
+            $("farm-list").replaceChildren(
+                ...farms.map((farm) =>
+                    node("p", `${farm.name} · ${farm.location}`),
+                ),
+            );
+
+            $("field-list").replaceChildren(
+                ...fields.map((field) =>
+                    node("p", `${field.name} · ${field.crop}`),
+                ),
+            );
+
+            renderSchedules();
+
+            $("task-list").replaceChildren();
+            $("history-list").replaceChildren();
+
+            if (!openTasks.length) {
+                $("task-list").append(
+                    node(
+                        "p",
+                        "No open tasks. Record an observation to begin.",
+                        "muted",
+                    ),
+                );
+            }
+
+            if (!tasks.some((task) => task.status === "completed")) {
+                $("history-list").append(
+                    node(
+                        "p",
+                        "Completed tasks and outcomes will appear here.",
+                        "muted",
+                    ),
+                );
+            }
+
+            for (const task of tasks) {
+                const observation = observations.find(
+                    (record) => record.id === task.observation_id,
+                );
+
+                const field = fields.find(
+                    (record) => record.id === observation?.field_id,
+                );
+
+                const article = node("article");
+                article.id = `task-${task.id}`;
+
+                article.append(
+                    node(
+                        "small",
+                        `${task.status.toUpperCase()} · ` +
+                            `${task.priority || "routine"} review`,
+                        "badge",
+                    ),
+                    node(
+                        "h3",
+                        `${field?.name || "Field"} · ` +
+                            `${field?.crop || "Crop"}`,
+                    ),
+                    node("p", observation?.note || ""),
+                    node("p", task.recommendation),
+                );
+
+                const voicePanel = voiceContextPanel(task);
+                if (voicePanel) article.append(voicePanel);
+
+                if (observation?.observed_at) {
+                    article.append(
+                        node(
+                            "small",
+                            `Observed ${displayTime(observation.observed_at)} · ` +
+                                `${observation.category} · ${observation.source}`,
+                            "muted",
+                        ),
+                    );
+                }
+
+                if (task.explanation) {
+                    article.append(
+                        node("p", task.explanation, "muted"),
+                    );
+                }
+
+                const missing = missingInformation(
+                    task.missing_information,
+                );
+
+                if (missing.length) {
+                    article.append(
+                        node(
+                            "p",
+                            "Information needed: " + missing.join("; "),
+                        ),
+                    );
+                }
+
+                if (observation?.soil_moisture_pct != null) {
+                    article.append(
+                        node(
+                            "p",
+                            "Volumetric soil moisture: " +
+                                `${observation.soil_moisture_pct}%`,
+                        ),
+                    );
+                }
+
+                if (task.status === "pending") {
+                    const button = node(
+                        "button",
+                        "Approve review task",
+                    );
+                    button.type = "button";
+
+                    button.addEventListener("click", () => {
+                        approveTask(task.id, button);
+                    });
+
+                    article.append(button);
+                }
+
+                if (task.status === "approved") {
+                    article.append(actionForm(task));
+                }
+
+                if (task.status === "completed") {
+                    article.append(
+                        node(
+                            "p",
+                            "Recorded completion: " + (task.outcome || ""),
+                        ),
+                    );
+
+                    if (task.completed) {
+                        article.append(
+                            node(
+                                "small",
+                                "Completed " + displayTime(task.completed),
+                                "muted",
+                            ),
+                        );
+                    }
+
+                    const action = task_actions.find(
+                        (record) => record.task_id === task.id,
+                    );
+
+                    article.append(
+                        node(
+                            "p",
+                            action
+                                ? `Action: ${action.action_type} · ` +
+                                    displayTime(action.performed_at)
+                                : "Legacy completion: no structured action time was recorded.",
+                            "muted",
+                        ),
+                        evidenceSummary(task),
+                    );
+
+                    const taskFollowups = followups.filter(
+                        (record) => record.task_id === task.id,
+                    );
+
+                    if (!taskFollowups.length) {
+                        article.append(
+                            node(
+                                "p",
+                                "Awaiting follow-up. Completion does not establish improvement.",
+                                "muted",
+                            ),
+                        );
+                    }
+
+                    for (const followup of taskFollowups) {
+                        article.append(followupBlock(followup));
+                    }
+
+                    article.append(followupForm(task));
+
+                    const hasActiveSchedule = (
+                        state.followup_schedules || []
+                    ).some(
+                        (record) =>
+                            record.task_id === task.id &&
+                            record.status === "scheduled",
+                    );
+
+                    if (!hasActiveSchedule) {
+                        article.append(scheduleForm(task));
+                    }
+
+                    $("history-list").append(article);
+                } else {
+                    $("task-list").append(article);
+                }
+            }
+        }
+
+        for (const [id, path] of [
+            ["farm", "farms"],
+            ["field", "fields"],
+            ["observation", "observations"],
+        ]) {
+            $(id).addEventListener("submit", async (event) => {
+                event.preventDefault();
+
+                const form = event.currentTarget;
+                const button = form.querySelector("button");
+                button.disabled = true;
+
+                try {
+                    const data = Object.fromEntries(new FormData(form));
+
+                    for (const key of ["farm_id", "field_id"]) {
+                        if (key in data) {
+                            data[key] = Number(data[key]);
+                        }
+                    }
+
+                    if (path === "observations") {
+                        if (data.observed_at) {
+                            data.observed_at = localTime(data.observed_at);
+                        } else {
+                            delete data.observed_at;
+                        }
+                    }
+
+                    state = await request("/api/" + path, data);
+                    form.reset();
+                    render();
+                    message("Record saved.");
+                } catch (error) {
+                    message(error.message, true);
+                    button.disabled = false;
+                }
+            });
+        }
+
+        Promise.all([
+            request("/api/state"),
+            request("/api/confirmed-voice-context")
+                .then((result) => { voiceContext = result.records || []; })
+                .catch(() => { voiceContextError = "Saved voice context unavailable. Refresh to retry; farm records can still be reviewed."; }),
+        ])
+            .then(([result]) => {
+                state = result;
+                render();
+                message("Workspace ready.");
+            })
+            .catch((error) => {
+                message(
+                    "Could not load workspace: " + error.message,
+                    true,
+                );
+            });
+    </script>
+</body>
+</html>
