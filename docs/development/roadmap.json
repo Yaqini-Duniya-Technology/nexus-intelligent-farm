@@ -22,7 +22,7 @@
       "workstream": "A",
       "workstream_name": "Core platform and architecture",
       "purpose": "Reject duplicate fields, nonfinite numbers and excessively nested bodies before a write.",
-      "benefit": "Reject duplicate fields, nonfinite numbers and excessively nested bodies before a write.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
       "priority": "Critical",
       "phase": "1 — Audit and reliability",
       "status": "Tested",
@@ -41,7 +41,7 @@
         "docs/development/VERIFICATION.md",
         "docs/RELIABILITY_GUIDE.md"
       ],
-      "git_reference": "upgrade/audit-roadmap-batch-1"
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
     },
     {
       "id": "NEXUS-UPG-002",
@@ -49,7 +49,7 @@
       "workstream": "A",
       "workstream_name": "Core platform and architecture",
       "purpose": "Require one positive Content-Length and reject truncated or oversized bodies before route dispatch.",
-      "benefit": "Require one positive Content-Length and reject truncated or oversized bodies before route dispatch.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
       "priority": "Critical",
       "phase": "1 — Audit and reliability",
       "status": "Tested",
@@ -70,7 +70,7 @@
         "docs/development/VERIFICATION.md",
         "docs/RELIABILITY_GUIDE.md"
       ],
-      "git_reference": "upgrade/audit-roadmap-batch-1"
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
     },
     {
       "id": "NEXUS-UPG-003",
@@ -78,7 +78,7 @@
       "workstream": "A",
       "workstream_name": "Core platform and architecture",
       "purpose": "Accept supported JSON media/charset combinations and preserve the explicit WAV route.",
-      "benefit": "Accept supported JSON media/charset combinations and preserve the explicit WAV route.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
       "priority": "Critical",
       "phase": "1 — Audit and reliability",
       "status": "Tested",
@@ -99,7 +99,7 @@
         "docs/development/VERIFICATION.md",
         "docs/RELIABILITY_GUIDE.md"
       ],
-      "git_reference": "upgrade/audit-roadmap-batch-1"
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
     },
     {
       "id": "NEXUS-UPG-004",
@@ -107,7 +107,7 @@
       "workstream": "A",
       "workstream_name": "Core platform and architecture",
       "purpose": "Bound slow body reads and return a recoverable timeout response without performing a mutation.",
-      "benefit": "Bound slow body reads and return a recoverable timeout response without performing a mutation.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
       "priority": "Critical",
       "phase": "1 — Audit and reliability",
       "status": "Tested",
@@ -128,7 +128,7 @@
         "docs/development/VERIFICATION.md",
         "docs/RELIABILITY_GUIDE.md"
       ],
-      "git_reference": "upgrade/audit-roadmap-batch-1"
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
     },
     {
       "id": "NEXUS-UPG-005",
@@ -136,7 +136,7 @@
       "workstream": "A",
       "workstream_name": "Core platform and architecture",
       "purpose": "Validate query switches, cap record pages and preserve complete bounded exports.",
-      "benefit": "Validate query switches, cap record pages and preserve complete bounded exports.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
       "priority": "High",
       "phase": "1 — Audit and reliability",
       "status": "Tested",
@@ -155,7 +155,7 @@
         "docs/development/VERIFICATION.md",
         "docs/RELIABILITY_GUIDE.md"
       ],
-      "git_reference": "upgrade/audit-roadmap-batch-1"
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
     },
     {
       "id": "NEXUS-UPG-006",
@@ -163,7 +163,7 @@
       "workstream": "A",
       "workstream_name": "Core platform and architecture",
       "purpose": "Validate persisted field types, enums, units and timestamps in addition to hashes.",
-      "benefit": "Validate persisted field types, enums, units and timestamps in addition to hashes.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
       "priority": "Critical",
       "phase": "1 — Audit and reliability",
       "status": "Tested",
@@ -182,7 +182,7 @@
         "docs/development/VERIFICATION.md",
         "docs/RELIABILITY_GUIDE.md"
       ],
-      "git_reference": "upgrade/audit-roadmap-batch-1"
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
     },
     {
       "id": "NEXUS-UPG-007",
@@ -190,7 +190,7 @@
       "workstream": "A",
       "workstream_name": "Core platform and architecture",
       "purpose": "Replace layered main-function monkeypatching with tested route composition while preserving legacy URLs.",
-      "benefit": "Replace layered main-function monkeypatching with tested route composition while preserving legacy URLs.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -200,7 +200,8 @@
         "Replace layered main-function monkeypatching with tested route composition while preserving legacy URLs."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Replace layered main-function monkeypatching with tested route composition while preserving legacy URLs.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -214,7 +215,7 @@
       "workstream": "A",
       "workstream_name": "Core platform and architecture",
       "purpose": "Version schema changes and preview their effects before applying them.",
-      "benefit": "Version schema changes and preview their effects before applying them.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -224,7 +225,8 @@
         "Version schema changes and preview their effects before applying them."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Version schema changes and preview their effects before applying them.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -238,7 +240,7 @@
       "workstream": "A",
       "workstream_name": "Core platform and architecture",
       "purpose": "Document and enforce one transaction per cross-record mutation.",
-      "benefit": "Document and enforce one transaction per cross-record mutation.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -248,7 +250,8 @@
         "Document and enforce one transaction per cross-record mutation."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Document and enforce one transaction per cross-record mutation.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -262,7 +265,7 @@
       "workstream": "A",
       "workstream_name": "Core platform and architecture",
       "purpose": "Return stable error codes alongside safe messages for all routes.",
-      "benefit": "Return stable error codes alongside safe messages for all routes.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -272,7 +275,8 @@
         "Return stable error codes alongside safe messages for all routes."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Return stable error codes alongside safe messages for all routes.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -286,7 +290,7 @@
       "workstream": "A",
       "workstream_name": "Core platform and architecture",
       "purpose": "Maintain version-specific readers and compatibility fixtures for saved payloads.",
-      "benefit": "Maintain version-specific readers and compatibility fixtures for saved payloads.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -296,7 +300,8 @@
         "Maintain version-specific readers and compatibility fixtures for saved payloads."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Maintain version-specific readers and compatibility fixtures for saved payloads.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -310,7 +315,7 @@
       "workstream": "A",
       "workstream_name": "Core platform and architecture",
       "purpose": "Distinguish busy database errors from validation failures and test safe bounded retries.",
-      "benefit": "Distinguish busy database errors from validation failures and test safe bounded retries.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -320,7 +325,8 @@
         "Distinguish busy database errors from validation failures and test safe bounded retries."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Distinguish busy database errors from validation failures and test safe bounded retries.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -334,7 +340,7 @@
       "workstream": "A",
       "workstream_name": "Core platform and architecture",
       "purpose": "Measure large-fixture read paths before adding indexes or caching.",
-      "benefit": "Measure large-fixture read paths before adding indexes or caching.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -344,7 +350,8 @@
         "Measure large-fixture read paths before adding indexes or caching."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Measure large-fixture read paths before adding indexes or caching.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -358,7 +365,7 @@
       "workstream": "A",
       "workstream_name": "Core platform and architecture",
       "purpose": "Show and validate the selected data directory before initializing a new database.",
-      "benefit": "Show and validate the selected data directory before initializing a new database.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -368,7 +375,8 @@
         "Show and validate the selected data directory before initializing a new database."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Show and validate the selected data directory before initializing a new database.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -382,7 +390,7 @@
       "workstream": "A",
       "workstream_name": "Core platform and architecture",
       "purpose": "Package the standard-library workspace separately from simulation and optional speech dependencies.",
-      "benefit": "Package the standard-library workspace separately from simulation and optional speech dependencies.",
+      "benefit": "Avoid ambiguous saves and preserve maintainable data boundaries.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -392,7 +400,8 @@
         "Package the standard-library workspace separately from simulation and optional speech dependencies."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Package the standard-library workspace separately from simulation and optional speech dependencies.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -406,7 +415,7 @@
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
       "purpose": "Register reviewed agricultural source metadata, scope and review dates before retrieval.",
-      "benefit": "Register reviewed agricultural source metadata, scope and review dates before retrieval.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -418,7 +427,8 @@
         "Register reviewed agricultural source metadata, scope and review dates before retrieval."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Register reviewed agricultural source metadata, scope and review dates before retrieval.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -432,7 +442,7 @@
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
       "purpose": "Associate each future decision-support claim with its actual supporting passage.",
-      "benefit": "Associate each future decision-support claim with its actual supporting passage.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -446,7 +456,8 @@
         "Associate each future decision-support claim with its actual supporting passage."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Associate each future decision-support claim with its actual supporting passage.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -460,7 +471,7 @@
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
       "purpose": "Check source origin, review responsibility and permitted use before indexing.",
-      "benefit": "Check source origin, review responsibility and permitted use before indexing.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -474,7 +485,8 @@
         "Check source origin, review responsibility and permitted use before indexing."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Check source origin, review responsibility and permitted use before indexing.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -488,7 +500,7 @@
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
       "purpose": "Freeze knowledge versions used in a reviewed recommendation.",
-      "benefit": "Freeze knowledge versions used in a reviewed recommendation.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -502,7 +514,8 @@
         "Freeze knowledge versions used in a reviewed recommendation."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Freeze knowledge versions used in a reviewed recommendation.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -516,7 +529,7 @@
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
       "purpose": "List deterministic rules, inputs, applicability and limitations without changing policy silently.",
-      "benefit": "List deterministic rules, inputs, applicability and limitations without changing policy silently.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -530,7 +543,8 @@
         "List deterministic rules, inputs, applicability and limitations without changing policy silently."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: List deterministic rules, inputs, applicability and limitations without changing policy silently.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -540,11 +554,11 @@
     },
     {
       "id": "NEXUS-UPG-021",
-      "feature": "Required-evidence gate",
+      "feature": "Applicability-gated knowledge cards",
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
-      "purpose": "Return missing-information prompts when a rule lacks required context.",
-      "benefit": "Return missing-information prompts when a rule lacks required context.",
+      "purpose": "Gate newly registered knowledge/rules by declared context requirements; preserve existing missing-information prompts.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -555,10 +569,11 @@
         "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
       ],
       "acceptance_criteria": [
-        "Return missing-information prompts when a rule lacks required context."
+        "Gate newly registered knowledge/rules by declared context requirements; preserve existing missing-information prompts."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Gate newly registered knowledge/rules by declared context requirements; preserve existing missing-information prompts.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -572,7 +587,7 @@
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
       "purpose": "Check crop stage, soil and measurement method before presenting water-management review prompts.",
-      "benefit": "Check crop stage, soil and measurement method before presenting water-management review prompts.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -586,7 +601,8 @@
         "Check crop stage, soil and measurement method before presenting water-management review prompts."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Check crop stage, soil and measurement method before presenting water-management review prompts.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -596,11 +612,11 @@
     },
     {
       "id": "NEXUS-UPG-023",
-      "feature": "Crop symptom review structure",
+      "feature": "Cross-record symptom assertion review",
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
-      "purpose": "Separate reported symptoms, human-suspected causes and confirmed adviser findings.",
-      "benefit": "Separate reported symptoms, human-suspected causes and confirmed adviser findings.",
+      "purpose": "Keep conflicting farmer, adviser and model assertions separate with source/version references instead of merging them into a diagnosis.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -611,10 +627,11 @@
         "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
       ],
       "acceptance_criteria": [
-        "Separate reported symptoms, human-suspected causes and confirmed adviser findings."
+        "Keep conflicting farmer, adviser and model assertions separate with source/version references instead of merging them into a diagnosis."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Keep conflicting farmer, adviser and model assertions separate with source/version references instead of merging them into a diagnosis.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -624,11 +641,11 @@
     },
     {
       "id": "NEXUS-UPG-024",
-      "feature": "Pest scouting evidence checklist",
+      "feature": "Reviewed pest-scouting protocol library",
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
-      "purpose": "Record sample coverage and observed organisms without inferring causation.",
-      "benefit": "Record sample coverage and observed organisms without inferring causation.",
+      "purpose": "Reuse human-reviewed scouting protocols with versioned applicability and sample instructions; do not infer organism causation.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -639,10 +656,11 @@
         "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
       ],
       "acceptance_criteria": [
-        "Record sample coverage and observed organisms without inferring causation."
+        "Reuse human-reviewed scouting protocols with versioned applicability and sample instructions; do not infer organism causation."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Reuse human-reviewed scouting protocols with versioned applicability and sample instructions; do not infer organism causation.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -652,11 +670,11 @@
     },
     {
       "id": "NEXUS-UPG-025",
-      "feature": "Soil measurement applicability",
+      "feature": "Soil sampling depth and spatial alignment",
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
-      "purpose": "Check units, sampling depth, instrument and observation date before using a reading.",
-      "benefit": "Check units, sampling depth, instrument and observation date before using a reading.",
+      "purpose": "Require a declared sampling depth and coverage basis before relating soil readings to a proposed knowledge card.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -667,10 +685,11 @@
         "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
       ],
       "acceptance_criteria": [
-        "Check units, sampling depth, instrument and observation date before using a reading."
+        "Require a declared sampling depth and coverage basis before relating soil readings to a proposed knowledge card."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Require a declared sampling depth and coverage basis before relating soil readings to a proposed knowledge card.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -684,7 +703,7 @@
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
       "purpose": "Check location precision and forecast/observation dates before linking weather to a case.",
-      "benefit": "Check location precision and forecast/observation dates before linking weather to a case.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -698,7 +717,8 @@
         "Check location precision and forecast/observation dates before linking weather to a case."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Check location precision and forecast/observation dates before linking weather to a case.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -712,7 +732,7 @@
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
       "purpose": "Keep accumulated rainfall windows separate from point readings and incompatible units.",
-      "benefit": "Keep accumulated rainfall windows separate from point readings and incompatible units.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -726,7 +746,8 @@
         "Keep accumulated rainfall windows separate from point readings and incompatible units."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Keep accumulated rainfall windows separate from point readings and incompatible units.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -740,7 +761,7 @@
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
       "purpose": "Represent insufficient evidence and unsupported cases without invented explanations.",
-      "benefit": "Represent insufficient evidence and unsupported cases without invented explanations.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -754,7 +775,8 @@
         "Represent insufficient evidence and unsupported cases without invented explanations."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Represent insufficient evidence and unsupported cases without invented explanations.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -768,7 +790,7 @@
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
       "purpose": "Build a reproducible literal retrieval baseline before evaluating generated assistance.",
-      "benefit": "Build a reproducible literal retrieval baseline before evaluating generated assistance.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -782,7 +804,8 @@
         "Build a reproducible literal retrieval baseline before evaluating generated assistance."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Build a reproducible literal retrieval baseline before evaluating generated assistance.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -792,11 +815,11 @@
     },
     {
       "id": "NEXUS-UPG-030",
-      "feature": "Human-readable rule explanations",
+      "feature": "Knowledge-card evidence explanations",
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
-      "purpose": "Display the rule inputs and limits alongside each deterministic review prompt.",
-      "benefit": "Display the rule inputs and limits alongside each deterministic review prompt.",
+      "purpose": "Display the actual reviewed supporting passage and applicability limits for a retrieved card, separately from existing static review prompts.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -807,10 +830,11 @@
         "Reviewed agricultural sources or datasets; expert review before agronomic applicability claims"
       ],
       "acceptance_criteria": [
-        "Display the rule inputs and limits alongside each deterministic review prompt."
+        "Display the actual reviewed supporting passage and applicability limits for a retrieved card, separately from existing static review prompts."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Display the actual reviewed supporting passage and applicability limits for a retrieved card, separately from existing static review prompts.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -824,7 +848,7 @@
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
       "purpose": "Evaluate supported and unsupported cases using reviewed fixtures and documented acceptance thresholds.",
-      "benefit": "Evaluate supported and unsupported cases using reviewed fixtures and documented acceptance thresholds.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -838,7 +862,8 @@
         "Evaluate supported and unsupported cases using reviewed fixtures and documented acceptance thresholds."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Evaluate supported and unsupported cases using reviewed fixtures and documented acceptance thresholds.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -852,7 +877,7 @@
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
       "purpose": "Require data origin, intended use and validation limitations for proposed ML datasets.",
-      "benefit": "Require data origin, intended use and validation limitations for proposed ML datasets.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -866,7 +891,8 @@
         "Require data origin, intended use and validation limitations for proposed ML datasets."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Require data origin, intended use and validation limitations for proposed ML datasets.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -880,7 +906,7 @@
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
       "purpose": "Test train/test separation by farm, date and relevant geographic unit before model evaluation.",
-      "benefit": "Test train/test separation by farm, date and relevant geographic unit before model evaluation.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Blocked",
@@ -894,7 +920,8 @@
         "Test train/test separation by farm, date and relevant geographic unit before model evaluation."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Test train/test separation by farm, date and relevant geographic unit before model evaluation.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -908,7 +935,7 @@
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
       "purpose": "Permit model registration only with a model card, evaluation evidence and explicit activation.",
-      "benefit": "Permit model registration only with a model card, evaluation evidence and explicit activation.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Future",
       "phase": "3 — Evidence and operational integration",
       "status": "Blocked",
@@ -922,7 +949,8 @@
         "Permit model registration only with a model card, evaluation evidence and explicit activation."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Permit model registration only with a model card, evaluation evidence and explicit activation.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -936,7 +964,7 @@
       "workstream": "B",
       "workstream_name": "AI and agricultural intelligence",
       "purpose": "Compare saved predictions against later labels without claiming live drift detection or model accuracy.",
-      "benefit": "Compare saved predictions against later labels without claiming live drift detection or model accuracy.",
+      "benefit": "Keep future agricultural assistance tied to reviewed evidence and explicit uncertainty.",
       "priority": "Future",
       "phase": "3 — Evidence and operational integration",
       "status": "Blocked",
@@ -950,7 +978,8 @@
         "Compare saved predictions against later labels without claiming live drift detection or model accuracy."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Compare saved predictions against later labels without claiming live drift detection or model accuracy.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -964,7 +993,7 @@
       "workstream": "C",
       "workstream_name": "Farm management and operations",
       "purpose": "Link a cultivation plan to an established field season with assumptions recorded.",
-      "benefit": "Link a cultivation plan to an established field season with assumptions recorded.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -974,7 +1003,8 @@
         "Link a cultivation plan to an established field season with assumptions recorded."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Link a cultivation plan to an established field season with assumptions recorded.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -988,7 +1018,7 @@
       "workstream": "C",
       "workstream_name": "Farm management and operations",
       "purpose": "Separate actual planting reports from planned calendar dates.",
-      "benefit": "Separate actual planting reports from planned calendar dates.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1000,7 +1030,8 @@
         "Separate actual planting reports from planned calendar dates."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Separate actual planting reports from planned calendar dates.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1014,7 +1045,7 @@
       "workstream": "C",
       "workstream_name": "Farm management and operations",
       "purpose": "Record actual product, amount, area and user-selected activity without inferring application doses.",
-      "benefit": "Record actual product, amount, area and user-selected activity without inferring application doses.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1026,7 +1057,8 @@
         "Record actual product, amount, area and user-selected activity without inferring application doses."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Record actual product, amount, area and user-selected activity without inferring application doses.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1040,7 +1072,7 @@
       "workstream": "C",
       "workstream_name": "Farm management and operations",
       "purpose": "Record actual water volume, area and method with unknowns preserved.",
-      "benefit": "Record actual water volume, area and method with unknowns preserved.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1052,7 +1084,8 @@
         "Record actual water volume, area and method with unknowns preserved."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Record actual water volume, area and method with unknowns preserved.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1066,7 +1099,7 @@
       "workstream": "C",
       "workstream_name": "Farm management and operations",
       "purpose": "Compare human-entered availability and assignments without authenticating people implicitly.",
-      "benefit": "Compare human-entered availability and assignments without authenticating people implicitly.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1078,7 +1111,8 @@
         "Compare human-entered availability and assignments without authenticating people implicitly."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Compare human-entered availability and assignments without authenticating people implicitly.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1092,7 +1126,7 @@
       "workstream": "C",
       "workstream_name": "Farm management and operations",
       "purpose": "Record actual usage and service triggers separately from condition certification.",
-      "benefit": "Record actual usage and service triggers separately from condition certification.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1104,7 +1138,8 @@
         "Record actual usage and service triggers separately from condition certification."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Record actual usage and service triggers separately from condition certification.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1114,11 +1149,11 @@
     },
     {
       "id": "NEXUS-UPG-042",
-      "feature": "Field area and coordinate evidence",
+      "feature": "Field-area measurement reconciliation",
       "workstream": "C",
       "workstream_name": "Farm management and operations",
-      "purpose": "Version reported area/coordinates with measurement method and precision.",
-      "benefit": "Version reported area/coordinates with measurement method and precision.",
+      "purpose": "Version field-area measurements and explain disagreements with crop-season area while preserving existing coordinate evidence.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1127,10 +1162,11 @@
       ],
       "requirements": [],
       "acceptance_criteria": [
-        "Version reported area/coordinates with measurement method and precision."
+        "Version field-area measurements and explain disagreements with crop-season area while preserving existing coordinate evidence."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Version field-area measurements and explain disagreements with crop-season area while preserving existing coordinate evidence.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1144,7 +1180,7 @@
       "workstream": "C",
       "workstream_name": "Farm management and operations",
       "purpose": "Plan coverage and record actual sampled areas without claiming a representative field survey.",
-      "benefit": "Plan coverage and record actual sampled areas without claiming a representative field survey.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1156,7 +1192,8 @@
         "Plan coverage and record actual sampled areas without claiming a representative field survey."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Plan coverage and record actual sampled areas without claiming a representative field survey.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1170,7 +1207,7 @@
       "workstream": "C",
       "workstream_name": "Farm management and operations",
       "purpose": "Separate requested, scheduled and actually completed consultation records.",
-      "benefit": "Separate requested, scheduled and actually completed consultation records.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1182,7 +1219,8 @@
         "Separate requested, scheduled and actually completed consultation records."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Separate requested, scheduled and actually completed consultation records.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1196,7 +1234,7 @@
       "workstream": "C",
       "workstream_name": "Farm management and operations",
       "purpose": "Associate explicitly selected documents with case records and source labels.",
-      "benefit": "Associate explicitly selected documents with case records and source labels.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1208,7 +1246,8 @@
         "Associate explicitly selected documents with case records and source labels."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Associate explicitly selected documents with case records and source labels.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1222,7 +1261,7 @@
       "workstream": "C",
       "workstream_name": "Farm management and operations",
       "purpose": "Verify document bytes and capture scope without authenticating their contents.",
-      "benefit": "Verify document bytes and capture scope without authenticating their contents.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1234,7 +1273,8 @@
         "Verify document bytes and capture scope without authenticating their contents."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Verify document bytes and capture scope without authenticating their contents.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1248,7 +1288,7 @@
       "workstream": "C",
       "workstream_name": "Farm management and operations",
       "purpose": "Create human-confirmed schedules while keeping background alerts disabled by default.",
-      "benefit": "Create human-confirmed schedules while keeping background alerts disabled by default.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1260,7 +1300,8 @@
         "Create human-confirmed schedules while keeping background alerts disabled by default."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Create human-confirmed schedules while keeping background alerts disabled by default.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1274,7 +1315,7 @@
       "workstream": "C",
       "workstream_name": "Farm management and operations",
       "purpose": "Assign work to verified permitted accounts after role and farm-membership controls exist.",
-      "benefit": "Assign work to verified permitted accounts after role and farm-membership controls exist.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1286,7 +1327,8 @@
         "Assign work to verified permitted accounts after role and farm-membership controls exist."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Assign work to verified permitted accounts after role and farm-membership controls exist.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1296,11 +1338,11 @@
     },
     {
       "id": "NEXUS-UPG-049",
-      "feature": "Task and decision cross-references",
+      "feature": "Explicit task/work-order/decision links",
       "workstream": "C",
       "workstream_name": "Farm management and operations",
-      "purpose": "Link related task and human-plan records without merging their independent statuses.",
-      "benefit": "Link related task and human-plan records without merging their independent statuses.",
+      "purpose": "Approve typed links between existing task, work-order and decision records without inferring identity from a common field or merging their statuses.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1309,10 +1351,11 @@
       ],
       "requirements": [],
       "acceptance_criteria": [
-        "Link related task and human-plan records without merging their independent statuses."
+        "Approve typed links between existing task, work-order and decision records without inferring identity from a common field or merging their statuses."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Approve typed links between existing task, work-order and decision records without inferring identity from a common field or merging their statuses.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1326,7 +1369,7 @@
       "workstream": "C",
       "workstream_name": "Farm management and operations",
       "purpose": "Show how old captured soil/stage/resource context is without inferring it is invalid.",
-      "benefit": "Show how old captured soil/stage/resource context is without inferring it is invalid.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1338,7 +1381,8 @@
         "Show how old captured soil/stage/resource context is without inferring it is invalid."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Show how old captured soil/stage/resource context is without inferring it is invalid.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1352,7 +1396,7 @@
       "workstream": "C",
       "workstream_name": "Farm management and operations",
       "purpose": "Retain earlier harvest quantities and the reason for correction.",
-      "benefit": "Retain earlier harvest quantities and the reason for correction.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1364,7 +1408,8 @@
         "Retain earlier harvest quantities and the reason for correction."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Retain earlier harvest quantities and the reason for correction.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1374,11 +1419,11 @@
     },
     {
       "id": "NEXUS-UPG-052",
-      "feature": "Structured sampling definitions",
+      "feature": "Reusable sampling-protocol templates",
       "workstream": "C",
       "workstream_name": "Farm management and operations",
-      "purpose": "Version affected-plant definitions, selection method and sample identity.",
-      "benefit": "Version affected-plant definitions, selection method and sample identity.",
+      "purpose": "Version reusable sampling definitions and freeze the chosen protocol version in each new inspection, preserving existing free-text inspection history.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1387,10 +1432,11 @@
       ],
       "requirements": [],
       "acceptance_criteria": [
-        "Version affected-plant definitions, selection method and sample identity."
+        "Version reusable sampling definitions and freeze the chosen protocol version in each new inspection, preserving existing free-text inspection history."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Version reusable sampling definitions and freeze the chosen protocol version in each new inspection, preserving existing free-text inspection history.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1400,11 +1446,11 @@
     },
     {
       "id": "NEXUS-UPG-053",
-      "feature": "Physical inventory count captures",
+      "feature": "Multi-location inventory count sessions",
       "workstream": "C",
       "workstream_name": "Farm management and operations",
-      "purpose": "Freeze physical-count scope separately from calculated balances.",
-      "benefit": "Freeze physical-count scope separately from calculated balances.",
+      "purpose": "Group explicitly disjoint count locations in a dated session and prevent duplicate coverage before summarizing quantities.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1413,10 +1459,11 @@
       ],
       "requirements": [],
       "acceptance_criteria": [
-        "Freeze physical-count scope separately from calculated balances."
+        "Group explicitly disjoint count locations in a dated session and prevent duplicate coverage before summarizing quantities."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Group explicitly disjoint count locations in a dated session and prevent duplicate coverage before summarizing quantities.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1426,11 +1473,11 @@
     },
     {
       "id": "NEXUS-UPG-054",
-      "feature": "Activity chronology review",
+      "feature": "Cross-module chronology review",
       "workstream": "C",
       "workstream_name": "Farm management and operations",
-      "purpose": "Flag inconsistent recorded dates without reordering or deleting historical reports.",
-      "benefit": "Flag inconsistent recorded dates without reordering or deleting historical reports.",
+      "purpose": "Review inconsistent dates across selected task, decision, stock and market events without reordering or deleting their historical reports.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1439,10 +1486,11 @@
       ],
       "requirements": [],
       "acceptance_criteria": [
-        "Flag inconsistent recorded dates without reordering or deleting historical reports."
+        "Review inconsistent dates across selected task, decision, stock and market events without reordering or deleting their historical reports."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Review inconsistent dates across selected task, decision, stock and market events without reordering or deleting their historical reports.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1456,7 +1504,7 @@
       "workstream": "C",
       "workstream_name": "Farm management and operations",
       "purpose": "Capture selected operational records and unresolved issues for a human handover.",
-      "benefit": "Capture selected operational records and unresolved issues for a human handover.",
+      "benefit": "Connect actual field work to practical, traceable operational records.",
       "priority": "High",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1468,7 +1516,8 @@
         "Capture selected operational records and unresolved issues for a human handover."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Capture selected operational records and unresolved issues for a human handover.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1482,7 +1531,7 @@
       "workstream": "D",
       "workstream_name": "Produce, markets and commerce",
       "purpose": "Preview explicit quantity reconciliation without posting duplicate core stock movements.",
-      "benefit": "Preview explicit quantity reconciliation without posting duplicate core stock movements.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1494,7 +1543,8 @@
         "Preview explicit quantity reconciliation without posting duplicate core stock movements."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Preview explicit quantity reconciliation without posting duplicate core stock movements.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1508,7 +1558,7 @@
       "workstream": "D",
       "workstream_name": "Produce, markets and commerce",
       "purpose": "Compare explicitly selected money records without automatically creating transactions.",
-      "benefit": "Compare explicitly selected money records without automatically creating transactions.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1520,7 +1570,8 @@
         "Compare explicitly selected money records without automatically creating transactions."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Compare explicitly selected money records without automatically creating transactions.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1534,7 +1585,7 @@
       "workstream": "D",
       "workstream_name": "Produce, markets and commerce",
       "purpose": "Freeze an order, its lines and selected delivery/payment/return records with defined scope.",
-      "benefit": "Freeze an order, its lines and selected delivery/payment/return records with defined scope.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1546,7 +1597,8 @@
         "Freeze an order, its lines and selected delivery/payment/return records with defined scope."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Freeze an order, its lines and selected delivery/payment/return records with defined scope.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1560,7 +1612,7 @@
       "workstream": "D",
       "workstream_name": "Produce, markets and commerce",
       "purpose": "Retain the exact dated offer sheet selected for manual sharing.",
-      "benefit": "Retain the exact dated offer sheet selected for manual sharing.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1572,7 +1624,8 @@
         "Retain the exact dated offer sheet selected for manual sharing."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Retain the exact dated offer sheet selected for manual sharing.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1586,7 +1639,7 @@
       "workstream": "D",
       "workstream_name": "Produce, markets and commerce",
       "purpose": "Preserve original agreed terms and record supported amendments separately.",
-      "benefit": "Preserve original agreed terms and record supported amendments separately.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1598,7 +1651,8 @@
         "Preserve original agreed terms and record supported amendments separately."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Preserve original agreed terms and record supported amendments separately.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1612,7 +1666,7 @@
       "workstream": "D",
       "workstream_name": "Produce, markets and commerce",
       "purpose": "Record package count and measured weight without assuming a universal bag weight.",
-      "benefit": "Record package count and measured weight without assuming a universal bag weight.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1624,7 +1678,8 @@
         "Record package count and measured weight without assuming a universal bag weight."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Record package count and measured weight without assuming a universal bag weight.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1638,7 +1693,7 @@
       "workstream": "D",
       "workstream_name": "Produce, markets and commerce",
       "purpose": "Require a documented conversion basis before converting packaging to kilograms.",
-      "benefit": "Require a documented conversion basis before converting packaging to kilograms.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1650,7 +1705,8 @@
         "Require a documented conversion basis before converting packaging to kilograms."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Require a documented conversion basis before converting packaging to kilograms.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1664,7 +1720,7 @@
       "workstream": "D",
       "workstream_name": "Produce, markets and commerce",
       "purpose": "Record actual storage checks and limitations without certifying food safety.",
-      "benefit": "Record actual storage checks and limitations without certifying food safety.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1676,7 +1732,8 @@
         "Record actual storage checks and limitations without certifying food safety."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Record actual storage checks and limitations without certifying food safety.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1690,7 +1747,7 @@
       "workstream": "D",
       "workstream_name": "Produce, markets and commerce",
       "purpose": "Record the source of acceptance or dispute rather than inferring it from dispatch.",
-      "benefit": "Record the source of acceptance or dispute rather than inferring it from dispatch.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1702,7 +1759,8 @@
         "Record the source of acceptance or dispute rather than inferring it from dispatch."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Record the source of acceptance or dispute rather than inferring it from dispatch.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1716,7 +1774,7 @@
       "workstream": "D",
       "workstream_name": "Produce, markets and commerce",
       "purpose": "Summarize scoped reported deliveries and returns without ranking buyer trustworthiness.",
-      "benefit": "Summarize scoped reported deliveries and returns without ranking buyer trustworthiness.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1728,7 +1786,8 @@
         "Summarize scoped reported deliveries and returns without ranking buyer trustworthiness."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Summarize scoped reported deliveries and returns without ranking buyer trustworthiness.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1742,7 +1801,7 @@
       "workstream": "D",
       "workstream_name": "Produce, markets and commerce",
       "purpose": "Record location, date, unit and user-reported price source without presenting live prices.",
-      "benefit": "Record location, date, unit and user-reported price source without presenting live prices.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1754,7 +1813,8 @@
         "Record location, date, unit and user-reported price source without presenting live prices."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Record location, date, unit and user-reported price source without presenting live prices.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1768,7 +1828,7 @@
       "workstream": "D",
       "workstream_name": "Produce, markets and commerce",
       "purpose": "Define selected costs and allocation assumptions before calculating descriptive margins.",
-      "benefit": "Define selected costs and allocation assumptions before calculating descriptive margins.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1780,7 +1840,8 @@
         "Define selected costs and allocation assumptions before calculating descriptive margins."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Define selected costs and allocation assumptions before calculating descriptive margins.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1794,7 +1855,7 @@
       "workstream": "D",
       "workstream_name": "Produce, markets and commerce",
       "purpose": "Preview the exact fields to share and omit contact details deliberately.",
-      "benefit": "Preview the exact fields to share and omit contact details deliberately.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1806,7 +1867,8 @@
         "Preview the exact fields to share and omit contact details deliberately."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Preview the exact fields to share and omit contact details deliberately.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1820,7 +1882,7 @@
       "workstream": "D",
       "workstream_name": "Produce, markets and commerce",
       "purpose": "Represent contributions and source histories only after membership permissions exist.",
-      "benefit": "Represent contributions and source histories only after membership permissions exist.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1832,7 +1894,8 @@
         "Represent contributions and source histories only after membership permissions exist."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Represent contributions and source histories only after membership permissions exist.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1846,7 +1909,7 @@
       "workstream": "D",
       "workstream_name": "Produce, markets and commerce",
       "purpose": "Validate a test lot through order, delivery, return and explicit reconciliation previews.",
-      "benefit": "Validate a test lot through order, delivery, return and explicit reconciliation previews.",
+      "benefit": "Reduce duplicate quantity and cash reporting across market workflows.",
       "priority": "Medium",
       "phase": "3 — Evidence and operational integration",
       "status": "Planned",
@@ -1858,7 +1921,8 @@
         "Validate a test lot through order, delivery, return and explicit reconciliation previews."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Validate a test lot through order, delivery, return and explicit reconciliation previews.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -1872,7 +1936,7 @@
       "workstream": "E",
       "workstream_name": "Experience and accessibility",
       "purpose": "List summaries first and load one full guide at a time while retaining no-JavaScript search.",
-      "benefit": "List summaries first and load one full guide at a time while retaining no-JavaScript search.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
       "priority": "High",
       "phase": "1 — Audit and reliability",
       "status": "Tested",
@@ -1891,7 +1955,7 @@
         "docs/development/VERIFICATION.md",
         "docs/RELIABILITY_GUIDE.md"
       ],
-      "git_reference": "upgrade/audit-roadmap-batch-1"
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
     },
     {
       "id": "NEXUS-UPG-072",
@@ -1899,7 +1963,7 @@
       "workstream": "E",
       "workstream_name": "Experience and accessibility",
       "purpose": "Retain valid selected references when refreshing options and warn when one is no longer available.",
-      "benefit": "Retain valid selected references when refreshing options and warn when one is no longer available.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
       "priority": "High",
       "phase": "1 — Audit and reliability",
       "status": "Tested",
@@ -1919,7 +1983,7 @@
         "docs/development/VERIFICATION.md",
         "docs/RELIABILITY_GUIDE.md"
       ],
-      "git_reference": "upgrade/audit-roadmap-batch-1"
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
     },
     {
       "id": "NEXUS-UPG-073",
@@ -1927,7 +1991,7 @@
       "workstream": "E",
       "workstream_name": "Experience and accessibility",
       "purpose": "Warn before navigation/context changes and prevent edits being lost during an in-flight save.",
-      "benefit": "Warn before navigation/context changes and prevent edits being lost during an in-flight save.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
       "priority": "High",
       "phase": "1 — Audit and reliability",
       "status": "In Progress",
@@ -1949,7 +2013,7 @@
         "docs/development/VERIFICATION.md",
         "docs/RELIABILITY_GUIDE.md"
       ],
-      "git_reference": "upgrade/audit-roadmap-batch-1"
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
     },
     {
       "id": "NEXUS-UPG-074",
@@ -1957,7 +2021,7 @@
       "workstream": "E",
       "workstream_name": "Experience and accessibility",
       "purpose": "Prevent an older asynchronous response from overwriting a newer selected view.",
-      "benefit": "Prevent an older asynchronous response from overwriting a newer selected view.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
       "priority": "High",
       "phase": "1 — Audit and reliability",
       "status": "In Progress",
@@ -1979,7 +2043,7 @@
         "docs/development/VERIFICATION.md",
         "docs/RELIABILITY_GUIDE.md"
       ],
-      "git_reference": "upgrade/audit-roadmap-batch-1"
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
     },
     {
       "id": "NEXUS-UPG-075",
@@ -1987,7 +2051,7 @@
       "workstream": "E",
       "workstream_name": "Experience and accessibility",
       "purpose": "Show bounded record pages, totals and previous/next controls without changing overview scope.",
-      "benefit": "Show bounded record pages, totals and previous/next controls without changing overview scope.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
       "priority": "High",
       "phase": "1 — Audit and reliability",
       "status": "Tested",
@@ -2008,25 +2072,28 @@
         "docs/development/VERIFICATION.md",
         "docs/RELIABILITY_GUIDE.md"
       ],
-      "git_reference": "upgrade/audit-roadmap-batch-1"
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
     },
     {
       "id": "NEXUS-UPG-076",
-      "feature": "Task-focused workspace home",
+      "feature": "Role-aware workspace start",
       "workstream": "E",
       "workstream_name": "Experience and accessibility",
-      "purpose": "Group actual supported workflows into clear starting choices without adding unsupported claims.",
-      "benefit": "Group actual supported workflows into clear starting choices without adding unsupported claims.",
+      "purpose": "Show permitted starting workflows after account roles exist; navigation must not substitute for API authorization.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
-      "dependencies": [],
+      "dependencies": [
+        "NEXUS-UPG-093"
+      ],
       "requirements": [],
       "acceptance_criteria": [
-        "Group actual supported workflows into clear starting choices without adding unsupported claims."
+        "Show permitted starting workflows after account roles exist; navigation must not substitute for API authorization."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Show permitted starting workflows after account roles exist; navigation must not substitute for API authorization.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2040,7 +2107,7 @@
       "workstream": "E",
       "workstream_name": "Experience and accessibility",
       "purpose": "Ensure every data-entry control has a meaningful programmatic label.",
-      "benefit": "Ensure every data-entry control has a meaningful programmatic label.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -2050,7 +2117,8 @@
         "Ensure every data-entry control has a meaningful programmatic label."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Ensure every data-entry control has a meaningful programmatic label.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2064,7 +2132,7 @@
       "workstream": "E",
       "workstream_name": "Experience and accessibility",
       "purpose": "Verify key creation/correction flows at narrow widths with real browser tests.",
-      "benefit": "Verify key creation/correction flows at narrow widths with real browser tests.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -2074,7 +2142,8 @@
         "Verify key creation/correction flows at narrow widths with real browser tests."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Verify key creation/correction flows at narrow widths with real browser tests.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2088,7 +2157,7 @@
       "workstream": "E",
       "workstream_name": "Experience and accessibility",
       "purpose": "Standardize page titles, landmarks and active navigation across existing routes.",
-      "benefit": "Standardize page titles, landmarks and active navigation across existing routes.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -2098,7 +2167,8 @@
         "Standardize page titles, landmarks and active navigation across existing routes."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Standardize page titles, landmarks and active navigation across existing routes.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2112,7 +2182,7 @@
       "workstream": "E",
       "workstream_name": "Experience and accessibility",
       "purpose": "Verify printable tables, headings and scope notes with representative nonprivate fixtures.",
-      "benefit": "Verify printable tables, headings and scope notes with representative nonprivate fixtures.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -2122,7 +2192,8 @@
         "Verify printable tables, headings and scope notes with representative nonprivate fixtures."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Verify printable tables, headings and scope notes with representative nonprivate fixtures.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2132,21 +2203,22 @@
     },
     {
       "id": "NEXUS-UPG-081",
-      "feature": "Keyboard focus audit",
+      "feature": "Keyboard acceptance suite",
       "workstream": "E",
       "workstream_name": "Experience and accessibility",
-      "purpose": "Verify modal focus, close behaviour and keyboard access across supported workflows.",
-      "benefit": "Verify modal focus, close behaviour and keyboard access across supported workflows.",
+      "purpose": "Automate and manually verify keyboard/modal focus and return behaviour across supported workflows, rather than recounting the existing native-dialog feature.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
       "dependencies": [],
       "requirements": [],
       "acceptance_criteria": [
-        "Verify modal focus, close behaviour and keyboard access across supported workflows."
+        "Automate and manually verify keyboard/modal focus and return behaviour across supported workflows, rather than recounting the existing native-dialog feature."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Automate and manually verify keyboard/modal focus and return behaviour across supported workflows, rather than recounting the existing native-dialog feature.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2160,7 +2232,7 @@
       "workstream": "E",
       "workstream_name": "Experience and accessibility",
       "purpose": "Load only needed guide content before optionally searching the complete catalogue.",
-      "benefit": "Load only needed guide content before optionally searching the complete catalogue.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -2170,7 +2242,8 @@
         "Load only needed guide content before optionally searching the complete catalogue."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Load only needed guide content before optionally searching the complete catalogue.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2180,21 +2253,22 @@
     },
     {
       "id": "NEXUS-UPG-083",
-      "feature": "Visible filter scope summaries",
+      "feature": "Active filter chips and reset",
       "workstream": "E",
       "workstream_name": "Experience and accessibility",
-      "purpose": "Show which filters affect entries versus field-wide overview calculations.",
-      "benefit": "Show which filters affect entries versus field-wide overview calculations.",
+      "purpose": "Show the currently selected field, source, status and text filters as actionable chips with an explicit reset, preserving overview-scope explanations.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
       "dependencies": [],
       "requirements": [],
       "acceptance_criteria": [
-        "Show which filters affect entries versus field-wide overview calculations."
+        "Show the currently selected field, source, status and text filters as actionable chips with an explicit reset, preserving overview-scope explanations."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Show the currently selected field, source, status and text filters as actionable chips with an explicit reset, preserving overview-scope explanations.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2208,7 +2282,7 @@
       "workstream": "E",
       "workstream_name": "Experience and accessibility",
       "purpose": "Guide a user through a labelled test example without saving sample facts automatically.",
-      "benefit": "Guide a user through a labelled test example without saving sample facts automatically.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -2218,7 +2292,8 @@
         "Guide a user through a labelled test example without saving sample facts automatically."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Guide a user through a labelled test example without saving sample facts automatically.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2232,7 +2307,7 @@
       "workstream": "E",
       "workstream_name": "Experience and accessibility",
       "purpose": "Use explicit Lagos dates, units and locale formatting throughout the UI.",
-      "benefit": "Use explicit Lagos dates, units and locale formatting throughout the UI.",
+      "benefit": "Make daily workflows easier to navigate without losing entered work.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -2242,7 +2317,8 @@
         "Use explicit Lagos dates, units and locale formatting throughout the UI."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Use explicit Lagos dates, units and locale formatting throughout the UI.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2256,7 +2332,7 @@
       "workstream": "F",
       "workstream_name": "Accounts and security",
       "purpose": "Apply the local origin boundary to legacy, resource, studio and audio write routes alike.",
-      "benefit": "Apply the local origin boundary to legacy, resource, studio and audio write routes alike.",
+      "benefit": "Control identities and data access before shared deployment.",
       "priority": "Critical",
       "phase": "1 — Audit and reliability",
       "status": "Tested",
@@ -2275,7 +2351,7 @@
         "docs/development/VERIFICATION.md",
         "docs/RELIABILITY_GUIDE.md"
       ],
-      "git_reference": "upgrade/audit-roadmap-batch-1"
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
     },
     {
       "id": "NEXUS-UPG-087",
@@ -2283,7 +2359,7 @@
       "workstream": "F",
       "workstream_name": "Accounts and security",
       "purpose": "Reject Transfer-Encoding, duplicate framing and unsupported compressed request bodies.",
-      "benefit": "Reject Transfer-Encoding, duplicate framing and unsupported compressed request bodies.",
+      "benefit": "Control identities and data access before shared deployment.",
       "priority": "Critical",
       "phase": "1 — Audit and reliability",
       "status": "Tested",
@@ -2302,7 +2378,7 @@
         "docs/development/VERIFICATION.md",
         "docs/RELIABILITY_GUIDE.md"
       ],
-      "git_reference": "upgrade/audit-roadmap-batch-1"
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
     },
     {
       "id": "NEXUS-UPG-088",
@@ -2310,7 +2386,7 @@
       "workstream": "F",
       "workstream_name": "Accounts and security",
       "purpose": "Return server-generated trace IDs and omit query strings, headers and bodies from combined-server request logs.",
-      "benefit": "Return server-generated trace IDs and omit query strings, headers and bodies from combined-server request logs.",
+      "benefit": "Control identities and data access before shared deployment.",
       "priority": "High",
       "phase": "1 — Audit and reliability",
       "status": "Tested",
@@ -2329,7 +2405,7 @@
         "docs/development/VERIFICATION.md",
         "docs/RELIABILITY_GUIDE.md"
       ],
-      "git_reference": "upgrade/audit-roadmap-batch-1"
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
     },
     {
       "id": "NEXUS-UPG-089",
@@ -2337,7 +2413,7 @@
       "workstream": "F",
       "workstream_name": "Accounts and security",
       "purpose": "Use a reviewed password-hashing design with no plaintext password persistence.",
-      "benefit": "Use a reviewed password-hashing design with no plaintext password persistence.",
+      "benefit": "Control identities and data access before shared deployment.",
       "priority": "Critical",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2349,7 +2425,8 @@
         "Use a reviewed password-hashing design with no plaintext password persistence."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Use a reviewed password-hashing design with no plaintext password persistence.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2363,7 +2440,7 @@
       "workstream": "F",
       "workstream_name": "Accounts and security",
       "purpose": "Require an explicit local first-owner setup without open administrator registration.",
-      "benefit": "Require an explicit local first-owner setup without open administrator registration.",
+      "benefit": "Control identities and data access before shared deployment.",
       "priority": "Critical",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2375,7 +2452,8 @@
         "Require an explicit local first-owner setup without open administrator registration."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Require an explicit local first-owner setup without open administrator registration.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2389,7 +2467,7 @@
       "workstream": "F",
       "workstream_name": "Accounts and security",
       "purpose": "Implement expiring server-side sessions and appropriate cookie controls.",
-      "benefit": "Implement expiring server-side sessions and appropriate cookie controls.",
+      "benefit": "Control identities and data access before shared deployment.",
       "priority": "Critical",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2401,7 +2479,8 @@
         "Implement expiring server-side sessions and appropriate cookie controls."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Implement expiring server-side sessions and appropriate cookie controls.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2415,7 +2494,7 @@
       "workstream": "F",
       "workstream_name": "Accounts and security",
       "purpose": "Protect authenticated writes with validated CSRF tokens in addition to origin checks.",
-      "benefit": "Protect authenticated writes with validated CSRF tokens in addition to origin checks.",
+      "benefit": "Control identities and data access before shared deployment.",
       "priority": "Critical",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2427,7 +2506,8 @@
         "Protect authenticated writes with validated CSRF tokens in addition to origin checks."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Protect authenticated writes with validated CSRF tokens in addition to origin checks.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2441,7 +2521,7 @@
       "workstream": "F",
       "workstream_name": "Accounts and security",
       "purpose": "Define farmer, worker, adviser, cooperative, business and administrator permissions before rollout.",
-      "benefit": "Define farmer, worker, adviser, cooperative, business and administrator permissions before rollout.",
+      "benefit": "Control identities and data access before shared deployment.",
       "priority": "Critical",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2453,7 +2533,8 @@
         "Define farmer, worker, adviser, cooperative, business and administrator permissions before rollout."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Define farmer, worker, adviser, cooperative, business and administrator permissions before rollout.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2467,7 +2548,7 @@
       "workstream": "F",
       "workstream_name": "Accounts and security",
       "purpose": "Associate permitted accounts with specific farms and enforce membership.",
-      "benefit": "Associate permitted accounts with specific farms and enforce membership.",
+      "benefit": "Control identities and data access before shared deployment.",
       "priority": "Critical",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2480,7 +2561,8 @@
         "Associate permitted accounts with specific farms and enforce membership."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Associate permitted accounts with specific farms and enforce membership.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2494,7 +2576,7 @@
       "workstream": "F",
       "workstream_name": "Accounts and security",
       "purpose": "Reject cross-farm object access through every relevant API and export.",
-      "benefit": "Reject cross-farm object access through every relevant API and export.",
+      "benefit": "Control identities and data access before shared deployment.",
       "priority": "Critical",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2507,7 +2589,8 @@
         "Reject cross-farm object access through every relevant API and export."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Reject cross-farm object access through every relevant API and export.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2521,7 +2604,7 @@
       "workstream": "F",
       "workstream_name": "Accounts and security",
       "purpose": "Expire revoked sessions and test logout across active clients.",
-      "benefit": "Expire revoked sessions and test logout across active clients.",
+      "benefit": "Control identities and data access before shared deployment.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2533,7 +2616,8 @@
         "Expire revoked sessions and test logout across active clients."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Expire revoked sessions and test logout across active clients.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2547,7 +2631,7 @@
       "workstream": "F",
       "workstream_name": "Accounts and security",
       "purpose": "Bound login/reset attempts and return safe errors without account enumeration.",
-      "benefit": "Bound login/reset attempts and return safe errors without account enumeration.",
+      "benefit": "Control identities and data access before shared deployment.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2559,7 +2643,8 @@
         "Bound login/reset attempts and return safe errors without account enumeration."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Bound login/reset attempts and return safe errors without account enumeration.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2573,7 +2658,7 @@
       "workstream": "F",
       "workstream_name": "Accounts and security",
       "purpose": "Record verified actor IDs separately from user-reported names while preserving legacy labels.",
-      "benefit": "Record verified actor IDs separately from user-reported names while preserving legacy labels.",
+      "benefit": "Control identities and data access before shared deployment.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2586,7 +2671,8 @@
         "Record verified actor IDs separately from user-reported names while preserving legacy labels."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Record verified actor IDs separately from user-reported names while preserving legacy labels.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2600,7 +2686,7 @@
       "workstream": "F",
       "workstream_name": "Accounts and security",
       "purpose": "Restrict exports to permitted fields and evidence scope with tested redaction.",
-      "benefit": "Restrict exports to permitted fields and evidence scope with tested redaction.",
+      "benefit": "Control identities and data access before shared deployment.",
       "priority": "Critical",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2613,7 +2699,8 @@
         "Restrict exports to permitted fields and evidence scope with tested redaction."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Restrict exports to permitted fields and evidence scope with tested redaction.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2627,7 +2714,7 @@
       "workstream": "F",
       "workstream_name": "Accounts and security",
       "purpose": "Prevent unsupported shared-network operation until authentication and deployment controls pass.",
-      "benefit": "Prevent unsupported shared-network operation until authentication and deployment controls pass.",
+      "benefit": "Control identities and data access before shared deployment.",
       "priority": "Critical",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2639,7 +2726,8 @@
         "Prevent unsupported shared-network operation until authentication and deployment controls pass."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Prevent unsupported shared-network operation until authentication and deployment controls pass.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2653,10 +2741,10 @@
       "workstream": "G",
       "workstream_name": "Infrastructure and DevOps",
       "purpose": "Run the standard-library suite on Windows and Linux with Python 3.13 and 3.14, plus browser-script helper checks.",
-      "benefit": "Run the standard-library suite on Windows and Linux with Python 3.13 and 3.14, plus browser-script helper checks.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
       "priority": "High",
       "phase": "1 — Audit and reliability",
-      "status": "In Progress",
+      "status": "Tested",
       "dependencies": [],
       "requirements": [],
       "acceptance_criteria": [
@@ -2666,31 +2754,33 @@
         ".github/workflows/farm-workspace.yml — four OS/Python jobs"
       ],
       "verification": [
-        "Remote matrix result required before marking Tested"
+        "GitHub Actions 41297994634: Windows/Linux × Python 3.13/3.14 all passed for implementation commit 1cd8563515fa0a1b0888866a8178eaf78e93938b",
+        "docs/development/VERIFICATION.md"
       ],
       "documentation": [
         "docs/development/VERIFICATION.md",
         "docs/RELIABILITY_GUIDE.md"
       ],
-      "git_reference": "upgrade/audit-roadmap-batch-1"
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
     },
     {
       "id": "NEXUS-UPG-102",
-      "feature": "Local health command contract",
+      "feature": "Data-minimising readiness endpoint",
       "workstream": "G",
       "workstream_name": "Infrastructure and DevOps",
-      "purpose": "Provide machine-readable local liveness/readiness without exposing farm records.",
-      "benefit": "Provide machine-readable local liveness/readiness without exposing farm records.",
+      "purpose": "Add a lightweight readiness contract without farm notes or full integrity scans; retain the existing detailed local doctor endpoint separately.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
       "dependencies": [],
       "requirements": [],
       "acceptance_criteria": [
-        "Provide machine-readable local liveness/readiness without exposing farm records."
+        "Add a lightweight readiness contract without farm notes or full integrity scans; retain the existing detailed local doctor endpoint separately."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Add a lightweight readiness contract without farm notes or full integrity scans; retain the existing detailed local doctor endpoint separately.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2704,17 +2794,21 @@
       "workstream": "G",
       "workstream_name": "Infrastructure and DevOps",
       "purpose": "Verify a recoverable backup before applying versioned schema changes.",
-      "benefit": "Verify a recoverable backup before applying versioned schema changes.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
       "priority": "Critical",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
-      "dependencies": [],
+      "dependencies": [
+        "NEXUS-UPG-008",
+        "NEXUS-UPG-104"
+      ],
       "requirements": [],
       "acceptance_criteria": [
         "Verify a recoverable backup before applying versioned schema changes."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Verify a recoverable backup before applying versioned schema changes.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2724,21 +2818,24 @@
     },
     {
       "id": "NEXUS-UPG-104",
-      "feature": "Restore rehearsal automation",
+      "feature": "Operator recovery rehearsal reports",
       "workstream": "G",
       "workstream_name": "Infrastructure and DevOps",
-      "purpose": "Restore to a new file and verify relationships using nonprivate fixtures.",
-      "benefit": "Restore to a new file and verify relationships using nonprivate fixtures.",
+      "purpose": "Generate a dated recoverability report after a verified restore-to-new-file exercise, explicitly declaring database and external-file scope.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
       "priority": "Critical",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
-      "dependencies": [],
+      "dependencies": [
+        "NEXUS-UPG-008"
+      ],
       "requirements": [],
       "acceptance_criteria": [
-        "Restore to a new file and verify relationships using nonprivate fixtures."
+        "Generate a dated recoverability report after a verified restore-to-new-file exercise, explicitly declaring database and external-file scope."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Generate a dated recoverability report after a verified restore-to-new-file exercise, explicitly declaring database and external-file scope.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2752,7 +2849,7 @@
       "workstream": "G",
       "workstream_name": "Infrastructure and DevOps",
       "purpose": "Document an affordable single-instance setup with persistent data and no accidental public binding.",
-      "benefit": "Document an affordable single-instance setup with persistent data and no accidental public binding.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
       "priority": "Future",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2767,7 +2864,8 @@
         "Document an affordable single-instance setup with persistent data and no accidental public binding."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Document an affordable single-instance setup with persistent data and no accidental public binding.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2781,7 +2879,7 @@
       "workstream": "G",
       "workstream_name": "Infrastructure and DevOps",
       "purpose": "Update action runtime versions after checking current support and repository constraints.",
-      "benefit": "Update action runtime versions after checking current support and repository constraints.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2791,7 +2889,8 @@
         "Update action runtime versions after checking current support and repository constraints."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Update action runtime versions after checking current support and repository constraints.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2805,7 +2904,7 @@
       "workstream": "G",
       "workstream_name": "Infrastructure and DevOps",
       "purpose": "Measure latency/error counts without including crop notes, contacts or tokens.",
-      "benefit": "Measure latency/error counts without including crop notes, contacts or tokens.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2815,7 +2914,8 @@
         "Measure latency/error counts without including crop notes, contacts or tokens."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Measure latency/error counts without including crop notes, contacts or tokens.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2829,7 +2929,7 @@
       "workstream": "G",
       "workstream_name": "Infrastructure and DevOps",
       "purpose": "Show resolved data path, port conflicts and dependency profile with actionable errors.",
-      "benefit": "Show resolved data path, port conflicts and dependency profile with actionable errors.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2839,7 +2939,8 @@
         "Show resolved data path, port conflicts and dependency profile with actionable errors."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Show resolved data path, port conflicts and dependency profile with actionable errors.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2853,7 +2954,7 @@
       "workstream": "G",
       "workstream_name": "Infrastructure and DevOps",
       "purpose": "Record runtime and optional dependency versions and review applicable vulnerability reports.",
-      "benefit": "Record runtime and optional dependency versions and review applicable vulnerability reports.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2863,7 +2964,8 @@
         "Record runtime and optional dependency versions and review applicable vulnerability reports."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Record runtime and optional dependency versions and review applicable vulnerability reports.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2877,7 +2979,7 @@
       "workstream": "G",
       "workstream_name": "Infrastructure and DevOps",
       "purpose": "Check source hashes and artifact contents before distributing release packages.",
-      "benefit": "Check source hashes and artifact contents before distributing release packages.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2887,7 +2989,8 @@
         "Check source hashes and artifact contents before distributing release packages."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Check source hashes and artifact contents before distributing release packages.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2901,7 +3004,7 @@
       "workstream": "G",
       "workstream_name": "Infrastructure and DevOps",
       "purpose": "Document and enforce the test matrix and compatibility checks before promotion.",
-      "benefit": "Document and enforce the test matrix and compatibility checks before promotion.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2911,7 +3014,8 @@
         "Document and enforce the test matrix and compatibility checks before promotion."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Document and enforce the test matrix and compatibility checks before promotion.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2925,17 +3029,21 @@
       "workstream": "G",
       "workstream_name": "Infrastructure and DevOps",
       "purpose": "Test failure and restoration for each supported schema migration.",
-      "benefit": "Test failure and restoration for each supported schema migration.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
-      "dependencies": [],
+      "dependencies": [
+        "NEXUS-UPG-008",
+        "NEXUS-UPG-103"
+      ],
       "requirements": [],
       "acceptance_criteria": [
         "Test failure and restoration for each supported schema migration."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Test failure and restoration for each supported schema migration.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2949,7 +3057,7 @@
       "workstream": "G",
       "workstream_name": "Infrastructure and DevOps",
       "purpose": "Document actual selected hosting costs and limits without inventing prices or usage.",
-      "benefit": "Document actual selected hosting costs and limits without inventing prices or usage.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2959,7 +3067,8 @@
         "Document actual selected hosting costs and limits without inventing prices or usage."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Document actual selected hosting costs and limits without inventing prices or usage.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -2973,7 +3082,7 @@
       "workstream": "G",
       "workstream_name": "Infrastructure and DevOps",
       "purpose": "Use a reviewed reverse-proxy/private-access setup after account protections pass.",
-      "benefit": "Use a reviewed reverse-proxy/private-access setup after account protections pass.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
       "priority": "Future",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -2988,7 +3097,8 @@
         "Use a reviewed reverse-proxy/private-access setup after account protections pass."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Use a reviewed reverse-proxy/private-access setup after account protections pass.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3002,7 +3112,7 @@
       "workstream": "G",
       "workstream_name": "Infrastructure and DevOps",
       "purpose": "Verify backup, access, monitoring and recovery prerequisites without equating a green test run to production readiness.",
-      "benefit": "Verify backup, access, monitoring and recovery prerequisites without equating a green test run to production readiness.",
+      "benefit": "Make release, recovery and hosting prerequisites reproducible.",
       "priority": "High",
       "phase": "2 — Access and platform foundations",
       "status": "Planned",
@@ -3017,7 +3127,8 @@
         "Verify backup, access, monitoring and recovery prerequisites without equating a green test run to production readiness."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Verify backup, access, monitoring and recovery prerequisites without equating a green test run to production readiness.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3031,7 +3142,7 @@
       "workstream": "H",
       "workstream_name": "Help and documentation",
       "purpose": "Explain strict request errors, unsaved changes, paging and compact Help at the relevant forms.",
-      "benefit": "Explain strict request errors, unsaved changes, paging and compact Help at the relevant forms.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
       "priority": "High",
       "phase": "1 — Audit and reliability",
       "status": "Tested",
@@ -3055,7 +3166,7 @@
         "docs/development/VERIFICATION.md",
         "docs/RELIABILITY_GUIDE.md"
       ],
-      "git_reference": "upgrade/audit-roadmap-batch-1"
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
     },
     {
       "id": "NEXUS-UPG-117",
@@ -3063,7 +3174,7 @@
       "workstream": "H",
       "workstream_name": "Help and documentation",
       "purpose": "Document actual account/session/role features only after implementation and testing.",
-      "benefit": "Document actual account/session/role features only after implementation and testing.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3076,7 +3187,8 @@
         "Document actual account/session/role features only after implementation and testing."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Document actual account/session/role features only after implementation and testing.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3090,7 +3202,7 @@
       "workstream": "H",
       "workstream_name": "Help and documentation",
       "purpose": "Document existing request schemas, response shapes and limits with tested examples.",
-      "benefit": "Document existing request schemas, response shapes and limits with tested examples.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3102,7 +3214,8 @@
         "Document existing request schemas, response shapes and limits with tested examples."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Document existing request schemas, response shapes and limits with tested examples.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3112,11 +3225,11 @@
     },
     {
       "id": "NEXUS-UPG-119",
-      "feature": "Workflow ownership dictionary",
+      "feature": "Cross-module save-effects matrix",
       "workstream": "H",
       "workstream_name": "Help and documentation",
-      "purpose": "Explain which records affect tasks, decisions, market quantities or cash and which remain separate.",
-      "benefit": "Explain which records affect tasks, decisions, market quantities or cash and which remain separate.",
+      "purpose": "Document and test which endpoints alter tasks, plans, market quantities or cash; preserve existing individual workflow guides.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3125,10 +3238,11 @@
       ],
       "requirements": [],
       "acceptance_criteria": [
-        "Explain which records affect tasks, decisions, market quantities or cash and which remain separate."
+        "Document and test which endpoints alter tasks, plans, market quantities or cash; preserve existing individual workflow guides."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Document and test which endpoints alter tasks, plans, market quantities or cash; preserve existing individual workflow guides.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3142,7 +3256,7 @@
       "workstream": "H",
       "workstream_name": "Help and documentation",
       "purpose": "Explain unknown season links and historical stage context using reviewed examples.",
-      "benefit": "Explain unknown season links and historical stage context using reviewed examples.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3154,7 +3268,8 @@
         "Explain unknown season links and historical stage context using reviewed examples."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Explain unknown season links and historical stage context using reviewed examples.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3168,7 +3283,7 @@
       "workstream": "H",
       "workstream_name": "Help and documentation",
       "purpose": "Explain deposits, refunds, returns and scoped balances without implying audited debts.",
-      "benefit": "Explain deposits, refunds, returns and scoped balances without implying audited debts.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3180,7 +3295,8 @@
         "Explain deposits, refunds, returns and scoped balances without implying audited debts."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Explain deposits, refunds, returns and scoped balances without implying audited debts.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3194,7 +3310,7 @@
       "workstream": "H",
       "workstream_name": "Help and documentation",
       "purpose": "Create screenshots using synthetic fixtures only and label their scope.",
-      "benefit": "Create screenshots using synthetic fixtures only and label their scope.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3206,7 +3322,8 @@
         "Create screenshots using synthetic fixtures only and label their scope."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Create screenshots using synthetic fixtures only and label their scope.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3220,7 +3337,7 @@
       "workstream": "H",
       "workstream_name": "Help and documentation",
       "purpose": "Review terms and error explanations with user feedback and record approved changes.",
-      "benefit": "Review terms and error explanations with user feedback and record approved changes.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3232,7 +3349,8 @@
         "Review terms and error explanations with user feedback and record approved changes."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Review terms and error explanations with user feedback and record approved changes.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3246,7 +3364,7 @@
       "workstream": "H",
       "workstream_name": "Help and documentation",
       "purpose": "Add reviewed terminology with language/source attribution; no unverified translation claims.",
-      "benefit": "Add reviewed terminology with language/source attribution; no unverified translation claims.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3258,7 +3376,8 @@
         "Add reviewed terminology with language/source attribution; no unverified translation claims."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Add reviewed terminology with language/source attribution; no unverified translation claims.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3268,11 +3387,11 @@
     },
     {
       "id": "NEXUS-UPG-125",
-      "feature": "Help maintenance contract",
+      "feature": "Selector-to-form Help binding validation",
       "workstream": "H",
       "workstream_name": "Help and documentation",
-      "purpose": "Validate guide IDs, selectors, route mappings and documentation ownership in CI.",
-      "benefit": "Validate guide IDs, selectors, route mappings and documentation ownership in CI.",
+      "purpose": "Validate that guide selectors resolve to actual intended controls and form routes, extending existing catalogue/schema tests.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3281,10 +3400,11 @@
       ],
       "requirements": [],
       "acceptance_criteria": [
-        "Validate guide IDs, selectors, route mappings and documentation ownership in CI."
+        "Validate that guide selectors resolve to actual intended controls and form routes, extending existing catalogue/schema tests."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Validate that guide selectors resolve to actual intended controls and form routes, extending existing catalogue/schema tests.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3294,11 +3414,11 @@
     },
     {
       "id": "NEXUS-UPG-126",
-      "feature": "Example fixture separation",
+      "feature": "Documented example-to-fixture links",
       "workstream": "H",
       "workstream_name": "Help and documentation",
-      "purpose": "Keep demonstration content clearly marked and out of actual record creation.",
-      "benefit": "Keep demonstration content clearly marked and out of actual record creation.",
+      "purpose": "Associate documented fictional walkthroughs with isolated fixture identifiers and test that the walkthrough creates no actual pilot records.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3307,10 +3427,11 @@
       ],
       "requirements": [],
       "acceptance_criteria": [
-        "Keep demonstration content clearly marked and out of actual record creation."
+        "Associate documented fictional walkthroughs with isolated fixture identifiers and test that the walkthrough creates no actual pilot records."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Associate documented fictional walkthroughs with isolated fixture identifiers and test that the walkthrough creates no actual pilot records.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3324,7 +3445,7 @@
       "workstream": "H",
       "workstream_name": "Help and documentation",
       "purpose": "Record content versions and preserve links to changed workflow guidance.",
-      "benefit": "Record content versions and preserve links to changed workflow guidance.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3336,7 +3457,8 @@
         "Record content versions and preserve links to changed workflow guidance."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Record content versions and preserve links to changed workflow guidance.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3350,7 +3472,7 @@
       "workstream": "H",
       "workstream_name": "Help and documentation",
       "purpose": "Export the supported guide set with searchable offline navigation and no farm data.",
-      "benefit": "Export the supported guide set with searchable offline navigation and no farm data.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3362,7 +3484,8 @@
         "Export the supported guide set with searchable offline navigation and no farm data."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Export the supported guide set with searchable offline navigation and no farm data.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3376,7 +3499,7 @@
       "workstream": "H",
       "workstream_name": "Help and documentation",
       "purpose": "Document verified restore-to-new-file steps and limits of external-file coverage.",
-      "benefit": "Document verified restore-to-new-file steps and limits of external-file coverage.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3388,7 +3511,8 @@
         "Document verified restore-to-new-file steps and limits of external-file coverage."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Document verified restore-to-new-file steps and limits of external-file coverage.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3402,11 +3526,12 @@
       "workstream": "H",
       "workstream_name": "Help and documentation",
       "purpose": "Document standard-library, simulation and optional model workflows with independent commands.",
-      "benefit": "Document standard-library, simulation and optional model workflows with independent commands.",
+      "benefit": "Explain supported workflows and their limits at the point of use.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
       "dependencies": [
+        "NEXUS-UPG-015",
         "NEXUS-UPG-116"
       ],
       "requirements": [],
@@ -3414,7 +3539,8 @@
         "Document standard-library, simulation and optional model workflows with independent commands."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Document standard-library, simulation and optional model workflows with independent commands.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3428,7 +3554,7 @@
       "workstream": "I",
       "workstream_name": "Business and adoption",
       "purpose": "Collect minimal consented pilot needs and constraints without inventing enrolled farms.",
-      "benefit": "Collect minimal consented pilot needs and constraints without inventing enrolled farms.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3440,7 +3566,8 @@
         "Collect minimal consented pilot needs and constraints without inventing enrolled farms."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Collect minimal consented pilot needs and constraints without inventing enrolled farms.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3454,7 +3581,7 @@
       "workstream": "I",
       "workstream_name": "Business and adoption",
       "purpose": "Record reported issues, priority and verified resolution without treating feedback as validated impact.",
-      "benefit": "Record reported issues, priority and verified resolution without treating feedback as validated impact.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3466,7 +3593,8 @@
         "Record reported issues, priority and verified resolution without treating feedback as validated impact."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Record reported issues, priority and verified resolution without treating feedback as validated impact.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3480,7 +3608,7 @@
       "workstream": "I",
       "workstream_name": "Business and adoption",
       "purpose": "Define tasks and consented measurements for real pilot usability sessions.",
-      "benefit": "Define tasks and consented measurements for real pilot usability sessions.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3492,7 +3620,8 @@
         "Define tasks and consented measurements for real pilot usability sessions."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Define tasks and consented measurements for real pilot usability sessions.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3506,7 +3635,7 @@
       "workstream": "I",
       "workstream_name": "Business and adoption",
       "purpose": "Create an explicitly synthetic isolated demo with a safe reset command.",
-      "benefit": "Create an explicitly synthetic isolated demo with a safe reset command.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3518,7 +3647,8 @@
         "Create an explicitly synthetic isolated demo with a safe reset command."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Create an explicitly synthetic isolated demo with a safe reset command.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3528,11 +3658,11 @@
     },
     {
       "id": "NEXUS-UPG-135",
-      "feature": "Evidence-based product facts page",
+      "feature": "Publishable capability catalogue",
       "workstream": "I",
       "workstream_name": "Business and adoption",
-      "purpose": "Present only tested capabilities, current limits and verified demonstration material.",
-      "benefit": "Present only tested capabilities, current limits and verified demonstration material.",
+      "purpose": "Generate reviewable marketing facts from verified release evidence and explicit limitations; do not publish automatically or infer adoption from database counts.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3541,10 +3671,11 @@
       ],
       "requirements": [],
       "acceptance_criteria": [
-        "Present only tested capabilities, current limits and verified demonstration material."
+        "Generate reviewable marketing facts from verified release evidence and explicit limitations; do not publish automatically or infer adoption from database counts."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Generate reviewable marketing facts from verified release evidence and explicit limitations; do not publish automatically or infer adoption from database counts.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3558,7 +3689,7 @@
       "workstream": "I",
       "workstream_name": "Business and adoption",
       "purpose": "Keep attribution, readable colours and company links consistent across delivered surfaces.",
-      "benefit": "Keep attribution, readable colours and company links consistent across delivered surfaces.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3570,7 +3701,8 @@
         "Keep attribution, readable colours and company links consistent across delivered surfaces."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Keep attribution, readable colours and company links consistent across delivered surfaces.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3584,7 +3716,7 @@
       "workstream": "I",
       "workstream_name": "Business and adoption",
       "purpose": "Capture consented interview needs without claiming partnerships or memberships.",
-      "benefit": "Capture consented interview needs without claiming partnerships or memberships.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3596,7 +3728,8 @@
         "Capture consented interview needs without claiming partnerships or memberships."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Capture consented interview needs without claiming partnerships or memberships.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3610,7 +3743,7 @@
       "workstream": "I",
       "workstream_name": "Business and adoption",
       "purpose": "Record proposed plans, assumptions and observed feedback without inventing revenue.",
-      "benefit": "Record proposed plans, assumptions and observed feedback without inventing revenue.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
       "priority": "Future",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3622,7 +3755,8 @@
         "Record proposed plans, assumptions and observed feedback without inventing revenue."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Record proposed plans, assumptions and observed feedback without inventing revenue.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3636,7 +3770,7 @@
       "workstream": "I",
       "workstream_name": "Business and adoption",
       "purpose": "Prepare reviewable materials tied to actual needs; do not send outreach automatically.",
-      "benefit": "Prepare reviewable materials tied to actual needs; do not send outreach automatically.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3648,7 +3782,8 @@
         "Prepare reviewable materials tied to actual needs; do not send outreach automatically."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Prepare reviewable materials tied to actual needs; do not send outreach automatically.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3662,7 +3797,7 @@
       "workstream": "I",
       "workstream_name": "Business and adoption",
       "purpose": "Assemble verified engineering and pilot evidence with explicit limitations and no invented traction.",
-      "benefit": "Assemble verified engineering and pilot evidence with explicit limitations and no invented traction.",
+      "benefit": "Validate real demand and adoption without invented business claims.",
       "priority": "Medium",
       "phase": "4 — Usability, guidance and adoption",
       "status": "Planned",
@@ -3674,7 +3809,8 @@
         "Assemble verified engineering and pilot evidence with explicit limitations and no invented traction."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Assemble verified engineering and pilot evidence with explicit limitations and no invented traction.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3688,7 +3824,7 @@
       "workstream": "J",
       "workstream_name": "Cross-cutting delivery and validation",
       "purpose": "Validate unique IDs, workstream counts, dependencies, acceptance criteria, test evidence and statuses with a read-only CLI.",
-      "benefit": "Validate unique IDs, workstream counts, dependencies, acceptance criteria, test evidence and statuses with a read-only CLI.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
       "priority": "High",
       "phase": "1 — Audit and reliability",
       "status": "Tested",
@@ -3707,7 +3843,7 @@
         "docs/development/VERIFICATION.md",
         "docs/RELIABILITY_GUIDE.md"
       ],
-      "git_reference": "upgrade/audit-roadmap-batch-1"
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
     },
     {
       "id": "NEXUS-UPG-142",
@@ -3715,7 +3851,7 @@
       "workstream": "J",
       "workstream_name": "Cross-cutting delivery and validation",
       "purpose": "Record inspected source revision, actual CI outcome, known limits and prioritized findings before implementation.",
-      "benefit": "Record inspected source revision, actual CI outcome, known limits and prioritized findings before implementation.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
       "priority": "High",
       "phase": "1 — Audit and reliability",
       "status": "Tested",
@@ -3734,7 +3870,7 @@
         "docs/development/VERIFICATION.md",
         "docs/RELIABILITY_GUIDE.md"
       ],
-      "git_reference": "upgrade/audit-roadmap-batch-1"
+      "git_reference": "1cd8563515fa0a1b0888866a8178eaf78e93938b"
     },
     {
       "id": "NEXUS-UPG-143",
@@ -3742,7 +3878,7 @@
       "workstream": "J",
       "workstream_name": "Cross-cutting delivery and validation",
       "purpose": "Connect completed criteria to tests, artifacts and immutable source references.",
-      "benefit": "Connect completed criteria to tests, artifacts and immutable source references.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
       "priority": "High",
       "phase": "Continuous release governance",
       "status": "Planned",
@@ -3754,7 +3890,8 @@
         "Connect completed criteria to tests, artifacts and immutable source references."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Connect completed criteria to tests, artifacts and immutable source references.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3768,7 +3905,7 @@
       "workstream": "J",
       "workstream_name": "Cross-cutting delivery and validation",
       "purpose": "Require scoped test, documentation, security and rollback evidence per phase.",
-      "benefit": "Require scoped test, documentation, security and rollback evidence per phase.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
       "priority": "High",
       "phase": "Continuous release governance",
       "status": "Planned",
@@ -3780,7 +3917,8 @@
         "Require scoped test, documentation, security and rollback evidence per phase."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Require scoped test, documentation, security and rollback evidence per phase.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3794,19 +3932,20 @@
       "workstream": "J",
       "workstream_name": "Cross-cutting delivery and validation",
       "purpose": "Preserve nonprivate older database/payload fixtures across supported readers.",
-      "benefit": "Preserve nonprivate older database/payload fixtures across supported readers.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
       "priority": "High",
       "phase": "Continuous release governance",
       "status": "Planned",
       "dependencies": [
-        "NEXUS-UPG-141"
+        "NEXUS-UPG-011"
       ],
       "requirements": [],
       "acceptance_criteria": [
         "Preserve nonprivate older database/payload fixtures across supported readers."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Preserve nonprivate older database/payload fixtures across supported readers.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3816,11 +3955,11 @@
     },
     {
       "id": "NEXUS-UPG-146",
-      "feature": "Security-negative test inventory",
+      "feature": "Risk-to-negative-test coverage map",
       "workstream": "J",
       "workstream_name": "Cross-cutting delivery and validation",
-      "purpose": "Track rejected malformed, unauthorized and cross-context operations separately from happy paths.",
-      "benefit": "Track rejected malformed, unauthorized and cross-context operations separately from happy paths.",
+      "purpose": "Map documented security/data-integrity risks to rejection tests and release evidence without recounting existing negative tests as newly implemented features.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
       "priority": "High",
       "phase": "Continuous release governance",
       "status": "Planned",
@@ -3829,10 +3968,11 @@
       ],
       "requirements": [],
       "acceptance_criteria": [
-        "Track rejected malformed, unauthorized and cross-context operations separately from happy paths."
+        "Map documented security/data-integrity risks to rejection tests and release evidence without recounting existing negative tests as newly implemented features."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Map documented security/data-integrity risks to rejection tests and release evidence without recounting existing negative tests as newly implemented features.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3846,19 +3986,20 @@
       "workstream": "J",
       "workstream_name": "Cross-cutting delivery and validation",
       "purpose": "Check actual exported and captured fields before each release.",
-      "benefit": "Check actual exported and captured fields before each release.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
       "priority": "High",
       "phase": "Continuous release governance",
       "status": "Planned",
       "dependencies": [
-        "NEXUS-UPG-141"
+        "NEXUS-UPG-068"
       ],
       "requirements": [],
       "acceptance_criteria": [
         "Check actual exported and captured fields before each release."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Check actual exported and captured fields before each release.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3868,11 +4009,11 @@
     },
     {
       "id": "NEXUS-UPG-148",
-      "feature": "Release and upgrade history",
+      "feature": "Versioned release provenance index",
       "workstream": "J",
       "workstream_name": "Cross-cutting delivery and validation",
-      "purpose": "Keep dated implemented changes separate from proposed roadmap items.",
-      "benefit": "Keep dated implemented changes separate from proposed roadmap items.",
+      "purpose": "Index release commits, artifact hashes, scope and validation evidence across versions, extending existing per-release notes.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
       "priority": "High",
       "phase": "Continuous release governance",
       "status": "Planned",
@@ -3881,10 +4022,11 @@
       ],
       "requirements": [],
       "acceptance_criteria": [
-        "Keep dated implemented changes separate from proposed roadmap items."
+        "Index release commits, artifact hashes, scope and validation evidence across versions, extending existing per-release notes."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Index release commits, artifact hashes, scope and validation evidence across versions, extending existing per-release notes.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3898,7 +4040,7 @@
       "workstream": "J",
       "workstream_name": "Cross-cutting delivery and validation",
       "purpose": "Require observed data and consent before making adoption or agricultural impact claims.",
-      "benefit": "Require observed data and consent before making adoption or agricultural impact claims.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
       "priority": "High",
       "phase": "Continuous release governance",
       "status": "Planned",
@@ -3910,7 +4052,8 @@
         "Require observed data and consent before making adoption or agricultural impact claims."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Require observed data and consent before making adoption or agricultural impact claims.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3924,7 +4067,7 @@
       "workstream": "J",
       "workstream_name": "Cross-cutting delivery and validation",
       "purpose": "Separate sensor, satellite, offline mobile and cooperative/financial research opportunities from the committed 150 items.",
-      "benefit": "Separate sensor, satellite, offline mobile and cooperative/financial research opportunities from the committed 150 items.",
+      "benefit": "Tie development scope and completion claims to acceptance evidence.",
       "priority": "High",
       "phase": "Continuous release governance",
       "status": "Planned",
@@ -3936,7 +4079,8 @@
         "Separate sensor, satellite, offline mobile and cooperative/financial research opportunities from the committed 150 items."
       ],
       "tests": [
-        "Criterion-specific automated regression and negative cases; manual acceptance where applicable"
+        "Fixture assertion: Separate sensor, satellite, offline mobile and cooperative/financial research opportunities from the committed 150 items.",
+        "Negative/boundary tests for missing context and unsupported cases; no unrequested mutation."
       ],
       "verification": [],
       "documentation": [
@@ -3944,5 +4088,6 @@
       ],
       "git_reference": null
     }
-  ]
+  ],
+  "pull_request": "https://github.com/Yaqini-Duniya-Technology/nexus-intelligent-farm/pull/1"
 }

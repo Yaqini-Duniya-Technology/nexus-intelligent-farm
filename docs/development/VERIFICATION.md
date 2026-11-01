@@ -19,7 +19,7 @@ Baseline: `e5eccd442eeada29769f304f4d025946c1fafe20`. Working branch: `upgrade/a
 
 The baseline GitHub run passed 749 repository tests with 123 subtests. That is baseline evidence, not a claim that this new branch has passed remotely.
 
-A new CI workflow defines Ubuntu/Windows × Python 3.13/3.14 workspace jobs, helper/syntax checks and isolated route smoke checks. NEXUS-UPG-101 remains In Progress until all four remote jobs pass. The existing simulation/repository workflow remains separate and unchanged.
+A new CI workflow defines Ubuntu/Windows × Python 3.13/3.14 workspace jobs, helper/syntax checks and isolated route smoke checks. NEXUS-UPG-101 is now Tested: all four remote jobs passed for implementation commit `1cd8563515fa0a1b0888866a8178eaf78e93938b`. The existing simulation/repository workflow remains separate and unchanged.
 
 The environment did not have a browser runtime. A Chromium headless-shell download was attempted and failed because the downloaded archive was incomplete/invalid. No browser test pass is claimed. NEXUS-UPG-073 and NEXUS-UPG-074 therefore remain In Progress, even though implementation, pure-helper tests and syntax checks are present.
 
@@ -35,3 +35,17 @@ Use isolated Test records and no actual farm facts:
 6. Use keyboard and narrow viewport to check controls, labels and focus. These observations are not substituted by the pure JavaScript helper tests.
 
 Actual user data, full device/mobile coverage, authenticated roles, production hosting and agricultural accuracy were not evaluated in this batch.
+
+## Published review evidence
+
+- Draft PR: https://github.com/Yaqini-Duniya-Technology/nexus-intelligent-farm/pull/1
+- Implementation commit: `1cd8563515fa0a1b0888866a8178eaf78e93938b`.
+- Branch repository CI run [41297994581](https://github.com/Yaqini-Duniya-Technology/nexus-intelligent-farm/actions/runs/41297994581): **778 passed, 1 warning, 123 subtests passed**.
+- Portability run [41297994634](https://github.com/Yaqini-Duniya-Technology/nexus-intelligent-farm/actions/runs/41297994634): both Linux jobs passed at the time of this entry; Windows jobs were still running. No Windows pass is inferred from Linux results.
+
+
+## Final first-batch status
+
+Portability run 41297994634 completed successfully on all four jobs: Windows/Linux, Python 3.13/3.14. Each job ran the workspace suite, modified-script syntax checks, Node helper tests and the isolated route smoke test. This verifies the committed implementation on those platforms; it does not substitute for browser UI acceptance.
+
+The current 150-item tracker has 16 Tested, 2 In Progress (real-browser acceptance), 129 Planned and 3 Blocked (data/evaluation prerequisites). Eighteen IDs have implementation in this batch; only sixteen have completed their recorded acceptance gates. No status is changed to Completed merely to satisfy a numerical target.
