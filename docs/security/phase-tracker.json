@@ -1,0 +1,291 @@
+{
+  "tracker_version": "nexus-security-phase-v1",
+  "baseline": "d353ab1af9d1556397877827843583cedd87c839",
+  "upgrades": [
+    {
+      "id": "NEXUS-SEC-001",
+      "title": "Account administration",
+      "priority": "Critical",
+      "status": "Tested",
+      "dependencies": [],
+      "implementation_details": "First batch: separate pilot administration, recovery, audit and Help; owner/editor/viewer farm roles preserved.",
+      "security_considerations": "Main Operations remains single-user. Local CLI/database access is privileged. No shared-hosting readiness claimed.",
+      "acceptance_criteria": [
+        "Account administration within its documented supported scope",
+        "Positive and denied API cases verified; existing farm history preserved"
+      ],
+      "test_results": [
+        "10 dedicated administration tests plus pilot regressions; full-suite result in verification report. Browser acceptance pending."
+      ],
+      "documentation_status": "Operator guide and embedded page Help available",
+      "git_reference": "upgrade/account-administration (immutable commit recorded in release report)"
+    },
+    {
+      "id": "NEXUS-SEC-002",
+      "title": "Operator-assisted password recovery",
+      "priority": "Critical",
+      "status": "Tested",
+      "dependencies": [
+        "NEXUS-SEC-001"
+      ],
+      "implementation_details": "First batch: separate pilot administration, recovery, audit and Help; owner/editor/viewer farm roles preserved.",
+      "security_considerations": "Main Operations remains single-user. Local CLI/database access is privileged. No shared-hosting readiness claimed.",
+      "acceptance_criteria": [
+        "Operator-assisted password recovery within its documented supported scope",
+        "Positive and denied API cases verified; existing farm history preserved"
+      ],
+      "test_results": [
+        "10 dedicated administration tests plus pilot regressions; full-suite result in verification report. Browser acceptance pending."
+      ],
+      "documentation_status": "Operator guide and embedded page Help available",
+      "git_reference": "upgrade/account-administration (immutable commit recorded in release report)"
+    },
+    {
+      "id": "NEXUS-SEC-003",
+      "title": "Full-workspace authentication",
+      "priority": "Critical",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-SEC-001",
+        "NEXUS-SEC-002"
+      ],
+      "implementation_details": "Not implemented in this batch; follow staged rollout after first-batch verification.",
+      "security_considerations": "Main Operations remains single-user. Local CLI/database access is privileged. No shared-hosting readiness claimed.",
+      "acceptance_criteria": [
+        "Full-workspace authentication within its documented supported scope",
+        "Positive and denied API cases verified; existing farm history preserved"
+      ],
+      "test_results": [],
+      "documentation_status": "Planned",
+      "git_reference": "upgrade/account-administration (immutable commit recorded in release report)"
+    },
+    {
+      "id": "NEXUS-SEC-004",
+      "title": "Farm permissions on every request",
+      "priority": "Critical",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-SEC-003"
+      ],
+      "implementation_details": "Not implemented in this batch; follow staged rollout after first-batch verification.",
+      "security_considerations": "Main Operations remains single-user. Local CLI/database access is privileged. No shared-hosting readiness claimed.",
+      "acceptance_criteria": [
+        "Farm permissions on every request within its documented supported scope",
+        "Positive and denied API cases verified; existing farm history preserved"
+      ],
+      "test_results": [],
+      "documentation_status": "Planned",
+      "git_reference": "upgrade/account-administration (immutable commit recorded in release report)"
+    },
+    {
+      "id": "NEXUS-SEC-005",
+      "title": "Protected exports and attachments",
+      "priority": "Critical",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-SEC-004"
+      ],
+      "implementation_details": "Not implemented in this batch; follow staged rollout after first-batch verification.",
+      "security_considerations": "Main Operations remains single-user. Local CLI/database access is privileged. No shared-hosting readiness claimed.",
+      "acceptance_criteria": [
+        "Protected exports and attachments within its documented supported scope",
+        "Positive and denied API cases verified; existing farm history preserved"
+      ],
+      "test_results": [],
+      "documentation_status": "Planned",
+      "git_reference": "upgrade/account-administration (immutable commit recorded in release report)"
+    },
+    {
+      "id": "NEXUS-SEC-006",
+      "title": "Permission regression coverage",
+      "priority": "Critical",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-SEC-003",
+        "NEXUS-SEC-004",
+        "NEXUS-SEC-005"
+      ],
+      "implementation_details": "Not implemented in this batch; follow staged rollout after first-batch verification.",
+      "security_considerations": "Main Operations remains single-user. Local CLI/database access is privileged. No shared-hosting readiness claimed.",
+      "acceptance_criteria": [
+        "Permission regression coverage within its documented supported scope",
+        "Positive and denied API cases verified; existing farm history preserved"
+      ],
+      "test_results": [],
+      "documentation_status": "Planned",
+      "git_reference": "upgrade/account-administration (immutable commit recorded in release report)"
+    },
+    {
+      "id": "NEXUS-SEC-007",
+      "title": "Account activity history",
+      "priority": "Critical",
+      "status": "Tested",
+      "dependencies": [],
+      "implementation_details": "First batch: separate pilot administration, recovery, audit and Help; owner/editor/viewer farm roles preserved.",
+      "security_considerations": "Main Operations remains single-user. Local CLI/database access is privileged. No shared-hosting readiness claimed.",
+      "acceptance_criteria": [
+        "Account activity history within its documented supported scope",
+        "Positive and denied API cases verified; existing farm history preserved"
+      ],
+      "test_results": [
+        "10 dedicated administration tests plus pilot regressions; full-suite result in verification report. Browser acceptance pending."
+      ],
+      "documentation_status": "Operator guide and embedded page Help available",
+      "git_reference": "upgrade/account-administration (immutable commit recorded in release report)"
+    },
+    {
+      "id": "NEXUS-SEC-008",
+      "title": "Contextual account Help",
+      "priority": "Critical",
+      "status": "Tested",
+      "dependencies": [
+        "NEXUS-SEC-001",
+        "NEXUS-SEC-002"
+      ],
+      "implementation_details": "First batch: separate pilot administration, recovery, audit and Help; owner/editor/viewer farm roles preserved.",
+      "security_considerations": "Main Operations remains single-user. Local CLI/database access is privileged. No shared-hosting readiness claimed.",
+      "acceptance_criteria": [
+        "Contextual account Help within its documented supported scope",
+        "Positive and denied API cases verified; existing farm history preserved"
+      ],
+      "test_results": [
+        "10 dedicated administration tests plus pilot regressions; full-suite result in verification report. Browser acceptance pending."
+      ],
+      "documentation_status": "Operator guide and embedded page Help available",
+      "git_reference": "upgrade/account-administration (immutable commit recorded in release report)"
+    },
+    {
+      "id": "NEXUS-SEC-009",
+      "title": "Migration and recovery coverage",
+      "priority": "Critical",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-SEC-001"
+      ],
+      "implementation_details": "Not implemented in this batch; follow staged rollout after first-batch verification.",
+      "security_considerations": "Main Operations remains single-user. Local CLI/database access is privileged. No shared-hosting readiness claimed.",
+      "acceptance_criteria": [
+        "Migration and recovery coverage within its documented supported scope",
+        "Positive and denied API cases verified; existing farm history preserved"
+      ],
+      "test_results": [],
+      "documentation_status": "Planned",
+      "git_reference": "upgrade/account-administration (immutable commit recorded in release report)"
+    },
+    {
+      "id": "NEXUS-SEC-010",
+      "title": "Real-browser workflow tests",
+      "priority": "Critical",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-SEC-001",
+        "NEXUS-SEC-002",
+        "NEXUS-SEC-003"
+      ],
+      "implementation_details": "Not implemented in this batch; follow staged rollout after first-batch verification.",
+      "security_considerations": "Main Operations remains single-user. Local CLI/database access is privileged. No shared-hosting readiness claimed.",
+      "acceptance_criteria": [
+        "Real-browser workflow tests within its documented supported scope",
+        "Positive and denied API cases verified; existing farm history preserved"
+      ],
+      "test_results": [],
+      "documentation_status": "Planned",
+      "git_reference": "upgrade/account-administration (immutable commit recorded in release report)"
+    },
+    {
+      "id": "NEXUS-OPS-001",
+      "title": "Inspection-to-decision links",
+      "priority": "High",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-SEC-004",
+        "NEXUS-SEC-006"
+      ],
+      "implementation_details": "Not implemented in this batch; follow staged rollout after first-batch verification.",
+      "security_considerations": "Main Operations remains single-user. Local CLI/database access is privileged. No shared-hosting readiness claimed.",
+      "acceptance_criteria": [
+        "Inspection-to-decision links within its documented supported scope",
+        "Positive and denied API cases verified; existing farm history preserved"
+      ],
+      "test_results": [],
+      "documentation_status": "Planned",
+      "git_reference": "upgrade/account-administration (immutable commit recorded in release report)"
+    },
+    {
+      "id": "NEXUS-OPS-002",
+      "title": "Unresolved information queue",
+      "priority": "High",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-SEC-004",
+        "NEXUS-SEC-006"
+      ],
+      "implementation_details": "Not implemented in this batch; follow staged rollout after first-batch verification.",
+      "security_considerations": "Main Operations remains single-user. Local CLI/database access is privileged. No shared-hosting readiness claimed.",
+      "acceptance_criteria": [
+        "Unresolved information queue within its documented supported scope",
+        "Positive and denied API cases verified; existing farm history preserved"
+      ],
+      "test_results": [],
+      "documentation_status": "Planned",
+      "git_reference": "upgrade/account-administration (immutable commit recorded in release report)"
+    },
+    {
+      "id": "NEXUS-OPS-003",
+      "title": "Unified operational dashboard",
+      "priority": "High",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-SEC-004",
+        "NEXUS-SEC-006"
+      ],
+      "implementation_details": "Not implemented in this batch; follow staged rollout after first-batch verification.",
+      "security_considerations": "Main Operations remains single-user. Local CLI/database access is privileged. No shared-hosting readiness claimed.",
+      "acceptance_criteria": [
+        "Unified operational dashboard within its documented supported scope",
+        "Positive and denied API cases verified; existing farm history preserved"
+      ],
+      "test_results": [],
+      "documentation_status": "Planned",
+      "git_reference": "upgrade/account-administration (immutable commit recorded in release report)"
+    },
+    {
+      "id": "NEXUS-OPS-004",
+      "title": "Ledger reconciliation",
+      "priority": "High",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-SEC-004",
+        "NEXUS-SEC-006"
+      ],
+      "implementation_details": "Not implemented in this batch; follow staged rollout after first-batch verification.",
+      "security_considerations": "Main Operations remains single-user. Local CLI/database access is privileged. No shared-hosting readiness claimed.",
+      "acceptance_criteria": [
+        "Ledger reconciliation within its documented supported scope",
+        "Positive and denied API cases verified; existing farm history preserved"
+      ],
+      "test_results": [],
+      "documentation_status": "Planned",
+      "git_reference": "upgrade/account-administration (immutable commit recorded in release report)"
+    },
+    {
+      "id": "NEXUS-OPS-005",
+      "title": "Review-ready evidence packs",
+      "priority": "High",
+      "status": "Planned",
+      "dependencies": [
+        "NEXUS-SEC-005",
+        "NEXUS-SEC-006"
+      ],
+      "implementation_details": "Not implemented in this batch; follow staged rollout after first-batch verification.",
+      "security_considerations": "Main Operations remains single-user. Local CLI/database access is privileged. No shared-hosting readiness claimed.",
+      "acceptance_criteria": [
+        "Review-ready evidence packs within its documented supported scope",
+        "Positive and denied API cases verified; existing farm history preserved"
+      ],
+      "test_results": [],
+      "documentation_status": "Planned",
+      "git_reference": "upgrade/account-administration (immutable commit recorded in release report)"
+    }
+  ]
+}

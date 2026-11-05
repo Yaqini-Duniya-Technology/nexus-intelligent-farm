@@ -76,3 +76,7 @@ Password reset and account lifecycle; integration of authenticated identity at e
 ## Validation
 
 Tests cover backup-before-schema, no-op reruns, failed backup, transactional schema rollback, checksum/future-version refusal, missing-directory refusal, explicit path conflict, password checks, viewer/write separation, disabled accounts, cross-farm denial and last-owner protection. Test fixtures contain no real farm evidence. Existing local workspace tests and route smoke remain required.
+
+## 5 November continuation
+
+Migration 3 adds platform administration, account activity and operator-assisted password recovery. See [Account administration and recovery](security/ACCOUNT_GUIDE.md) for current supported commands. The earlier account-foundation limitations above describe the initial pilot; password recovery is now implemented, while full Operations authentication and shared hosting remain incomplete.

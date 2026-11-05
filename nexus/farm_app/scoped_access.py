@@ -43,12 +43,17 @@ def login(database, username, password, now=None):
             if attempt and attempt['window_start'] + 900 > now:
                 count = attempt['failures'] + 1
             db.execute('INSERT INTO nexus_login_attempts VALUES (?,?,?) ON CONFLICT(username_hash) DO UPDATE SET failures=excluded.failures,window_start=excluded.window_start', (key, count, start))
+            from nexus.farm_app.account_admin import event
+            event(db, 'login_failed', affected=account['id'] if account else None, summary='Credentials rejected', result='denied')
             db.commit()
             raise AccessError('Invalid credentials', 401)
         db.execute('DELETE FROM nexus_login_attempts WHERE username_hash=?', (key,))
         db.execute('DELETE FROM nexus_sessions WHERE expires_at<=? OR last_seen<=?', (now, now - 1800))
         token, csrf = secrets.token_urlsafe(32), secrets.token_urlsafe(32)
         db.execute('INSERT INTO nexus_sessions VALUES (?,?,?,?,?,?)', (digest(token), account['id'], csrf, now, now, now + 28800))
+        from nexus.farm_app.account_admin import event
+        db.execute('UPDATE nexus_accounts SET last_sign_in=? WHERE id=?', (datetime.now(timezone.utc).isoformat(), account['id']))
+        event(db, 'login_success', actor=account['id'], affected=account['id'], summary='Account signed in')
         db.commit()
         return token, csrf
 
@@ -77,7 +82,7 @@ def read(database, token, farm_id=None):
     with closing(accounts.connect(database)) as db, db:
         user = identity(db, token)
         farms = [dict(row) for row in db.execute('SELECT f.id,f.name,m.role FROM farms f JOIN nexus_farm_memberships m ON m.farm_id=f.id WHERE m.account_id=? ORDER BY f.id', (user['account_id'],))]
-        result = {'username': user['username'], 'csrf': user['csrf'], 'farms': farms, 'fields': [], 'observations': [], 'notes': []}
+        result = {'username': user['username'], 'csrf': user['csrf'], 'farms': farms, 'fields': [], 'observations': [], 'notes': [], 'platform_admin': bool(db.execute('SELECT 1 FROM nexus_platform_admins WHERE account_id=?', (user['account_id'],)).fetchone())}
         if farm_id is not None:
             require_farm(db, user['account_id'], farm_id)
             result['fields'] = [dict(row) for row in db.execute('SELECT id,name,crop FROM fields WHERE farm_id=? ORDER BY id', (farm_id,))]

@@ -12,7 +12,7 @@ async function load(){
   const mine=++generation, previous=$('farm').value;
   const data=await request('/api/session'+(previous?'?farm_id='+encodeURIComponent(previous):''));
   if(mine!==generation)return;
-  csrf=data.csrf;$('sign-in').hidden=true;$('workspace').hidden=false;$('identity').textContent='Signed in as '+data.username;
+  csrf=data.csrf;$('admin-link').hidden=!data.platform_admin;$('sign-in').hidden=true;$('workspace').hidden=false;$('identity').textContent='Signed in as '+data.username;
   $('farm').replaceChildren(new Option('Select a farm',''),...data.farms.map(f=>new Option(f.name+' · '+f.role,String(f.id))));
   $('farm').value=data.farms.some(f=>String(f.id)===previous)?previous:'';activeFarm=$('farm').value;
   list('fields',data.fields,f=>f.name+' · '+f.crop);
@@ -20,7 +20,7 @@ async function load(){
   list('notes',data.notes,n=>'#'+n.id+' · '+n.note+' · '+n.created_at);
   const farm=data.farms.find(f=>String(f.id)===$('farm').value);
   $('note-form').hidden=!farm||farm.role==='viewer';
-  $('message').textContent='Records refreshed. Notes are separate from observations and tasks.';
+  $('message').textContent=data.farms.length?'Records refreshed. Notes are separate from observations and tasks.':'No farm assigned. Ask your operator to assign an existing farm; signing in does not create a membership.';
 }
 async function action(button,work){const controls=[...document.querySelectorAll('button,input,select,textarea')];const states=controls.map(c=>c.disabled);controls.forEach(c=>c.disabled=true);try{await work();}catch(error){$('message').textContent=error.message;}finally{controls.forEach((c,i)=>c.disabled=states[i]);}}
 $('login').onsubmit=e=>{e.preventDefault();action(e.submitter,async()=>{try{const result=await request('/api/login',{username:$('username').value,password:$('password').value});csrf=result.csrf;}finally{$('password').value='';}await load();});};
@@ -30,3 +30,5 @@ $('logout').onclick=e=>action(e.target,async()=>{if($('note').value&&!confirm('S
 $('note-form').onsubmit=e=>{e.preventDefault();const farm_id=Number($('farm').value);action(e.submitter,async()=>{await request('/api/note',{farm_id,note:$('note').value});$('note').value='';await load();});};
 window.addEventListener('beforeunload',e=>{if($('note').value){e.preventDefault();e.returnValue='';}});
 load().catch(e=>$('message').textContent=e.message);
+
+$('reset').onsubmit=e=>{e.preventDefault();action(e.submitter,async()=>{if($('reset-password').value!==$('reset-repeat').value)throw Error('Passwords differ. Retype both entries.');const token=$('reset-token').value,password=$('reset-password').value;try{const result=await request('/api/reset',{token,password});csrf='';$('workspace').hidden=true;$('sign-in').hidden=false;$('message').textContent=result.message;}finally{$('reset-token').value='';$('reset-password').value='';$('reset-repeat').value='';}});};
