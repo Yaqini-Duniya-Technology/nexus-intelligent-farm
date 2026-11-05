@@ -205,6 +205,10 @@ def make_handler(base,store):
 
 
 def main():
+    if '--authenticated' in sys.argv:
+        sys.argv.remove('--authenticated')
+        from nexus.farm_app.authenticated_workspace import main as authenticated_main
+        return authenticated_main()
     from nexus.farm_app import server, voice_clarifications
     original=server.main
     def start():
