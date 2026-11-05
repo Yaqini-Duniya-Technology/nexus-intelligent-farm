@@ -7,7 +7,7 @@ from http.cookies import SimpleCookie, CookieError
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse, parse_qs
-from nexus.farm_app import scoped_access as access, local_accounts, request_inputs
+from nexus.farm_app import scoped_access as access, local_accounts, request_inputs, account_admin
 
 
 def make_handler(database):
@@ -47,10 +47,16 @@ def make_handler(database):
             if not self.valid_host():
                 return self.respond(403, {'error': 'Use the local host and port'})
             parsed = urlparse(self.path)
+            if parsed.path == '/admin':
+                try:
+                    account_admin.state(database, self.token())
+                    return self.respond(200, Path(__file__).with_name('account_admin.html').read_bytes())
+                except access.AccessError as error:
+                    return self.respond(error.status, {'error': str(error)})
             if parsed.path == '/':
                 return self.respond(200, Path(__file__).with_name('account_pilot.html').read_bytes())
-            if parsed.path == '/pilot.js':
-                raw = Path(__file__).with_name('account_pilot.js').read_bytes()
+            if parsed.path in ('/pilot.js','/admin.js'):
+                raw = Path(__file__).with_name('account_admin.js' if parsed.path=='/admin.js' else 'account_pilot.js').read_bytes()
                 self.send_response(200)
                 self.send_header('Content-Type', 'text/javascript; charset=utf-8')
                 self.send_header('Content-Length', str(len(raw)))
@@ -58,6 +64,13 @@ def make_handler(database):
                 self.send_header('X-Content-Type-Options', 'nosniff')
                 self.end_headers()
                 return self.wfile.write(raw)
+            if parsed.path == '/api/admin':
+                try:
+                    query = parse_qs(parsed.query, keep_blank_values=True)
+                    if set(query)-{'search','status','offset'} or any(len(v)!=1 for v in query.values()):raise ValueError('Invalid account filter')
+                    return self.respond(200, account_admin.state(database,self.token(),query.get('search',[''])[0],query.get('status',['all'])[0],int(query.get('offset',['0'])[0])))
+                except access.AccessError as error:return self.respond(error.status, {'error':str(error)})
+                except (ValueError,sqlite3.Error):return self.respond(400,{'error':'Could not read account records'})
             if parsed.path != '/api/session':
                 return self.respond(404, {'error': 'Route unavailable in the scoped pilot'})
             try:
@@ -75,10 +88,14 @@ def make_handler(database):
             if not self.valid_host() or self.headers.get_all('Origin', []) != ['http://' + self.headers.get('Host', '')]:
                 return self.respond(403, {'error': 'Matching local Origin required'})
             path = urlparse(self.path).path
-            if path not in ('/api/login', '/api/logout', '/api/note'):
+            if path not in ('/api/login', '/api/logout', '/api/note', '/api/admin', '/api/reset'):
                 return self.respond(404, {'error': 'Route unavailable in the scoped pilot'})
             try:
                 data = request_inputs.parse_object(request_inputs.read_request(self))
+                if path == '/api/reset':
+                    return self.respond(200, account_admin.redeem(database, data.get('token'), data.get('password')))
+                if path == '/api/admin':
+                    return self.respond(200, account_admin.change(database,self.token(),self.headers.get('X-Nexus-CSRF'),data))
                 if path == '/api/login':
                     token, csrf = access.login(database, data.get('username'), data.get('password'))
                     return self.respond(200, {'csrf': csrf}, 'nexus_session=' + token + '; Path=/; HttpOnly; SameSite=Strict; Max-Age=28800')
@@ -89,6 +106,9 @@ def make_handler(database):
                 result = access.note(database, self.token(), csrf, data.get('farm_id'), data.get('note'))
                 return self.respond(200, {'note_id': result})
             except access.AccessError as error:
+                if path=='/api/admin':
+                    try:account_admin.record_denial(database,self.token())
+                    except sqlite3.Error:pass
                 return self.respond(error.status, {'error': str(error)})
             except request_inputs.RequestError as error:
                 self.close_connection = True

@@ -1,4 +1,4 @@
-"""Local account administration foundation. Web routes do not enforce these grants yet."""
+"""Privileged local account creation and farm grants. Full Operations remains single-user."""
 import argparse
 import getpass
 import hashlib
@@ -49,13 +49,20 @@ def connect(database):
         raise
 
 
-def create(database, username, password):
+def validate_username(username):
     if not isinstance(username, str) or not username.isascii() or not 3 <= len(username) <= 64 or any(c not in 'abcdefghijklmnopqrstuvwxyz0123456789-._' for c in username):
         raise ValueError('Username: 3–64 lowercase ASCII letters, digits, dot, dash or underscore')
+
+
+def create(database, username, password):
+    validate_username(username)
     encoded = password_hash(password)
     with closing(connect(database)) as db, db:
         try:
-            return db.execute('INSERT INTO nexus_accounts(username,password_hash,created_at) VALUES (?,?,?)', (username, encoded, datetime.now(timezone.utc).isoformat())).lastrowid
+            account_id = db.execute('INSERT INTO nexus_accounts(username,password_hash,created_at) VALUES (?,?,?)', (username, encoded, datetime.now(timezone.utc).isoformat())).lastrowid
+            from nexus.farm_app.account_admin import event
+            event(db, 'account_create', affected=account_id, summary='Privileged local CLI creation')
+            return account_id
         except sqlite3.IntegrityError:
             raise ValueError('Username already exists') from None
 
@@ -71,6 +78,8 @@ def grant(database, account_id, farm_id, role):
         if old and old['role'] == 'owner' and role != 'owner' and db.execute("SELECT count(*) FROM nexus_farm_memberships m JOIN nexus_accounts a ON a.id=m.account_id WHERE farm_id=? AND role='owner' AND a.disabled=0", (farm_id,)).fetchone()[0] <= 1:
             raise ValueError('Cannot demote the last enabled farm owner')
         db.execute('INSERT INTO nexus_farm_memberships VALUES (?,?,?) ON CONFLICT(account_id,farm_id) DO UPDATE SET role=excluded.role', (account_id, farm_id, role))
+        from nexus.farm_app.account_admin import event
+        event(db, 'account_grant', affected=account_id, farm=farm_id, summary='Privileged local CLI role assignment: '+role)
 
 
 def allowed(database, account_id, farm_id, write=False):
@@ -102,7 +111,7 @@ def main():
         else:
             grant(args.database, args.account_id, args.farm_id, args.role)
             print('Local farm membership saved.')
-        print('Foundation only: web permissions are not enforced. Keep the server local.')
+        print('The pilot enforces its supported routes. Full Operations remains single-user; keep both local.')
     except (ValueError, sqlite3.Error) as error:
         parser.exit(1, f'Account administration failed: {error}\n')
 

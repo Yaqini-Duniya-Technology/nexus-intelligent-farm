@@ -20,6 +20,14 @@ MIGRATIONS = (
         "CREATE TABLE nexus_login_attempts (username_hash TEXT PRIMARY KEY, failures INTEGER NOT NULL, window_start INTEGER NOT NULL)",
         "CREATE TABLE nexus_scoped_notes (id INTEGER PRIMARY KEY, farm_id INTEGER NOT NULL REFERENCES farms(id), account_id INTEGER NOT NULL REFERENCES nexus_accounts(id), note TEXT NOT NULL, created_at TEXT NOT NULL)",
     )),
+    (3, 'account_administration', (
+        "CREATE TABLE nexus_platform_admins (account_id INTEGER PRIMARY KEY REFERENCES nexus_accounts(id))",
+        "ALTER TABLE nexus_accounts ADD COLUMN last_sign_in TEXT",
+        "CREATE TABLE nexus_password_resets (token_hash TEXT PRIMARY KEY, account_id INTEGER NOT NULL REFERENCES nexus_accounts(id), expires_at INTEGER NOT NULL, used_at INTEGER)",
+        "CREATE TABLE nexus_security_events (id INTEGER PRIMARY KEY, recorded_at TEXT NOT NULL, actor_id INTEGER REFERENCES nexus_accounts(id), affected_id INTEGER REFERENCES nexus_accounts(id), farm_id INTEGER REFERENCES farms(id), category TEXT NOT NULL, result TEXT NOT NULL, summary TEXT NOT NULL)",
+        "CREATE TRIGGER nexus_security_no_update BEFORE UPDATE ON nexus_security_events BEGIN SELECT RAISE(ABORT,'Security history is append-only'); END",
+        "CREATE TRIGGER nexus_security_no_delete BEFORE DELETE ON nexus_security_events BEGIN SELECT RAISE(ABORT,'Security history is append-only'); END",
+    )),
 )
 
 

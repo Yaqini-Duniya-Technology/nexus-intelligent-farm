@@ -30,7 +30,7 @@ class DeploymentTests(unittest.TestCase):
 
     def test_backup_precedes_schema_and_repeat_is_noop(self):
         result = self.migrate()
-        self.assertEqual(result['applied'], [1, 2])
+        self.assertEqual(result['applied'], [1, 2, 3])
         with closing(sqlite3.connect(result['backup'])) as db:
             self.assertEqual(db.execute('SELECT count(*) FROM farms').fetchone()[0], 2)
             self.assertIsNone(db.execute("SELECT 1 FROM sqlite_master WHERE name='nexus_accounts'").fetchone())

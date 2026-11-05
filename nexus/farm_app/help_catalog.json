@@ -5625,6 +5625,50 @@
       "after_save": "Check the reported backup and applied versions. Read docs/DEPLOYMENT_CONTROLS.md for commands, path meanings and recovery.",
       "fields": [],
       "example_notice": "Fictional example path C:\\NEXUS-data is illustrative. Do not initialize a new empty database to replace missing records. No passwords belong in farm forms."
+    },
+    {
+      "id": "account-administration",
+      "title": "Manage accounts and farm assignments",
+      "category": "Administration",
+      "routes": [
+        {
+          "path": "/admin"
+        }
+      ],
+      "forms": [],
+      "purpose": "Use the separate pilot administration page as an explicitly bootstrapped platform administrator.",
+      "steps": [
+        "Apply migration 3 and bootstrap an existing account through the privileged CLI. Sign in to the pilot and open Account administration.",
+        "Search usernames, create accounts with a private initial password, then explicitly assign an existing farm.",
+        "Owner/editor/viewer are the implemented farm roles. Only platform administrators can manage accounts. Last-owner and last-administrator guards prevent lockout.",
+        "Disabling signs out existing sessions. Read the safe activity history and the embedded Help. Full Operations account enforcement remains incomplete."
+      ],
+      "save_effect": "Preserves farm history; administration changes access, while recovery replaces the password and revokes sessions.",
+      "after_save": "Refresh and verify the saved result. Read docs/security/ACCOUNT_GUIDE.md and the pilot embedded Help.",
+      "fields": [],
+      "example_notice": "Fictional examples are format illustrations only. Replace account IDs and private paths with verified values. Never share passwords or recovery credentials."
+    },
+    {
+      "id": "account-recovery",
+      "title": "Recover an account password",
+      "category": "Administration",
+      "routes": [
+        {
+          "path": "/workbench"
+        }
+      ],
+      "forms": [],
+      "purpose": "Use independently verified operator-mediated recovery; no email/SMS delivery is configured.",
+      "steps": [
+        "Ask the authorised operator to verify identity independently, not by username alone.",
+        "The operator uses issue-reset with a private output file. The single-use credential expires after 15 minutes and is never shown in the dashboard.",
+        "Open the pilot recovery form, enter the credential and repeat a new 12–1024 character password. All old sessions are invalidated.",
+        "Delete the private credential file after use; never put credentials in URLs, logs, farm notes or chat."
+      ],
+      "save_effect": "Preserves farm history; administration changes access, while recovery replaces the password and revokes sessions.",
+      "after_save": "Refresh and verify the saved result. Read docs/security/ACCOUNT_GUIDE.md and the pilot embedded Help.",
+      "fields": [],
+      "example_notice": "Fictional examples are format illustrations only. Replace account IDs and private paths with verified values. Never share passwords or recovery credentials."
     }
   ],
   "glossary": {
