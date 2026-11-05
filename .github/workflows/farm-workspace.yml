@@ -35,8 +35,32 @@ jobs:
           node --check nexus/farm_app/form_safety.js
           node --check nexus/farm_app/account_pilot.js
           node --check nexus/farm_app/account_admin.js
+          node --check nexus/farm_app/authenticated_workspace.js
           node --check nexus/farm_app/page_guides.js
       - name: Check form safety helpers
         run: node nexus/farm_app/test_form_safety.cjs
       - name: Smoke test combined routes on an isolated database
         run: python -m nexus.farm_app.smoke_workspace
+
+  authenticated-core-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Verify core access and existing workspace
+        run: python -m unittest discover -s nexus/farm_app -t .
+      - name: Check protected workspace JavaScript
+        run: node --check nexus/farm_app/authenticated_workspace.js
+      - name: Verify existing combined routes
+        run: python -m nexus.farm_app.smoke_workspace
+      - name: Package checked source-only updater
+        run: python nexus/farm_app/package_authenticated.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexus-authenticated-core
+          path: dist/nexus-authenticated-core/
+          if-no-files-found: error
+          retention-days: 30
