@@ -44,38 +44,42 @@
       "id": "NEXUS-SEC-003",
       "title": "Full-workspace authentication",
       "priority": "Critical",
-      "status": "Planned",
+      "status": "In Progress",
       "dependencies": [
         "NEXUS-SEC-001",
         "NEXUS-SEC-002"
       ],
-      "implementation_details": "Not implemented in this batch; follow staged rollout after first-batch verification.",
+      "implementation_details": "Protected core main-launcher mode for farms, fields, observations and tasks; other sections explicitly unavailable. Full-workspace scope incomplete.",
       "security_considerations": "Main Operations remains single-user. Local CLI/database access is privileged. No shared-hosting readiness claimed.",
       "acceptance_criteria": [
         "Full-workspace authentication within its documented supported scope",
         "Positive and denied API cases verified; existing farm history preserved"
       ],
-      "test_results": [],
-      "documentation_status": "Planned",
-      "git_reference": "upgrade/account-administration (immutable commit recorded in release report)"
+      "test_results": [
+        "Direct HTTP and service denial tests plus installer and launcher regressions run in CI; runtime results must be checked on PR #3. Real-browser acceptance pending."
+      ],
+      "documentation_status": "docs/security/AUTHENTICATED_CORE.md and embedded Help",
+      "git_reference": "https://github.com/Yaqini-Duniya-Technology/nexus-intelligent-farm/pull/3"
     },
     {
       "id": "NEXUS-SEC-004",
       "title": "Farm permissions on every request",
       "priority": "Critical",
-      "status": "Planned",
+      "status": "In Progress",
       "dependencies": [
         "NEXUS-SEC-003"
       ],
-      "implementation_details": "Not implemented in this batch; follow staged rollout after first-batch verification.",
+      "implementation_details": "Protected core main-launcher mode for farms, fields, observations and tasks; other sections explicitly unavailable. Full-workspace scope incomplete.",
       "security_considerations": "Main Operations remains single-user. Local CLI/database access is privileged. No shared-hosting readiness claimed.",
       "acceptance_criteria": [
         "Farm permissions on every request within its documented supported scope",
         "Positive and denied API cases verified; existing farm history preserved"
       ],
-      "test_results": [],
-      "documentation_status": "Planned",
-      "git_reference": "upgrade/account-administration (immutable commit recorded in release report)"
+      "test_results": [
+        "Direct HTTP and service denial tests plus installer and launcher regressions run in CI; runtime results must be checked on PR #3. Real-browser acceptance pending."
+      ],
+      "documentation_status": "docs/security/AUTHENTICATED_CORE.md and embedded Help",
+      "git_reference": "https://github.com/Yaqini-Duniya-Technology/nexus-intelligent-farm/pull/3"
     },
     {
       "id": "NEXUS-SEC-005",
@@ -99,21 +103,23 @@
       "id": "NEXUS-SEC-006",
       "title": "Permission regression coverage",
       "priority": "Critical",
-      "status": "Planned",
+      "status": "In Progress",
       "dependencies": [
         "NEXUS-SEC-003",
         "NEXUS-SEC-004",
         "NEXUS-SEC-005"
       ],
-      "implementation_details": "Not implemented in this batch; follow staged rollout after first-batch verification.",
+      "implementation_details": "Protected core main-launcher mode for farms, fields, observations and tasks; other sections explicitly unavailable. Full-workspace scope incomplete.",
       "security_considerations": "Main Operations remains single-user. Local CLI/database access is privileged. No shared-hosting readiness claimed.",
       "acceptance_criteria": [
         "Permission regression coverage within its documented supported scope",
         "Positive and denied API cases verified; existing farm history preserved"
       ],
-      "test_results": [],
-      "documentation_status": "Planned",
-      "git_reference": "upgrade/account-administration (immutable commit recorded in release report)"
+      "test_results": [
+        "Direct HTTP and service denial tests plus installer and launcher regressions run in CI; runtime results must be checked on PR #3. Real-browser acceptance pending."
+      ],
+      "documentation_status": "docs/security/AUTHENTICATED_CORE.md and embedded Help",
+      "git_reference": "https://github.com/Yaqini-Duniya-Technology/nexus-intelligent-farm/pull/3"
     },
     {
       "id": "NEXUS-SEC-007",

@@ -3,6 +3,10 @@ import sqlite3
 import tempfile
 import threading
 import unittest
+import socket
+import subprocess
+import sys
+import time
 from contextlib import closing
 from pathlib import Path
 from http.server import ThreadingHTTPServer
@@ -115,6 +119,31 @@ class WorkspacePermissionTests(unittest.TestCase):
         with self.assertRaises(access.AccessError):core.change(self.path,token,'wrong',dict(operation='field',farm_id=1,name='Forbidden',crop='maize'))
         with self.assertRaises(ValueError):self.change(operation='observation',farm_id=1,field_id=1,note='Fixture',observed_at='2099-01-01T00:00:00+00:00')
         with self.store.connect() as db:self.assertEqual(db.execute('SELECT count(*) FROM observations').fetchone()[0],0)
+
+    def test_main_launcher_authenticated_mode(self):
+        with socket.socket() as sock:
+            sock.bind(('127.0.0.1',0));port=sock.getsockname()[1]
+        with tempfile.TemporaryFile() as log:
+            process=subprocess.Popen([sys.executable,'-u','-m','nexus.farm_app.operations','--authenticated','--database',str(self.path),'--port',str(port)],stdout=log,stderr=log)
+            try:
+                for attempt in range(150):
+                    if process.poll() is not None:
+                        log.seek(0);self.fail(log.read().decode(errors='replace'))
+                    try:
+                        with urlopen(f'http://127.0.0.1:{port}/',timeout=.5) as r:
+                            self.assertIn(b'Open workspace',r.read())
+                        break
+                    except OSError:
+                        time.sleep(.05)
+                else:
+                    self.fail('Authenticated launcher did not start')
+                with self.assertRaises(HTTPError) as error:
+                    urlopen(f'http://127.0.0.1:{port}/api/state')
+                self.assertEqual(error.exception.code,404)
+            finally:
+                process.terminate()
+                try:process.wait(timeout=5)
+                except subprocess.TimeoutExpired:process.kill();process.wait()
 
     def test_http_login_protected_routes_writes_and_legacy_denials(self):
         server=ThreadingHTTPServer(('127.0.0.1',0),web.make_handler(self.path))
