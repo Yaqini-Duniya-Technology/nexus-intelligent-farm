@@ -31,8 +31,8 @@ class WorkspacePermissionTests(unittest.TestCase):
             accounts.grant(self.path,uid,farm,role)
             self.sessions[name]=access.login(self.path,name,'fixture-'+name+'-password')
 
-    def change(self,name='owner',**data):
-        token,csrf=self.sessions[name]
+    def change(self,account_name='owner',**data):
+        token,csrf=self.sessions[account_name]
         return core.change(self.path,token,csrf,data)
 
     def observation(self,name='owner',farm=1,field=1):
