@@ -1,0 +1,1260 @@
+{
+  "release": "nexus-baseline-inspections-v1",
+  "scope": "Static candidate inventory, not proof of route reachability or feature completion. Dynamic SQL/routes require manual review.",
+  "modules": [
+    {
+      "module": "__init__",
+      "command": false,
+      "route_literals": [],
+      "table_references": [],
+      "sha256": "4a2c07e925708580c72bf6091ca07693730ee660401cdbbfaf033f461fa3fdde"
+    },
+    {
+      "module": "account_admin",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "SET",
+        "farms",
+        "nexus_accounts",
+        "nexus_farm_memberships",
+        "nexus_login_attempts",
+        "nexus_password_resets",
+        "nexus_platform_admins",
+        "nexus_security_events",
+        "nexus_sessions"
+      ],
+      "sha256": "bee4d6e8e6145f6db037fb9fc961d7fe1c973218d305278cc36c7fdd650742eb"
+    },
+    {
+      "module": "account_pilot",
+      "command": true,
+      "route_literals": [
+        "/admin",
+        "/admin.js",
+        "/api/admin",
+        "/api/login",
+        "/api/logout",
+        "/api/note",
+        "/api/reset",
+        "/api/session",
+        "/pilot.js"
+      ],
+      "table_references": [],
+      "sha256": "c845851e02288be758ea90bc13c18f284da44bd33395591b9e0affb8f230847f"
+    },
+    {
+      "module": "advisers",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "adviser_reviews",
+        "farms",
+        "fields",
+        "observations"
+      ],
+      "sha256": "18e5acf2afa5e9d39725e9eab87fdbff9205529b612540a0e1a9151fb707572a"
+    },
+    {
+      "module": "atomic",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "changing",
+        "farms",
+        "fields",
+        "observations",
+        "review_snapshots",
+        "tasks"
+      ],
+      "sha256": "73ec55243783249b11cc6741a464fc28374219c3a9a4b4cd499b58f57519149e"
+    },
+    {
+      "module": "audit",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "review_snapshots",
+        "this"
+      ],
+      "sha256": "0cbf1ece9d2939961caa439307cefc96a58de4199dc475c6e4f67873019fb7c4"
+    },
+    {
+      "module": "authenticated_workspace",
+      "command": true,
+      "route_literals": [
+        "/api/field-inspections",
+        "/api/workspace",
+        "/field-inspections",
+        "/inspections.js",
+        "/workspace",
+        "/workspace.js"
+      ],
+      "table_references": [],
+      "sha256": "46de9ee3799e31c9eabff80d2db5566b0410afc88d2c997d6e93d1e520300df6"
+    },
+    {
+      "module": "backup",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "sqlite_master",
+        "your"
+      ],
+      "sha256": "64a279b7e85c7930866468e7283691c96af82907b6c33b2463651f371f3f39a7"
+    },
+    {
+      "module": "baseline_audit",
+      "command": true,
+      "route_literals": [
+        "/admin",
+        "/api/admin",
+        "/api/field-inspections",
+        "/api/login",
+        "/api/logout",
+        "/api/session",
+        "/api/workspace",
+        "/field-inspections",
+        "/workspace"
+      ],
+      "table_references": [
+        "sqlite_master"
+      ],
+      "sha256": "17b451446a20d7facca0927abcf584271f1047686ac03b4f1d6eacda24a0dc17"
+    },
+    {
+      "module": "capture_decision_cycle",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "decision_cycle_snapshots",
+        "decision_events",
+        "decision_review_bundles",
+        "human_decision_reviews",
+        "human_decisions",
+        "sqlite_master",
+        "work"
+      ],
+      "sha256": "dc6af1ea017f695ef42093af4e36d4fb1c7fa652916a978d3ab2767fecebe20f"
+    },
+    {
+      "module": "capture_review",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "decision_events",
+        "decision_review_bundles",
+        "farms",
+        "fields",
+        "human_decisions",
+        "is",
+        "natlas_voice_observation_links",
+        "observation_photos",
+        "observations",
+        "record_corrections",
+        "review_snapshots",
+        "sqlite_master",
+        "tasks",
+        "this",
+        "voice_clarification_answers",
+        "weather_snapshots",
+        "workspace"
+      ],
+      "sha256": "64ce092f43c6e59183f500d824312fc377a1f870a694d29fa3bdabe5f7379583"
+    },
+    {
+      "module": "confirm_voice_review",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "natlas_voice_observation_links",
+        "natlas_voice_response_reviews",
+        "sqlite_master",
+        "voice_drafts",
+        "voice_observation_links"
+      ],
+      "sha256": "61be2232ef4919e482524e19359896025c450dd88290ec0a8ad5cf48a8d14618"
+    },
+    {
+      "module": "correct_record",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "record_corrections",
+        "sqlite_master"
+      ],
+      "sha256": "37ac5e37600d4a984003ecab29bbd9f482eae9d7f68a40ceb8fcdf793994fd74"
+    },
+    {
+      "module": "correct_voice_source",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "sqlite_master",
+        "voice_drafts",
+        "voice_source_corrections"
+      ],
+      "sha256": "bf79ced50177a56345b5b0ae5076176c32698a011a52d72d857c7a2c0f4dec61"
+    },
+    {
+      "module": "decision_cycles",
+      "command": true,
+      "route_literals": [
+        "/api/decision-cycle",
+        "/decision-cycles"
+      ],
+      "table_references": [
+        "an",
+        "decision_cycle_snapshots",
+        "sqlite_master",
+        "these",
+        "this"
+      ],
+      "sha256": "3eb7d70bda9b30cff020e3c538ac49c85e559106fa31036720bd63e52b41bb22"
+    },
+    {
+      "module": "decision_events",
+      "command": true,
+      "route_literals": [
+        "/api/decision-events",
+        "/decision-events"
+      ],
+      "table_references": [
+        "decision_events",
+        "human_decisions",
+        "this"
+      ],
+      "sha256": "c3b3a70e43c28ac73855e6d7a0fb1ebc9b636c48561fc2dcd85825a68c4925bd"
+    },
+    {
+      "module": "decision_report",
+      "command": true,
+      "route_literals": [
+        "/decision-report"
+      ],
+      "table_references": [
+        "decision_events",
+        "decision_review_bundles",
+        "human_decision_reviews",
+        "human_decisions",
+        "sqlite_master",
+        "work"
+      ],
+      "sha256": "466caa0a61d0f673f2392d458c5daaed40bc4b0aa4c4c261ffd970d3311b51b2"
+    },
+    {
+      "module": "decision_review",
+      "command": true,
+      "route_literals": [
+        "/decision-review"
+      ],
+      "table_references": [
+        "several"
+      ],
+      "sha256": "c727b5d4707ac6b37d0afd0031cccef8e3cb929fc58eaaf9a689ba971012dccd"
+    },
+    {
+      "module": "decision_review_completion",
+      "command": true,
+      "route_literals": [
+        "/api/decision-reviews",
+        "/decision-reviews"
+      ],
+      "table_references": [
+        "decision_review_bundles",
+        "human_decision_reviews",
+        "human_decisions"
+      ],
+      "sha256": "ebcc90f6472b1835173ad9ea9d76f04ee686630619a4018ab24a89acce35de9f"
+    },
+    {
+      "module": "decision_reviews",
+      "command": true,
+      "route_literals": [
+        "/decision-reviews"
+      ],
+      "table_references": [
+        "them",
+        "this"
+      ],
+      "sha256": "eba2cab0b5872d72e19c4ebb504c46d383992ca93614949f9544abaa21728f2c"
+    },
+    {
+      "module": "demo_workspace",
+      "command": true,
+      "route_literals": [],
+      "table_references": [],
+      "sha256": "54c876dc199b2c472637145539919d8de13f15b0a55cc6b808ead1ff113d795d"
+    },
+    {
+      "module": "deployment_controls",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "ON",
+        "nexus_accounts",
+        "nexus_farm_memberships",
+        "nexus_login_attempts",
+        "nexus_password_resets",
+        "nexus_platform_admins",
+        "nexus_schema_migrations",
+        "nexus_scoped_notes",
+        "nexus_security_events",
+        "nexus_sessions",
+        "sqlite_master"
+      ],
+      "sha256": "e214d3bcbabad50a40fe8a5c068a7110eb40e01b0322b1fa09189c5802c4ff88"
+    },
+    {
+      "module": "development_tracker",
+      "command": true,
+      "route_literals": [],
+      "table_references": [],
+      "sha256": "6658e06beb7f7be55381282b0cbebdef26d7c3a86eb10cb2a0796e9fbf3a88c4"
+    },
+    {
+      "module": "evidence_quality",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "current",
+        "this"
+      ],
+      "sha256": "06a6280a36b46018c3f97d0f7509d2655211f1f6eb81b36abe792d50213aa2e7"
+    },
+    {
+      "module": "evidence_studio",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "crop_seasons",
+        "decision_review_bundles",
+        "fields",
+        "observations"
+      ],
+      "sha256": "48f5c5ed14dd41105d588207c24c2cddb2495ef2b42f37a9ac402f229e2a1cf0"
+    },
+    {
+      "module": "experiences",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "conservative",
+        "decision_events",
+        "decision_experiences",
+        "human_decisions"
+      ],
+      "sha256": "6dc0d75b9092981bd9eb32b662ce440f446dd0cd664e04f47256b7f69af9a6d1"
+    },
+    {
+      "module": "export",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "being",
+        "sqlite_master"
+      ],
+      "sha256": "298050849cb9b3ab1e01d2c69aaecf976388e980908c3e06da0e122541603704"
+    },
+    {
+      "module": "export_photos",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "observation_photos"
+      ],
+      "sha256": "f5c91c2e22a5c2b31b31dbd9c2432fb3e54a756979ed96e586d1157734c71ee4"
+    },
+    {
+      "module": "export_voice_request",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "natlas_voice_requests",
+        "voice_drafts"
+      ],
+      "sha256": "e9c25f902a5838081b3390399563f7f2bbcd0b0cb6d55a66fff35ec577325e18"
+    },
+    {
+      "module": "farm_resources",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "fields",
+        "resource_entries"
+      ],
+      "sha256": "2235e133603b1989ab1ff140f241c363dfb10bcc5ac6095f07c16079b4081865"
+    },
+    {
+      "module": "field_context",
+      "command": true,
+      "route_literals": [
+        "/api/field-context",
+        "/field-context"
+      ],
+      "table_references": [
+        "farms",
+        "field_context_versions",
+        "fields",
+        "or"
+      ],
+      "sha256": "b48030f3c00f1ce8dfa54077ebaf859f81ceff7d8a9389e9b746139bce1dc8ba"
+    },
+    {
+      "module": "field_context_guard",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "field_context_versions"
+      ],
+      "sha256": "77c7bb5b5523251db73f3813588d3684297816cd3ec5a14d05c5a71707d7436e"
+    },
+    {
+      "module": "field_inspections",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "cob",
+        "field_inspections",
+        "fields",
+        "observations",
+        "sqlite_master",
+        "this"
+      ],
+      "sha256": "748b30115d5992890b7a1573b4e1a2e56173bf572b8055e60cc3ce6b3a0306fd"
+    },
+    {
+      "module": "field_measurements",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "measurement_imports"
+      ],
+      "sha256": "53cb668dd5f68f0e34fc5f23e9a29d49629cf7bfcebb466603ed1b8eee13fbbd"
+    },
+    {
+      "module": "finance",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "crop_seasons",
+        "fields",
+        "produce",
+        "season_transactions"
+      ],
+      "sha256": "ab384324da86fe63814058fb2a68fe9a0c6ecaae9b58acdaefa1416f6d7bf4ef"
+    },
+    {
+      "module": "harvests",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "SET",
+        "crop_seasons",
+        "fields",
+        "final",
+        "harvests"
+      ],
+      "sha256": "a76e918eef290d60d2f0c83f3e5c49117367bbe9bed681118bf4733869cef771"
+    },
+    {
+      "module": "hausa_transcribe",
+      "command": true,
+      "route_literals": [],
+      "table_references": [],
+      "sha256": "160d95d451984596965fad636360b1c972ca5061ce0146a5cd05b63a631b3121"
+    },
+    {
+      "module": "history",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "the"
+      ],
+      "sha256": "bc13e12b745f64c638057a63e1b3342e111983ca78a90235e67a393d0393057d"
+    },
+    {
+      "module": "human_decisions",
+      "command": true,
+      "route_literals": [
+        "/api/human-decisions",
+        "/human-decisions"
+      ],
+      "table_references": [
+        "decision_review_bundles",
+        "human_decisions",
+        "the"
+      ],
+      "sha256": "4a7e455e19dfbfd50171ba6c800ee065e301f95d8ce0c92b0a67c79a48a6a13c"
+    },
+    {
+      "module": "import_natlas",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "natlas_test_imports"
+      ],
+      "sha256": "b8996fd328f2599f1dc42921f55592c56b8943c57479bf88118d589e99ff64b1"
+    },
+    {
+      "module": "import_voice_response",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "natlas_voice_requests",
+        "natlas_voice_responses",
+        "original",
+        "sqlite_master"
+      ],
+      "sha256": "544bb5fea01e90d99fd7dd84b3db938ae0eec92d8d81406e8188813f083e51a7"
+    },
+    {
+      "module": "install_authenticated",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "an",
+        "nexus"
+      ],
+      "sha256": "e9e6a6dfef348b3d123e54ce3b053aa5926ef7c847f43d035dc127c30cfdfce0"
+    },
+    {
+      "module": "local_accounts",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "SET",
+        "farms",
+        "nexus_accounts",
+        "nexus_farm_memberships"
+      ],
+      "sha256": "38a1f68a80c2026c1048a1cae1bc3153444e4d75b02d9ec6680b0b7445b90338"
+    },
+    {
+      "module": "logistics_catalog",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "a",
+        "stock",
+        "the"
+      ],
+      "sha256": "c3904c95a5c023ca289e889d789a952b68f0e2eb24be1f35953104ac418053e2"
+    },
+    {
+      "module": "market_catalog",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "a",
+        "actual",
+        "available",
+        "quarantined"
+      ],
+      "sha256": "2c176f8bf08bc52cecc6875a37cdceaf143eed85cc3dc49d1a9661ec27964c75"
+    },
+    {
+      "module": "natlas_review",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "a",
+        "natlas_test_imports",
+        "sqlite_master"
+      ],
+      "sha256": "6b5276d5f6ec2ce85879c88229e865bb62b6f1846a369bcf551a52966077672b"
+    },
+    {
+      "module": "observation_report",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "adviser_reviews",
+        "farms",
+        "fields",
+        "followups",
+        "observation_photos",
+        "observations",
+        "sqlite_master",
+        "task_actions",
+        "tasks"
+      ],
+      "sha256": "21ac3451ea40a7b6ca30566f4b9c64d3a9bc146e060c8240b747f8e6f1f8c7b2"
+    },
+    {
+      "module": "observation_seasons",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "crop_seasons",
+        "earlier",
+        "farms",
+        "fields",
+        "observation_season_history",
+        "observations"
+      ],
+      "sha256": "3704d654acbb40f9c36ef1674d55730fc916544222387f9062f1cf0d70f70ee6"
+    },
+    {
+      "module": "observations",
+      "command": false,
+      "route_literals": [],
+      "table_references": [],
+      "sha256": "8ae3c4dcfa05594e97eb34360fcc53964b36741e8c2f3c6a3b9200d255d71f3f"
+    },
+    {
+      "module": "operations",
+      "command": true,
+      "route_literals": [
+        "/advisers",
+        "/api/help/catalog",
+        "/api/help/context",
+        "/api/help/download",
+        "/api/help/search",
+        "/api/help/topic",
+        "/api/market/offer",
+        "/api/market/statement",
+        "/api/ops/",
+        "/api/ops/work",
+        "/api/ops/work-events",
+        "/api/resources/",
+        "/api/resources/calendar",
+        "/api/resources/export",
+        "/api/resources/meta",
+        "/api/resources/save",
+        "/api/resources/state",
+        "/api/studio/",
+        "/evidence-studio",
+        "/field-inspections",
+        "/finance",
+        "/help",
+        "/help-centre",
+        "/human-decisions",
+        "/market",
+        "/ops-assets/",
+        "/photos",
+        "/resources",
+        "/review-bundles",
+        "/season-overview",
+        "/stock",
+        "/work",
+        "/workbench"
+      ],
+      "table_references": [
+        "fields",
+        "natlas_voice_observation_links",
+        "natlas_voice_requests",
+        "natlas_voice_responses",
+        "observations"
+      ],
+      "sha256": "b5e19be8103e4cb918226542c3e371466791045a8c833841119304d451b70e56"
+    },
+    {
+      "module": "operations_common",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "sqlite_master"
+      ],
+      "sha256": "ecd6da62e25e164c016caab58fecb100259143713772ef0cd5771a6f7ec0663d"
+    },
+    {
+      "module": "operations_exports",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "this"
+      ],
+      "sha256": "819589d0243fae13d5f0bfe3fa70746eee103b087ea407dec0eb87cc160731cf"
+    },
+    {
+      "module": "operations_records",
+      "command": false,
+      "route_literals": [
+        "/advisers",
+        "/decision-events",
+        "/decision-reviews",
+        "/field-inspections",
+        "/observation-seasons",
+        "/photos"
+      ],
+      "table_references": [
+        "date",
+        "decision_review_bundles",
+        "human_decision_reviews",
+        "human_decisions",
+        "observations",
+        "tasks",
+        "this",
+        "work_orders"
+      ],
+      "sha256": "81a3ee90b1474862f9b2c8f77d69690c5ed1b748ddcad2171273b163d0493aca"
+    },
+    {
+      "module": "operations_recovery",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "an",
+        "observation_photos",
+        "work_orders"
+      ],
+      "sha256": "edf404419341ffea71dcb05a57703d80de07e2bb940db79f817a86150af3e5a4"
+    },
+    {
+      "module": "package_authenticated",
+      "command": false,
+      "route_literals": [],
+      "table_references": [],
+      "sha256": "9185c687bc2b9ff80fb3361b5d7854d7a2b6758169d3c96a7df5ed55988c4627"
+    },
+    {
+      "module": "page_guides",
+      "command": false,
+      "route_literals": [
+        "/api/",
+        "/evidence-studio",
+        "/help-centre?",
+        "/market",
+        "/ops-assets/",
+        "/resources",
+        "/workbench"
+      ],
+      "table_references": [
+        "your"
+      ],
+      "sha256": "65b90f04030d7241913a87fa6a66f6f539b36b9396222a19cd2a780a23d1ad44"
+    },
+    {
+      "module": "photos",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "farms",
+        "fields",
+        "observation_photos",
+        "observations"
+      ],
+      "sha256": "56ab93fdfce3f5bf7770456c7440242e2693e118662bdec9317fd89372186de4"
+    },
+    {
+      "module": "produce_market",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "this"
+      ],
+      "sha256": "df33c19355e9ebdb08e048b33fdf15fb8fa61dec757cd8755af00687a077a924"
+    },
+    {
+      "module": "project_branding",
+      "command": false,
+      "route_literals": [
+        "/api/",
+        "/ops-assets/"
+      ],
+      "table_references": [],
+      "sha256": "2eec914cbc2be22f4a6520f3a10b535302c6ecbdb89588667086a17677671c06"
+    },
+    {
+      "module": "request_inputs",
+      "command": false,
+      "route_literals": [
+        "/api/photos",
+        "/api/studio/",
+        "/api/voice-drafts"
+      ],
+      "table_references": [],
+      "sha256": "c64dc594d144e70159facf00a2a420ac330652f2553e3e3088d5291c03811fb7"
+    },
+    {
+      "module": "resource_catalog",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "a",
+        "actual",
+        "crop"
+      ],
+      "sha256": "966da0cef02f08094fde0af3f16acd9fe1479e7bf0f0ca83afa1d3275a4e206b"
+    },
+    {
+      "module": "resource_formtypes",
+      "command": false,
+      "route_literals": [],
+      "table_references": [],
+      "sha256": "f09c612257ffa29bc03d78b54f527aa7d6b5fb4451970cb8f4867fc9b7418979"
+    },
+    {
+      "module": "resource_logistics",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "crop_seasons",
+        "harvests",
+        "observations",
+        "season_transactions"
+      ],
+      "sha256": "49e756d3e66aa9344bf028c98086a9f0e1c071756b894635718ea178ac99ef00"
+    },
+    {
+      "module": "review_bundles",
+      "command": true,
+      "route_literals": [
+        "/api/review-bundle",
+        "/review-bundles"
+      ],
+      "table_references": [
+        "an",
+        "bundle",
+        "corrected",
+        "decision_review_bundles",
+        "farm",
+        "sqlite_master",
+        "this",
+        "workspace"
+      ],
+      "sha256": "65f5f6ad163ba42eb60132ac64cdeae0ca17f5fc77eb2448982fd99993d060af"
+    },
+    {
+      "module": "review_readiness",
+      "command": true,
+      "route_literals": [],
+      "table_references": [
+        "decision_review_bundles",
+        "its"
+      ],
+      "sha256": "44c3ddc279bdbefe83384431faf3fdefb3ff88aaf2ab56ab0bd1132a70ca8ccc"
+    },
+    {
+      "module": "scheduling",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "followup_schedules",
+        "followups",
+        "observations",
+        "task_actions",
+        "tasks",
+        "the",
+        "this"
+      ],
+      "sha256": "abda9656fe7f9db5c0afb223f74fd72704191cdf18c49f2a9c6cc14da0b50e4d"
+    },
+    {
+      "module": "scoped_access",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "SET",
+        "farms",
+        "fields",
+        "nexus_accounts",
+        "nexus_farm_memberships",
+        "nexus_login_attempts",
+        "nexus_platform_admins",
+        "nexus_scoped_notes",
+        "nexus_sessions",
+        "observations"
+      ],
+      "sha256": "a7427b481b89363d79d8a1eed782c278a9499facd89329267faf7513f6a49db3"
+    },
+    {
+      "module": "season_context",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "observation_season_history",
+        "those"
+      ],
+      "sha256": "d2ff4f899e46d7756b7c2f231cd59c84970cf9b05ca0340dd5df3652fa7b4d9f"
+    },
+    {
+      "module": "season_overview",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "frozen"
+      ],
+      "sha256": "e6257f2b480e3c86d0cdee7650b067ccefb2d4fa69e6fcd506bad8c87fed227d"
+    },
+    {
+      "module": "seasons",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "crop_seasons",
+        "farms",
+        "fields"
+      ],
+      "sha256": "718e82a29f2b0f5cc1b3db3f4827b1d5109f01a526a8f27d73cc4ebd27f8a80e"
+    },
+    {
+      "module": "server",
+      "command": true,
+      "route_literals": [
+        "/advisers",
+        "/api/adviser-reviews",
+        "/api/farms",
+        "/api/field-inspections",
+        "/api/fields",
+        "/api/finance",
+        "/api/followup-schedules",
+        "/api/followup-schedules/close",
+        "/api/followups",
+        "/api/harvests",
+        "/api/history",
+        "/api/observation-seasons",
+        "/api/observations",
+        "/api/photo",
+        "/api/photos",
+        "/api/review-snapshot",
+        "/api/season-overview",
+        "/api/seasons",
+        "/api/state",
+        "/api/stock",
+        "/api/task-actions",
+        "/api/tasks",
+        "/field-inspections",
+        "/finance",
+        "/harvests",
+        "/history",
+        "/observation-seasons",
+        "/overview",
+        "/photos",
+        "/season-overview",
+        "/seasons",
+        "/stock"
+      ],
+      "table_references": [],
+      "sha256": "131f1091a88ce7b16f312dc6386295171018288e1418259ef548b1e5fe9512ff"
+    },
+    {
+      "module": "smoke_workspace",
+      "command": true,
+      "route_literals": [
+        "/advisers",
+        "/api/help/catalog",
+        "/api/ops/health",
+        "/api/ops/meta",
+        "/api/ops/search",
+        "/api/ops/work",
+        "/api/resources/meta",
+        "/api/studio/backups",
+        "/api/studio/case-queue",
+        "/api/studio/cases",
+        "/api/studio/finance",
+        "/api/studio/links",
+        "/api/studio/measurements",
+        "/api/studio/meta",
+        "/api/studio/notes",
+        "/api/studio/quality",
+        "/api/studio/template",
+        "/api/studio/views",
+        "/decision-cycles",
+        "/decision-events",
+        "/decision-report",
+        "/decision-reviews",
+        "/evidence-studio",
+        "/field-context",
+        "/field-inspections",
+        "/finance",
+        "/harvests",
+        "/help",
+        "/help-centre",
+        "/history",
+        "/human-decisions",
+        "/market",
+        "/observation-seasons",
+        "/ops-assets/evidence_studio.js",
+        "/ops-assets/form_safety.js",
+        "/ops-assets/operations_workbench.js",
+        "/ops-assets/page_guides.css",
+        "/ops-assets/page_guides.js",
+        "/ops-assets/resource_workspace.css",
+        "/ops-assets/resource_workspace.js",
+        "/overview",
+        "/photos",
+        "/resources",
+        "/review-bundles",
+        "/season-overview",
+        "/seasons",
+        "/stock",
+        "/voice",
+        "/voice-clarifications",
+        "/voice-extraction-review",
+        "/voice-pipeline",
+        "/voice-reviewed-confirmation",
+        "/weather",
+        "/workbench"
+      ],
+      "table_references": [],
+      "sha256": "e02cfbd142c431764161293be4f8144fa6da605e7cad0c2f10ee8aa52b3d28cc"
+    },
+    {
+      "module": "stock",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "SET",
+        "crop_seasons",
+        "fields",
+        "harvest_product_forms",
+        "harvests",
+        "season_transactions",
+        "stock_movements",
+        "stock_sales"
+      ],
+      "sha256": "340599bfa67eefb12eb4f43e8bd154a0b09f21756dd1317266f0e4989356e9e2"
+    },
+    {
+      "module": "store",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "EVIDENCE",
+        "farms",
+        "fields",
+        "followups",
+        "observations",
+        "task_actions",
+        "tasks"
+      ],
+      "sha256": "15e25c5ba18e9adc09308b8fa6fe61cd2612b3d0a3103a5f2f29b02563e3dec1"
+    },
+    {
+      "module": "studio_backups",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "the"
+      ],
+      "sha256": "933dbaad75eaad54bfe649414945572ee4dc4cff87028e522b60ade4392fadc2"
+    },
+    {
+      "module": "studio_cases",
+      "command": false,
+      "route_literals": [
+        "/evidence-studio",
+        "/workbench"
+      ],
+      "table_references": [],
+      "sha256": "19499bfd7b998b73701828a2f695e5c5dcb2886912cf44ba11069bfc0c97832e"
+    },
+    {
+      "module": "studio_ledger",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "IF",
+        "fields",
+        "observations"
+      ],
+      "sha256": "1d5c44f1ff23c2bec7f57e0a3f2b994f8095eaa9039b940886edf03bce329de3"
+    },
+    {
+      "module": "studio_links",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "decision_review_bundles",
+        "human_decisions",
+        "observations"
+      ],
+      "sha256": "86a3d9f24738085afc2bf6332ac2e51d128e4137cda59a955dc534f7368983dc"
+    },
+    {
+      "module": "studio_reports",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "crop_seasons",
+        "date",
+        "decision_review_bundles",
+        "season_transactions"
+      ],
+      "sha256": "06633f5a11351f41983b51023ecfd30e3b13b6aa1de1aa7e5e05aaced0ad72e5"
+    },
+    {
+      "module": "studio_test_support",
+      "command": false,
+      "route_literals": [],
+      "table_references": [],
+      "sha256": "96bfea6c0e98addaaac010a15092a793a93970abf3c0652fe9cce59d68fa8549"
+    },
+    {
+      "module": "voice_clarifications",
+      "command": true,
+      "route_literals": [
+        "/api/voice-clarifications",
+        "/voice-clarifications"
+      ],
+      "table_references": [
+        "fields",
+        "natlas_voice_observation_links",
+        "observations",
+        "sqlite_master",
+        "voice_clarification_answers"
+      ],
+      "sha256": "fab7571c31efa163ce4a3748584cfd2f640efb369c7bf35ff30edf501c7780ce"
+    },
+    {
+      "module": "voice_confirm",
+      "command": true,
+      "route_literals": [
+        "/api/voice-confirm",
+        "/api/voice-links",
+        "/voice-confirm"
+      ],
+      "table_references": [
+        "voice_drafts",
+        "voice_observation_links"
+      ],
+      "sha256": "04c3b677dab14f803f44a76a6a5ecb483fa8c754aab2405ea3640980c53930b0"
+    },
+    {
+      "module": "voice_drafts",
+      "command": true,
+      "route_literals": [
+        "/api/voice-draft-correction",
+        "/api/voice-drafts",
+        "/voice"
+      ],
+      "table_references": [
+        "voice_drafts"
+      ],
+      "sha256": "9fb09b7a9e9303605aaf4ae414f5a844bb49ca436bc672465fd9fb124b339640"
+    },
+    {
+      "module": "voice_pipeline",
+      "command": true,
+      "route_literals": [
+        "/api/pipeline"
+      ],
+      "table_references": [
+        "its",
+        "sqlite_master"
+      ],
+      "sha256": "c199b2ef73de8726af21ad363d8609020d3a1b9aa9d335965e5667d9e1eeeaa4"
+    },
+    {
+      "module": "voice_response_review",
+      "command": true,
+      "route_literals": [
+        "/api/records",
+        "/api/reviews"
+      ],
+      "table_references": [
+        "natlas_voice_requests",
+        "natlas_voice_response_reviews",
+        "natlas_voice_responses",
+        "sqlite_master"
+      ],
+      "sha256": "da941415052bff8ffd2922525037d3e13e8c728d404f4c2a25789903bf628595"
+    },
+    {
+      "module": "voice_review",
+      "command": true,
+      "route_literals": [
+        "/api/voice-transcribe",
+        "/voice"
+      ],
+      "table_references": [],
+      "sha256": "c5f39cf7b91cae562fb0f7852f55e6b102ffb9d26cc4cff1983b427a7978c275"
+    },
+    {
+      "module": "voice_review_confirm",
+      "command": true,
+      "route_literals": [
+        "/api/confirm",
+        "/api/records"
+      ],
+      "table_references": [
+        "farms",
+        "fields",
+        "natlas_voice_observation_links",
+        "sqlite_master",
+        "voice_observation_links"
+      ],
+      "sha256": "787507b941d1ac9aa88a13b074ed755b680d713563a8337880dd80c25f020438"
+    },
+    {
+      "module": "voice_workspace",
+      "command": true,
+      "route_literals": [
+        "/api/confirm",
+        "/api/confirmed-voice-context",
+        "/api/pipeline",
+        "/api/records",
+        "/api/reviews",
+        "/api/voice-extraction-records",
+        "/api/voice-extraction-reviews",
+        "/api/voice-pipeline",
+        "/api/voice-reviewed-confirm",
+        "/api/voice-reviewed-records",
+        "/voice",
+        "/voice-extraction-review",
+        "/voice-pipeline",
+        "/voice-reviewed-confirmation"
+      ],
+      "table_references": [
+        "natlas_voice_observation_links",
+        "sqlite_master"
+      ],
+      "sha256": "bc16511115f103624bc3a2ff7f1bfacf0ebc9bb5388127b2d583645b53fea73e"
+    },
+    {
+      "module": "weather",
+      "command": true,
+      "route_literals": [
+        "/api/weather",
+        "/api/weather-snapshots",
+        "/weather"
+      ],
+      "table_references": [
+        "weather_snapshots"
+      ],
+      "sha256": "508cd818e860f8b5b14661d7f01d6f02d611817b78d9c6510c48377ae985cc54"
+    },
+    {
+      "module": "work_orders",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "fields",
+        "observations",
+        "work_order_events",
+        "work_orders"
+      ],
+      "sha256": "25e9d29667dda5efe7835a5305daea93df3a0ed8eddee122ebb380f1989360ac"
+    },
+    {
+      "module": "workspace_access",
+      "command": false,
+      "route_literals": [],
+      "table_references": [
+        "farms",
+        "fields",
+        "nexus_farm_memberships",
+        "nexus_platform_admins",
+        "observations",
+        "sqlite_master",
+        "tasks"
+      ],
+      "sha256": "8f2f8a8ab9e9f4b6daed6b2188ee305835c7ea76ed33ce3c25304e6c4d699c97"
+    }
+  ],
+  "authenticated_routes": [
+    "/",
+    "/workspace",
+    "/api/workspace",
+    "/field-inspections",
+    "/api/field-inspections",
+    "/api/session",
+    "/api/login",
+    "/api/logout",
+    "/admin",
+    "/api/admin"
+  ],
+  "authenticated_boundary": "Only explicit authenticated handler and account-pilot allowlists. Legacy operational routes are not delegated."
+}

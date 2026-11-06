@@ -1,0 +1,3605 @@
+{
+  "version": "nexus-master-upgrades-v1",
+  "denominator": 150,
+  "status_policy": "Do not infer completion from existing feature names or test count. No field validation claimed.",
+  "upgrades": [
+    {
+      "id": "NEXUS-001",
+      "title": "Inventory pages and commands",
+      "module": "Baseline",
+      "priority": 1,
+      "existing_status": "Baseline evidence recorded; acceptance review pending",
+      "dependencies": [],
+      "technical_changes": "See BATCH-01.md",
+      "migration": "No new migration in batch 1",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": "502 workspace tests and 65-route smoke passed locally, 2026-11-06. This is batch evidence, not complete acceptance of every baseline requirement.",
+      "manual_results": "New inspection browser acceptance pending. Prior authenticated owner/viewer display was user-confirmed.",
+      "help": "docs/development/BATCH-01.md and inspection page Help",
+      "git_reference": "upgrade/baseline-protected-inspections",
+      "status": "In Progress"
+    },
+    {
+      "id": "NEXUS-002",
+      "title": "Map database dependencies",
+      "module": "Baseline",
+      "priority": 2,
+      "existing_status": "Baseline evidence recorded; acceptance review pending",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": "See BATCH-01.md",
+      "migration": "No new migration in batch 1",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": "502 workspace tests and 65-route smoke passed locally, 2026-11-06. This is batch evidence, not complete acceptance of every baseline requirement.",
+      "manual_results": "New inspection browser acceptance pending. Prior authenticated owner/viewer display was user-confirmed.",
+      "help": "docs/development/BATCH-01.md and inspection page Help",
+      "git_reference": "upgrade/baseline-protected-inspections",
+      "status": "In Progress"
+    },
+    {
+      "id": "NEXUS-003",
+      "title": "Distinguish authenticated and legacy routes",
+      "module": "Baseline",
+      "priority": 3,
+      "existing_status": "Baseline evidence recorded; acceptance review pending",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": "See BATCH-01.md",
+      "migration": "No new migration in batch 1",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": "502 workspace tests and 65-route smoke passed locally, 2026-11-06. This is batch evidence, not complete acceptance of every baseline requirement.",
+      "manual_results": "New inspection browser acceptance pending. Prior authenticated owner/viewer display was user-confirmed.",
+      "help": "docs/development/BATCH-01.md and inspection page Help",
+      "git_reference": "upgrade/baseline-protected-inspections",
+      "status": "In Progress"
+    },
+    {
+      "id": "NEXUS-004",
+      "title": "Release identity",
+      "module": "Baseline",
+      "priority": 4,
+      "existing_status": "Baseline evidence recorded; acceptance review pending",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": "See BATCH-01.md",
+      "migration": "No new migration in batch 1",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": "502 workspace tests and 65-route smoke passed locally, 2026-11-06. This is batch evidence, not complete acceptance of every baseline requirement.",
+      "manual_results": "New inspection browser acceptance pending. Prior authenticated owner/viewer display was user-confirmed.",
+      "help": "docs/development/BATCH-01.md and inspection page Help",
+      "git_reference": "upgrade/baseline-protected-inspections",
+      "status": "In Progress"
+    },
+    {
+      "id": "NEXUS-005",
+      "title": "Reconcile roadmap",
+      "module": "Baseline",
+      "priority": 5,
+      "existing_status": "Baseline evidence recorded; acceptance review pending",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": "See BATCH-01.md",
+      "migration": "No new migration in batch 1",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": "502 workspace tests and 65-route smoke passed locally, 2026-11-06. This is batch evidence, not complete acceptance of every baseline requirement.",
+      "manual_results": "New inspection browser acceptance pending. Prior authenticated owner/viewer display was user-confirmed.",
+      "help": "docs/development/BATCH-01.md and inspection page Help",
+      "git_reference": "upgrade/baseline-protected-inspections",
+      "status": "In Progress"
+    },
+    {
+      "id": "NEXUS-006",
+      "title": "Workflow acceptance criteria",
+      "module": "Baseline",
+      "priority": 6,
+      "existing_status": "Baseline evidence recorded; acceptance review pending",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": "See BATCH-01.md",
+      "migration": "No new migration in batch 1",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": "502 workspace tests and 65-route smoke passed locally, 2026-11-06. This is batch evidence, not complete acceptance of every baseline requirement.",
+      "manual_results": "New inspection browser acceptance pending. Prior authenticated owner/viewer display was user-confirmed.",
+      "help": "docs/development/BATCH-01.md and inspection page Help",
+      "git_reference": "upgrade/baseline-protected-inspections",
+      "status": "In Progress"
+    },
+    {
+      "id": "NEXUS-007",
+      "title": "Isolated demonstration database",
+      "module": "Baseline",
+      "priority": 7,
+      "existing_status": "Baseline evidence recorded; acceptance review pending",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": "See BATCH-01.md",
+      "migration": "No new migration in batch 1",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": "502 workspace tests and 65-route smoke passed locally, 2026-11-06. This is batch evidence, not complete acceptance of every baseline requirement.",
+      "manual_results": "New inspection browser acceptance pending. Prior authenticated owner/viewer display was user-confirmed.",
+      "help": "docs/development/BATCH-01.md and inspection page Help",
+      "git_reference": "upgrade/baseline-protected-inspections",
+      "status": "In Progress"
+    },
+    {
+      "id": "NEXUS-008",
+      "title": "Windows and Python support",
+      "module": "Baseline",
+      "priority": 8,
+      "existing_status": "Baseline evidence recorded; acceptance review pending",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": "See BATCH-01.md",
+      "migration": "No new migration in batch 1",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": "502 workspace tests and 65-route smoke passed locally, 2026-11-06. This is batch evidence, not complete acceptance of every baseline requirement.",
+      "manual_results": "New inspection browser acceptance pending. Prior authenticated owner/viewer display was user-confirmed.",
+      "help": "docs/development/BATCH-01.md and inspection page Help",
+      "git_reference": "upgrade/baseline-protected-inspections",
+      "status": "In Progress"
+    },
+    {
+      "id": "NEXUS-009",
+      "title": "Known issues register",
+      "module": "Baseline",
+      "priority": 9,
+      "existing_status": "Baseline evidence recorded; acceptance review pending",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": "See BATCH-01.md",
+      "migration": "No new migration in batch 1",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": "502 workspace tests and 65-route smoke passed locally, 2026-11-06. This is batch evidence, not complete acceptance of every baseline requirement.",
+      "manual_results": "New inspection browser acceptance pending. Prior authenticated owner/viewer display was user-confirmed.",
+      "help": "docs/development/BATCH-01.md and inspection page Help",
+      "git_reference": "upgrade/baseline-protected-inspections",
+      "status": "In Progress"
+    },
+    {
+      "id": "NEXUS-010",
+      "title": "Evidence-based progress",
+      "module": "Baseline",
+      "priority": 10,
+      "existing_status": "Baseline evidence recorded; acceptance review pending",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": "See BATCH-01.md",
+      "migration": "No new migration in batch 1",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": "502 workspace tests and 65-route smoke passed locally, 2026-11-06. This is batch evidence, not complete acceptance of every baseline requirement.",
+      "manual_results": "New inspection browser acceptance pending. Prior authenticated owner/viewer display was user-confirmed.",
+      "help": "docs/development/BATCH-01.md and inspection page Help",
+      "git_reference": "upgrade/baseline-protected-inspections",
+      "status": "In Progress"
+    },
+    {
+      "id": "NEXUS-011",
+      "title": "Inspection read permissions",
+      "module": "Permissions",
+      "priority": 11,
+      "existing_status": "Baseline evidence recorded; acceptance review pending",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": "See BATCH-01.md",
+      "migration": "No new migration in batch 1",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": "502 workspace tests and 65-route smoke passed locally, 2026-11-06. This is batch evidence, not complete acceptance of every baseline requirement.",
+      "manual_results": "New inspection browser acceptance pending. Prior authenticated owner/viewer display was user-confirmed.",
+      "help": "docs/development/BATCH-01.md and inspection page Help",
+      "git_reference": "upgrade/baseline-protected-inspections",
+      "status": "Tested"
+    },
+    {
+      "id": "NEXUS-012",
+      "title": "Inspection write and correction permissions",
+      "module": "Permissions",
+      "priority": 12,
+      "existing_status": "Baseline evidence recorded; acceptance review pending",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": "See BATCH-01.md",
+      "migration": "No new migration in batch 1",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": "502 workspace tests and 65-route smoke passed locally, 2026-11-06. This is batch evidence, not complete acceptance of every baseline requirement.",
+      "manual_results": "New inspection browser acceptance pending. Prior authenticated owner/viewer display was user-confirmed.",
+      "help": "docs/development/BATCH-01.md and inspection page Help",
+      "git_reference": "upgrade/baseline-protected-inspections",
+      "status": "Tested"
+    },
+    {
+      "id": "NEXUS-013",
+      "title": "Season permissions",
+      "module": "Permissions",
+      "priority": 13,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-014",
+      "title": "Harvest and stock permissions",
+      "module": "Permissions",
+      "priority": 14,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-015",
+      "title": "Measurement permissions",
+      "module": "Permissions",
+      "priority": 15,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-016",
+      "title": "Resource permissions",
+      "module": "Permissions",
+      "priority": 16,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-017",
+      "title": "Market permissions",
+      "module": "Permissions",
+      "priority": 17,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-018",
+      "title": "Adviser and decision permissions",
+      "module": "Permissions",
+      "priority": 18,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-019",
+      "title": "Bundle and cycle permissions",
+      "module": "Permissions",
+      "priority": 19,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-020",
+      "title": "Default deny",
+      "module": "Permissions",
+      "priority": 20,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-021",
+      "title": "CSV export permissions",
+      "module": "Files",
+      "priority": 21,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-022",
+      "title": "JSON and HTML export permissions",
+      "module": "Files",
+      "priority": 22,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-023",
+      "title": "Photo access",
+      "module": "Files",
+      "priority": 23,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-024",
+      "title": "Audio and transcript access",
+      "module": "Files",
+      "priority": 24,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-025",
+      "title": "Report downloads",
+      "module": "Files",
+      "priority": 25,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-026",
+      "title": "Storage containment",
+      "module": "Files",
+      "priority": 26,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-027",
+      "title": "Upload validation",
+      "module": "Files",
+      "priority": 27,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-028",
+      "title": "Attachment ownership",
+      "module": "Files",
+      "priority": 28,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-029",
+      "title": "Export guidance",
+      "module": "Files",
+      "priority": 29,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-030",
+      "title": "Revoked download access",
+      "module": "Files",
+      "priority": 30,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-031",
+      "title": "Account and farm identity",
+      "module": "Accounts",
+      "priority": 31,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-032",
+      "title": "Session expiry and drafts",
+      "module": "Accounts",
+      "priority": 32,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-033",
+      "title": "Password change",
+      "module": "Accounts",
+      "priority": 33,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-034",
+      "title": "Recovery expiry and reuse",
+      "module": "Accounts",
+      "priority": 34,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-035",
+      "title": "Open-form permission changes",
+      "module": "Accounts",
+      "priority": 35,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-036",
+      "title": "Account search and pagination",
+      "module": "Accounts",
+      "priority": 36,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-037",
+      "title": "Last-owner error guidance",
+      "module": "Accounts",
+      "priority": 37,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-038",
+      "title": "Sign-in abuse controls",
+      "module": "Accounts",
+      "priority": 38,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-039",
+      "title": "Role audit scope",
+      "module": "Accounts",
+      "priority": 39,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-040",
+      "title": "Shared-device guidance",
+      "module": "Accounts",
+      "priority": 40,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-041",
+      "title": "Unified data directory",
+      "module": "Recovery",
+      "priority": 41,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-042",
+      "title": "Wrong-database prevention",
+      "module": "Recovery",
+      "priority": 42,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-043",
+      "title": "Operator diagnostics",
+      "module": "Recovery",
+      "priority": 43,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-044",
+      "title": "Migration preview",
+      "module": "Recovery",
+      "priority": 44,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-045",
+      "title": "Pre-migration backup verification",
+      "module": "Recovery",
+      "priority": 45,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-046",
+      "title": "Isolated restore drills",
+      "module": "Recovery",
+      "priority": 46,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-047",
+      "title": "Attachment backup",
+      "module": "Recovery",
+      "priority": 47,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-048",
+      "title": "Restored attachment references",
+      "module": "Recovery",
+      "priority": 48,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-049",
+      "title": "Interrupted upgrade recovery",
+      "module": "Recovery",
+      "priority": 49,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-050",
+      "title": "Older-version installer tests",
+      "module": "Recovery",
+      "priority": 50,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-051",
+      "title": "Consistent navigation",
+      "module": "Usability",
+      "priority": 51,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-052",
+      "title": "Broken-link checks",
+      "module": "Usability",
+      "priority": 52,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-053",
+      "title": "Contextual help",
+      "module": "Usability",
+      "priority": 53,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-054",
+      "title": "Field examples",
+      "module": "Usability",
+      "priority": 54,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-055",
+      "title": "Form organisation",
+      "module": "Usability",
+      "priority": 55,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-056",
+      "title": "Validation draft preservation",
+      "module": "Usability",
+      "priority": 56,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-057",
+      "title": "Save and retry states",
+      "module": "Usability",
+      "priority": 57,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-058",
+      "title": "Mobile and keyboard access",
+      "module": "Usability",
+      "priority": 58,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-059",
+      "title": "Terminology and encoding",
+      "module": "Usability",
+      "priority": 59,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-060",
+      "title": "Useful empty states",
+      "module": "Usability",
+      "priority": 60,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-061",
+      "title": "Season terminology",
+      "module": "Seasons",
+      "priority": 61,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-062",
+      "title": "Planned versus actual dates",
+      "module": "Seasons",
+      "priority": 62,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-063",
+      "title": "Season date validation",
+      "module": "Seasons",
+      "priority": 63,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-064",
+      "title": "Unknown season handling",
+      "module": "Seasons",
+      "priority": 64,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-065",
+      "title": "Context recheck indicators",
+      "module": "Seasons",
+      "priority": 65,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-066",
+      "title": "Frozen season context",
+      "module": "Seasons",
+      "priority": 66,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-067",
+      "title": "Season corrections",
+      "module": "Seasons",
+      "priority": 67,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-068",
+      "title": "Harvest season links",
+      "module": "Seasons",
+      "priority": 68,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-069",
+      "title": "Season overview filters",
+      "module": "Seasons",
+      "priority": 69,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-070",
+      "title": "Historical season regressions",
+      "module": "Seasons",
+      "priority": 70,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-071",
+      "title": "Observation categories",
+      "module": "Inspections",
+      "priority": 71,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-072",
+      "title": "Conditions versus diagnoses",
+      "module": "Inspections",
+      "priority": 72,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-073",
+      "title": "Local time display",
+      "module": "Inspections",
+      "priority": 73,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-074",
+      "title": "Inspection history",
+      "module": "Inspections",
+      "priority": 74,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-075",
+      "title": "Plant count checks",
+      "module": "Inspections",
+      "priority": 75,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-076",
+      "title": "Cob group validation",
+      "module": "Inspections",
+      "priority": 76,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-077",
+      "title": "Sample definitions",
+      "module": "Inspections",
+      "priority": 77,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-078",
+      "title": "Sample limitations",
+      "module": "Inspections",
+      "priority": 78,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-079",
+      "title": "Visits versus corrections",
+      "module": "Inspections",
+      "priority": 79,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-080",
+      "title": "No field-wide inference",
+      "module": "Inspections",
+      "priority": 80,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-081",
+      "title": "Measurement units",
+      "module": "Environment",
+      "priority": 81,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-082",
+      "title": "Zero versus unknown",
+      "module": "Environment",
+      "priority": 82,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-083",
+      "title": "Instrument metadata",
+      "module": "Environment",
+      "priority": 83,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-084",
+      "title": "Measurement associations",
+      "module": "Environment",
+      "priority": 84,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-085",
+      "title": "Import preview",
+      "module": "Environment",
+      "priority": 85,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-086",
+      "title": "Duplicate measurement detection",
+      "module": "Environment",
+      "priority": 86,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-087",
+      "title": "Weather source display",
+      "module": "Environment",
+      "priority": 87,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-088",
+      "title": "Coordinate uncertainty",
+      "module": "Environment",
+      "priority": 88,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-089",
+      "title": "Stale context flags",
+      "module": "Environment",
+      "priority": 89,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-090",
+      "title": "Bounds versus thresholds",
+      "module": "Environment",
+      "priority": 90,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-091",
+      "title": "Tasks versus decisions",
+      "module": "Decisions",
+      "priority": 91,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-092",
+      "title": "Approval guidance",
+      "module": "Decisions",
+      "priority": 92,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-093",
+      "title": "Action chronology",
+      "module": "Decisions",
+      "priority": 93,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-094",
+      "title": "Completion versus outcomes",
+      "module": "Decisions",
+      "priority": 94,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-095",
+      "title": "Review disposition help",
+      "module": "Decisions",
+      "priority": 95,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-096",
+      "title": "Review history",
+      "module": "Decisions",
+      "priority": 96,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-097",
+      "title": "Review-date limitations",
+      "module": "Decisions",
+      "priority": 97,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-098",
+      "title": "Decision-event links",
+      "module": "Decisions",
+      "priority": 98,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-099",
+      "title": "Duplicate prevention",
+      "module": "Decisions",
+      "priority": 99,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-100",
+      "title": "End-to-end role tests",
+      "module": "Decisions",
+      "priority": 100,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-101",
+      "title": "Adviser role labels",
+      "module": "Evidence",
+      "priority": 101,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-102",
+      "title": "Credential limitations",
+      "module": "Evidence",
+      "priority": 102,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-103",
+      "title": "Findings and recommendations",
+      "module": "Evidence",
+      "priority": 103,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-104",
+      "title": "Photo provenance",
+      "module": "Evidence",
+      "priority": 104,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-105",
+      "title": "Bundle scope",
+      "module": "Evidence",
+      "priority": 105,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-106",
+      "title": "Hash guidance",
+      "module": "Evidence",
+      "priority": 106,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-107",
+      "title": "Capture comparison",
+      "module": "Evidence",
+      "priority": 107,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-108",
+      "title": "Original versus later evidence",
+      "module": "Evidence",
+      "priority": 108,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-109",
+      "title": "Finding references",
+      "module": "Evidence",
+      "priority": 109,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-110",
+      "title": "Corrupt evidence tests",
+      "module": "Evidence",
+      "priority": 110,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-111",
+      "title": "Supply units",
+      "module": "Resources",
+      "priority": 111,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-112",
+      "title": "Movement corrections",
+      "module": "Resources",
+      "priority": 112,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-113",
+      "title": "Supply balances",
+      "module": "Resources",
+      "priority": 113,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-114",
+      "title": "Reservations versus consumption",
+      "module": "Resources",
+      "priority": 114,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-115",
+      "title": "Equipment maintenance",
+      "module": "Resources",
+      "priority": 115,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-116",
+      "title": "Person-hours",
+      "module": "Resources",
+      "priority": 116,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-117",
+      "title": "Costs versus payments",
+      "module": "Resources",
+      "priority": 117,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-118",
+      "title": "Budget terminology",
+      "module": "Resources",
+      "priority": 118,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-119",
+      "title": "Resource associations",
+      "module": "Resources",
+      "priority": 119,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-120",
+      "title": "Resource reports",
+      "module": "Resources",
+      "priority": 120,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-121",
+      "title": "Lot harvest links",
+      "module": "Market",
+      "priority": 121,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-122",
+      "title": "Produce units",
+      "module": "Market",
+      "priority": 122,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-123",
+      "title": "Quantity correction history",
+      "module": "Market",
+      "priority": 123,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-124",
+      "title": "Offers versus orders",
+      "module": "Market",
+      "priority": 124,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-125",
+      "title": "Order-line ownership",
+      "module": "Market",
+      "priority": 125,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-126",
+      "title": "Delivery return reconciliation",
+      "module": "Market",
+      "priority": 126,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-127",
+      "title": "Payment balances",
+      "module": "Market",
+      "priority": 127,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-128",
+      "title": "Ledger separation",
+      "module": "Market",
+      "priority": 128,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-129",
+      "title": "Duplicate transaction review",
+      "module": "Market",
+      "priority": 129,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-130",
+      "title": "Statement limitations",
+      "module": "Market",
+      "priority": 130,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-131",
+      "title": "Voice record permissions",
+      "module": "Voice",
+      "priority": 131,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-132",
+      "title": "Audio validation",
+      "module": "Voice",
+      "priority": 132,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-133",
+      "title": "Original ASR preservation",
+      "module": "Voice",
+      "priority": 133,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-134",
+      "title": "Language uncertainty",
+      "module": "Voice",
+      "priority": 134,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-135",
+      "title": "Wrong upload guidance",
+      "module": "Voice",
+      "priority": 135,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-136",
+      "title": "Request response links",
+      "module": "Voice",
+      "priority": 136,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-137",
+      "title": "Test-source separation",
+      "module": "Voice",
+      "priority": 137,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-138",
+      "title": "Confirmation guidance",
+      "module": "Voice",
+      "priority": 138,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-139",
+      "title": "Frozen clarifications",
+      "module": "Voice",
+      "priority": 139,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-140",
+      "title": "Voice workflow regression",
+      "module": "Voice",
+      "priority": 140,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-141",
+      "title": "Permission test matrix",
+      "module": "Readiness",
+      "priority": 141,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-142",
+      "title": "Browser acceptance tests",
+      "module": "Readiness",
+      "priority": 142,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-143",
+      "title": "Windows CI",
+      "module": "Readiness",
+      "priority": 143,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-144",
+      "title": "Performance fixtures",
+      "module": "Readiness",
+      "priority": 144,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-145",
+      "title": "Private log review",
+      "module": "Readiness",
+      "priority": 145,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-146",
+      "title": "Mobile accessibility checks",
+      "module": "Readiness",
+      "priority": 146,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-147",
+      "title": "Farmer adviser testing",
+      "module": "Readiness",
+      "priority": 147,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-148",
+      "title": "Help feedback",
+      "module": "Readiness",
+      "priority": 148,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-149",
+      "title": "Release rollback notes",
+      "module": "Readiness",
+      "priority": 149,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    },
+    {
+      "id": "NEXUS-150",
+      "title": "Formal pilot gate",
+      "module": "Readiness",
+      "priority": 150,
+      "existing_status": "Not yet assessed against this master prompt; existing code may already implement part or all",
+      "dependencies": [
+        "NEXUS-001"
+      ],
+      "technical_changes": null,
+      "migration": "Assess before implementation",
+      "security": "Validate identity, membership, role and referenced record ownership where applicable",
+      "acceptance_criteria": [
+        "Required behaviour works in isolated fixtures",
+        "Relevant negative/security cases pass",
+        "Contextual help matches actual behaviour",
+        "Manual acceptance recorded where required"
+      ],
+      "automated_results": null,
+      "manual_results": null,
+      "help": null,
+      "git_reference": null,
+      "status": "Not Started"
+    }
+  ]
+}

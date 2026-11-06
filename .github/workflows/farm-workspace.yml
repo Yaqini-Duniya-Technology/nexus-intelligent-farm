@@ -36,6 +36,7 @@ jobs:
           node --check nexus/farm_app/account_pilot.js
           node --check nexus/farm_app/account_admin.js
           node --check nexus/farm_app/authenticated_workspace.js
+          node --check nexus/farm_app/authenticated_inspections.js
           node --check nexus/farm_app/page_guides.js
       - name: Check form safety helpers
         run: node nexus/farm_app/test_form_safety.cjs
@@ -53,14 +54,16 @@ jobs:
       - name: Verify core access and existing workspace
         run: python -m unittest discover -s nexus/farm_app -t .
       - name: Check protected workspace JavaScript
-        run: node --check nexus/farm_app/authenticated_workspace.js
+        run: |
+          node --check nexus/farm_app/authenticated_workspace.js
+          node --check nexus/farm_app/authenticated_inspections.js
       - name: Verify existing combined routes
         run: python -m nexus.farm_app.smoke_workspace
       - name: Package checked source-only updater
         run: python nexus/farm_app/package_authenticated.py
       - uses: actions/upload-artifact@v4
         with:
-          name: nexus-authenticated-core
-          path: dist/nexus-authenticated-core/
+          name: nexus-baseline-inspections
+          path: dist/nexus-baseline-inspections/
           if-no-files-found: error
           retention-days: 30
