@@ -367,3 +367,7 @@ Storage and account foundations: [deployment controls guide](docs/DEPLOYMENT_CON
 Account administration and recovery: [operator guide](docs/security/ACCOUNT_GUIDE.md), [account audit](docs/security/ACCOUNT_AUDIT.md), and [15-item phase tracker](docs/security/phase-tracker.json). Farm ownership does not automatically grant platform administration.
 
 Protected core workspace integration: [authenticated launcher and permission guide](docs/security/AUTHENTICATED_CORE.md). Start with `python -m nexus.farm_app.operations --authenticated --database nexus-farm.sqlite3 --port 8080`. Unsupported legacy sections remain unavailable in that mode; default Operations remains local single-user. No shared hosting readiness is claimed.
+
+### Baseline and protected inspections
+
+See [batch 1 evidence and local acceptance guide](docs/development/BATCH-01.md) and [150-item status register](docs/development/master-upgrades.json). New authenticated inspection routes reuse existing append-only validation. Keep local; new browser acceptance is pending.

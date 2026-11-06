@@ -5,6 +5,7 @@ from nexus.farm_app import local_accounts as accounts, scoped_access as access
 from nexus.farm_app.account_admin import event, operator
 from nexus.farm_app.store import FarmStore
 from nexus.farm_app.atomic import create_observation_atomic
+from nexus.farm_app import field_inspections as inspections
 
 
 class BoundConnection:
@@ -63,7 +64,7 @@ def change(database, token, csrf, data):
             raise access.AccessError('Refresh before saving')
         actor = user['account_id']
         op = data.get('operation')
-        if op not in ('farm','field','observation','approve','action','followup'):
+        if op not in ('farm','field','observation','approve','action','followup','inspection'):
             raise ValueError('This workflow is not enabled in the authenticated workspace')
         bound = BoundStore(db, database)
         if op == 'farm':
@@ -76,6 +77,12 @@ def change(database, token, csrf, data):
             access.require_farm(db, actor, farm, write=True)
             if op == 'field':
                 result = {'field_id': bound.create('fields', data)}
+            elif op == 'inspection':
+                observation = selected_id(data.get('observation_id'))
+                if not db.execute('SELECT 1 FROM observations o JOIN fields f ON f.id=o.field_id WHERE o.id=? AND f.farm_id=?', (observation, farm)).fetchone():
+                    raise access.AccessError()
+                inspections.initialize(bound)
+                result = inspections.save(bound, data)
             elif op == 'observation':
                 field = selected_id(data.get('field_id'))
                 if not db.execute('SELECT 1 FROM fields WHERE id=? AND farm_id=?', (field, farm)).fetchone():
@@ -96,3 +103,31 @@ def change(database, token, csrf, data):
                 result = {'task_id': task}
         event(db, 'workspace_'+op, actor=actor, affected=actor, farm=farm, summary='Authenticated core workflow saved: '+op)
         return result
+
+
+def read_inspections(database, token, farm_id, observation_id=None):
+    """One read transaction; never call the legacy all-farm state reader."""
+    with closing(accounts.connect(database)) as db, db:
+        db.execute('BEGIN')
+        user = access.identity(db, token)
+        farm = selected_id(farm_id)
+        role = access.require_farm(db, user['account_id'], farm)
+        args = [farm]
+        sql = 'SELECT o.*,f.name AS field_name FROM observations o JOIN fields f ON f.id=o.field_id WHERE f.farm_id=?'
+        if observation_id is not None:
+            observation_id = selected_id(observation_id)
+            if not db.execute('SELECT 1 FROM observations o JOIN fields f ON f.id=o.field_id WHERE o.id=? AND f.farm_id=?', (observation_id,farm)).fetchone():
+                raise access.AccessError()
+            sql += ' AND o.id=?'
+            args.append(observation_id)
+        observations = [dict(row) for row in db.execute(sql+' ORDER BY o.id DESC',args)]
+        tables = {row[0] for row in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        history = []
+        for observation in observations:
+            # Hash only the original row, excluding the joined display label.
+            raw = {k:v for k,v in observation.items() if k!='field_name'}
+            history.extend(inspections.capture_history(db,tables,raw) or [])
+            observation['selection_hash'] = inspections.digest(raw)
+        return {'username':user['username'],'csrf':user['csrf'],'farm_id':farm,
+                'can_write':role in ('owner','editor'),'observations':observations,
+                'history':sorted(history,key=lambda row:row['id'],reverse=True)}
