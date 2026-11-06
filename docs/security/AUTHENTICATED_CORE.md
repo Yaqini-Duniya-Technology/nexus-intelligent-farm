@@ -1,3 +1,5 @@
+> Release update: protected inspections are now included in nexus-baseline-inspections-v1. Follow [the current batch guide](../development/BATCH-01.md) for installation and acceptance. The original core-stage description below is historical.
+
 # Authenticated core workspace — first integration stage
 
 This stage protects farm/field reads and creation, observations with original task snapshots, task approval, actual action records and later follow-up reports. It does not claim the whole application is integrated.

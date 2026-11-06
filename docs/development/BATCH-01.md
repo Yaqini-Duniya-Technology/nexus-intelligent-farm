@@ -76,3 +76,5 @@ Stop the server. Restore changed code from the installer's backup-authenticated-
 ## Local verification record — 6 November 2026
 
 502 standard-library workspace tests passed (72.722 seconds). Existing combined workspace smoke passed all 65 routes on an isolated temporary database. New JavaScript passed Node syntax checking. Git whitespace validation passed. Full-repository pytest and new Windows/browser checks are not claimed by these local results; see CI separately. Six new protected-inspection tests plus three baseline tests were added. No actual farmer database was used.
+
+A subsequent focused run passed 23 tests after the final startup/help changes. The whole-repository pytest attempt was blocked during collection by missing `kaggle_environments` in this local runtime (four import errors); no full-repository pass is claimed locally. GitHub CI uses the repository dependency installation and is reported separately.
