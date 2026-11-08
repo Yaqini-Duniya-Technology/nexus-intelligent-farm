@@ -88,22 +88,106 @@ function render() {
     el(key).disabled=busy || Boolean(pending);
   }
   for (const id of ['refresh','review','retry','farm','observation']) el(id).disabled=busy;
-  el('history').replaceChildren();
-  const rows=currentRows();
-  const corrected=new Set(rows.map(r=>r.supersedes_id));
-  if (!rows.length) {
-    const p=document.createElement('p');
-    p.textContent='No inspections for this observation.';
-    el('history').append(p);
+  renderHistory();
+}
+
+let displayedHistory=null, displayedObservation=null;
+const dateFormat=new Intl.DateTimeFormat(undefined,{
+  year:'numeric',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short',
+});
+function timeLabel(value) {
+  const date=new Date(value ?? NaN);
+  return Number.isNaN(date.getTime()) ? 'Not recorded' : dateFormat.format(date);
+}
+function valueLabel(record,key) {
+  if (!Object.hasOwn(record,key) || record[key]==='') return 'Not recorded';
+  return record[key]===null ? 'Unknown' : String(record[key]);
+}
+function element(tag, text, className) {
+  const node=document.createElement(tag);
+  if (text!==undefined) node.textContent=text;
+  if (className) node.className=className;
+  return node;
+}
+function group(container, title, items) {
+  const heading=element('h4',title);
+  const list=element('dl',undefined,'inspection-grid');
+  for (const [label,value] of items) {
+    const pair=element('div');
+    pair.append(element('dt',label),element('dd',value));
+    list.append(pair);
   }
+  container.append(heading,list);
+}
+function sampleText(payload) {
+  const checked=payload.plants_checked, affected=payload.plants_affected;
+  if (!Number.isInteger(checked)) return 'Plants checked: '+valueLabel(payload,'plants_checked');
+  if (checked===0) return '0 plants checked';
+  return checked+' plants checked'+(Number.isInteger(affected) ? ' · '+affected+' met the recorded criterion' : '');
+}
+function renderHistory() {
+  if (records.history===displayedHistory && selected===displayedObservation) return;
+  displayedHistory=records.history;
+  displayedObservation=selected;
+  const history=el('history'), rows=currentRows();
+  const expanded=new Set([...history.querySelectorAll('details[open]')].map(node=>node.dataset.inspection));
+  history.replaceChildren();
+  if (!rows.length) {
+    history.append(element('p','No inspections for this observation.'));
+    return;
+  }
+  const byId=new Map(rows.map(row=>[row.id,row]));
+  const corrections=new Map(rows.filter(row=>row.supersedes_id!==null).map(row=>[row.supersedes_id,row.id]));
   for (const row of rows) {
-    const section=document.createElement('section'), h=document.createElement('h3'), p=document.createElement('pre');
-    h.textContent='Inspection #'+row.id+(corrected.has(row.id)?' — earlier corrected entry':'');
-    p.textContent='Recorded: '+new Date(row.recorded_at).toLocaleString()+'\n'
-      +Object.entries(row.payload).filter(([k])=>k!=='observation_at_capture')
-        .map(([k,v])=>k.replaceAll('_',' ')+': '+(v??'Unknown')).join('\n');
-    section.append(h,p);
-    el('history').append(section);
+    const p=row.payload, prior=byId.get(row.supersedes_id);
+    const frozen=p.observation_at_capture ?? {};
+    const card=element('article',undefined,'inspection-card');
+    const heading=element('h3','Inspection #'+row.id);
+    const status=element('p',row.supersedes_id!==null
+      ? 'Correction of #'+row.supersedes_id : 'Original inspection','inspection-status');
+    if (corrections.has(row.id)) status.textContent+=' · corrected by #'+corrections.get(row.id);
+    const details=element('details',undefined,'inspection-detail');
+    details.dataset.inspection=String(row.id);
+    details.open=expanded.has(String(row.id));
+    details.append(element('summary','Details and correction history for #'+row.id));
+    group(details,'Inspection information',[
+      ['Farm',el('farm').selectedOptions[0]?.textContent ?? 'Not recorded'],
+      ['Field',selected.field_name],['Observation','#'+row.observation_id],
+      ['Recorded',timeLabel(row.recorded_at)],['Reported by',valueLabel(p,'reporter')],
+      ['Area checked',valueLabel(p,'area')],
+    ]);
+    group(details,'Sample counts',[
+      ...Object.keys(counts).map(key=>[counts[key],valueLabel(p,key)]),
+      ['How plants were selected',valueLabel(p,'sampling_method')],
+      ['Affected-plant criterion',valueLabel(p,'observation_definition')],
+    ]);
+    group(details,'Findings and limitations',[
+      ['Inspector’s report',valueLabel(p,'findings')],
+      ['Observation text at capture',valueLabel(frozen,'note')],
+      ['Condition at capture',valueLabel(frozen,'condition')],
+      ['Observation source at capture',valueLabel(frozen,'source')],
+    ]);
+    details.append(element('p','Counts describe the inspected sample only. They do not establish a cause or a field-wide rate. Findings and identities are reported by users.','inspection-note'));
+    group(details,'Correction history',[
+      ['Corrects',row.supersedes_id===null?'Not applicable (original entry)':'Inspection #'+row.supersedes_id],
+      ['Reason',valueLabel(p,'reason')],
+      ['Later correction',corrections.has(row.id)?'Inspection #'+corrections.get(row.id):'None recorded'],
+    ]);
+    if (prior) {
+      const changes=[
+        ...Object.entries(fields).filter(([key])=>key!=='reason').map(([key,[label]])=>[key,label]),
+        ...Object.entries(counts),['performed_at','Inspection time'],
+      ].filter(([key])=>prior.payload[key]!==p[key]).map(([key,label])=>[
+        label,key==='performed_at'
+          ? timeLabel(prior.payload[key])+' → '+timeLabel(p[key])
+          : valueLabel(prior.payload,key)+' → '+valueLabel(p,key),
+      ]);
+      if (changes.length) group(details,'Changed fields — previous → recorded',changes);
+      else details.append(element('p','No sample, findings or inspection-time fields changed.'));
+    }
+    card.append(heading,status,element('p',timeLabel(p.performed_at),'inspection-date'),
+      element('p',sampleText(p),'inspection-sample'),details);
+    history.append(card);
   }
 }
 
