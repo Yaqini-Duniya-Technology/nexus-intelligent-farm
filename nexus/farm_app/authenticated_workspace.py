@@ -27,8 +27,9 @@ def make_handler(database):
                 raw = raw.replace('Local permission testing: farm records and separate notes. Full workspace workflows are unavailable here. Do not publish this pilot.', 'Protected core workflows are available through Open workspace after sign-in. Other full-workspace sections are still being integrated. Keep this development server local.')
                 raw = raw.replace('<button id="logout">','<a href="/workspace">Open workspace</a><button id="logout">')
                 return self.respond(200,raw.encode())
-            if parsed.path in ('/workspace.js','/inspections.js'):
-                raw = Path(__file__).with_name('authenticated_inspections.js' if parsed.path=='/inspections.js' else 'authenticated_workspace.js').read_bytes()
+            if parsed.path in ('/workspace.js','/inspections.js','/protected-seasons.js'):
+                raw = Path(__file__).with_name({'/inspections.js':'authenticated_inspections.js','/workspace.js':'authenticated_workspace.js',
+                                               '/protected-seasons.js':'authenticated_seasons.js'}[parsed.path]).read_bytes()
                 self.send_response(200)
                 self.send_header('Content-Type','text/javascript; charset=utf-8')
                 self.send_header('Content-Length',str(len(raw)))
@@ -36,7 +37,7 @@ def make_handler(database):
                 self.send_header('X-Content-Type-Options','nosniff')
                 self.end_headers()
                 return self.wfile.write(raw)
-            if parsed.path not in ('/workspace','/api/workspace','/field-inspections','/api/field-inspections'):
+            if parsed.path not in ('/workspace','/api/workspace','/field-inspections','/api/field-inspections','/protected-seasons','/api/protected-seasons'):
                 # This parent is an explicit account-pilot allowlist, not legacy Operations.
                 return super().do_GET()
             try:
@@ -47,14 +48,18 @@ def make_handler(database):
                 if parsed.path=='/api/field-inspections':
                     oid = int(query['observation_id'][0]) if 'observation_id' in query else None
                     return self.respond(200,workflows.read_inspections(database,self.token(),farm,oid))
+                if parsed.path=='/api/protected-seasons':
+                    return self.respond(200,workflows.read_seasons(database,self.token(),farm))
                 result = workflows.read(database,self.token(),farm)
+                if parsed.path=='/protected-seasons':
+                    return self.respond(200,Path(__file__).with_name('authenticated_seasons.html').read_bytes())
                 if parsed.path=='/field-inspections':
                     return self.respond(200,Path(__file__).with_name('authenticated_inspections.html').read_bytes())
                 if parsed.path == '/workspace':
                     return self.respond(200,Path(__file__).with_name('authenticated_workspace.html').read_bytes())
                 return self.respond(200,result)
             except access.AccessError as error:
-                if error.status==401 and parsed.path in ('/workspace','/field-inspections'):
+                if error.status==401 and parsed.path in ('/workspace','/field-inspections','/protected-seasons'):
                     self.send_response(302)
                     self.send_header('Location','/')
                     self.send_header('Cache-Control','no-store')
@@ -66,7 +71,7 @@ def make_handler(database):
                 return self.respond(400,{'error':'Could not read the selected farm records'})
 
         def do_POST(self):
-            if urlparse(self.path).path not in ('/api/workspace','/api/field-inspections'):
+            if urlparse(self.path).path not in ('/api/workspace','/api/field-inspections','/api/protected-seasons'):
                 return super().do_POST()
             if not self.valid_host() or self.headers.get_all('Origin',[])!=['http://'+self.headers.get('Host','')]:
                 return self.respond(403,{'error':'Matching local Origin required'})
@@ -77,6 +82,8 @@ def make_handler(database):
                     if data.get('operation','inspection')!='inspection':
                         raise ValueError('Inspection operation required')
                     data['operation']='inspection'
+                if urlparse(self.path).path=='/api/protected-seasons' and data.get('operation') not in ('season','season_context'):
+                    raise ValueError('Season operation required')
                 if len(self.headers.get_all('X-Nexus-CSRF',[]))!=1:
                     raise access.AccessError('Refresh before saving')
                 return self.respond(200,workflows.change(database,self.token(),self.headers.get('X-Nexus-CSRF'),data))
@@ -128,7 +135,7 @@ def main():
     except (ValueError,sqlite3.Error) as error:
         server.server_close()
         parser.exit(1,f'Authenticated workspace cannot initialise {database}: {error}. Check database access and schema.\n')
-    print(f'Release: nexus-inspection-history-recovery-v1 | Database: {database}',flush=True)
+    print(f'Release: nexus-protected-crop-seasons-v1 | Database: {database}',flush=True)
     print(f'NEXUS authenticated core workspace: http://127.0.0.1:{args.port}\nUnsupported legacy routes are unavailable. Keep local.',flush=True)
     try:
         server.serve_forever()

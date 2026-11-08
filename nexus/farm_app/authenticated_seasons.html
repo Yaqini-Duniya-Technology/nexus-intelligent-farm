@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEXUS protected crop seasons</title>
+<style>
+*{box-sizing:border-box}body{margin:auto;max-width:880px;padding:16px;font:16px/1.5 system-ui;background:#f1f5ee;color:#183c2c;overflow-wrap:anywhere}
+nav{display:flex;flex-wrap:wrap;gap:16px}a{color:inherit}section,details{background:white;border:1px solid #c4d4c9;border-radius:12px;padding:16px;margin:14px 0}
+label{display:block;margin:10px 0}input,select,button,textarea{font:inherit;padding:8px;max-width:100%}input,select,textarea{display:block;width:100%}
+article{border-top:1px solid #c4d4c9;padding:10px 0}summary,button{cursor:pointer}p{white-space:pre-wrap}
+:focus-visible{outline:3px solid #286e4f;outline-offset:3px}
+</style>
+<h1>Protected crop seasons</h1>
+<nav><a href="/workspace">Workspace</a><a href="/field-inspections">Field inspections</a><a href="/">Account and notes</a></nav>
+<p id="message" role="status" aria-live="polite">Loading assigned farms…</p>
+<label>Assigned farm <select id="farm"></select></label>
+<button id="refresh" type="button">Refresh records</button>
+<details><summary>Help — seasons, dates and permissions</summary>
+<p>Choose an assigned farm. Owners and editors can save seasons and record season context for a field observation. Viewers can read. An inspection follows its parent observation; season context is saved on that observation.</p>
+<p>Dates record the stated plan or planting record; they do not establish growth stage. Choose Unknown season when you cannot establish a link. No context recorded means nobody has saved an entry. Unavailable means a prior link is no longer valid or cannot be read.</p>
+<p>For a new season, select the correct field, then enter a name, variety, area in hectares and dates. Fictional example: DEMO rainy season; DEMO variety; 0.5 hectares. The expected harvest must be later than planting. An existing season stays on its original field. Editing it does not rewrite captured context.</p>
+<p>If records changed or access expired, refresh and review before retrying. Save results may be unknown after a connection drop; check the list before creating the same season again. This page does not offer deletes, closure, exports or harvest editing.</p></details>
+<section><h2>Crop seasons</h2><div id="seasons"></div>
+<form id="season-form" hidden>
+<h3 id="season-title">Add a season</h3>
+<label>Field <select name="field_id" required></select></label>
+<label>Season name <input name="name" maxlength="200" required></label>
+<label>Variety <input name="variety" maxlength="200" required></label>
+<label>Area (hectares) <input name="area_ha" type="number" min="0" step="any" required></label>
+<label>Planting date <input name="planting_date" type="date" required></label>
+<label>Expected harvest date <input name="expected_harvest_date" type="date" required></label>
+<button type="submit">Save season</button> <button type="button" id="new-season">New season</button>
+</form></section>
+<section><h2>Observation season context</h2>
+<label>Observation <select id="observation"></select></label><p id="observation-note"></p>
+<form id="context-form" hidden>
+<label>Season <select name="season" required></select></label>
+<label>Reported growth stage <select name="growth_stage" required></select></label>
+<label>Your name / role <input name="reporter" maxlength="200" required></label>
+<label>Evidence or basis <textarea name="basis" maxlength="3000" required></textarea></label>
+<label>Reason for entry or correction <textarea name="reason" maxlength="3000" required></textarea></label>
+<button type="submit">Save season context</button>
+</form>
+<h3>Saved context</h3><div id="history"></div></section>
+<script src="/protected-seasons.js" defer></script></html>

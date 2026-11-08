@@ -37,6 +37,7 @@ jobs:
           node --check nexus/farm_app/account_admin.js
           node --check nexus/farm_app/authenticated_workspace.js
           node --check nexus/farm_app/authenticated_inspections.js
+          node --check nexus/farm_app/authenticated_seasons.js
           node --check nexus/farm_app/page_guides.js
       - name: Check form safety helpers
         run: node nexus/farm_app/test_form_safety.cjs
@@ -57,14 +58,15 @@ jobs:
         run: |
           node --check nexus/farm_app/authenticated_workspace.js
           node --check nexus/farm_app/authenticated_inspections.js
+          node --check nexus/farm_app/authenticated_seasons.js
       - name: Verify existing combined routes
         run: python -m nexus.farm_app.smoke_workspace
       - name: Package checked source-only updater
         run: python nexus/farm_app/package_authenticated.py
       - uses: actions/upload-artifact@v4
         with:
-          name: nexus-inspection-history-recovery
-          path: dist/nexus-inspection-history-recovery/
+          name: nexus-protected-crop-seasons
+          path: dist/nexus-protected-crop-seasons/
           if-no-files-found: error
           retention-days: 30
 

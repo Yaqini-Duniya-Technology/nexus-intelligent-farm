@@ -2,7 +2,7 @@
 import hashlib,json,shutil
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
-TARGET=ROOT/'dist/nexus-inspection-history-recovery'
+TARGET=ROOT/'dist/nexus-protected-crop-seasons'
 TARGET.mkdir(parents=True,exist_ok=True)
 for path in (ROOT/'nexus/farm_app').iterdir():
     if path.is_file() and path.suffix in ('.py','.html','.css','.js','.json','.cjs'):
@@ -17,7 +17,7 @@ for path in (ROOT/'docs/DEPLOYMENT_CONTROLS.md',ROOT/'docs/RELIABILITY_GUIDE.md'
         shutil.copy2(path,TARGET/'docs'/path.name)
 (TARGET/'nexus/__init__.py').write_text('',encoding='utf-8')
 shutil.copy2(ROOT/'nexus/farm_app/install_authenticated.py',TARGET/'install_workspace.py')
-shutil.copy2(ROOT/'docs/development/INSPECTION-HISTORY-RECOVERY.md',TARGET/'INSTALL.md')
+shutil.copy2(ROOT/'docs/development/PROTECTED-CROP-SEASONS.md',TARGET/'INSTALL.md')
 files={str(p.relative_to(TARGET)).replace('\\','/'):hashlib.sha256(p.read_bytes()).hexdigest() for folder in (TARGET/'nexus/farm_app',TARGET/'docs') for p in sorted(folder.rglob('*')) if p.is_file() and '__pycache__' not in p.parts}
-(TARGET/'RELEASE.json').write_text(json.dumps({'release':'nexus-authenticated-core-v1','application_release':'nexus-inspection-history-recovery-v1','files':files},indent=2),encoding='utf-8')
+(TARGET/'RELEASE.json').write_text(json.dumps({'release':'nexus-authenticated-core-v1','application_release':'nexus-protected-crop-seasons-v1','files':files},indent=2),encoding='utf-8')
 print('Source-only updater packaged:',len(files),'verified files')

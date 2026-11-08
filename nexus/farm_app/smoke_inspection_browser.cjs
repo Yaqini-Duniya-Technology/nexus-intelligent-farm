@@ -175,6 +175,45 @@ async function run() {
     await a.locator('#refresh').click(); await historyCount(a,4);
     assert.equal(await a.locator('#reason').inputValue(),'Keep this draft through access changes');
     assert.equal(await a.locator('#correction').inputValue(),'3');
+    const seasonPath=url+'/protected-seasons';
+    await b.goto(seasonPath);
+    await b.locator('#farm').selectOption('1');
+    await b.locator('#observation').selectOption(String(observation));
+    await b.getByText('No season context recorded.',{exact:true}).waitFor();
+    const form=b.locator('#season-form');
+    await form.locator('[name=field_id]').selectOption('1');
+    for(const [name,value] of Object.entries({name:'Demo wet season',variety:'Demo maize',
+      area_ha:'0.5',planting_date:'2026-06-01',expected_harvest_date:'2026-10-01'})) {
+      await form.locator('[name='+name+']').fill(value);
+    }
+    await form.getByRole('button',{name:'Save season',exact:true}).click();
+    await b.getByRole('heading',{name:'Demo wet season',exact:true}).waitFor();
+    const context=b.locator('#context-form');
+    async function saveContext(season,reason) {
+      await context.locator('[name=season]').selectOption(season);
+      for (const [name,value] of Object.entries({reporter:'Demo reporter',basis:'Demo field notes',reason})) {
+        await context.locator('[name='+name+']').fill(value);
+      }
+      await context.getByRole('button',{name:'Save season context'}).click();
+      await b.locator('#history').getByText('Reason: '+reason,{exact:true}).waitFor();
+    }
+    await saveContext('unknown','Could not establish season');
+    await b.locator('#history').getByRole('heading',{name:/Unknown season/}).waitFor();
+    await saveContext('1','Matched the field record');
+    await b.getByRole('button',{name:'Edit Demo wet season'}).click();
+    assert.equal(await form.locator('[name=field_id]').isDisabled(),true);
+    await form.locator('[name=name]').fill('Renamed demo season');
+    await form.getByRole('button',{name:'Save season',exact:true}).click();
+    await b.getByRole('heading',{name:'Renamed demo season',exact:true}).waitFor();
+    await b.locator('#history').getByRole('heading',{name:/Demo wet season/}).waitFor();
+    await viewer.goto(seasonPath);
+    await viewer.locator('#farm').selectOption('1');
+    await viewer.locator('#observation').selectOption(String(observation));
+    await viewer.locator('#history').getByRole('heading',{name:/Demo wet season/}).waitFor();
+    assert.equal(await viewer.locator('#season-form').isVisible(),false);
+    assert.equal(await viewer.locator('#context-form').isVisible(),false);
+    await checkDenied(outsider,'/api/protected-seasons?farm_id=1');
+    console.log('Protected seasons browser passed: create, unknown context, linked context, edit, captured history, viewer and cross-farm denial.');
     console.log('Browser smoke passed: sign-in, save/correct/reload, stale two-tab draft, lost response, offline retry, viewer, cross-farm, expiry, downgrade and revocation.');
   } finally { await browser.close(); }
 }

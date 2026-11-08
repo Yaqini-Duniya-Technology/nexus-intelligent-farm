@@ -6,7 +6,7 @@ from nexus.farm_app import local_accounts as accounts, scoped_access as access
 from nexus.farm_app.account_admin import event, operator
 from nexus.farm_app.store import FarmStore
 from nexus.farm_app.atomic import create_observation_atomic
-from nexus.farm_app import field_inspections as inspections
+from nexus.farm_app import field_inspections as inspections, protected_seasons
 
 
 class BoundConnection:
@@ -98,7 +98,7 @@ def change(database, token, csrf, data):
             raise access.AccessError('Refresh before saving')
         actor = user['account_id']
         op = data.get('operation')
-        if op not in ('farm','field','observation','approve','action','followup','inspection'):
+        if op not in ('farm','field','observation','approve','action','followup','inspection','season','season_context'):
             raise ValueError('This workflow is not enabled in the authenticated workspace')
         bound = BoundStore(db, database)
         if op == 'farm':
@@ -111,6 +111,10 @@ def change(database, token, csrf, data):
             access.require_farm(db, actor, farm, write=True)
             if op == 'field':
                 result = {'field_id': bound.create('fields', data)}
+            elif op in ('season','season_context'):
+                result = protected_seasons.save(db, bound, farm, data)
+                if result['reused']:
+                    return result
             elif op == 'inspection':
                 observation = selected_id(data.get('observation_id'))
                 if not db.execute('SELECT 1 FROM observations o JOIN fields f ON f.id=o.field_id WHERE o.id=? AND f.farm_id=?', (observation, farm)).fetchone():
@@ -166,3 +170,13 @@ def read_inspections(database, token, farm_id, observation_id=None):
         return {'username':user['username'],'csrf':user['csrf'],'farm_id':farm,
                 'can_write':role in ('owner','editor'),'observations':observations,
                 'history':sorted(history,key=lambda row:row['id'],reverse=True)}
+
+
+def read_seasons(database, token, farm_id):
+    with closing(accounts.connect(database)) as db, db:
+        db.execute('BEGIN')
+        user = access.identity(db, token)
+        farm = selected_id(farm_id)
+        role = access.require_farm(db, user['account_id'], farm)
+        return dict(protected_seasons.read(db, farm), farm_id=farm, username=user['username'],
+                    csrf=user['csrf'], can_write=role in ('owner', 'editor'))
