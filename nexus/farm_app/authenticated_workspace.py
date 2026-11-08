@@ -1,6 +1,8 @@
 """Protected main-workspace entry point: core records only; no legacy delegation."""
 import argparse
-import json
+import errno
+import socket
+import sys
 import sqlite3
 from contextlib import closing
 from http.server import ThreadingHTTPServer
@@ -92,6 +94,14 @@ def make_handler(database):
     return Handler
 
 
+class AuthenticatedServer(ThreadingHTTPServer):
+    def server_bind(self):
+        if sys.platform == 'win32' and hasattr(socket, 'SO_EXCLUSIVEADDRUSE'):
+            self.allow_reuse_address = False
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+        super().server_bind()
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--database',required=True)
@@ -99,14 +109,26 @@ def main():
     args=parser.parse_args()
     if not 1<=args.port<=65535:
         parser.error('Use a port between 1 and 65535')
+    database=Path(args.database).expanduser().resolve()
+    if not database.is_file():
+        parser.exit(1,f'Authenticated workspace: database not found: {database}. Check --database; no new database was created.\n')
     try:
-        with closing(local_accounts.connect(args.database)):
+        with closing(local_accounts.connect(database)):
             pass
-        initialize_audit(FarmStore(args.database))
     except (ValueError,sqlite3.Error) as error:
-        parser.exit(1,f'Authenticated workspace cannot start: {error}\n')
-    server=ThreadingHTTPServer(('127.0.0.1',args.port),make_handler(args.database))
-    print(f'Release: nexus-inspection-reliability-v1 | Database: {Path(args.database).resolve()}',flush=True)
+        parser.exit(1,f'Authenticated workspace cannot open {database}: {error}. Check the selected database and access migrations.\n')
+    try:
+        server=AuthenticatedServer(('127.0.0.1',args.port),make_handler(database))
+    except OSError as error:
+        if error.errno in (errno.EADDRINUSE,10048) or getattr(error,'winerror',None) in (10013,10048):
+            parser.exit(1,f'Port {args.port} cannot be bound (already in use or reserved). Stop the other listener or select a different --port. PowerShell: Get-NetTCPConnection -LocalPort {args.port} -State Listen\n')
+        parser.exit(1,f'Cannot bind authenticated workspace to 127.0.0.1:{args.port}: {error}\n')
+    try:
+        initialize_audit(FarmStore(database))
+    except (ValueError,sqlite3.Error) as error:
+        server.server_close()
+        parser.exit(1,f'Authenticated workspace cannot initialise {database}: {error}. Check database access and schema.\n')
+    print(f'Release: nexus-inspection-history-recovery-v1 | Database: {database}',flush=True)
     print(f'NEXUS authenticated core workspace: http://127.0.0.1:{args.port}\nUnsupported legacy routes are unavailable. Keep local.',flush=True)
     try:
         server.serve_forever()

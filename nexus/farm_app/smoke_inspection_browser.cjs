@@ -55,6 +55,35 @@ async function run() {
   const browser=await chromium.launch(executablePath
     ? {executablePath,ignoreDefaultArgs:['--no-startup-window']} : {});
   try {
+    if (config.restoredHistory) {
+      const mobile=await browser.newContext({viewport:{width:320,height:740},isMobile:true,
+        hasTouch:true,locale:'en-GB',timezoneId:'Africa/Lagos'});
+      const page=await mobile.newPage();
+      await signIn(page,'owner');
+      await open(page);
+      await historyCount(page,2);
+      const ids=config.restoredHistory.map(row=>row.id);
+      assert.deepEqual(await page.locator('#history h3').allTextContents(),ids.map(id=>'Inspection #'+id));
+      const summary=page.locator('#history summary').first();
+      await summary.focus();
+      await summary.press('Enter');
+      const latest=page.locator('.inspection-card').first();
+      const original=page.locator('.inspection-card').last();
+      await latest.getByText('Demo correction',{exact:true}).waitFor();
+      assert.match(await latest.locator('.inspection-date').innerText(),/GMT\+1|WAT/);
+      assert.match(await latest.locator('.inspection-sample').innerText(),/10 plants checked · 0 met/);
+      assert.match(await latest.locator('dl').last().innerText(),/2 → 0/);
+      assert.match(await latest.innerText(),/Cobs checked\s+Unknown/);
+      await original.locator('summary').click();
+      assert.match(await original.innerText(),/Not applicable \(original entry\)/);
+      assert.match(await original.innerText(),/Initial fixture/);
+      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+      const history=await page.evaluate(async oid=>(await (await fetch(
+        '/api/field-inspections?farm_id=1&observation_id='+oid)).json()).history,observation);
+      assert.deepEqual(history,config.restoredHistory);
+      console.log('Restored Chromium history passed at 320px: fresh sign-in, both records, keyboard expansion, local time, zero/unknown, correction comparison, exact data and no horizontal overflow.');
+      return;
+    }
     const owner=await browser.newContext();
     const a=await owner.newPage();
     await signIn(a,'owner'); await open(a);
@@ -100,6 +129,7 @@ async function run() {
     await a.locator('#message').filter({hasText:'Inspection #3 already saved.'}).waitFor();
     assert.equal(delivered,retryBody);
     await open(a); await historyCount(a,3);
+    await a.locator('#history summary').last().click();
     assert.match(await a.locator('#history').innerText(),/Original visit/);
 
     // Drop a request before it reaches the server; the same retry saves it once.
