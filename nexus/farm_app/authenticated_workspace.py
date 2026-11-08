@@ -7,6 +7,7 @@ from http.server import ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 from nexus.farm_app import account_pilot, local_accounts, request_inputs, scoped_access as access, workspace_access as workflows
+from nexus.farm_app.field_inspections import InspectionConflict
 from nexus.farm_app.audit import initialize_audit
 from nexus.farm_app.store import FarmStore
 
@@ -82,6 +83,8 @@ def make_handler(database):
             except request_inputs.RequestError as error:
                 self.close_connection=True
                 return self.respond(error.status,{'error':str(error)})
+            except InspectionConflict as error:
+                return self.respond(409,{'error':str(error)})
             except (ValueError,TypeError) as error:
                 return self.respond(400,{'error':str(error)})
             except sqlite3.Error:
@@ -103,7 +106,7 @@ def main():
     except (ValueError,sqlite3.Error) as error:
         parser.exit(1,f'Authenticated workspace cannot start: {error}\n')
     server=ThreadingHTTPServer(('127.0.0.1',args.port),make_handler(args.database))
-    print(f'Release: nexus-baseline-inspections-v1 | Database: {Path(args.database).resolve()}',flush=True)
+    print(f'Release: nexus-inspection-reliability-v1 | Database: {Path(args.database).resolve()}',flush=True)
     print(f'NEXUS authenticated core workspace: http://127.0.0.1:{args.port}\nUnsupported legacy routes are unavailable. Keep local.',flush=True)
     try:
         server.serve_forever()

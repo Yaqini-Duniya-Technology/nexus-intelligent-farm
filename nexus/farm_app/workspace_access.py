@@ -1,5 +1,6 @@
 """Farm-authorised core workflows; all mutations share the permission transaction."""
 import hmac
+import uuid
 from contextlib import closing, contextmanager
 from nexus.farm_app import local_accounts as accounts, scoped_access as access
 from nexus.farm_app.account_admin import event, operator
@@ -54,6 +55,39 @@ def read(database, token, farm_id=None):
         return result
 
 
+def save_inspection(db, bound, actor, farm, data):
+    inspections.initialize(bound)
+    if 'submission_id' not in data:
+        return inspections.save(bound, data)
+    key = data['submission_id']
+    try:
+        if not isinstance(key, str) or str(uuid.UUID(key, version=4)) != key:
+            raise ValueError()
+    except ValueError:
+        raise ValueError('Invalid inspection submission ID') from None
+    if data.get('intent') not in ('new', 'correct'):
+        raise ValueError('Choose new inspection or correction')
+    request_hash = inspections.digest(data)
+    db.execute('''CREATE TABLE IF NOT EXISTS nexus_inspection_receipts (
+        account_id INTEGER NOT NULL REFERENCES nexus_accounts(id),
+        farm_id INTEGER NOT NULL REFERENCES farms(id),
+        submission_id TEXT NOT NULL,
+        request_sha256 TEXT NOT NULL,
+        inspection_id INTEGER NOT NULL REFERENCES field_inspections(id),
+        PRIMARY KEY (account_id, farm_id, submission_id)
+    )''')
+    receipt = db.execute('''SELECT request_sha256,inspection_id FROM nexus_inspection_receipts
+        WHERE account_id=? AND farm_id=? AND submission_id=?''', (actor, farm, key)).fetchone()
+    if receipt:
+        if receipt['request_sha256'] != request_hash:
+            raise inspections.InspectionConflict('This save ID is already associated with a different submission')
+        return {'id': receipt['inspection_id'], 'reused': True}
+    saved = inspections.save(bound, data, deduplicate=False)
+    db.execute('INSERT INTO nexus_inspection_receipts VALUES (?,?,?,?,?)',
+               (actor, farm, key, request_hash, saved['id']))
+    return saved
+
+
 def change(database, token, csrf, data):
     if not isinstance(data, dict):
         raise ValueError('Expected an object')
@@ -81,8 +115,9 @@ def change(database, token, csrf, data):
                 observation = selected_id(data.get('observation_id'))
                 if not db.execute('SELECT 1 FROM observations o JOIN fields f ON f.id=o.field_id WHERE o.id=? AND f.farm_id=?', (observation, farm)).fetchone():
                     raise access.AccessError()
-                inspections.initialize(bound)
-                result = inspections.save(bound, data)
+                result = save_inspection(db, bound, actor, farm, data)
+                if result['reused']:
+                    return result
             elif op == 'observation':
                 field = selected_id(data.get('field_id'))
                 if not db.execute('SELECT 1 FROM fields WHERE id=? AND farm_id=?', (field, farm)).fetchone():
