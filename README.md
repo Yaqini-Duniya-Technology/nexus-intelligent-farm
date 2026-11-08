@@ -370,4 +370,4 @@ Protected core workspace integration: [authenticated launcher and permission gui
 
 ### Baseline and protected inspections
 
-See [batch 1 evidence and local acceptance guide](docs/development/BATCH-01.md) and [150-item status register](docs/development/master-upgrades.json). New authenticated inspection routes reuse existing append-only validation. Keep local; new browser acceptance is pending.
+See [batch 1 evidence and local acceptance guide](docs/development/BATCH-01.md) and [150-item status register](docs/development/master-upgrades.json). New authenticated inspection routes reuse existing append-only validation. Keep local. See [inspection reliability and demo verification](docs/development/INSPECTION-RELIABILITY.md) for the newer draft and retry workflow.

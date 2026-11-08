@@ -98,3 +98,51 @@ class ProtectedInspectionTests(unittest.TestCase):
                 self.assertEqual(e.exception.code,status);e.exception.close()
             with call('/api/field-inspections',data=data) as r:self.assertIn('id',json.load(r))
         finally:server.shutdown();server.server_close();thread.join()
+
+    def test_versioned_correction_conflicts_preserve_original_and_latest(self):
+        oid, _ = self.fixture()
+        first = self.change(**self.data(oid))
+        original = core.read_inspections(self.path, self.sessions['owner'][0], 1, oid)['history'][0]
+        draft = self.data(oid, intent='correct', supersedes_id=first['id'],
+                          target_revision=original['content_sha256'], reason='Draft A')
+        for bad in (dict(draft, supersedes_id=None), dict(draft, target_revision='obsolete')):
+            with self.assertRaises(ValueError):
+                self.change(**bad)
+        second = self.change(**dict(draft, reason='Saved in tab B'))
+        with self.assertRaises(ValueError):
+            self.change(**draft)
+        fresh_base = dict(draft, base_id=second['id'])
+        with self.assertRaises(ValueError):
+            self.change(**fresh_base)
+        state = core.read_inspections(self.path, self.sessions['viewer'][0], 1, oid)
+        self.assertEqual([r['id'] for r in state['history']], [second['id'], first['id']])
+        self.assertEqual(state['history'][1], original)
+
+    def test_receipt_replays_exact_request_and_allows_distinct_identical_visits(self):
+        from uuid import uuid4
+        oid, _ = self.fixture()
+        data = self.data(oid, intent='new', target_revision=None, submission_id=str(uuid4()))
+        first = self.change(**data)
+        second = self.change(**dict(data, base_id=first['id'], submission_id=str(uuid4())))
+        self.assertNotEqual(first['id'], second['id'])
+        self.assertEqual(self.change(**data), {'id':first['id'], 'reused':True})
+        with self.assertRaises(ValueError):
+            self.change(**dict(data, reason='Altered retry'))
+        with self.store.connect() as db:
+            self.assertEqual(db.execute("SELECT count(*) FROM nexus_security_events WHERE category='workspace_inspection'").fetchone()[0],2)
+            db.execute("UPDATE nexus_farm_memberships SET role='viewer' WHERE account_id=?", (self.ids['owner'],))
+        with self.assertRaises(access.AccessError):
+            self.change(**data)
+
+    def test_receipt_and_inspection_rollback_with_failed_audit(self):
+        from uuid import uuid4
+        oid, _ = self.fixture()
+        data = self.data(oid, intent='new', target_revision=None, submission_id=str(uuid4()))
+        with self.store.connect() as db:
+            db.execute("CREATE TRIGGER fixture_receipt_failure BEFORE INSERT ON nexus_security_events WHEN NEW.category='workspace_inspection' BEGIN SELECT RAISE(ABORT,'fixture'); END")
+        with self.assertRaises(sqlite3.IntegrityError):
+            self.change(**data)
+        with self.store.connect() as db:
+            self.assertFalse(db.execute("SELECT 1 FROM sqlite_master WHERE name='nexus_inspection_receipts'").fetchone())
+            db.execute("DROP TRIGGER fixture_receipt_failure")
+        self.assertFalse(self.change(**data)['reused'])

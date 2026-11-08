@@ -63,7 +63,26 @@ jobs:
         run: python nexus/farm_app/package_authenticated.py
       - uses: actions/upload-artifact@v4
         with:
-          name: nexus-baseline-inspections
-          path: dist/nexus-baseline-inspections/
+          name: nexus-inspection-reliability
+          path: dist/nexus-inspection-reliability/
           if-no-files-found: error
           retention-days: 30
+
+
+  inspection-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium test tools
+        run: |
+          npm install --prefix "$RUNNER_TEMP/nexus-browser" --no-audit --no-fund playwright@1.62.1
+          "$RUNNER_TEMP/nexus-browser/node_modules/.bin/playwright" install --with-deps chromium --only-shell
+      - name: Exercise authenticated inspection workflow in Chromium
+        run: NODE_PATH="$RUNNER_TEMP/nexus-browser/node_modules" python -m nexus.farm_app.smoke_inspection_browser

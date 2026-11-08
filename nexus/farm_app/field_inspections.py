@@ -124,7 +124,11 @@ def state(store):
         return {'observations': observations, 'history': sorted(history, key=lambda r: r['id'], reverse=True)}
 
 
-def save(store, data):
+class InspectionConflict(ValueError):
+    pass
+
+
+def save(store, data, *, deduplicate=True):
     oid = data.get('observation_id')
     if not positive(oid):
         raise ValueError('Select an observation')
@@ -135,11 +139,17 @@ def save(store, data):
             raise ValueError('Observation not found')
         observation = dict(row)
         if data.get('observation_hash') != digest(observation):
-            raise ValueError('Observation changed; refresh before saving')
+            raise InspectionConflict('Observation changed; refresh and review before saving')
         history = capture_history(db, {'field_inspections'}, observation)
         target = data.get('supersedes_id')
-        if target is not None and (not positive(target) or not any(r['id'] == target for r in history)):
-            raise ValueError('Select a correction target from this observation')
+        target_row = next((r for r in history if r['id'] == target), None)
+        if target is not None and (not positive(target) or target_row is None):
+            raise InspectionConflict('Select an available correction target from this observation')
+        if 'intent' in data:
+            if data['intent'] != ('correct' if target is not None else 'new'):
+                raise ValueError('Inspection intent does not match its correction target')
+            if data.get('target_revision') != (target_row['content_sha256'] if target_row else None):
+                raise InspectionConflict('Correction target changed; refresh and review before saving')
         payload = {'version': VERSION, 'observation_id': oid,
                    'observation_at_capture': observation, 'supersedes_id': target,
                    'performed_at': data.get('performed_at')}
@@ -151,14 +161,14 @@ def save(store, data):
         hash_value = digest(payload)
         # A repeated submission is safe even after the first response was lost.
         identical = next((r for r in history if r['content_sha256'] == hash_value), None)
-        if identical:
+        if deduplicate and identical:
             return {'id': identical['id'], 'reused': True}
         latest = history[0]['id'] if history else None
         base = data.get('base_id')
         if (base is not None and not positive(base)) or base != latest:
-            raise ValueError('Inspection history changed; refresh before saving')
+            raise InspectionConflict('Inspection history changed; refresh and review before saving')
         if target is not None and any(r['supersedes_id'] == target for r in history):
-            raise ValueError('This entry already has a correction; correct the newer entry instead')
+            raise InspectionConflict('This entry already has a correction; review the newer entry')
         cursor = db.execute('''INSERT INTO field_inspections
             (observation_id,supersedes_id,recorded_at,content_sha256,payload) VALUES (?,?,?,?,?)''',
             (oid, target, datetime.now(timezone.utc).isoformat(), hash_value, canonical(payload)))
